@@ -54,6 +54,14 @@ test('hero statement names real work and dossier is present', () => {
   }
 });
 
+test('ascii-arts dressing present (dither, statusbar)', () => {
+  for (const f of ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html']) {
+    const html = read(f);
+    assert.ok(html.includes('class="dither"'), `${f} missing dither`);
+    assert.ok(html.includes('class="statusbar"'), `${f} missing statusbar`);
+  }
+});
+
 test('resume pages link static PDFs', () => {
   const pairs = [
     ['resume/en.html', 'felipe-lemos-resume-en.pdf'],

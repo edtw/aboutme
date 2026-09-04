@@ -1,4 +1,4 @@
-.showcase { width: min(1120px, 88vw); margin: 0 auto; padding: 70px 0 90px; }
+.showcase { position: relative; width: min(1120px, 88vw); margin: 0 auto; padding: 70px 0 90px; }
 .showcase h1 { font: 500 clamp(44px, 6vw, 84px)/1 var(--serif); letter-spacing: -.04em; margin: 18px 0; }
 .showcase h1 em { color: var(--accent); }
 .showcase .lede { max-width: 760px; color: var(--silver); line-height: 1.7; }

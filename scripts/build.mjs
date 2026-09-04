@@ -115,6 +115,7 @@ ${head({ lang, title, desc, canonical, prefix })}
 ${header(lang, prefix, t)}
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
+        <div class="dither" aria-hidden="true"></div>
         ${heroGraphic()}
         <div class="hero-center">
           <p class="kicker">${esc(L(cv.person.location, lang))} <span>/</span> ${lang === 'pt' ? 'Aberto a oportunidades' : 'Open to opportunities'}<span class="cursor" aria-hidden="true">▊</span></p>
@@ -217,7 +218,7 @@ ${skills}
         <div class="contact-links"><a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a><a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo' : 'Résumé'} ↗</a></div>
       </section>
     </main>
-    <footer><span>Felipe Lemos · ${esc(L(cv.person.location, lang))}</span><span>${lang === 'pt' ? 'Segurança: educação, defesa e testes autorizados.' : 'Security work: education, defense, authorized testing.'}</span><span>© 2026</span></footer>
+    <footer class="statusbar"><span>● ${lang === 'pt' ? 'CONECTADO' : 'CONNECTED'} · Felipe Lemos · ${esc(L(cv.person.location, lang))}</span><span>${lang === 'pt' ? 'Segurança: educação, defesa e testes autorizados.' : 'Security work: education, defense, authorized testing.'}</span><span>© 2026</span></footer>
     <script src="${prefix}assets/js/site.js"></script>
   </body>
 </html>
@@ -241,6 +242,7 @@ ${head({ lang, title, desc, canonical, prefix })}
     <div class="scanlines" aria-hidden="true"></div>
 ${header(lang, prefix, T[lang])}
     <main id="main" class="showcase">
+      <div class="dither" aria-hidden="true"></div>
       <p class="section-index"><a href="${prefix}${en ? '' : 'pt/'}">← Felipe Lemos</a> · ${en ? 'Public technical showcase' : 'Demonstração técnica pública'} · ${en ? 'Sanitized subset — no private code' : 'Subconjunto sanitizado — sem código privado'}</p>
       <h1>Micro Runtime <em>${en ? 'can run AI locally.' : 'executa IA localmente.'}</em></h1>
       <p class="lede">${en ? 'A modular Rust 2021 runtime for constrained environments. This public page demonstrates only the safe, non-sensitive ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, and how envelopes keep artifacts canonical.' : 'Runtime modular em Rust 2021 para ambientes restritos. Esta página demonstra apenas ideias seguras e não sensíveis: como a saída numérica do modelo vira ações limitadas, como modelos minúsculos respeitam orçamentos e como envelopes mantêm artefatos canônicos.'}</p>
@@ -270,7 +272,7 @@ tape: ARGMAX penultimate, END last</code></pre></article>
         <p id="demo-out" role="status"></p>
       </section>
     </main>
-    <footer><span>Felipe Lemos · Micro Runtime ${en ? 'public showcase' : 'demonstração pública'}</span><span>© 2026</span></footer>
+    <footer class="statusbar"><span>● ${en ? 'CONNECTED' : 'CONECTADO'} · Felipe Lemos · Micro Runtime ${en ? 'public showcase' : 'demonstração pública'}</span><span>© 2026</span></footer>
     <script src="${prefix}assets/js/site.js"></script>
     <script src="${prefix}assets/js/showcase-demo.js"></script>
   </body>
