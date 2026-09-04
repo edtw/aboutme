@@ -6,8 +6,8 @@
   --silver: #aaa8a3;
   --dim: #74736f;
   --line: #303032;
-  --accent: #d0aeb2;
-  --gothic: "UnifrakturCook", Georgia, serif;
+  --accent: #c8fa4e;
+  --display: "Anton", "Arial Narrow", sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Inter Tight", Arial, sans-serif;
   --mono: "IBM Plex Mono", monospace;
@@ -20,7 +20,8 @@ a { color: inherit; text-decoration: none; }
 button { color: inherit; }
 .grain { position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
 .site-header { height: 72px; padding: 0 clamp(22px, 4vw, 68px); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; position: relative; z-index: 10; background: rgba(11,11,12,.88); backdrop-filter: blur(12px); }
-.monogram { font-family: var(--gothic); font-size: 27px; width: max-content; }
+.monogram { font-family: var(--display); font-size: 24px; letter-spacing: .04em; width: max-content; }
+::selection { background: var(--accent); color: #000; }
 .site-header nav { display: flex; gap: 34px; color: var(--silver); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .13em; }
 .site-header nav a, .header-actions a { transition: color .2s ease; }
 .site-header nav a:hover, .header-actions a:hover { color: var(--accent); }
@@ -36,14 +37,14 @@ button { color: inherit; }
 .hero-center { position: relative; z-index: 2; text-align: center; width: min(850px, 88vw); margin-top: 65px; padding-bottom: 80px; }
 .kicker, .section-index, .entry-meta, .case-top, .case-domain { font: 10px var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--silver); }
 .kicker span { color: var(--accent); margin: 0 12px; }
-.hero h1 { margin: 23px 0 0; font: clamp(75px, 11vw, 165px)/.72 var(--gothic); letter-spacing: -.035em; text-shadow: 0 8px 35px #000; }
+.hero h1 { margin: 23px 0 0; font: clamp(64px, 10vw, 150px)/.95 var(--display); letter-spacing: .01em; text-transform: uppercase; text-shadow: 0 0 34px rgba(200,250,78,.25), 0 8px 35px #000; }
 .hero-role { margin: 27px 0 0; font: 600 clamp(20px, 2.8vw, 38px)/1 var(--serif); letter-spacing: .04em; }
 .hero-statement { width: min(650px, 88vw); margin: 29px auto 0; color: var(--silver); font-size: 16px; line-height: 1.7; }
 .hero-links { margin-top: 38px; display: flex; justify-content: center; gap: 10px; }
 .hero-links a, .contact-links a { border: 1px solid var(--line); padding: 14px 18px; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .1em; transition: background .2s, border-color .2s; }
 .hero-links a:hover, .contact-links a:hover { border-color: var(--ivory); }
-.hero-links .primary-link { background: var(--ivory); color: var(--black); border-color: var(--ivory); }
-.hero-links .primary-link:hover { background: var(--accent); border-color: var(--accent); }
+.hero-links .primary-link { background: var(--accent); color: var(--black); border-color: var(--accent); }
+.hero-links .primary-link:hover { background: transparent; color: var(--accent); }
 .hero-footer { position: absolute; left: clamp(22px, 4vw, 68px); right: clamp(22px, 4vw, 68px); bottom: 24px; display: flex; justify-content: space-between; color: var(--dim); font: 9px var(--mono); letter-spacing: .12em; }
 
 .section { border-bottom: 1px solid var(--line); position: relative; }
@@ -163,7 +164,7 @@ section { scroll-margin-top: 84px; }
 .stat-strip span { font: 9px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--dim); }
 .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 0 0 50px; border-top: 1px solid var(--ivory); }
 .trio > div { padding-top: 16px; }
-.trio h3 { margin: 0 0 10px; font: clamp(34px, 4vw, 52px)/1 var(--gothic); }
+.trio h3 { margin: 0 0 10px; font: clamp(30px, 3.6vw, 46px)/1 var(--display); text-transform: uppercase; letter-spacing: .02em; }
 .trio p { margin: 0; color: var(--silver); font-size: 14px; line-height: 1.6; }
 .toolbox { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 40px; }
 .tool-group { background: var(--panel); padding: 18px 20px; }

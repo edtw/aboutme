@@ -10,7 +10,7 @@ const L = (obj, lang) => obj?.[lang] ?? obj?.en ?? '';
 const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 const SITE = cv.meta.siteUrl;
-const FONTS = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;family=UnifrakturCook:wght@700&amp;display=swap';
+const FONTS = 'https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap';
 
 function head({ lang, title, desc, canonical, prefix }) {
   const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
@@ -66,7 +66,7 @@ function heroGraphic() {
           <svg viewBox="0 0 1200 450" preserveAspectRatio="none">
             <defs>
               <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M 18 0 L 0 0 0 18" fill="none" stroke="currentColor" stroke-width="0.45" /></pattern>
-              <radialGradient id="orb"><stop offset="0" stop-color="#d9b9bc" stop-opacity=".8"/><stop offset="1" stop-color="#d9b9bc" stop-opacity="0"/></radialGradient>
+              <radialGradient id="orb"><stop offset="0" stop-color="#c8fa4e" stop-opacity=".35"/><stop offset="1" stop-color="#c8fa4e" stop-opacity="0"/></radialGradient>
             </defs>
             <rect x="100" y="60" width="300" height="250" fill="url(#grid)" />
             <rect x="800" y="60" width="300" height="250" fill="url(#grid)" />
@@ -84,7 +84,7 @@ function portfolioPage(lang) {
   const prefix = lang === 'pt' ? '../' : '';
   const canonical = lang === 'pt' ? `${SITE}/pt/` : `${SITE}/`;
   const title = lang === 'pt' ? 'Felipe Lemos | Engenheiro de Software' : 'Felipe Lemos | Software Engineer';
-  const desc = L(cv.person.summary, lang).slice(0, 155);
+  const desc = L(cv.person.statement, lang);
   const exp = cv.experience[0];
   const projects = cv.projects;
   const sec = (n, label) => `<p class="section-index">${n} / <span>${label}</span></p>`;
@@ -149,7 +149,7 @@ ${header(lang, prefix, t)}
             ${sec('00', lang === 'pt' ? 'Perfil' : 'Profile')}
             <h2>${lang === 'pt' ? 'Perto da máquina.<br /><em>Perto das pessoas.</em>' : 'Close to the machine.<br /><em>Close to people.</em>'}</h2>
           </div>
-          <p class="lead">${lang === 'pt' ? 'Sou engenheiro de software no Rio de Janeiro. Trabalho perto da máquina — Rust, C++, Windows internals — e entrego coisas que gente usa: um PDV, serviços de IA, uma arena no Roblox.' : 'I write software in Rio de Janeiro. I work close to the machine — Rust, C++, Windows internals — and I ship things people touch: a POS, AI services, a Roblox arena.'}</p>
+          <p class="lead">${lang === 'pt' ? 'Sou engenheiro de software no Rio de Janeiro. Trabalho perto da máquina: Rust, C++, Windows internals. Entrego coisas que gente usa: um PDV, serviços de IA, uma arena no Roblox.' : 'I write software in Rio de Janeiro. I work close to the machine: Rust, C++, Windows internals. I ship things people touch: a POS, AI services, a Roblox arena.'}</p>
           <div class="trio">
             <div><h3>Build</h3><p>${lang === 'pt' ? 'Sistemas pequenos que aguentam trabalho real.' : 'Small systems that carry real workloads.'}</p></div>
             <div><h3>Break</h3><p>${lang === 'pt' ? 'Forçar limites no lab antes que a realidade force.' : 'Abuse it in the lab before reality does.'}</p></div>
@@ -224,7 +224,7 @@ ${projectCards}
 function runtimePage(lang) {
   const prefix = lang === 'pt' ? '../../' : '../';
   const canonical = lang === 'pt' ? `${SITE}/pt/microruntime/` : `${SITE}/microruntime/`;
-  const title = lang === 'pt' ? 'Micro Runtime — Demonstração pública | Felipe Lemos' : 'Micro Runtime — Public showcase | Felipe Lemos';
+  const title = lang === 'pt' ? 'Micro Runtime: Demonstração pública | Felipe Lemos' : 'Micro Runtime: Public showcase | Felipe Lemos';
   const desc = lang === 'pt' ? 'Demonstração pública e sanitizada do Micro Runtime: IA local com GGUF, VM TinyML M35 e envelopes MRE1.' : 'Sanitized public showcase of Micro Runtime: local GGUF AI, M35 TinyML VM, and MRE1 envelopes.';
   const en = lang === 'en';
   return `<!doctype html>
@@ -239,9 +239,9 @@ ${head({ lang, title, desc, canonical, prefix })}
 ${header(lang, prefix, T[lang])}
     <main id="main" class="showcase">
       <div class="dither" aria-hidden="true"></div>
-      <p class="section-index"><a href="${prefix}${en ? '' : 'pt/'}">← Felipe Lemos</a> · ${en ? 'Public technical showcase' : 'Demonstração técnica pública'} · ${en ? 'Sanitized subset — no private code' : 'Subconjunto sanitizado — sem código privado'}</p>
+      <p class="section-index"><a href="${prefix}${en ? '' : 'pt/'}">← Felipe Lemos</a> · ${en ? 'Public technical showcase' : 'Demonstração técnica pública'} · ${en ? 'Sanitized subset. No private code.' : 'Subconjunto sanitizado. Sem código privado.'}</p>
       <h1>Micro Runtime <em>${en ? 'can run AI locally.' : 'executa IA localmente.'}</em></h1>
-      <p class="lede">${en ? 'A modular Rust 2021 runtime for constrained environments. This public page demonstrates only the safe, non-sensitive ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, and how envelopes keep artifacts canonical.' : 'Runtime modular em Rust 2021 para ambientes restritos. Esta página demonstra apenas ideias seguras e não sensíveis: como a saída numérica do modelo vira ações limitadas, como modelos minúsculos respeitam orçamentos e como envelopes mantêm artefatos canônicos.'}</p>
+      <p class="lede">${en ? 'A modular Rust runtime for constrained environments. This page shows only safe ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, how envelopes keep artifacts canonical.' : 'Runtime modular em Rust para ambientes restritos. Esta página mostra só ideias seguras: como a saída numérica vira ações limitadas, como modelos minúsculos respeitam orçamentos, como envelopes mantêm artefatos canônicos.'}</p>
       <div class="showcase-grid">
         <article><span>01</span><h2>${en ? 'Decision plane, not autopilot' : 'Plano de decisão, não piloto automático'}</h2><p>${en ? 'A minimal TokenEngine trait returns single numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed 256-slot one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never becomes ambient authority.' : 'Um trait mínimo TokenEngine retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo de 256 slots one-shot invoca um handler HostOp fechado. Saída probabilística nunca vira autoridade ambiente.'}</p><pre><code>trait TokenEngine {
   fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
@@ -261,7 +261,7 @@ tape: ARGMAX penultimate, END last</code></pre></article>
       </div>
       <section class="demo" aria-label="${en ? 'Interactive TinyML budget demo' : 'Demo interativa de orçamento TinyML'}">
         <h2>${en ? 'Try the budget logic' : 'Teste a lógica de orçamento'}</h2>
-        <p>${en ? 'A tiny client-side simulation of M35-style budget enforcement. No model, no private code — just the idea that oversized tapes fail closed.' : 'Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado — apenas a ideia de que tapes grandes falham fechadas.'}</p>
+        <p>${en ? 'A tiny client-side simulation of M35-style budget enforcement. No model, no private code. Just the idea that oversized tapes fail closed.' : 'Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado. Só a ideia de que tapes grandes falham fechadas.'}</p>
         <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
         <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
         <button id="demo-run" type="button">${en ? 'Validate tape' : 'Validar tape'}</button>
@@ -280,7 +280,7 @@ function resumePage(lang, detailed) {
   const prefix = '../';
   const variant = detailed ? 'detailed' : 'one-page';
   const canonical = `${SITE}/resume/${lang === 'pt' ? 'pt' : 'en'}${detailed ? '-detailed' : ''}.html`;
-  const title = `${cv.person.name} — ${(lang === 'pt' ? 'Currículo' : 'Résumé')}${detailed ? (lang === 'pt' ? ' (Detalhado)' : ' (Detailed)') : ''}`;
+  const title = `${cv.person.name} · ${(lang === 'pt' ? 'Currículo' : 'Résumé')}${detailed ? (lang === 'pt' ? ' (Detalhado)' : ' (Detailed)') : ''}`;
   const sel = detailed ? cv.documents.detailed : cv.documents.onePage;
   const projects = sel.projectIds.map((id) => cv.projects.find((p) => p.id === id)).filter(Boolean);
   const exp = cv.experience[0];
@@ -319,10 +319,10 @@ function resumePage(lang, detailed) {
       <section><h2>${lang === 'pt' ? 'Resumo' : 'Summary'}</h2><p>${esc(summaryText)}</p></section>
       <section><h2>${lang === 'pt' ? 'Habilidades Técnicas' : 'Technical Skills'}</h2><ul>${cv.skills.map((s) => `<li><strong>${esc(L(s.group, lang))}:</strong> ${esc(s.items)}</li>`).join('')}</ul></section>
       <section><h2>${lang === 'pt' ? 'Experiência' : 'Experience'}</h2>
-        <article class="resume-entry"><h3>${esc(L(exp.role, lang))} — ${esc(exp.organization)} (${esc(exp.platform)})</h3><p class="resume-when">${lang === 'pt' ? 'Atual' : 'Current'}</p><p><strong>${esc(L(exp.title, lang))}</strong> ${esc(detailed ? short(L(exp.body, lang), 300) : short(L(exp.body, lang), 170))}</p></article>
+        <article class="resume-entry"><h3>${esc(L(exp.role, lang))}, ${esc(exp.organization)} (${esc(exp.platform)})</h3><p class="resume-when">${lang === 'pt' ? 'Atual' : 'Current'}</p><p><strong>${esc(L(exp.title, lang))}</strong> ${esc(detailed ? short(L(exp.body, lang), 300) : short(L(exp.body, lang), 170))}</p></article>
       </section>
       <section><h2>${lang === 'pt' ? 'Projetos Selecionados' : 'Selected Projects'}</h2>
-        ${projects.map((p) => `<article class="resume-entry"><h3>${esc(p.name)}${p.org ? ` · ${esc(p.org)}` : ''} — ${esc(L(p.domain, lang))}</h3><p>${esc(projSummary(p))}</p><ul>${(L(p.resumeBullets, lang)).slice(0, sel.highlightCount).map((b) => `<li>${esc(detailed ? b : short(b, 115))}</li>`).join('')}</ul><p class="resume-tech">${esc(p.evidence)}</p></article>`).join('\n        ')}
+        ${projects.map((p) => `<article class="resume-entry"><h3>${esc(p.name)}${p.org ? ` · ${esc(p.org)}` : ''}: ${esc(L(p.domain, lang))}</h3><p>${esc(projSummary(p))}</p><ul>${(L(p.resumeBullets, lang)).slice(0, sel.highlightCount).map((b) => `<li>${esc(detailed ? b : short(b, 115))}</li>`).join('')}</ul><p class="resume-tech">${esc(p.evidence)}</p></article>`).join('\n        ')}
       </section>
       <section><h2>${lang === 'pt' ? 'Pesquisa em Segurança' : 'Security Research'}</h2><p>${esc(secIntro)}</p><ul>${secAreas.map((a) => `<li>${esc(L(a, lang))}</li>`).join('')}</ul></section>
       <section><h2>${lang === 'pt' ? 'Certificações' : 'Certifications'}</h2><ul>${cv.certifications.map((c) => `<li>${esc(L(c, lang))}</li>`).join('')}</ul></section>

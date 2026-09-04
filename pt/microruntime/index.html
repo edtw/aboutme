@@ -7,16 +7,16 @@
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="canonical" href="https://edtw.github.io/aboutme/pt/microruntime/" />
   <link rel="alternate" hreflang="en" href="https://edtw.github.io/aboutme/" />
-  <meta property="og:title" content="Micro Runtime — Demonstração pública | Felipe Lemos" />
+  <meta property="og:title" content="Micro Runtime: Demonstração pública | Felipe Lemos" />
   <meta property="og:description" content="Demonstração pública e sanitizada do Micro Runtime: IA local com GGUF, VM TinyML M35 e envelopes MRE1." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edtw.github.io/aboutme/pt/microruntime/" />
   <meta property="og:locale" content="pt_BR" />
-  <title>Micro Runtime — Demonstração pública | Felipe Lemos</title>
+  <title>Micro Runtime: Demonstração pública | Felipe Lemos</title>
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;family=UnifrakturCook:wght@700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
   <link rel="stylesheet" href="../../assets/css/resume.css" media="print" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
@@ -41,9 +41,9 @@
     </header>
     <main id="main" class="showcase">
       <div class="dither" aria-hidden="true"></div>
-      <p class="section-index"><a href="../../pt/">← Felipe Lemos</a> · Demonstração técnica pública · Subconjunto sanitizado — sem código privado</p>
+      <p class="section-index"><a href="../../pt/">← Felipe Lemos</a> · Demonstração técnica pública · Subconjunto sanitizado. Sem código privado.</p>
       <h1>Micro Runtime <em>executa IA localmente.</em></h1>
-      <p class="lede">Runtime modular em Rust 2021 para ambientes restritos. Esta página demonstra apenas ideias seguras e não sensíveis: como a saída numérica do modelo vira ações limitadas, como modelos minúsculos respeitam orçamentos e como envelopes mantêm artefatos canônicos.</p>
+      <p class="lede">Runtime modular em Rust para ambientes restritos. Esta página mostra só ideias seguras: como a saída numérica vira ações limitadas, como modelos minúsculos respeitam orçamentos, como envelopes mantêm artefatos canônicos.</p>
       <div class="showcase-grid">
         <article><span>01</span><h2>Plano de decisão, não piloto automático</h2><p>Um trait mínimo TokenEngine retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo de 256 slots one-shot invoca um handler HostOp fechado. Saída probabilística nunca vira autoridade ambiente.</p><pre><code>trait TokenEngine {
   fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
@@ -63,7 +63,7 @@ tape: ARGMAX penultimate, END last</code></pre></article>
       </div>
       <section class="demo" aria-label="Demo interativa de orçamento TinyML">
         <h2>Teste a lógica de orçamento</h2>
-        <p>Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado — apenas a ideia de que tapes grandes falham fechadas.</p>
+        <p>Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado. Só a ideia de que tapes grandes falham fechadas.</p>
         <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
         <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
         <button id="demo-run" type="button">Validar tape</button>

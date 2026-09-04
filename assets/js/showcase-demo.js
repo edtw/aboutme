@@ -8,10 +8,10 @@
     const okOps = ops >= 1 && ops <= 64;
     const okArena = arenaKb >= 1 && arenaKb <= 256;
     if (okOps && okArena) {
-      out.textContent = `ACCEPT — ops=${ops} arena=${arenaKb}KiB within M35-style budgets (demo only).`;
+      out.textContent = `ACCEPT: ops=${ops} arena=${arenaKb}KiB within M35-style budgets (demo only).`;
       out.dataset.state = 'ok';
     } else {
-      out.textContent = `REJECT (fail-closed) — over budget: max 64 ops / 256 KiB in this demo. Requested ops=${ops} arena=${arenaKb}KiB.`;
+      out.textContent = `REJECT (fail-closed): over budget. Max 64 ops / 256 KiB in this demo. Requested ops=${ops} arena=${arenaKb}KiB.`;
       out.dataset.state = 'reject';
     }
   });

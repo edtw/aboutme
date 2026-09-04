@@ -7,16 +7,16 @@
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="canonical" href="https://edtw.github.io/aboutme/microruntime/" />
   <link rel="alternate" hreflang="pt-BR" href="https://edtw.github.io/aboutme/pt/" /><link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/" />
-  <meta property="og:title" content="Micro Runtime — Public showcase | Felipe Lemos" />
+  <meta property="og:title" content="Micro Runtime: Public showcase | Felipe Lemos" />
   <meta property="og:description" content="Sanitized public showcase of Micro Runtime: local GGUF AI, M35 TinyML VM, and MRE1 envelopes." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edtw.github.io/aboutme/microruntime/" />
   <meta property="og:locale" content="en_US" />
-  <title>Micro Runtime — Public showcase | Felipe Lemos</title>
+  <title>Micro Runtime: Public showcase | Felipe Lemos</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;family=UnifrakturCook:wght@700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="../assets/css/resume.css" media="print" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
@@ -41,9 +41,9 @@
     </header>
     <main id="main" class="showcase">
       <div class="dither" aria-hidden="true"></div>
-      <p class="section-index"><a href="../">← Felipe Lemos</a> · Public technical showcase · Sanitized subset — no private code</p>
+      <p class="section-index"><a href="../">← Felipe Lemos</a> · Public technical showcase · Sanitized subset. No private code.</p>
       <h1>Micro Runtime <em>can run AI locally.</em></h1>
-      <p class="lede">A modular Rust 2021 runtime for constrained environments. This public page demonstrates only the safe, non-sensitive ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, and how envelopes keep artifacts canonical.</p>
+      <p class="lede">A modular Rust runtime for constrained environments. This page shows only safe ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, how envelopes keep artifacts canonical.</p>
       <div class="showcase-grid">
         <article><span>01</span><h2>Decision plane, not autopilot</h2><p>A minimal TokenEngine trait returns single numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed 256-slot one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never becomes ambient authority.</p><pre><code>trait TokenEngine {
   fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
@@ -63,7 +63,7 @@ tape: ARGMAX penultimate, END last</code></pre></article>
       </div>
       <section class="demo" aria-label="Interactive TinyML budget demo">
         <h2>Try the budget logic</h2>
-        <p>A tiny client-side simulation of M35-style budget enforcement. No model, no private code — just the idea that oversized tapes fail closed.</p>
+        <p>A tiny client-side simulation of M35-style budget enforcement. No model, no private code. Just the idea that oversized tapes fail closed.</p>
         <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
         <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
         <button id="demo-run" type="button">Validate tape</button>

@@ -4,7 +4,7 @@
 
 ### Software Engineer · Systems & Security · Roblox Developer
 
-Rust runtimes with local AI · distributed mesh & telemetry systems · combat gameplay on NEXUS — grounded in isolated-lab security research.
+Rust runtimes with local AI. Distributed mesh and telemetry. Combat gameplay on NEXUS. Security research in an isolated lab.
 
 [Portfolio](https://edtw.github.io/aboutme/) · [Português](https://edtw.github.io/aboutme/pt/) · [Micro Runtime showcase](https://edtw.github.io/aboutme/microruntime/) · [Résumé EN](https://edtw.github.io/aboutme/resume/en.html) · [Currículo PT](https://edtw.github.io/aboutme/resume/pt.html) · [LinkedIn](https://www.linkedin.com/in/yuee/) · [GitHub](https://github.com/edtw)
 
@@ -21,7 +21,7 @@ A unified bilingual professional identity:
 - **Editorial portfolio** (EN + PT-BR static pages) with gothic-noir visual system
 - **Evidence-based case studies**: Karma Network, Micro Runtime, ESTH, Marambaia PDV, Prisma Platform, Airshipper, NEXUS
 - **Security & Red Team section** framed for authorized lab work and defensive outcomes
-- **Public Micro Runtime showcase**: sanitized demonstration that the runtime can run AI locally (TokenEngine, GGUF, M35 TinyML, MRE1) — concepts only, no private code
+- **Public Micro Runtime showcase**: sanitized demonstration that the runtime can run AI locally (TokenEngine, GGUF, M35 TinyML, MRE1). Concepts only, no private code.
 - **Résumé creator**: ATS-friendly one-page + detailed résumés in EN + PT-BR, with print CSS and optional PDF generation
 
 ## Professional profile

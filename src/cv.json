@@ -20,8 +20,8 @@
       "pt": "Engenheiro de Software & Desenvolvedor Roblox"
     },
     "statement": {
-      "en": "I'm Felipe. I build systems software — runtimes, networks, game combat — and I study how they break, in a lab, on purpose.",
-      "pt": "Sou o Felipe. Construo software de sistemas — runtimes, redes, combate em jogos — e estudo como eles quebram, em laboratório, de propósito."
+      "en": "I'm Felipe. I build systems software: runtimes, networks, game combat. I study how they break. In a lab. On purpose.",
+      "pt": "Sou o Felipe. Construo software de sistemas: runtimes, redes, combate em jogos. Estudo como eles quebram. Em laboratório. De propósito."
     },
     "summary": {
       "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
@@ -79,7 +79,7 @@
         "en": "A Rust mesh network with its own chain and distributed compute. I work on the networking and agent crates.",
         "pt": "Rede mesh em Rust com chain própria e computação distribuída. Atuo nos crates de rede e agentes."
       },
-      "stack": "Rust 2024 · Tokio · Axum · SQLx · Candle · DHT",
+      "stack": "Rust · Tokio · Axum · SQLx · Candle · DHT",
       "role": {
         "en": "Networking + agent crates in a 700-commit monorepo",
         "pt": "Crates de rede + agentes em monorepo com 700+ commits"
@@ -126,7 +126,7 @@
         "en": "A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.",
         "pt": "Runtime Rust para máquinas pequenas. Alocador próprio, dispatch one-shot e IA local sem nuvem."
       },
-      "stack": "Rust 2021 · no_std · Candle · GGUF · TinyML · Wasm",
+      "stack": "Rust · no_std · Candle · GGUF · TinyML · Wasm",
       "role": {
         "en": "Architecture, allocator, local-AI execution",
         "pt": "Arquitetura, alocador, execução de IA local"
@@ -151,7 +151,7 @@
     },
     {
       "id": "esth",
-      "name": "ESTH — Enterprise Scripting & Telemetry Host",
+      "name": "ESTH: Enterprise Scripting & Telemetry Host",
       "visibility": "private-case-study",
       "domain": {
         "en": "C++ · PYTHON · LICENSED SYSTEMS AGENT",
@@ -173,7 +173,7 @@
         "en": "A licensed telemetry agent for an authorized game client. Encrypted config, fail-closed by design.",
         "pt": "Agente licenciado de telemetria para um game client autorizado. Config criptografada, fail-closed."
       },
-      "stack": "C++17 · CMake · FastAPI · AES-GCM · pytest",
+      "stack": "C++ · CMake · FastAPI · AES-GCM · pytest",
       "role": {
         "en": "Agent, backend sync, integration tests",
         "pt": "Agente, sync backend, testes de integração"
@@ -383,7 +383,7 @@
     "points": [
       {
         "t": { "en": "Windows internals", "pt": "Windows internals" },
-        "d": { "en": "Learned in isolated VMs — to know what defenders should log.", "pt": "Aprendido em VMs isoladas — para saber o que defensores devem registrar." }
+        "d": { "en": "Studied in isolated VMs to learn what defenders should log.", "pt": "Estudado em VMs isoladas para saber o que defensores devem registrar." }
       },
       {
         "t": { "en": "Protocol & API review", "pt": "Revisão de protocolos e APIs" },

@@ -53,8 +53,8 @@ test('hero is short, human, visual', () => {
     const m = html.match(/<p class="hero-statement">([\s\S]*?)<\/p>/);
     assert.ok(m && m[1].length < 220, `${f} hero statement too long`);
   }
-  assert.ok(read('index.html').includes('in a lab, on purpose'));
-  assert.ok(read('pt/index.html').includes('de propósito'));
+  assert.ok(read('index.html').includes('On purpose'));
+  assert.ok(read('pt/index.html').includes('De propósito'));
 });
 
 test('work board has filters, cards, approach', () => {
@@ -76,6 +76,16 @@ test('ascii-arts dressing present (dither, statusbar)', () => {
     assert.ok(html.includes('class="dither"'), `${f} missing dither`);
     assert.ok(html.includes('class="statusbar"'), `${f} missing statusbar`);
   }
+});
+
+test('no em-dashes, blackletter, or version trivia on portfolio pages', () => {
+  for (const f of ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html']) {
+    const html = read(f);
+    assert.ok(!html.includes('—'), `${f} contains em-dash`);
+    assert.ok(!html.includes('Unifraktur'), `${f} still loads blackletter`);
+    assert.ok(!html.includes('Rust 2021') && !html.includes('Rust 2024') && !html.includes('C++17'), `${f} has version trivia`);
+  }
+  assert.ok(read('styles.css').includes('Anton'), 'display font missing');
 });
 
 test('resume pages link static PDFs', () => {
