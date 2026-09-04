@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "contentVersion": "2.0.0",
+    "lastUpdated": "2026-09-04",
+    "siteUrl": "https://edtw.github.io/aboutme"
+  },
+  "person": {
+    "name": "Felipe Lemos",
+    "location": {
+      "en": "Rio de Janeiro, Brazil",
+      "pt": "Rio de Janeiro, Brasil"
+    },
+    "headline": {
+      "en": "Software Engineer | Backend & Systems | Security Engineering | Rust, Python, TypeScript, C/C++ | Roblox Developer",
+      "pt": "Engenheiro de Software | Backend e Sistemas | Engenharia de Segurança | Rust, Python, TypeScript, C/C++ | Desenvolvedor Roblox"
+    },
+    "role": {
+      "en": "Software Engineer & Roblox Developer",
+      "pt": "Engenheiro de Software & Desenvolvedor Roblox"
+    },
+    "statement": {
+      "en": "I engineer reliable digital systems across backend development, security, infrastructure, and interactive experiences.",
+      "pt": "Desenvolvo sistemas digitais confiáveis entre backend, segurança, infraestrutura e experiências interativas."
+    },
+    "summary": {
+      "en": "Software engineer with a systems-oriented mindset and the ability to move between product, infrastructure, security, and game development. Work spans real-time web platforms, Rust runtimes with local AI execution, cross-platform release infrastructure, distributed mesh/blockchain/compute research, licensed telemetry systems, AI service architectures, security research in isolated labs, computer vision, and Roblox gameplay development. Strongest in roles valuing technical range, ownership, and careful investigation — from API contracts and data models down to operating-system behavior, and from prototype through testing, deployment, observability, and iteration.",
+      "pt": "Engenheiro de software com visão orientada a sistemas e capacidade de transitar entre produto, infraestrutura, segurança e desenvolvimento de jogos. Experiência prática com plataformas web em tempo real, runtimes em Rust com execução local de IA, infraestrutura de releases multiplataforma, pesquisa em mesh/blockchain/computação distribuída, sistemas licenciados de telemetria, arquiteturas de serviços de IA, pesquisa em segurança em laboratório isolado, visão computacional e gameplay no Roblox. Melhor desempenho em funções que valorizam amplitude técnica, autonomia e investigação cuidadosa — de contratos de API e modelos de dados até o comportamento do sistema operacional, e do protótipo até testes, deploy, observabilidade e iteração."
+    },
+    "profiles": {
+      "github": "https://github.com/edtw",
+      "linkedin": "https://www.linkedin.com/in/yuee/",
+      "robloxNexus": "https://www.roblox.com/pt/games/84720327590325/NEXUS"
+    }
+  },
+  "experience": [
+    {
+      "id": "nexus",
+      "organization": "NEXUS",
+      "platform": "Roblox Studio",
+      "current": true,
+      "role": {
+        "en": "Roblox Studio Developer",
+        "pt": "Desenvolvedor Roblox Studio"
+      },
+      "title": {
+        "en": "Gameplay development for a live PvP arena experience.",
+        "pt": "Desenvolvimento de gameplay para uma experiência PvP de arena em evolução."
+      },
+      "body": {
+        "en": "Contributing to NEXUS in Roblox Studio, an evolving combat experience centered on distinctive characters, abilities, visual effects, and strategic player interaction. The role brings together gameplay logic, rapid iteration, technical collaboration, and attention to how systems feel in play.",
+        "pt": "Contribuo para o NEXUS no Roblox Studio, uma experiência de combate centrada em personagens distintos, habilidades, efeitos visuais e interação estratégica entre jogadores. O trabalho une lógica de gameplay, iteração rápida, colaboração técnica e atenção a como os sistemas se comportam durante o jogo."
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "karma",
+      "name": "Karma Network",
+      "org": "Spirix",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "RUST · DISTRIBUTED SYSTEMS · MESH / BLOCKCHAIN / COMPUTE",
+        "pt": "RUST · SISTEMAS DISTRIBUÍDOS · MESH / BLOCKCHAIN / COMPUTE"
+      },
+      "summary": {
+        "en": "Mesh network framework in Rust built around Proof of Antiquity blockchain, distributed computing, and agent capabilities. Three layers: blockchain (PoA consensus, Ed25519 wallets, hardware attestation, anti-Sybil nullifiers, on-chain marketplace, eclipse defense), mesh network (DHT overlay, mesh routing, relay forwarding, DAG state sync, peer discovery), and distributed compute (federated learning with FedAvg/DiLoCo, secure aggregation, differential privacy, pure-Rust ML inference with Candle, swarm coordination). Chameleon is the reference agent implementation built on Karma.",
+        "pt": "Framework de rede mesh em Rust com blockchain Proof of Antiquity, computação distribuída e capacidades de agentes. Três camadas: blockchain (consenso PoA, carteiras Ed25519, atestação de hardware, nullifiers anti-Sybil, marketplace on-chain, defesa contra eclipse), rede mesh (overlay DHT, roteamento mesh, relay, sincronização de estado via DAG, descoberta de pares) e computação distribuída (aprendizado federado com FedAvg/DiLoCo, agregação segura, privacidade diferencial, inferência ML em Rust puro com Candle, coordenação em enxame). Chameleon é a implementação de agente de referência sobre o Karma."
+      },
+      "challenge": {
+        "en": "Unify consensus, networking, and distributed ML into one coherent Rust workspace without losing operability.",
+        "pt": "Unificar consenso, rede e ML distribuído em um único workspace Rust sem perder operabilidade."
+      },
+      "evidence": "Rust 2024 workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker",
+      "resumeBullets": {
+        "en": [
+          "Contribute to large Rust workspace spanning blockchain, mesh networking, and distributed compute layers",
+          "Work across DHT overlay, DAG state sync, relay/marketplace services, and federated-learning primitives",
+          "Operate in high-velocity monorepo with hundreds of recent commits across site, API, agents, and docs"
+        ],
+        "pt": [
+          "Contribuição para workspace Rust de grande porte entre blockchain, rede mesh e computação distribuída",
+          "Atuação em overlay DHT, sincronização de estado via DAG, serviços de relay/marketplace e primitivas de aprendizado federado",
+          "Operação em monorepo de alta velocidade com centenas de commits recentes entre site, API, agentes e docs"
+        ]
+      }
+    },
+    {
+      "id": "micro-runtime",
+      "name": "Micro Runtime",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "RUST · SYSTEMS ENGINEERING · LOCAL AI RUNTIME",
+        "pt": "RUST · ENGENHARIA DE SISTEMAS · RUNTIME LOCAL DE IA"
+      },
+      "summary": {
+        "en": "Modular Rust 2021 runtime for constrained environments. Feature-gated architecture with optional no_std, custom allocator (4 KiB pages, sharded heap, ephemeral scopes), fixed 256-slot one-shot SecureDispatcher, read-only memory-mapped IO, closed HostOp ISA with session workers, and automated architecture validation in CI. Local AI execution model: TokenEngine trait decoupling numeric decisions from actions; local GGUF via Candle with memory-mapped and in-memory model loading, quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback; M35 TinyML VM with canonical 64-byte header, fixed-length opcodes, full tape validation, budgets, offline assembler/trainer and synthetic fixtures; MRE1 zero-copy product-envelope parser with canonical ordering and policy rules.",
+        "pt": "Runtime modular em Rust 2021 para ambientes restritos. Arquitetura por features com no_std opcional, alocador customizado (páginas de 4 KiB, heap fragmentado, escopos efêmeros), SecureDispatcher fixo de 256 slots one-shot, IO com memory-map somente leitura, ISA fechada HostOp com session workers e validação automatizada da arquitetura no CI. Execução local de IA: trait TokenEngine separando decisões numéricas de ações; GGUF local via Candle com mmap e carregamento em memória, modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso; VM TinyML M35 com header canônico de 64 bytes, opcodes de tamanho fixo, validação completa da tape, orçamentos, assembler/trainer offline e fixtures sintéticas; parser zero-copy de envelopes MRE1 com ordenação canônica e regras de política."
+      },
+      "challenge": {
+        "en": "Unify low-level memory control, local inference, transport, and trust boundaries without turning the runtime into a monolith.",
+        "pt": "Unificar controle de memória em baixo nível, inferência local, transporte e limites de confiança sem criar um monolito."
+      },
+      "evidence": "Rust 2021 · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
+      "resumeBullets": {
+        "en": [
+          "Built feature-gated Rust runtime with no_std support, custom allocation, and one-shot capability dispatch",
+          "Implemented local AI execution paths: memory-mapped/in-memory GGUF loading and no-heap TinyML VM with budgets and validation",
+          "Added canonical envelope parsing, telemetry/diagnostics, and CI architecture inventories with size gates"
+        ],
+        "pt": [
+          "Construção de runtime Rust por features com suporte a no_std, alocação customizada e dispatch por capacidades one-shot",
+          "Implementação de execução local de IA: carregamento GGUF via mmap/em memória e VM TinyML sem heap, com orçamentos e validação",
+          "Criação de parsing canônico de envelopes, telemetria/diagnóstico e inventários de arquitetura no CI com limites de tamanho"
+        ]
+      }
+    },
+    {
+      "id": "esth",
+      "name": "ESTH — Enterprise Scripting & Telemetry Host",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "C++ · PYTHON · LICENSED SYSTEMS AGENT",
+        "pt": "C++ · PYTHON · AGENTE LICENCIADO DE SISTEMAS"
+      },
+      "summary": {
+        "en": "Licensed client + agent + cloud API for scripting and telemetry against an authorized first-party game client in isolated lab VMs. Four-plane separation: FastAPI cloud (license, device binding, ownership-gated sync, catalog, encrypted OffsetBundle v3, telemetry ingest), native loader GUI (login, HWID, catalog, sync, editor, agent supervision), local agent service (execution queue, data-driven scheduler, diagnostics snapshots), and versioned shared contracts (IPC framing, OffsetBundle schema, no hardcoded addresses in binaries). AES-256-GCM protected configuration delivery with in-memory handling, short-lived bundles, and fail-closed behavior. Windows (ImGui/DX11, named pipes, job supervision) and macOS (Metal/Cocoa panel, Unix sockets) abstractions.",
+        "pt": "Cliente licenciado + agente + API cloud para scripting e telemetria contra um game client first-party autorizado, em VMs isoladas de laboratório. Separação em quatro planos: cloud FastAPI (licença, vínculo de dispositivo, sync com controle de ownership, catálogo, OffsetBundle v3 criptografado, ingestão de telemetria), GUI nativa (login, HWID, catálogo, sync, editor, supervisão do agente), serviço agente local (fila de execução, scheduler orientado a dados, snapshots de diagnóstico) e contratos versionados (framing IPC, schema OffsetBundle, sem endereços fixos nos binários). Entrega de configuração protegida por AES-256-GCM com manuseio em memória, bundles de curta duração e comportamento fail-closed. Abstrações Windows (ImGui/DX11, named pipes, supervisão por job) e macOS (painel Metal/Cocoa, Unix sockets)."
+      },
+      "challenge": {
+        "en": "Keep licensing, configuration delivery, execution, and diagnostics isolated, versioned, and fail-closed across platforms.",
+        "pt": "Manter licenciamento, entrega de configuração, execução e diagnóstico isolados, versionados e fail-closed entre plataformas."
+      },
+      "evidence": "C++17 · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery",
+      "resumeBullets": {
+        "en": [
+          "Built cross-platform systems agent with local IPC service, queued scheduler, and data-driven configuration sync",
+          "Implemented license/device binding, ownership-gated sync, and encrypted configuration delivery with versioned schemas",
+          "Authored integration tests, snapshot diagnostics, and architecture docs for reliability and fail-closed behavior"
+        ],
+        "pt": [
+          "Construção de agente multiplataforma com serviço IPC local, scheduler em fila e sync de configuração orientado a dados",
+          "Implementação de licenciamento/vínculo de dispositivo, sync com ownership e entrega criptografada com schemas versionados",
+          "Criação de testes de integração, diagnósticos por snapshot e documentação de arquitetura com foco em fail-closed"
+        ]
+      }
+    },
+    {
+      "id": "marambaia-pdv",
+      "name": "Marambaia PDV",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "FULL STACK · REAL TIME · OPERATIONS",
+        "pt": "FULL STACK · TEMPO REAL · OPERAÇÕES"
+      },
+      "summary": {
+        "en": "Multi-surface restaurant operations platform covering products, tables, orders, cash registers, customer QR ordering, analytics, backups, access control, and real-time synchronization. Includes work on race conditions and order-total consistency.",
+        "pt": "Plataforma de operações para restaurantes com múltiplas interfaces: produtos, mesas, pedidos, caixas, pedidos via QR Code, analytics, backups, controle de acesso e sincronização em tempo real. Inclui trabalho em race conditions e consistência de totais."
+      },
+      "challenge": {
+        "en": "Keep concurrent ordering, cash, and table state coherent across admin and customer surfaces.",
+        "pt": "Manter pedidos concorrentes, caixa e estado de mesas coerentes entre interfaces admin e do cliente."
+      },
+      "evidence": "React · Node.js · Express · MongoDB · Socket.IO · JWT · transaction consistency",
+      "resumeBullets": {
+        "en": ["Built real-time ordering, QR customer flows, and cash/table management", "Fixed concurrency and order-total consistency issues"],
+        "pt": ["Construção de pedidos em tempo real, fluxos QR e gestão de caixa/mesas", "Correção de concorrência e consistência de totais"]
+      }
+    },
+    {
+      "id": "airshipper",
+      "name": "Airshipper",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "RUST · RELEASE ENGINEERING · CROSS-PLATFORM",
+        "pt": "RUST · RELEASE ENGINEERING · MULTIPLATAFORMA"
+      },
+      "summary": {
+        "en": "Customized desktop launcher and release service with platform artifact mapping, GitHub release integration, metrics, database-backed metadata, installers, and multi-platform build pipelines. Based on the open-source Veloren Airshipper; customization only, with upstream attribution.",
+        "pt": "Launcher desktop customizado e serviço de releases com mapeamento de artefatos por plataforma, integração com releases do GitHub, métricas, metadados em banco, instaladores e pipelines multiplataforma. Baseado no Airshipper open-source do Veloren; apenas customização, com atribuição ao upstream."
+      },
+      "challenge": {
+        "en": "Ship consistent releases and channels across Linux, Windows, and macOS.",
+        "pt": "Entregar releases e canais consistentes em Linux, Windows e macOS."
+      },
+      "evidence": "Rust · Iced · Tokio · Axum · SQLx · Prometheus · release automation",
+      "resumeBullets": {
+        "en": ["Customized open-source launcher for GitHub-hosted release channels", "Mapped platform artifacts, metrics, and metadata with automated packaging"],
+        "pt": ["Customização de launcher open-source para canais de release no GitHub", "Mapeamento de artefatos, métricas e metadados com empacotamento automatizado"]
+      }
+    },
+    {
+      "id": "prisma-platform",
+      "name": "Prisma Platform",
+      "visibility": "private-case-study",
+      "domain": {
+        "en": "AI SERVICES · AUTOMATION · PLATFORM ARCHITECTURE",
+        "pt": "SERVIÇOS DE IA · AUTOMAÇÃO · ARQUITETURA DE PLATAFORMA"
+      },
+      "summary": {
+        "en": "Service-oriented platform for WhatsApp connectivity and AI-assisted workflows. Separates web application, messaging service, AI handling, provider abstraction with fallback, intent detection, analytics, persistence, caching, and containerized operations.",
+        "pt": "Plataforma orientada a serviços para conectividade WhatsApp e fluxos assistidos por IA. Separa aplicação web, mensageria, processamento de IA, abstração de provedores com fallback, detecção de intenção, analytics, persistência, cache e operação em containers."
+      },
+      "challenge": {
+        "en": "Keep external providers replaceable and operational responsibilities explicit.",
+        "pt": "Manter provedores externos substituíveis e responsabilidades operacionais explícitas."
+      },
+      "evidence": "Next.js · TypeScript · Express · FastAPI · PostgreSQL · Redis · Docker",
+      "resumeBullets": {
+        "en": ["Designed multi-service messaging/AI platform with provider fallback and session management", "Containerized development with persistence, caching, and analytics boundaries"],
+        "pt": ["Design de plataforma multisseriço de mensageria/IA com fallback de provedores e gestão de sessão", "Desenvolvimento conteinerizado com fronteiras de persistência, cache e analytics"]
+      }
+    }
+  ],
+  "securityResearch": {
+    "title": {
+      "en": "Offensive Security Research — Isolated Lab Only",
+      "pt": "Pesquisa em Segurança Ofensiva — Somente Laboratório Isolado"
+    },
+    "intro": {
+      "en": "Hands-on security research conducted for education, defense, and authorized testing only. Work emphasizes understanding operating-system behavior, binary and protocol analysis, and defensive detection — not operational tooling. Sensitive implementations stay private; public discussion is limited to concepts, boundaries, and defensive outcomes.",
+      "pt": "Pesquisa prática em segurança conduzida somente para educação, defesa e testes autorizados. O foco é compreender comportamento de sistemas operacionais, análise binária e de protocolos e detecção defensiva — não ferramentação operacional. Implementações sensíveis permanecem privadas; a discussão pública se limita a conceitos, limites e resultados defensivos."
+    },
+    "areas": [
+      {
+        "en": "Windows internals and binary analysis in isolated VMs, focused on telemetry and defensive validation",
+        "pt": "Windows internals e análise binária em VMs isoladas, com foco em telemetria e validação defensiva"
+      },
+      {
+        "en": "Protocol and application behavior review, including hypothesis-driven API assessments with explicit authorization",
+        "pt": "Revisão de protocolos e comportamento de aplicações, incluindo avaliações de API orientadas por hipóteses e com autorização explícita"
+      },
+      {
+        "en": "Malware analysis concepts: loader telemetry, encrypted IPC patterns, persistence indicators, and control-plane detections",
+        "pt": "Conceitos de análise de malware: telemetria de loaders, padrões de IPC criptografado, indicadores de persistência e detecções de control-plane"
+      },
+      {
+        "en": "Detection engineering mindset: reproduce suspicious behavior safely to define what defenders should log and alert",
+        "pt": "Mentalidade de detection engineering: reproduzir comportamento suspeito com segurança para definir o que defensores devem registrar e alertar"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "group": { "en": "Backend & product engineering", "pt": "Backend e engenharia de produto" },
+      "items": "TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO",
+      "body": {
+        "en": "APIs, full-stack systems, service boundaries, data modeling, authentication, and real-time communication.",
+        "pt": "APIs, sistemas full-stack, limites entre serviços, modelagem de dados, autenticação e comunicação em tempo real."
+      }
+    },
+    {
+      "group": { "en": "Systems & infrastructure", "pt": "Sistemas e infraestrutura" },
+      "items": "Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus",
+      "body": {
+        "en": "Memory-aware software, platform integration, containers, build pipelines, observability, persistence, and caching.",
+        "pt": "Software consciente de memória, integração de plataformas, containers, pipelines, observabilidade, persistência e cache."
+      }
+    },
+    {
+      "group": { "en": "Security engineering", "pt": "Engenharia de segurança" },
+      "items": "Reverse engineering · AppSec · network analysis · cryptography · authorized testing",
+      "body": {
+        "en": "Authorized research across binaries, protocols, Windows internals, application behavior, and defensive validation.",
+        "pt": "Pesquisa autorizada em binários, protocolos, Windows internals, comportamento de aplicações e validação defensiva."
+      }
+    },
+    {
+      "group": { "en": "AI & interactive technology", "pt": "IA e tecnologia interativa" },
+      "items": "Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau",
+      "body": {
+        "en": "Local model execution, TinyML budgets, computer vision, gameplay systems, and software shaped around direct user feedback.",
+        "pt": "Execução local de modelos, orçamentos TinyML, visão computacional, sistemas de gameplay e software orientado pelo retorno do usuário."
+      }
+    }
+  ],
+  "documents": {
+    "onePage": {
+      "projectIds": ["micro-runtime", "karma", "marambaia-pdv"],
+      "highlightCount": 2
+    },
+    "detailed": {
+      "projectIds": ["karma", "micro-runtime", "esth", "marambaia-pdv", "prisma-platform", "airshipper"],
+      "highlightCount": 3
+    }
+  }
+}

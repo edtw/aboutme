@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sanitized public showcase of Micro Runtime: local GGUF AI, M35 TinyML VM, and MRE1 envelopes." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="canonical" href="https://edtw.github.io/aboutme/microruntime/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://edtw.github.io/aboutme/pt/" /><link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/" />
+  <meta property="og:title" content="Micro Runtime — Public showcase | Felipe Lemos" />
+  <meta property="og:description" content="Sanitized public showcase of Micro Runtime: local GGUF AI, M35 TinyML VM, and MRE1 envelopes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edtw.github.io/aboutme/microruntime/" />
+  <meta property="og:locale" content="en_US" />
+  <title>Micro Runtime — Public showcase | Felipe Lemos</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;family=UnifrakturCook:wght@700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../assets/css/resume.css" media="print" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
+    <link rel="stylesheet" href="../assets/css/showcase.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="monogram" href="../#top" aria-label="Felipe Lemos home">FL</a>
+      <nav aria-label="Main navigation">
+        <a href="../#profile">Profile</a>
+        <a href="../#work">Work</a>
+        <a href="../#expertise">Expertise</a>
+        <a href="../microruntime/">Runtime</a>
+        <a href="../resume/en.html">Résumé</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a class="lang-link" href="../pt/" hreflang="pt-BR" aria-label="Switch to Portuguese">PT</a>
+      </div>
+    </header>
+    <main id="main" class="showcase">
+      <p class="section-index"><a href="../">← Felipe Lemos</a> · Public technical showcase · Sanitized subset — no private code</p>
+      <h1>Micro Runtime <em>can run AI locally.</em></h1>
+      <p class="lede">A modular Rust 2021 runtime for constrained environments. This public page demonstrates only the safe, non-sensitive ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, and how envelopes keep artifacts canonical.</p>
+      <div class="showcase-grid">
+        <article><span>01</span><h2>Decision plane, not autopilot</h2><p>A minimal TokenEngine trait returns single numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed 256-slot one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never becomes ambient authority.</p><pre><code>trait TokenEngine {
+  fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
+  fn reset(&amp;mut self);
+}
+// bridge: model_token -&gt; dispatch_token -&gt; HostOp
+// dispatcher: one-shot, fixed 256 slots, closed enum</code></pre></article>
+        <article><span>02</span><h2>Local GGUF, explicit and boring</h2><p>Memory-mapped or fully in-memory model loading (no disk writes), quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback, constrained decoding to a digit vocabulary, and zeroized buffers on drop.</p><pre><code>MICRO_RUNTIME_GGUF=/models/qwen3-0.6b-q4_k_m.gguf
+# missing model =&gt; None (no silent fallback)
+# think budget default 2048, act budget 32 digits</code></pre></article>
+        <article><span>03</span><h2>M35 TinyML VM</h2><p>Canonical 64-byte header, fixed-length opcodes (FC_W8A8, ADD_RQ, LUT8, ARGMAX, END), full tape validation once (spans, aliasing, quantization, order, budgets), int8 only, no heap, no float, no graph. Offline assembler and trainer produce byte-identical images with SHA manifests; only synthetic fixtures ship publicly.</p><pre><code>MAGIC M35\0 · VERSION 1 · HEADER 64B
+MAX_OPS 4096 · MAX_ARENA 16MiB · budgets enforced
+tape: ARGMAX penultimate, END last</code></pre></article>
+        <article><span>04</span><h2>MRE1 envelopes</h2><p>144-byte header + up to 256 × 80-byte records + 104-byte trailer. Canonical order, sizes, zero-reserved fields, and authority cross-rules. Zero-copy borrowed views; trust (signatures, counters) stays in the bootstrap, never in the parser.</p></article>
+        <article><span>05</span><h2>Memory discipline</h2><p>Custom global allocator with 4 KiB pages, sharded heap, and ephemeral scopes; read-only no-follow memory maps; one-shot dispatch that scrubs caller buffers. CI enforces formatting, architecture inventory, tests, and object size gates.</p></article>
+        <article><span>06</span><h2>What is deliberately excluded</h2><p>No weights, keys, certificates, transports, mixnet, kernel, driver, C2, or evasion content. No private source. This showcase is an original explanation of public concepts, not a release of the private runtime.</p><a class="primary-link" href="../resume/en-detailed.html">See résumé detail →</a></article>
+      </div>
+      <section class="demo" aria-label="Interactive TinyML budget demo">
+        <h2>Try the budget logic</h2>
+        <p>A tiny client-side simulation of M35-style budget enforcement. No model, no private code — just the idea that oversized tapes fail closed.</p>
+        <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
+        <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
+        <button id="demo-run" type="button">Validate tape</button>
+        <p id="demo-out" role="status"></p>
+      </section>
+    </main>
+    <footer><span>Felipe Lemos · Micro Runtime public showcase</span><span>© 2026</span></footer>
+    <script src="../assets/js/site.js"></script>
+    <script src="../assets/js/showcase-demo.js"></script>
+  </body>
+</html>

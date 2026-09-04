@@ -5,6 +5,10 @@
   "description": "Felipe's professional portfolio",
   "scripts": {
     "start": "python3 -m http.server 4173",
-    "check": "node --check script.js"
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "check": "node --check scripts/build.mjs && node --check scripts/validate.mjs && node --check scripts/generate-pdfs.mjs && node --check assets/js/site.js",
+    "test": "node --test \"tests/*.mjs\"",
+    "pdf": "node scripts/generate-pdfs.mjs"
   }
 }

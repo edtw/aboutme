@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /resume/
+Disallow: /downloads/
+Sitemap: https://edtw.github.io/aboutme/sitemap.xml
