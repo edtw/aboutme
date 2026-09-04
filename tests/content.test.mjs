@@ -45,12 +45,28 @@ test('resume section order is ATS-standard', () => {
   }
 });
 
-test('hero statement names real work and dossier is present', () => {
+test('hero is short, human, visual', () => {
   for (const f of ['index.html', 'pt/index.html']) {
     const html = read(f);
-    assert.ok(html.includes('class="dossier"'), `${f} missing dossier`);
-    assert.ok(html.includes('NEXUS'), `${f} statement missing NEXUS`);
-    assert.ok(html.includes('Rust'), `${f} statement missing Rust`);
+    assert.ok(!html.includes('class="dossier"'), `${f} still has dossier`);
+    assert.ok(html.includes('class="stat-strip"'), `${f} missing stat strip`);
+    const m = html.match(/<p class="hero-statement">([\s\S]*?)<\/p>/);
+    assert.ok(m && m[1].length < 220, `${f} hero statement too long`);
+  }
+  assert.ok(read('index.html').includes('in a lab, on purpose'));
+  assert.ok(read('pt/index.html').includes('de propósito'));
+});
+
+test('work board has filters, cards, approach', () => {
+  for (const f of ['index.html', 'pt/index.html']) {
+    const html = read(f);
+    for (const tr of ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES']) {
+      assert.ok(html.includes(`data-filter="${tr}"`), `${f} missing filter ${tr}`);
+    }
+    const cards = html.match(/class="work-card"/g) || [];
+    assert.equal(cards.length, 7, `${f} expected 7 cards`);
+    assert.ok(html.includes('LOCAL MIND'), `${f} missing codenames`);
+    assert.ok(html.includes('Build') || html.includes('Build'), `${f} missing approach trio`);
   }
 });
 

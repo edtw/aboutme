@@ -28,11 +28,10 @@
     <header class="site-header">
       <a class="monogram" href="#top" aria-label="Felipe Lemos home">FL</a>
       <nav aria-label="Main navigation">
-        <a href="#profile">Profile</a>
-        <a href="#work">Work</a>
-        <a href="#expertise">Expertise</a>
-        <a href="microruntime/">Runtime</a>
-        <a href="resume/en.html">Résumé</a>
+        <a href="#work">[Work]</a>
+        <a href="#security">[Security]</a>
+        <a href="#resume">[Résumé]</a>
+        <a href="#contact">[Contact]</a>
       </nav>
       <div class="header-actions">
         <a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -61,22 +60,17 @@
           <p class="kicker">Rio de Janeiro, Brazil <span>/</span> Open to opportunities<span class="cursor" aria-hidden="true">▊</span></p>
           <h1 id="hero-title">Felipe Lemos</h1>
           <p class="hero-role">Software Engineer &amp; Roblox Developer</p>
-          <p class="hero-statement">I build Rust runtimes that run AI locally, distributed mesh and telemetry systems, and combat gameplay on Roblox NEXUS — with security research in an isolated lab behind everything I ship.</p>
+          <p class="hero-statement">I'm Felipe. I build systems software — runtimes, networks, game combat — and I study how they break, in a lab, on purpose.</p>
           <div class="hero-links">
-            <a class="primary-link" href="#work">Explore selected work ↓</a>
-            <a href="resume/en.html">Résumé as PDF ↗</a>
+            <a class="primary-link" href="#work">See work ↓</a>
+            <a href="resume/en.html">Résumé ↗</a>
           </div>
-          <aside class="dossier" aria-label="Profile file info">
-            <p class="dossier-title"><span>FILE INFO</span></p>
-            <table>
-              <tr><th scope="row">HANDLE</th><td>Felipe Lemos</td></tr>
-              <tr><th scope="row">ROLE</th><td>Software Engineer &amp; Roblox Developer</td></tr>
-              <tr><th scope="row">CURRENT</th><td><a href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">NEXUS</a> · Roblox Studio</td></tr>
-              <tr><th scope="row">STACK</th><td>Rust · C/C++ · Python · TypeScript · Luau</td></tr>
-              <tr><th scope="row">SECURITY</th><td>Isolated lab · authorized testing only</td></tr>
-              <tr><th scope="row">CONTACT</th><td><a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a> · <a href="https://github.com/edtw" target="_blank" rel="noreferrer">GitHub ↗</a></td></tr>
-            </table>
-          </aside>
+          <ul class="stat-strip" aria-label="Numbers">
+            <li><strong>07</strong><span>case studies</span></li>
+            <li><strong>02</strong><span>locales</span></li>
+            <li><strong>04</strong><span>PDF résumés</span></li>
+            <li><strong>NEXUS</strong><span>live now</span></li>
+          </ul>
         </div>
         <div class="hero-footer"><span>EST. 2020</span><span>SOFTWARE / SYSTEMS / SECURITY / GAMES</span><span>22°54'S 43°12'W</span></div>
       </section>
@@ -84,126 +78,135 @@
       <section class="profile section" id="profile">
         <div class="section-inner">
           <div class="section-heading">
-            <p class="section-index">I / <span>Professional profile</span></p>
-            <h2>Generalist range.<br /><em>Engineering depth.</em></h2>
+            <p class="section-index">00 / <span>Profile</span></p>
+            <h2>Close to the machine.<br /><em>Close to people.</em></h2>
           </div>
-          <div class="profile-copy">
-            <p class="lead">I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab.</p>
-            <div class="profile-columns">
-              <p>I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.</p>
-              <p>I currently develop gameplay on NEXUS (Roblox Studio) and conduct applied research across Rust runtimes with local AI, distributed systems, licensed telemetry, and offensive security in an isolated lab — always scoped, authorized, and defense-oriented.</p>
-            </div>
+          <p class="lead">I write software in Rio de Janeiro. I work close to the machine — Rust, C++, Windows internals — and I ship things people touch: a POS, AI services, a Roblox arena.</p>
+          <div class="trio">
+            <div><h3>Build</h3><p>Small systems that carry real workloads.</p></div>
+            <div><h3>Break</h3><p>Abuse it in the lab before reality does.</p></div>
+            <div><h3>Harden</h3><p>Document the limits. Leave it easier to run.</p></div>
           </div>
-        </div>
-      </section>
-
-      <section class="career section">
-        <div class="section-inner">
-          <div class="section-heading compact">
-            <p class="section-index">II / <span>Current chapter</span></p>
-            <h2>Building systems<br /><em>people can feel.</em></h2>
+          <div class="toolbox">
+            <div class="tool-group"><span>Backend &amp; product engineering</span><p>TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO</p></div>
+            <div class="tool-group"><span>Systems &amp; infrastructure</span><p>Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus</p></div>
+            <div class="tool-group"><span>Security engineering</span><p>Reverse engineering · AppSec · network analysis · cryptography · authorized testing</p></div>
+            <div class="tool-group"><span>AI &amp; interactive technology</span><p>Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau</p></div>
           </div>
-          <article class="career-entry">
-            <div class="entry-meta"><span>Current</span><span>Roblox Studio</span></div>
-            <div class="entry-content">
-              <p class="entry-overline">Developer · NEXUS</p>
-              <h3>Gameplay development for a live PvP arena experience.</h3>
-              <p>Contributing to NEXUS in Roblox Studio, an evolving combat experience centered on distinctive characters, abilities, visual effects, and strategic player interaction. The role brings together gameplay logic, rapid iteration, technical collaboration, and attention to how systems feel in play.</p>
-              <a href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">View the experience ↗</a>
-            </div>
-          </article>
+          <p class="now-line"><span>NOW</span> → <a href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">NEXUS</a> · combat gameplay in Roblox Studio</p>
         </div>
       </section>
 
       <section class="work section" id="work">
         <div class="section-inner">
-          <div class="section-heading wide">
-            <div><p class="section-index">III / <span>Selected engineering work</span></p><h2>Evidence over<br /><em>adjectives.</em></h2></div>
-            <p>Representative case studies from public and private repositories. Confidential codebases are described at an architectural level without exposing sensitive implementation.</p>
+          <div class="section-heading">
+            <p class="section-index">01 / <span>Selected work</span></p>
+            <h2>Seven things <em>I built.</em></h2>
           </div>
-          <div class="case-grid">
+          <div class="filters" role="group" aria-label="Filter projects">
+            <button type="button" data-filter="ALL" aria-pressed="true" class="active">[ALL]</button>
+            <button type="button" data-filter="SYSTEMS" aria-pressed="false">[SYSTEMS]</button>
+            <button type="button" data-filter="PRODUCT" aria-pressed="false">[PRODUCT]</button>
+            <button type="button" data-filter="SECURITY" aria-pressed="false">[SECURITY]</button>
+            <button type="button" data-filter="GAMES" aria-pressed="false">[GAMES]</button>
+          </div>
+          <div class="work-grid">
 
-            <article class="case-card case-large">
-              <div class="case-top"><span>01</span><span>Private case study</span></div>
-              <p class="case-domain">RUST · DISTRIBUTED SYSTEMS · MESH / BLOCKCHAIN / COMPUTE · Spirix</p>
-              <h3>Karma Network</h3>
-              <p>Mesh network framework in Rust built around Proof of Antiquity blockchain, distributed computing, and agent capabilities. Three layers: blockchain (PoA consensus, Ed25519 wallets, hardware attestation, anti-Sybil nullifiers, on-chain marketplace, eclipse defense), mesh network (DHT overlay, mesh routing, relay forwarding, DAG state sync, peer discovery), and distributed compute (federated learning with FedAvg/DiLoCo, secure aggregation, differential privacy, pure-Rust ML inference with Candle, swarm coordination). Chameleon is the reference agent implementation built on Karma.</p>
-              <dl><div><dt>Challenge</dt><dd>Unify consensus, networking, and distributed ML into one coherent Rust workspace without losing operability.</dd></div><div><dt>Engineering evidence</dt><dd>Rust 2024 workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker</dd></div></dl>
-            </article>
-            <article class="case-card">
-              <div class="case-top"><span>02</span><span>Private case study</span></div>
-              <p class="case-domain">RUST · SYSTEMS ENGINEERING · LOCAL AI RUNTIME</p>
+            <article class="work-card" data-track="SYSTEMS">
+              <div class="work-top"><span>[01]</span><span class="track">SYSTEMS</span><span class="codename">LOCAL MIND</span></div>
               <h3>Micro Runtime</h3>
-              <p>Modular Rust 2021 runtime for constrained environments. Feature-gated architecture with optional no_std, custom allocator (4 KiB pages, sharded heap, ephemeral scopes), fixed 256-slot one-shot SecureDispatcher, read-only memory-mapped IO, closed HostOp ISA with session workers, and automated architecture validation in CI. Local AI execution model: TokenEngine trait decoupling numeric decisions from actions; local GGUF via Candle with memory-mapped and in-memory model loading, quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback; M35 TinyML VM with canonical 64-byte header, fixed-length opcodes, full tape validation, budgets, offline assembler/trainer and synthetic fixtures; MRE1 zero-copy product-envelope parser with canonical ordering and policy rules.</p>
-              <dl><div><dt>Challenge</dt><dd>Unify low-level memory control, local inference, transport, and trust boundaries without turning the runtime into a monolith.</dd></div><div><dt>Engineering evidence</dt><dd>Rust 2021 · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates</dd></div></dl>
+              <p class="oneliner">A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.</p>
+              <p class="stack">Rust 2021 · no_std · Candle · GGUF · TinyML · Wasm</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Architecture, allocator, local-AI execution</dd></div><div><dt>FOCO</dt><dd>Memory budgets, TinyML, no silent fallbacks</dd></div></dl>
+              <a class="work-link" href="microruntime/">Open showcase →</a>
             </article>
-            <article class="case-card">
-              <div class="case-top"><span>03</span><span>Private case study</span></div>
-              <p class="case-domain">C++ · PYTHON · LICENSED SYSTEMS AGENT</p>
+            <article class="work-card" data-track="SYSTEMS">
+              <div class="work-top"><span>[02]</span><span class="track">SYSTEMS</span><span class="codename">MESH LEDGER</span></div>
+              <h3>Karma Network <small>· Spirix</small></h3>
+              <p class="oneliner">A Rust mesh network with its own chain and distributed compute. I work on the networking and agent crates.</p>
+              <p class="stack">Rust 2024 · Tokio · Axum · SQLx · Candle · DHT</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Networking + agent crates in a 700-commit monorepo</dd></div><div><dt>FOCO</dt><dd>DHT overlay, DAG sync, federated primitives</dd></div></dl>
+
+            </article>
+            <article class="work-card" data-track="SECURITY">
+              <div class="work-top"><span>[03]</span><span class="track">SECURITY</span><span class="codename">GATED AGENT</span></div>
               <h3>ESTH — Enterprise Scripting &amp; Telemetry Host</h3>
-              <p>Licensed client + agent + cloud API for scripting and telemetry against an authorized first-party game client in isolated lab VMs. Four-plane separation: FastAPI cloud (license, device binding, ownership-gated sync, catalog, encrypted OffsetBundle v3, telemetry ingest), native loader GUI (login, HWID, catalog, sync, editor, agent supervision), local agent service (execution queue, data-driven scheduler, diagnostics snapshots), and versioned shared contracts (IPC framing, OffsetBundle schema, no hardcoded addresses in binaries). AES-256-GCM protected configuration delivery with in-memory handling, short-lived bundles, and fail-closed behavior. Windows (ImGui/DX11, named pipes, job supervision) and macOS (Metal/Cocoa panel, Unix sockets) abstractions.</p>
-              <dl><div><dt>Challenge</dt><dd>Keep licensing, configuration delivery, execution, and diagnostics isolated, versioned, and fail-closed across platforms.</dd></div><div><dt>Engineering evidence</dt><dd>C++17 · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery</dd></div></dl>
+              <p class="oneliner">A licensed telemetry agent for an authorized game client. Encrypted config, fail-closed by design.</p>
+              <p class="stack">C++17 · CMake · FastAPI · AES-GCM · pytest</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Agent, backend sync, integration tests</dd></div><div><dt>FOCO</dt><dd>Local IPC, encrypted delivery, fail-closed</dd></div></dl>
+
             </article>
-            <article class="case-card">
-              <div class="case-top"><span>04</span><span>Private case study</span></div>
-              <p class="case-domain">FULL STACK · REAL TIME · OPERATIONS</p>
+            <article class="work-card" data-track="GAMES">
+              <div class="work-top"><span>[04]</span><span class="track">GAMES</span><span class="codename">ARENA BUILD</span></div>
+              <h3>NEXUS</h3>
+              <p class="oneliner">Combat gameplay on a live Roblox arena. Characters, abilities, iteration with real players.</p>
+              <p class="stack">Roblox Studio · Luau · live ops</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Gameplay developer, live iteration</dd></div><div><dt>FOCO</dt><dd>Combat systems, abilities, player feel</dd></div></dl>
+              <a class="work-link" href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">See it live ↗</a>
+            </article>
+            <article class="work-card" data-track="PRODUCT">
+              <div class="work-top"><span>[05]</span><span class="track">PRODUCT</span><span class="codename">TABLE SYNC</span></div>
               <h3>Marambaia PDV</h3>
-              <p>Multi-surface restaurant operations platform covering products, tables, orders, cash registers, customer QR ordering, analytics, backups, access control, and real-time synchronization. Includes work on race conditions and order-total consistency.</p>
-              <dl><div><dt>Challenge</dt><dd>Keep concurrent ordering, cash, and table state coherent across admin and customer surfaces.</dd></div><div><dt>Engineering evidence</dt><dd>React · Node.js · Express · MongoDB · Socket.IO · JWT · transaction consistency</dd></div></dl>
+              <p class="oneliner">A restaurant POS with real-time orders. I fixed the race conditions, not just found them.</p>
+              <p class="stack">React · Node.js · MongoDB · Socket.IO</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Full-stack build + concurrency fixes</dd></div><div><dt>FOCO</dt><dd>Real-time orders, QR flows, cash consistency</dd></div></dl>
+
             </article>
-            <article class="case-card">
-              <div class="case-top"><span>05</span><span>Private case study</span></div>
-              <p class="case-domain">RUST · RELEASE ENGINEERING · CROSS-PLATFORM</p>
+            <article class="work-card" data-track="SYSTEMS">
+              <div class="work-top"><span>[06]</span><span class="track">SYSTEMS</span><span class="codename">RELEASE RAIL</span></div>
               <h3>Airshipper</h3>
-              <p>Customized desktop launcher and release service with platform artifact mapping, GitHub release integration, metrics, database-backed metadata, installers, and multi-platform build pipelines. Based on the open-source Veloren Airshipper; customization only, with upstream attribution.</p>
-              <dl><div><dt>Challenge</dt><dd>Ship consistent releases and channels across Linux, Windows, and macOS.</dd></div><div><dt>Engineering evidence</dt><dd>Rust · Iced · Tokio · Axum · SQLx · Prometheus · release automation</dd></div></dl>
+              <p class="oneliner">Release infrastructure: a Rust launcher serving versioned builds to three OSes. (Upstream: Veloren.)</p>
+              <p class="stack">Rust · Iced · Tokio · SQLx · CI</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Fork customization, release channels</dd></div><div><dt>FOCO</dt><dd>Artifact mapping, multi-OS packaging</dd></div></dl>
+
             </article>
-            <article class="case-card case-wide">
-              <div class="case-top"><span>06</span><span>Private case study</span></div>
-              <p class="case-domain">AI SERVICES · AUTOMATION · PLATFORM ARCHITECTURE</p>
+            <article class="work-card" data-track="PRODUCT">
+              <div class="work-top"><span>[07]</span><span class="track">PRODUCT</span><span class="codename">FALLBACK BUS</span></div>
               <h3>Prisma Platform</h3>
-              <p>Service-oriented platform for WhatsApp connectivity and AI-assisted workflows. Separates web application, messaging service, AI handling, provider abstraction with fallback, intent detection, analytics, persistence, caching, and containerized operations.</p>
-              <dl><div><dt>Challenge</dt><dd>Keep external providers replaceable and operational responsibilities explicit.</dd></div><div><dt>Engineering evidence</dt><dd>Next.js · TypeScript · Express · FastAPI · PostgreSQL · Redis · Docker</dd></div></dl>
+              <p class="oneliner">WhatsApp + AI behind one API. Swappable providers, managed sessions, all containerized.</p>
+              <p class="stack">Next.js · FastAPI · PostgreSQL · Redis · Docker</p>
+              <dl class="roles"><div><dt>ROLE</dt><dd>Service boundaries, provider fallback</dd></div><div><dt>FOCO</dt><dd>Messaging, intent detection, containers</dd></div></dl>
+
             </article>
           </div>
-          <p class="showcase-link"><a href="microruntime/">See the public Micro Runtime showcase →</a></p>
+          <p class="fineprint">Private code described at architecture level. Nothing sensitive is published.</p>
         </div>
       </section>
 
-      <section class="security section">
+      <section class="security section" id="security">
         <div class="section-inner">
-          <div class="section-heading wide">
-            <div><p class="section-index">IV / <span>Security & Red Team</span></p><h2>Offensive capability,<br /><em>defensive posture.</em></h2></div>
-            <p>Hands-on security research conducted for education, defense, and authorized testing only. Work emphasizes understanding operating-system behavior, binary and protocol analysis, and defensive detection — not operational tooling. Sensitive implementations stay private; public discussion is limited to concepts, boundaries, and defensive outcomes.</p>
+          <div class="section-heading">
+            <p class="section-index">02 / <span>Security</span></p>
+            <h2>I can attack.<br /><em>I prefer to defend.</em></h2>
           </div>
-          <ul class="security-list">
-            <li>Windows internals and binary analysis in isolated VMs — studying telemetry to learn what defenders should log</li>
-            <li>Protocol and app-behavior review, including hypothesis-driven API assessments under explicit authorization</li>
-            <li>Malware-analysis fundamentals: loader telemetry, encrypted-IPC patterns, persistence indicators, control-plane detections</li>
-            <li>Detection-engineering habit: reproduce suspicious behavior safely, then write the alert I wish existed</li>
-          </ul>
-          <p class="fineprint">All sensitive work stays private. External discussion is limited to concepts, scope boundaries, and defensive outcomes.</p>
+          <div class="sec-grid">
+            <div><span>01</span><h3>Windows internals</h3><p>Learned in isolated VMs — to know what defenders should log.</p></div>
+            <div><span>02</span><h3>Protocol &amp; API review</h3><p>Hypothesis-driven, authorized, written down.</p></div>
+            <div><span>03</span><h3>Malware fundamentals</h3><p>Loader telemetry, persistence signs, control-plane patterns.</p></div>
+            <div><span>04</span><h3>Detection habit</h3><p>Reproduce it safely, then write the alert.</p></div>
+          </div>
+          <p class="rules">Rules: isolated VMs only · authorized targets only · sensitive work stays private.</p>
         </div>
       </section>
 
-      <section class="expertise section" id="expertise">
+      <section class="resumes section" id="resume">
         <div class="section-inner">
-          <div class="section-heading compact"><p class="section-index">V / <span>Engineering disciplines</span></p><h2>Breadth with<br /><em>a clear center.</em></h2></div>
-          <div class="discipline-list">
-
-            <article><span>01</span><h3>Backend &amp; product engineering</h3><p>APIs, full-stack systems, service boundaries, data modeling, authentication, and real-time communication.</p><small>TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO</small></article>
-            <article><span>02</span><h3>Systems &amp; infrastructure</h3><p>Memory-aware software, platform integration, containers, build pipelines, observability, persistence, and caching.</p><small>Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus</small></article>
-            <article><span>03</span><h3>Security engineering</h3><p>Authorized research across binaries, protocols, Windows internals, application behavior, and defensive validation.</p><small>Reverse engineering · AppSec · network analysis · cryptography · authorized testing</small></article>
-            <article><span>04</span><h3>AI &amp; interactive technology</h3><p>Local model execution, TinyML budgets, computer vision, gameplay systems, and software shaped around direct user feedback.</p><small>Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau</small></article>
+          <div class="section-heading">
+            <p class="section-index">03 / <span>Résumé</span></p>
+            <h2>Take <em>the paper.</em></h2>
+          </div>
+          <div class="resume-cards">
+            <div><h3>One page</h3><p>ATS-safe, one column, no gimmicks.</p><a href="resume/en.html">Open ↗</a> <a href="downloads/felipe-lemos-resume-en.pdf" download>PDF ↓</a></div>
+            <div><h3>Detailed</h3><p>ATS-safe, one column, no gimmicks.</p><a href="resume/en-detailed.html">Open ↗</a> <a href="downloads/felipe-lemos-resume-en-detailed.pdf" download>PDF ↓</a></div>
           </div>
         </div>
       </section>
 
       <section class="contact section" id="contact">
         <div class="contact-ornament" aria-hidden="true">✦</div>
-        <p class="section-index">VI / <span>Contact</span></p>
-        <h2>Let us build something<br /><em>worth understanding.</em></h2>
-        <p>Open to software engineering, backend, systems, application security, DevSecOps, automation, and game technology opportunities.</p>
+        <p class="section-index">04 / <span>Contact</span></p>
+        <h2>Got a hard <em>system?</em></h2>
+        <p>Software, backend, systems, security, games. Rio de Janeiro, open to work.</p>
         <div class="contact-links"><a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/edtw" target="_blank" rel="noreferrer">GitHub ↗</a><a href="resume/en.html">Résumé ↗</a></div>
       </section>
     </main>

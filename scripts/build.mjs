@@ -44,11 +44,10 @@ function header(lang, prefix, t) {
     <header class="site-header">
       <a class="monogram" href="${prefix}#top" aria-label="Felipe Lemos home">FL</a>
       <nav aria-label="${lang === 'pt' ? 'Navegação principal' : 'Main navigation'}">
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#profile">${t.navProfile}</a>
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#work">${t.navWork}</a>
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#expertise">${t.navExpertise}</a>
-        <a href="${prefix}microruntime/${lang === 'pt' ? '../pt/microruntime/' : ''}">${t.navRuntime}</a>
-        <a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${t.navResume}</a>
+        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#work">[${t.navWork}]</a>
+        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#security">[${t.navSecurity}]</a>
+        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#resume">[${t.navResume}]</a>
+        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#contact">[${t.navContact}]</a>
       </nav>
       <div class="header-actions">
         <a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -58,8 +57,8 @@ function header(lang, prefix, t) {
 }
 
 const T = {
-  en: { navProfile: 'Profile', navWork: 'Work', navExpertise: 'Expertise', navRuntime: 'Runtime', navResume: 'Résumé' },
-  pt: { navProfile: 'Perfil', navWork: 'Projetos', navExpertise: 'Competências', navRuntime: 'Runtime', navResume: 'Currículo' }
+  en: { navWork: 'Work', navSecurity: 'Security', navResume: 'Résumé', navContact: 'Contact' },
+  pt: { navWork: 'Projetos', navSecurity: 'Segurança', navResume: 'Currículo', navContact: 'Contato' }
 };
 
 function heroGraphic() {
@@ -90,17 +89,25 @@ function portfolioPage(lang) {
   const projects = cv.projects;
   const sec = (n, label) => `<p class="section-index">${n} / <span>${label}</span></p>`;
 
-  const projectCards = projects.map((p, i) => `
-            <article class="case-card${i === 0 ? ' case-large' : ''}${p.id === 'prisma-platform' ? ' case-wide' : ''}">
-              <div class="case-top"><span>0${i + 1}</span><span>${lang === 'pt' ? 'Estudo de caso privado' : 'Private case study'}</span></div>
-              <p class="case-domain">${esc(L(p.domain, lang))}${p.org ? ` · ${esc(p.org)}` : ''}</p>
-              <h3>${esc(p.name)}</h3>
-              <p>${esc(L(p.summary, lang))}</p>
-              <dl><div><dt>${lang === 'pt' ? 'Desafio' : 'Challenge'}</dt><dd>${esc(L(p.challenge, lang))}</dd></div><div><dt>${lang === 'pt' ? 'Evidências' : 'Engineering evidence'}</dt><dd>${esc(p.evidence)}</dd></div></dl>
+  const ordered = [...projects].sort((a, b) => (a.order ?? 9) - (b.order ?? 9));
+  const tracks = ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES'];
+  const trackLabel = (tr) => lang === 'pt'
+    ? ({ ALL: 'TODOS', SYSTEMS: 'SISTEMAS', PRODUCT: 'PRODUTO', SECURITY: 'SEGURANÇA', GAMES: 'JOGOS' }[tr])
+    : ({ ALL: 'ALL', SYSTEMS: 'SYSTEMS', PRODUCT: 'PRODUCT', SECURITY: 'SECURITY', GAMES: 'GAMES' }[tr]);
+  const projectLink = (p) => {
+    if (!p.link) return '';
+    if (p.link.kind === 'showcase') return `<a class="work-link" href="${prefix}microruntime/${lang === 'pt' ? '../pt/microruntime/' : ''}">${lang === 'pt' ? 'Ver demonstração' : 'Open showcase'} →</a>`;
+    return `<a class="work-link" href="${p.link.url}" target="_blank" rel="noreferrer">${lang === 'pt' ? 'Ver ao vivo' : 'See it live'} ↗</a>`;
+  };
+  const projectCards = ordered.map((p, i) => `
+            <article class="work-card" data-track="${p.track}">
+              <div class="work-top"><span>[0${i + 1}]</span><span class="track">${p.track}</span><span class="codename">${esc(p.codename)}</span></div>
+              <h3>${esc(p.name)}${p.org ? ` <small>· ${esc(p.org)}</small>` : ''}</h3>
+              <p class="oneliner">${esc(L(p.blurb, lang))}</p>
+              <p class="stack">${esc(p.stack)}</p>
+              <dl class="roles"><div><dt>${lang === 'pt' ? 'PAPEL' : 'ROLE'}</dt><dd>${esc(L(p.role, lang))}</dd></div><div><dt>FOCO</dt><dd>${esc(L(p.focus, lang))}</dd></div></dl>
+              ${projectLink(p)}
             </article>`).join('');
-
-  const skills = cv.skills.map((s, i) => `
-            <article><span>0${i + 1}</span><h3>${esc(L(s.group, lang))}</h3><p>${esc(L(s.body, lang))}</p><small>${esc(s.items)}</small></article>`).join('');
 
   const secRes = cv.securityResearch;
 
@@ -123,20 +130,15 @@ ${header(lang, prefix, t)}
           <p class="hero-role">${esc(L(cv.person.role, lang))}</p>
           <p class="hero-statement">${esc(L(cv.person.statement, lang))}</p>
           <div class="hero-links">
-            <a class="primary-link" href="#work">${lang === 'pt' ? 'Explorar projetos' : 'Explore selected work'} ↓</a>
-            <a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo em PDF' : 'Résumé as PDF'} ↗</a>
+            <a class="primary-link" href="#work">${lang === 'pt' ? 'Ver projetos' : 'See work'} ↓</a>
+            <a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo' : 'Résumé'} ↗</a>
           </div>
-          <aside class="dossier" aria-label="${lang === 'pt' ? 'Ficha do perfil' : 'Profile file info'}">
-            <p class="dossier-title"><span>${lang === 'pt' ? 'FICHA' : 'FILE INFO'}</span></p>
-            <table>
-              <tr><th scope="row">HANDLE</th><td>Felipe Lemos</td></tr>
-              <tr><th scope="row">${lang === 'pt' ? 'FUNÇÃO' : 'ROLE'}</th><td>${esc(L(cv.person.role, lang))}</td></tr>
-              <tr><th scope="row">${lang === 'pt' ? 'ATUAL' : 'CURRENT'}</th><td><a href="${cv.person.profiles.robloxNexus}" target="_blank" rel="noreferrer">NEXUS</a> · Roblox Studio</td></tr>
-              <tr><th scope="row">STACK</th><td>Rust · C/C++ · Python · TypeScript · Luau</td></tr>
-              <tr><th scope="row">${lang === 'pt' ? 'SEGURANÇA' : 'SECURITY'}</th><td>${lang === 'pt' ? 'Laboratório isolado · somente testes autorizados' : 'Isolated lab · authorized testing only'}</td></tr>
-              <tr><th scope="row">${lang === 'pt' ? 'CONTATO' : 'CONTACT'}</th><td><a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a> · <a href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a></td></tr>
-            </table>
-          </aside>
+          <ul class="stat-strip" aria-label="${lang === 'pt' ? 'Números' : 'Numbers'}">
+            <li><strong>07</strong><span>${lang === 'pt' ? 'estudos de caso' : 'case studies'}</span></li>
+            <li><strong>02</strong><span>${lang === 'pt' ? 'idiomas' : 'locales'}</span></li>
+            <li><strong>04</strong><span>${lang === 'pt' ? 'currículos em PDF' : 'PDF résumés'}</span></li>
+            <li><strong>NEXUS</strong><span>${lang === 'pt' ? 'no ar agora' : 'live now'}</span></li>
+          </ul>
         </div>
         <div class="hero-footer"><span>EST. 2020</span><span>SOFTWARE / SYSTEMS / SECURITY / GAMES</span><span>22°54'S 43°12'W</span></div>
       </section>
@@ -144,77 +146,71 @@ ${header(lang, prefix, t)}
       <section class="profile section" id="profile">
         <div class="section-inner">
           <div class="section-heading">
-            ${sec('I', lang === 'pt' ? 'Perfil profissional' : 'Professional profile')}
-            <h2>${lang === 'pt' ? 'Amplitude generalista.<br /><em>Profundidade técnica.</em>' : 'Generalist range.<br /><em>Engineering depth.</em>'}</h2>
+            ${sec('00', lang === 'pt' ? 'Perfil' : 'Profile')}
+            <h2>${lang === 'pt' ? 'Perto da máquina.<br /><em>Perto das pessoas.</em>' : 'Close to the machine.<br /><em>Close to people.</em>'}</h2>
           </div>
-          <div class="profile-copy">
-            <p class="lead">${esc(L(cv.person.summary, lang).split('. ')[0])}.</p>
-            <div class="profile-columns">
-              <p>${esc(L(cv.person.summary, lang))}</p>
-              <p>${lang === 'pt' ? 'Atualmente desenvolvo gameplay no NEXUS (Roblox Studio) e conduzo pesquisa aplicada em runtimes Rust com IA local, sistemas distribuídos, telemetria licenciada e segurança ofensiva em laboratório isolado — sempre com escopo autorizado e foco defensivo.' : 'I currently develop gameplay on NEXUS (Roblox Studio) and conduct applied research across Rust runtimes with local AI, distributed systems, licensed telemetry, and offensive security in an isolated lab — always scoped, authorized, and defense-oriented.'}</p>
-            </div>
+          <p class="lead">${lang === 'pt' ? 'Sou engenheiro de software no Rio de Janeiro. Trabalho perto da máquina — Rust, C++, Windows internals — e entrego coisas que gente usa: um PDV, serviços de IA, uma arena no Roblox.' : 'I write software in Rio de Janeiro. I work close to the machine — Rust, C++, Windows internals — and I ship things people touch: a POS, AI services, a Roblox arena.'}</p>
+          <div class="trio">
+            <div><h3>Build</h3><p>${lang === 'pt' ? 'Sistemas pequenos que aguentam trabalho real.' : 'Small systems that carry real workloads.'}</p></div>
+            <div><h3>Break</h3><p>${lang === 'pt' ? 'Forçar limites no lab antes que a realidade force.' : 'Abuse it in the lab before reality does.'}</p></div>
+            <div><h3>Harden</h3><p>${lang === 'pt' ? 'Documentar limites. Entregar mais fácil de operar.' : 'Document the limits. Leave it easier to run.'}</p></div>
           </div>
-        </div>
-      </section>
-
-      <section class="career section">
-        <div class="section-inner">
-          <div class="section-heading compact">
-            ${sec('II', lang === 'pt' ? 'Momento atual' : 'Current chapter')}
-            <h2>${lang === 'pt' ? 'Construindo sistemas<br /><em>que as pessoas sentem.</em>' : 'Building systems<br /><em>people can feel.</em>'}</h2>
+          <div class="toolbox">
+            ${cv.skills.map((s) => `<div class="tool-group"><span>${esc(L(s.group, lang))}</span><p>${esc(s.items)}</p></div>`).join('\n            ')}
           </div>
-          <article class="career-entry">
-            <div class="entry-meta"><span>${lang === 'pt' ? 'Atual' : 'Current'}</span><span>${esc(exp.platform)}</span></div>
-            <div class="entry-content">
-              <p class="entry-overline">${lang === 'pt' ? 'Desenvolvedor' : 'Developer'} · ${esc(exp.organization)}</p>
-              <h3>${esc(L(exp.title, lang))}</h3>
-              <p>${esc(L(exp.body, lang))}</p>
-              <a href="${cv.person.profiles.robloxNexus}" target="_blank" rel="noreferrer">${lang === 'pt' ? 'Ver experiência' : 'View the experience'} ↗</a>
-            </div>
-          </article>
+          <p class="now-line"><span>${lang === 'pt' ? 'AGORA' : 'NOW'}</span> → <a href="${cv.person.profiles.robloxNexus}" target="_blank" rel="noreferrer">NEXUS</a> · ${lang === 'pt' ? 'gameplay de combate no Roblox Studio' : 'combat gameplay in Roblox Studio'}</p>
         </div>
       </section>
 
       <section class="work section" id="work">
         <div class="section-inner">
-          <div class="section-heading wide">
-            <div>${sec('III', lang === 'pt' ? 'Engenharia selecionada' : 'Selected engineering work')}<h2>${lang === 'pt' ? 'Evidências acima<br /><em>de adjetivos.</em>' : 'Evidence over<br /><em>adjectives.</em>'}</h2></div>
-            <p>${lang === 'pt' ? 'Estudos de caso de repositórios públicos e privados. Código confidencial é descrito no nível de arquitetura, sem expor implementação sensível.' : 'Representative case studies from public and private repositories. Confidential codebases are described at an architectural level without exposing sensitive implementation.'}</p>
+          <div class="section-heading">
+            ${sec('01', lang === 'pt' ? 'Projetos' : 'Selected work')}
+            <h2>${lang === 'pt' ? 'Sete coisas que <em>eu construí.</em>' : 'Seven things <em>I built.</em>'}</h2>
           </div>
-          <div class="case-grid">
+          <div class="filters" role="group" aria-label="${lang === 'pt' ? 'Filtrar projetos' : 'Filter projects'}">
+            ${tracks.map((tr, i) => `<button type="button" data-filter="${tr}" aria-pressed="${i === 0}"${i === 0 ? ' class="active"' : ''}>[${trackLabel(tr)}]</button>`).join('\n            ')}
+          </div>
+          <div class="work-grid">
 ${projectCards}
           </div>
-          <p class="showcase-link"><a href="${prefix}microruntime/${lang === 'pt' ? '../pt/microruntime/' : ''}">${lang === 'pt' ? 'Ver demonstração pública do Micro Runtime →' : 'See the public Micro Runtime showcase →'}</a></p>
+          <p class="fineprint">${lang === 'pt' ? 'Código privado descrito em nível de arquitetura. Nada sensível é publicado.' : 'Private code described at architecture level. Nothing sensitive is published.'}</p>
         </div>
       </section>
 
-      <section class="security section">
+      <section class="security section" id="security">
         <div class="section-inner">
-          <div class="section-heading wide">
-            <div>${sec('IV', lang === 'pt' ? 'Segurança & Red Team' : 'Security & Red Team')}<h2>${lang === 'pt' ? 'Capacidade ofensiva,<br /><em>postura defensiva.</em>' : 'Offensive capability,<br /><em>defensive posture.</em>'}</h2></div>
-            <p>${esc(L(secRes.intro, lang))}</p>
+          <div class="section-heading">
+            ${sec('02', lang === 'pt' ? 'Segurança' : 'Security')}
+            <h2>${lang === 'pt' ? 'Sei atacar.<br /><em>Prefiro defender.</em>' : 'I can attack.<br /><em>I prefer to defend.</em>'}</h2>
           </div>
-          <ul class="security-list">
-            ${secRes.areas.map((a) => `<li>${esc(L(a, lang))}</li>`).join('\n            ')}
-          </ul>
-          <p class="fineprint">${lang === 'pt' ? 'Todo trabalho sensível permanece privado. Discussões externas limitam-se a conceitos, limites de escopo e resultados defensivos.' : 'All sensitive work stays private. External discussion is limited to concepts, scope boundaries, and defensive outcomes.'}</p>
+          <div class="sec-grid">
+            ${secRes.points.map((pt_, i) => `<div><span>0${i + 1}</span><h3>${esc(L(pt_.t, lang))}</h3><p>${esc(L(pt_.d, lang))}</p></div>`).join('\n            ')}
+          </div>
+          <p class="rules">${esc(L(secRes.rules, lang))}</p>
         </div>
       </section>
 
-      <section class="expertise section" id="expertise">
+      <section class="resumes section" id="resume">
         <div class="section-inner">
-          <div class="section-heading compact">${sec('V', lang === 'pt' ? 'Disciplinas' : 'Engineering disciplines')}<h2>${lang === 'pt' ? 'Amplitude com<br /><em>um centro claro.</em>' : 'Breadth with<br /><em>a clear center.</em>'}</h2></div>
-          <div class="discipline-list">
-${skills}
+          <div class="section-heading">
+            ${sec('03', lang === 'pt' ? 'Currículo' : 'Résumé')}
+            <h2>${lang === 'pt' ? 'Leve <em>o papel.</em>' : 'Take <em>the paper.</em>'}</h2>
+          </div>
+          <div class="resume-cards">
+            ${[
+              { f: lang === 'pt' ? 'pt.html' : 'en.html', pdf: lang === 'pt' ? 'felipe-lemos-curriculo-pt.pdf' : 'felipe-lemos-resume-en.pdf', t: lang === 'pt' ? 'Uma página' : 'One page' },
+              { f: lang === 'pt' ? 'pt-detailed.html' : 'en-detailed.html', pdf: lang === 'pt' ? 'felipe-lemos-curriculo-pt-detalhado.pdf' : 'felipe-lemos-resume-en-detailed.pdf', t: lang === 'pt' ? 'Detalhado' : 'Detailed' }
+            ].map((r) => `<div><h3>${r.t}</h3><p>${lang === 'pt' ? 'ATS, uma coluna, sem firula.' : 'ATS-safe, one column, no gimmicks.'}</p><a href="${prefix}resume/${r.f}">${lang === 'pt' ? 'Abrir' : 'Open'} ↗</a> <a href="${prefix}downloads/${r.pdf}" download>PDF ↓</a></div>`).join('\n            ')}
           </div>
         </div>
       </section>
 
       <section class="contact section" id="contact">
         <div class="contact-ornament" aria-hidden="true">✦</div>
-        ${sec('VI', lang === 'pt' ? 'Contato' : 'Contact')}
-        <h2>${lang === 'pt' ? 'Vamos construir algo<br /><em>que vale compreender.</em>' : 'Let us build something<br /><em>worth understanding.</em>'}</h2>
-        <p>${lang === 'pt' ? 'Aberto a engenharia de software, backend, sistemas, segurança de aplicações, DevSecOps, automação e tecnologia para jogos.' : 'Open to software engineering, backend, systems, application security, DevSecOps, automation, and game technology opportunities.'}</p>
+        ${sec('04', lang === 'pt' ? 'Contato' : 'Contact')}
+        <h2>${lang === 'pt' ? 'Tem um sistema <em>difícil?</em>' : 'Got a hard <em>system?</em>'}</h2>
+        <p>${lang === 'pt' ? 'Software, backend, sistemas, segurança, jogos. Rio de Janeiro, aberto a propostas.' : 'Software, backend, systems, security, games. Rio de Janeiro, open to work.'}</p>
         <div class="contact-links"><a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a><a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo' : 'Résumé'} ↗</a></div>
       </section>
     </main>
@@ -347,14 +343,15 @@ fs.mkdirSync(path.join(root, 'assets/css'), { recursive: true });
 fs.mkdirSync(path.join(root, 'assets/js'), { recursive: true });
 fs.mkdirSync(path.join(root, 'downloads'), { recursive: true });
 
-fs.writeFileSync(path.join(root, 'index.html'), portfolioPage('en'));
-fs.writeFileSync(path.join(root, 'pt/index.html'), portfolioPage('pt'));
-fs.writeFileSync(path.join(root, 'microruntime/index.html'), runtimePage('en'));
-fs.writeFileSync(path.join(root, 'pt/microruntime/index.html'), runtimePage('pt'));
-fs.writeFileSync(path.join(root, 'resume/en.html'), resumePage('en', false));
-fs.writeFileSync(path.join(root, 'resume/en-detailed.html'), resumePage('en', true));
-fs.writeFileSync(path.join(root, 'resume/pt.html'), resumePage('pt', false));
-fs.writeFileSync(path.join(root, 'resume/pt-detailed.html'), resumePage('pt', true));
+const clean = (s) => s.replace(/[ \t]+$/gm, '');
+fs.writeFileSync(path.join(root, 'index.html'), clean(portfolioPage('en')));
+fs.writeFileSync(path.join(root, 'pt/index.html'), clean(portfolioPage('pt')));
+fs.writeFileSync(path.join(root, 'microruntime/index.html'), clean(runtimePage('en')));
+fs.writeFileSync(path.join(root, 'pt/microruntime/index.html'), clean(runtimePage('pt')));
+fs.writeFileSync(path.join(root, 'resume/en.html'), clean(resumePage('en', false)));
+fs.writeFileSync(path.join(root, 'resume/en-detailed.html'), clean(resumePage('en', true)));
+fs.writeFileSync(path.join(root, 'resume/pt.html'), clean(resumePage('pt', false)));
+fs.writeFileSync(path.join(root, 'resume/pt-detailed.html'), clean(resumePage('pt', true)));
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

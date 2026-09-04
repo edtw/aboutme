@@ -6,14 +6,22 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cv = JSON.parse(fs.readFileSync(path.join(root, 'src/cv.json'), 'utf8'));
 const errors = [];
 const forLang = (obj, lang) => obj?.[lang];
+const TRACKS = new Set(['SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES']);
 for (const lang of ['en', 'pt']) {
   for (const k of ['location', 'headline', 'role', 'statement', 'summary']) {
     if (!forLang(cv.person[k], lang)) errors.push(`person.${k} missing ${lang}`);
   }
   for (const p of cv.projects) {
-    for (const k of ['domain', 'summary', 'challenge']) if (!forLang(p[k], lang)) errors.push(`project ${p.id}.${k} missing ${lang}`);
+    for (const k of ['domain', 'summary', 'challenge', 'blurb', 'role', 'focus']) if (!forLang(p[k], lang)) errors.push(`project ${p.id}.${k} missing ${lang}`);
     if (!p.resumeBullets?.[lang]?.length) errors.push(`project ${p.id}.resumeBullets missing ${lang}`);
+    if (!TRACKS.has(p.track)) errors.push(`project ${p.id} bad track ${p.track}`);
+    if (!p.codename || !p.stack) errors.push(`project ${p.id} missing codename/stack`);
+    if (typeof p.order !== 'number') errors.push(`project ${p.id} missing order`);
   }
+  cv.securityResearch.points.forEach((pt, i) => {
+    if (!forLang(pt.t, lang) || !forLang(pt.d, lang)) errors.push(`securityResearch.points[${i}] missing ${lang}`);
+  });
+  if (!forLang(cv.securityResearch.rules, lang)) errors.push(`securityResearch.rules missing ${lang}`);
   for (const k of ['title', 'intro']) if (!forLang(cv.securityResearch[k], lang)) errors.push(`securityResearch.${k} missing ${lang}`);
   cv.securityResearch.areas.forEach((a, i) => { if (!forLang(a, lang)) errors.push(`securityResearch.areas[${i}] missing ${lang}`); });
   cv.skills.forEach((s, i) => {
@@ -27,7 +35,7 @@ const ids = new Set();
 for (const p of cv.projects) {
   if (ids.has(p.id)) errors.push(`duplicate project id ${p.id}`);
   ids.add(p.id);
-  if (!['private-case-study', 'public'].includes(p.visibility)) errors.push(`project ${p.id} bad visibility`);
+  if (!['private-case-study', 'public', 'public-link'].includes(p.visibility)) errors.push(`project ${p.id} bad visibility`);
 }
 for (const v of ['onePage', 'detailed']) for (const id of cv.documents[v].projectIds) if (!ids.has(id)) errors.push(`documents.${v} unknown project ${id}`);
 // no public links to private repos

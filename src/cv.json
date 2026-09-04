@@ -20,8 +20,8 @@
       "pt": "Engenheiro de Software & Desenvolvedor Roblox"
     },
     "statement": {
-      "en": "I build Rust runtimes that run AI locally, distributed mesh and telemetry systems, and combat gameplay on Roblox NEXUS — with security research in an isolated lab behind everything I ship.",
-      "pt": "Construo runtimes Rust com IA local, sistemas distribuídos de mesh e telemetria, e gameplay de combate no NEXUS (Roblox) — com pesquisa em segurança em laboratório isolado por trás de tudo que entrego."
+      "en": "I'm Felipe. I build systems software — runtimes, networks, game combat — and I study how they break, in a lab, on purpose.",
+      "pt": "Sou o Felipe. Construo software de sistemas — runtimes, redes, combate em jogos — e estudo como eles quebram, em laboratório, de propósito."
     },
     "summary": {
       "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
@@ -72,6 +72,23 @@
         "pt": "Unificar consenso, rede e ML distribuído em um único workspace Rust sem perder operabilidade."
       },
       "evidence": "Rust 2024 workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker",
+      "order": 2,
+      "track": "SYSTEMS",
+      "codename": "MESH LEDGER",
+      "blurb": {
+        "en": "A Rust mesh network with its own chain and distributed compute. I work on the networking and agent crates.",
+        "pt": "Rede mesh em Rust com chain própria e computação distribuída. Atuo nos crates de rede e agentes."
+      },
+      "stack": "Rust 2024 · Tokio · Axum · SQLx · Candle · DHT",
+      "role": {
+        "en": "Networking + agent crates in a 700-commit monorepo",
+        "pt": "Crates de rede + agentes em monorepo com 700+ commits"
+      },
+      "focus": {
+        "en": "DHT overlay, DAG sync, federated primitives",
+        "pt": "Overlay DHT, sync via DAG, primitivas federadas"
+      },
+      "link": null,
       "resumeBullets": {
         "en": [
           "Contribute to a large Rust workspace unifying blockchain, mesh networking, and distributed compute",
@@ -102,6 +119,23 @@
         "pt": "Unificar controle de memória em baixo nível, inferência local, transporte e limites de confiança sem criar um monolito."
       },
       "evidence": "Rust 2021 · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
+      "order": 1,
+      "track": "SYSTEMS",
+      "codename": "LOCAL MIND",
+      "blurb": {
+        "en": "A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.",
+        "pt": "Runtime Rust para máquinas pequenas. Alocador próprio, dispatch one-shot e IA local sem nuvem."
+      },
+      "stack": "Rust 2021 · no_std · Candle · GGUF · TinyML · Wasm",
+      "role": {
+        "en": "Architecture, allocator, local-AI execution",
+        "pt": "Arquitetura, alocador, execução de IA local"
+      },
+      "focus": {
+        "en": "Memory budgets, TinyML, no silent fallbacks",
+        "pt": "Orçamentos de memória, TinyML, sem fallback silencioso"
+      },
+      "link": { "kind": "showcase" },
       "resumeBullets": {
         "en": [
           "Built a feature-gated Rust runtime where capabilities compile in or out without forking the codebase",
@@ -132,6 +166,23 @@
         "pt": "Manter licenciamento, entrega de configuração, execução e diagnóstico isolados, versionados e fail-closed entre plataformas."
       },
       "evidence": "C++17 · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery",
+      "order": 3,
+      "track": "SECURITY",
+      "codename": "GATED AGENT",
+      "blurb": {
+        "en": "A licensed telemetry agent for an authorized game client. Encrypted config, fail-closed by design.",
+        "pt": "Agente licenciado de telemetria para um game client autorizado. Config criptografada, fail-closed."
+      },
+      "stack": "C++17 · CMake · FastAPI · AES-GCM · pytest",
+      "role": {
+        "en": "Agent, backend sync, integration tests",
+        "pt": "Agente, sync backend, testes de integração"
+      },
+      "focus": {
+        "en": "Local IPC, encrypted delivery, fail-closed",
+        "pt": "IPC local, entrega criptografada, fail-closed"
+      },
+      "link": null,
       "resumeBullets": {
         "en": [
           "Built a cross-platform systems agent with local IPC, queued scheduling, and data-driven config sync",
@@ -162,6 +213,23 @@
         "pt": "Manter pedidos concorrentes, caixa e estado de mesas coerentes entre interfaces admin e do cliente."
       },
       "evidence": "React · Node.js · Express · MongoDB · Socket.IO · JWT · transaction consistency",
+      "order": 5,
+      "track": "PRODUCT",
+      "codename": "TABLE SYNC",
+      "blurb": {
+        "en": "A restaurant POS with real-time orders. I fixed the race conditions, not just found them.",
+        "pt": "PDV de restaurante com pedidos em tempo real. Corrigi as race conditions, não só encontrei."
+      },
+      "stack": "React · Node.js · MongoDB · Socket.IO",
+      "role": {
+        "en": "Full-stack build + concurrency fixes",
+        "pt": "Build full-stack + correções de concorrência"
+      },
+      "focus": {
+        "en": "Real-time orders, QR flows, cash consistency",
+        "pt": "Pedidos em tempo real, fluxos QR, consistência de caixa"
+      },
+      "link": null,
       "resumeBullets": {
         "en": ["Built real-time ordering, QR customer flows, and cash/table management for a restaurant POS", "Hunted down race conditions and order-total bugs across concurrent admin and customer surfaces"],
         "pt": ["Pedidos em tempo real, fluxos QR e gestão de caixa/mesas para um PDV de restaurante", "Caça a race conditions e bugs de total em superfícies concorrentes de admin e cliente"]
@@ -184,6 +252,23 @@
         "pt": "Entregar releases e canais consistentes em Linux, Windows e macOS."
       },
       "evidence": "Rust · Iced · Tokio · Axum · SQLx · Prometheus · release automation",
+      "order": 6,
+      "track": "SYSTEMS",
+      "codename": "RELEASE RAIL",
+      "blurb": {
+        "en": "Release infrastructure: a Rust launcher serving versioned builds to three OSes. (Upstream: Veloren.)",
+        "pt": "Infra de releases: launcher Rust servindo builds versionados para três SOs. (Upstream: Veloren.)"
+      },
+      "stack": "Rust · Iced · Tokio · SQLx · CI",
+      "role": {
+        "en": "Fork customization, release channels",
+        "pt": "Customização do fork, canais de release"
+      },
+      "focus": {
+        "en": "Artifact mapping, multi-OS packaging",
+        "pt": "Mapeamento de artefatos, empacotamento multi-OS"
+      },
+      "link": null,
       "resumeBullets": {
         "en": ["Customized the open-source Veloren launcher for GitHub-hosted release channels", "Mapped platform artifacts, metrics, and metadata with automated multi-OS packaging"],
         "pt": ["Customização do launcher open-source do Veloren para releases hospedados no GitHub", "Artefatos por plataforma, métricas e metadados com empacotamento multi-OS"]
@@ -206,10 +291,66 @@
         "pt": "Manter provedores externos substituíveis e responsabilidades operacionais explícitas."
       },
       "evidence": "Next.js · TypeScript · Express · FastAPI · PostgreSQL · Redis · Docker",
+      "order": 7,
+      "track": "PRODUCT",
+      "codename": "FALLBACK BUS",
+      "blurb": {
+        "en": "WhatsApp + AI behind one API. Swappable providers, managed sessions, all containerized.",
+        "pt": "WhatsApp + IA atrás de uma API. Provedores trocáveis, sessões gerenciadas, tudo em containers."
+      },
+      "stack": "Next.js · FastAPI · PostgreSQL · Redis · Docker",
+      "role": {
+        "en": "Service boundaries, provider fallback",
+        "pt": "Fronteiras de serviços, fallback de provedores"
+      },
+      "focus": {
+        "en": "Messaging, intent detection, containers",
+        "pt": "Mensageria, detecção de intenção, containers"
+      },
+      "link": null,
       "resumeBullets": {
         "en": ["Designed a multi-service WhatsApp/AI platform with provider fallback and session management", "Drew hard lines between web, messaging, AI, persistence, and cache behind Docker Compose"],
         "pt": ["Plataforma multisseriço de WhatsApp/IA com fallback de provedores e gestão de sessão", "Fronteiras claras entre web, mensageria, IA, persistência e cache com Docker Compose"]
       }
+    },
+    {
+      "id": "nexus",
+      "name": "NEXUS",
+      "visibility": "public-link",
+      "domain": {
+        "en": "GAMES · ROBLOX STUDIO · LIVE OPS",
+        "pt": "JOGOS · ROBLOX STUDIO · LIVE OPS"
+      },
+      "summary": {
+        "en": "Gameplay developer on a live Roblox PvP arena: characters, abilities, combat feel, iteration with real players.",
+        "pt": "Desenvolvedor de gameplay em arena PvP Roblox ao vivo: personagens, habilidades, feel de combate e iteração com jogadores reais."
+      },
+      "challenge": {
+        "en": "Ship combat that feels good while the game is already live.",
+        "pt": "Entregar combate com bom feel enquanto o jogo já está no ar."
+      },
+      "evidence": "Roblox Studio · Luau · live ops",
+      "resumeBullets": {
+        "en": ["Develop combat gameplay on a live Roblox PvP arena"],
+        "pt": ["Gameplay de combate em arena PvP Roblox ao vivo"]
+      },
+      "order": 4,
+      "track": "GAMES",
+      "codename": "ARENA BUILD",
+      "blurb": {
+        "en": "Combat gameplay on a live Roblox arena. Characters, abilities, iteration with real players.",
+        "pt": "Gameplay de combate em arena Roblox ao vivo. Personagens, habilidades, iteração com jogadores reais."
+      },
+      "stack": "Roblox Studio · Luau · live ops",
+      "role": {
+        "en": "Gameplay developer, live iteration",
+        "pt": "Desenvolvedor de gameplay, iteração ao vivo"
+      },
+      "focus": {
+        "en": "Combat systems, abilities, player feel",
+        "pt": "Sistemas de combate, habilidades, feel do jogador"
+      },
+      "link": { "kind": "url", "url": "https://www.roblox.com/pt/games/84720327590325/NEXUS" }
     }
   ],
   "securityResearch": {
@@ -238,7 +379,29 @@
         "en": "Detection-engineering habit: reproduce suspicious behavior safely, then write the alert I wish existed",
         "pt": "Hábito de detection engineering: reproduzir comportamento suspeito com segurança e escrever o alerta ideal"
       }
-    ]
+    ],
+    "points": [
+      {
+        "t": { "en": "Windows internals", "pt": "Windows internals" },
+        "d": { "en": "Learned in isolated VMs — to know what defenders should log.", "pt": "Aprendido em VMs isoladas — para saber o que defensores devem registrar." }
+      },
+      {
+        "t": { "en": "Protocol & API review", "pt": "Revisão de protocolos e APIs" },
+        "d": { "en": "Hypothesis-driven, authorized, written down.", "pt": "Com hipótese, autorização e documentação." }
+      },
+      {
+        "t": { "en": "Malware fundamentals", "pt": "Fundamentos de malware" },
+        "d": { "en": "Loader telemetry, persistence signs, control-plane patterns.", "pt": "Telemetria de loaders, persistência, padrões de control-plane." }
+      },
+      {
+        "t": { "en": "Detection habit", "pt": "Hábito de detecção" },
+        "d": { "en": "Reproduce it safely, then write the alert.", "pt": "Reproduzir com segurança, depois escrever o alerta." }
+      }
+    ],
+    "rules": {
+      "en": "Rules: isolated VMs only · authorized targets only · sensitive work stays private.",
+      "pt": "Regras: só VMs isoladas · só alvos autorizados · sensível fica privado."
+    }
   },
   "certifications": [
     {
