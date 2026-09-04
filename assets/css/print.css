@@ -1,4 +1,4 @@
-@page { size: A4; margin: 11mm 12mm; }
+@page { size: A4; margin: 9mm 10mm; }
 @media print {
   body.resume { background: #fff; }
   .screen-only, .resume-actions { display: none !important; }
@@ -6,6 +6,21 @@
   a { color: #000; text-decoration: none; }
   h1, h2, h3, .resume-entry { break-inside: avoid; }
   h2, h3 { break-after: avoid; }
-  p, li { orphans: 3; widows: 3; }
-  .resume.compact .resume-sheet { font-size: 10pt; }
+  p, li { orphans: 2; widows: 2; }
+  .resume.compact .resume-sheet h1 { font-size: 18pt; margin-bottom: 2px; }
+  .resume.compact .resume-headline { font-size: 8.5pt; margin: 3px 0; }
+  .resume.compact .resume-meta { font-size: 7pt; }
+  .resume.compact .resume-sheet h2 { font-size: 8.5pt; margin: 9px 0 3px; }
+  .resume.compact .resume-sheet h3 { font-size: 9pt; margin: 6px 0 2px; }
+  .resume.compact .resume-sheet p, .resume.compact .resume-sheet li { font-size: 8pt; line-height: 1.32; }
+  .resume.compact .resume-tech, .resume.compact .resume-when { font-size: 7pt; }
+  .resume.compact .resume-sheet ul { margin: 3px 0; padding-left: 16px; }
+  .resume.detailed .resume-sheet h1 { font-size: 20pt; }
+  .resume.detailed .resume-headline { font-size: 9pt; margin: 3px 0; }
+  .resume.detailed .resume-meta { font-size: 7.5pt; }
+  .resume.detailed .resume-sheet h2 { font-size: 9pt; margin: 10px 0 3px; }
+  .resume.detailed .resume-sheet h3 { font-size: 9.5pt; margin: 7px 0 2px; }
+  .resume.detailed .resume-sheet p, .resume.detailed .resume-sheet li { font-size: 8.5pt; line-height: 1.35; }
+  .resume.detailed .resume-tech, .resume.detailed .resume-when { font-size: 7.5pt; }
+  .resume.detailed .resume-sheet ul { margin: 3px 0; padding-left: 16px; }
 }

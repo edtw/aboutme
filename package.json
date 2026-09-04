@@ -10,5 +10,9 @@
     "check": "node --check scripts/build.mjs && node --check scripts/validate.mjs && node --check scripts/generate-pdfs.mjs && node --check assets/js/site.js",
     "test": "node --test \"tests/*.mjs\"",
     "pdf": "node scripts/generate-pdfs.mjs"
+  },
+  "devDependencies": {
+    "pdfjs-dist": "^6.3.289",
+    "playwright": "^1.62.1"
   }
 }

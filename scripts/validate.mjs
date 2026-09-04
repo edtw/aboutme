@@ -20,6 +20,8 @@ for (const lang of ['en', 'pt']) {
     if (!forLang(s.group, lang)) errors.push(`skills[${i}].group missing ${lang}`);
     if (!forLang(s.body, lang)) errors.push(`skills[${i}].body missing ${lang}`);
   });
+  cv.certifications.forEach((c, i) => { if (!forLang(c, lang)) errors.push(`certifications[${i}] missing ${lang}`); });
+  for (const k of ['languages', 'interests']) if (!forLang(cv.extras[k], lang)) errors.push(`extras.${k} missing ${lang}`);
 }
 const ids = new Set();
 for (const p of cv.projects) {

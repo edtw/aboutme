@@ -24,8 +24,8 @@
       "pt": "Desenvolvo sistemas digitais confiáveis entre backend, segurança, infraestrutura e experiências interativas."
     },
     "summary": {
-      "en": "Software engineer with a systems-oriented mindset and the ability to move between product, infrastructure, security, and game development. Work spans real-time web platforms, Rust runtimes with local AI execution, cross-platform release infrastructure, distributed mesh/blockchain/compute research, licensed telemetry systems, AI service architectures, security research in isolated labs, computer vision, and Roblox gameplay development. Strongest in roles valuing technical range, ownership, and careful investigation — from API contracts and data models down to operating-system behavior, and from prototype through testing, deployment, observability, and iteration.",
-      "pt": "Engenheiro de software com visão orientada a sistemas e capacidade de transitar entre produto, infraestrutura, segurança e desenvolvimento de jogos. Experiência prática com plataformas web em tempo real, runtimes em Rust com execução local de IA, infraestrutura de releases multiplataforma, pesquisa em mesh/blockchain/computação distribuída, sistemas licenciados de telemetria, arquiteturas de serviços de IA, pesquisa em segurança em laboratório isolado, visão computacional e gameplay no Roblox. Melhor desempenho em funções que valorizam amplitude técnica, autonomia e investigação cuidadosa — de contratos de API e modelos de dados até o comportamento do sistema operacional, e do protótipo até testes, deploy, observabilidade e iteração."
+      "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
+      "pt": "Sou engenheiro de software no Rio de Janeiro e aprendo sistemas construindo — e quebrando em laboratório isolado. Atuo em serviços backend, runtimes Rust com IA local, infraestrutura de releases, pesquisa em sistemas distribuídos e gameplay no Roblox, atualmente em sistemas de combate no NEXUS. Rendo melhor onde há ownership real: times pequenos, restrições duras e código que precisa conquistar confiança. Em preparação para o OSCP, busco vagas em engenharia de software, backend, sistemas e segurança de aplicações."
     },
     "profiles": {
       "github": "https://github.com/edtw",
@@ -74,14 +74,14 @@
       "evidence": "Rust 2024 workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker",
       "resumeBullets": {
         "en": [
-          "Contribute to large Rust workspace spanning blockchain, mesh networking, and distributed compute layers",
-          "Work across DHT overlay, DAG state sync, relay/marketplace services, and federated-learning primitives",
-          "Operate in high-velocity monorepo with hundreds of recent commits across site, API, agents, and docs"
+          "Contribute to a large Rust workspace unifying blockchain, mesh networking, and distributed compute",
+          "Work across DHT overlay, DAG state sync, relay services, and federated-learning primitives",
+          "Integrate daily across site, API, agents, and docs in a fast-moving monorepo"
         ],
         "pt": [
-          "Contribuição para workspace Rust de grande porte entre blockchain, rede mesh e computação distribuída",
-          "Atuação em overlay DHT, sincronização de estado via DAG, serviços de relay/marketplace e primitivas de aprendizado federado",
-          "Operação em monorepo de alta velocidade com centenas de commits recentes entre site, API, agentes e docs"
+          "Contribuição para workspace Rust que unifica blockchain, rede mesh e computação distribuída",
+          "Atuação em overlay DHT, sincronização via DAG, serviços de relay e primitivas federadas",
+          "Integração diária entre site, API, agentes e docs em monorepo acelerado"
         ]
       }
     },
@@ -104,14 +104,14 @@
       "evidence": "Rust 2021 · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
       "resumeBullets": {
         "en": [
-          "Built feature-gated Rust runtime with no_std support, custom allocation, and one-shot capability dispatch",
-          "Implemented local AI execution paths: memory-mapped/in-memory GGUF loading and no-heap TinyML VM with budgets and validation",
-          "Added canonical envelope parsing, telemetry/diagnostics, and CI architecture inventories with size gates"
+          "Built a feature-gated Rust runtime where capabilities compile in or out without forking the codebase",
+          "Added local AI paths: memory-mapped GGUF loading and a no-heap TinyML VM with hard budgets",
+          "Keep the architecture honest with CI inventories and size gates that fail dirty builds"
         ],
         "pt": [
-          "Construção de runtime Rust por features com suporte a no_std, alocação customizada e dispatch por capacidades one-shot",
-          "Implementação de execução local de IA: carregamento GGUF via mmap/em memória e VM TinyML sem heap, com orçamentos e validação",
-          "Criação de parsing canônico de envelopes, telemetria/diagnóstico e inventários de arquitetura no CI com limites de tamanho"
+          "Construção de runtime Rust por features, sem forking do código para ligar/desligar capacidades",
+          "Criação de IA local: GGUF via mmap e VM TinyML sem heap, com orçamentos rígidos",
+          "Arquitetura auditável com inventários de CI e limites que reprovam builds fora do contrato"
         ]
       }
     },
@@ -134,14 +134,14 @@
       "evidence": "C++17 · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery",
       "resumeBullets": {
         "en": [
-          "Built cross-platform systems agent with local IPC service, queued scheduler, and data-driven configuration sync",
-          "Implemented license/device binding, ownership-gated sync, and encrypted configuration delivery with versioned schemas",
-          "Authored integration tests, snapshot diagnostics, and architecture docs for reliability and fail-closed behavior"
+          "Built a cross-platform systems agent with local IPC, queued scheduling, and data-driven config sync",
+          "Shipped license/device binding with ownership-gated, encrypted configuration delivery",
+          "Backed it with integration tests, snapshot diagnostics, and docs written for fail-closed behavior"
         ],
         "pt": [
-          "Construção de agente multiplataforma com serviço IPC local, scheduler em fila e sync de configuração orientado a dados",
-          "Implementação de licenciamento/vínculo de dispositivo, sync com ownership e entrega criptografada com schemas versionados",
-          "Criação de testes de integração, diagnósticos por snapshot e documentação de arquitetura com foco em fail-closed"
+          "Agente multiplataforma com IPC local, scheduler em fila e sync de configuração orientado a dados",
+          "Licenciamento por dispositivo com entrega criptografada e controle de ownership",
+          "Testes de integração, diagnósticos por snapshot e docs pensadas para fail-closed"
         ]
       }
     },
@@ -163,8 +163,8 @@
       },
       "evidence": "React · Node.js · Express · MongoDB · Socket.IO · JWT · transaction consistency",
       "resumeBullets": {
-        "en": ["Built real-time ordering, QR customer flows, and cash/table management", "Fixed concurrency and order-total consistency issues"],
-        "pt": ["Construção de pedidos em tempo real, fluxos QR e gestão de caixa/mesas", "Correção de concorrência e consistência de totais"]
+        "en": ["Built real-time ordering, QR customer flows, and cash/table management for a restaurant POS", "Hunted down race conditions and order-total bugs across concurrent admin and customer surfaces"],
+        "pt": ["Pedidos em tempo real, fluxos QR e gestão de caixa/mesas para um PDV de restaurante", "Caça a race conditions e bugs de total em superfícies concorrentes de admin e cliente"]
       }
     },
     {
@@ -185,8 +185,8 @@
       },
       "evidence": "Rust · Iced · Tokio · Axum · SQLx · Prometheus · release automation",
       "resumeBullets": {
-        "en": ["Customized open-source launcher for GitHub-hosted release channels", "Mapped platform artifacts, metrics, and metadata with automated packaging"],
-        "pt": ["Customização de launcher open-source para canais de release no GitHub", "Mapeamento de artefatos, métricas e metadados com empacotamento automatizado"]
+        "en": ["Customized the open-source Veloren launcher for GitHub-hosted release channels", "Mapped platform artifacts, metrics, and metadata with automated multi-OS packaging"],
+        "pt": ["Customização do launcher open-source do Veloren para releases hospedados no GitHub", "Artefatos por plataforma, métricas e metadados com empacotamento multi-OS"]
       }
     },
     {
@@ -207,8 +207,8 @@
       },
       "evidence": "Next.js · TypeScript · Express · FastAPI · PostgreSQL · Redis · Docker",
       "resumeBullets": {
-        "en": ["Designed multi-service messaging/AI platform with provider fallback and session management", "Containerized development with persistence, caching, and analytics boundaries"],
-        "pt": ["Design de plataforma multisseriço de mensageria/IA com fallback de provedores e gestão de sessão", "Desenvolvimento conteinerizado com fronteiras de persistência, cache e analytics"]
+        "en": ["Designed a multi-service WhatsApp/AI platform with provider fallback and session management", "Drew hard lines between web, messaging, AI, persistence, and cache behind Docker Compose"],
+        "pt": ["Plataforma multisseriço de WhatsApp/IA com fallback de provedores e gestão de sessão", "Fronteiras claras entre web, mensageria, IA, persistência e cache com Docker Compose"]
       }
     }
   ],
@@ -223,22 +223,42 @@
     },
     "areas": [
       {
-        "en": "Windows internals and binary analysis in isolated VMs, focused on telemetry and defensive validation",
-        "pt": "Windows internals e análise binária em VMs isoladas, com foco em telemetria e validação defensiva"
+        "en": "Windows internals and binary analysis in isolated VMs — studying telemetry to learn what defenders should log",
+        "pt": "Windows internals e análise binária em VMs isoladas — estudando telemetria para saber o que defensores devem registrar"
       },
       {
-        "en": "Protocol and application behavior review, including hypothesis-driven API assessments with explicit authorization",
-        "pt": "Revisão de protocolos e comportamento de aplicações, incluindo avaliações de API orientadas por hipóteses e com autorização explícita"
+        "en": "Protocol and app-behavior review, including hypothesis-driven API assessments under explicit authorization",
+        "pt": "Revisão de protocolos e comportamento de apps, com avaliações de API orientadas por hipóteses e autorização explícita"
       },
       {
-        "en": "Malware analysis concepts: loader telemetry, encrypted IPC patterns, persistence indicators, and control-plane detections",
-        "pt": "Conceitos de análise de malware: telemetria de loaders, padrões de IPC criptografado, indicadores de persistência e detecções de control-plane"
+        "en": "Malware-analysis fundamentals: loader telemetry, encrypted-IPC patterns, persistence indicators, control-plane detections",
+        "pt": "Fundamentos de análise de malware: telemetria de loaders, padrões de IPC criptografado, persistência e detecções"
       },
       {
-        "en": "Detection engineering mindset: reproduce suspicious behavior safely to define what defenders should log and alert",
-        "pt": "Mentalidade de detection engineering: reproduzir comportamento suspeito com segurança para definir o que defensores devem registrar e alertar"
+        "en": "Detection-engineering habit: reproduce suspicious behavior safely, then write the alert I wish existed",
+        "pt": "Hábito de detection engineering: reproduzir comportamento suspeito com segurança e escrever o alerta ideal"
       }
     ]
+  },
+  "certifications": [
+    {
+      "en": "OSCP (Offensive Security Certified Professional) — in progress, self-study with lab practice",
+      "pt": "OSCP (Offensive Security Certified Professional) — em andamento, estudo com prática em laboratório"
+    },
+    {
+      "en": "TryHackMe — active learner, ongoing rooms across red-team and blue-team tracks",
+      "pt": "TryHackMe — aprendizado ativo, rooms contínuos nas trilhas red-team e blue-team"
+    }
+  ],
+  "extras": {
+    "languages": {
+      "en": "Portuguese (native) · English (professional working proficiency)",
+      "pt": "Português (nativo) · Inglês (proficiência profissional)"
+    },
+    "interests": {
+      "en": "Game development (Roblox Studio) · CTF challenges · home-lab security research · open-source Rust",
+      "pt": "Desenvolvimento de jogos (Roblox Studio) · desafios CTF · pesquisa em home-lab · Rust open-source"
+    }
   },
   "skills": [
     {

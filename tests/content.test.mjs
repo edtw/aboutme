@@ -32,3 +32,28 @@ test('resume variants differ sanely', () => {
   const det = read('resume/en-detailed.html').length;
   assert.ok(det > one, 'detailed should be longer');
 });
+
+test('resume section order is ATS-standard', () => {
+  for (const f of ['resume/en.html', 'resume/pt.html', 'resume/en-detailed.html', 'resume/pt-detailed.html']) {
+    const html = read(f);
+    const order = ['Summary', 'Technical Skills', 'Experience', 'Selected Projects', 'Resumo', 'Habilidades Técnicas', 'Experiência', 'Projetos Selecionados']
+      .filter((h) => html.includes(`<h2>${h}</h2>`));
+    const idx = order.map((h) => html.indexOf(`<h2>${h}</h2>`));
+    assert.deepEqual([...idx].sort((a, b) => a - b), idx, `${f} headings out of order`);
+    assert.ok(html.includes('Technical Skills') || html.includes('Habilidades Técnicas'), `${f} missing skills heading`);
+    assert.ok(html.includes('Certifications') || html.includes('Certificações'), `${f} missing certifications`);
+  }
+});
+
+test('resume pages link static PDFs', () => {
+  const pairs = [
+    ['resume/en.html', 'felipe-lemos-resume-en.pdf'],
+    ['resume/en-detailed.html', 'felipe-lemos-resume-en-detailed.pdf'],
+    ['resume/pt.html', 'felipe-lemos-curriculo-pt.pdf'],
+    ['resume/pt-detailed.html', 'felipe-lemos-curriculo-pt-detalhado.pdf']
+  ];
+  for (const [html, pdf] of pairs) {
+    assert.ok(read(html).includes(`downloads/${pdf}`), `${html} missing ${pdf} link`);
+    assert.ok(fs.existsSync(path.join(root, 'downloads', pdf)), `${pdf} not generated`);
+  }
+});

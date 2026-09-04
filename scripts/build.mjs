@@ -273,6 +273,12 @@ function resumePage(lang, detailed) {
   const sel = detailed ? cv.documents.detailed : cv.documents.onePage;
   const projects = sel.projectIds.map((id) => cv.projects.find((p) => p.id === id)).filter(Boolean);
   const exp = cv.experience[0];
+  const pdfFile = { en: detailed ? 'felipe-lemos-resume-en-detailed.pdf' : 'felipe-lemos-resume-en.pdf', pt: detailed ? 'felipe-lemos-curriculo-pt-detalhado.pdf' : 'felipe-lemos-curriculo-pt.pdf' }[lang];
+  const short = (s, n) => { const t = String(s); return t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + '…' : t; };
+  const summaryText = detailed ? short(L(cv.person.summary, lang), 450) : short(L(cv.person.summary, lang).split('. ')[0] + '.', 150);
+  const projSummary = (p) => detailed ? short(L(p.summary, lang), 400) : short(L(p.summary, lang), 150);
+  const secAreas = detailed ? cv.securityResearch.areas : cv.securityResearch.areas.slice(0, 2);
+  const secIntro = detailed ? short(L(cv.securityResearch.intro, lang), 260) : short(L(cv.securityResearch.intro, lang), 140);
   return `<!doctype html>
 <html lang="${lang === 'pt' ? 'pt-BR' : 'en'}">
   <head>
@@ -289,8 +295,8 @@ function resumePage(lang, detailed) {
   <body class="resume ${detailed ? 'detailed' : 'compact'}">
     <div class="resume-actions screen-only">
       <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}">← ${lang === 'pt' ? 'Portfólio' : 'Portfolio'}</a>
-      <span>${lang === 'pt' ? 'Currículo' : 'Résumé'} · ${lang === 'pt' ? (detailed ? 'Detalhado' : 'Uma página') : (detailed ? 'Detailed' : 'One page')} · ${lang === 'pt' ? 'Português'.replace('Português', lang === 'pt' ? 'Português' : 'Português') : 'English'}</span>
-      <span><a href="${lang === 'pt' ? (detailed ? 'pt.html' : 'pt-detailed.html') : (detailed ? 'en.html' : 'en-detailed.html')}">${lang === 'pt' ? (detailed ? 'Versão 1 página' : 'Versão detalhada') : (detailed ? 'One-page version' : 'Detailed version')}</a> · <a href="${detailed ? (lang === 'pt' ? 'en-detailed.html' : 'pt-detailed.html') : (lang === 'pt' ? 'en.html' : 'pt.html')}">${lang === 'pt' ? 'English' : 'Português'}</a></span>
+      <span>${lang === 'pt' ? 'Currículo' : 'Résumé'} · ${lang === 'pt' ? (detailed ? 'Detalhado' : 'Uma página') : (detailed ? 'Detailed' : 'One page')} · ${lang === 'pt' ? 'Português' : 'English'}</span>
+      <span><a href="${lang === 'pt' ? (detailed ? 'pt.html' : 'pt-detailed.html') : (detailed ? 'en.html' : 'en-detailed.html')}">${lang === 'pt' ? (detailed ? 'Versão 1 página' : 'Versão detalhada') : (detailed ? 'One-page version' : 'Detailed version')}</a> · <a href="${detailed ? (lang === 'pt' ? 'en-detailed.html' : 'pt-detailed.html') : (lang === 'pt' ? 'en.html' : 'pt.html')}">${lang === 'pt' ? 'English' : 'Português'}</a> · <a href="../downloads/${pdfFile}" download>${lang === 'pt' ? 'Baixar PDF' : 'Download PDF'}</a></span>
       <button type="button" onclick="window.print()">${lang === 'pt' ? 'Imprimir / Salvar PDF' : 'Print / Save PDF'}</button>
     </div>
     <main class="resume-sheet">
@@ -299,15 +305,17 @@ function resumePage(lang, detailed) {
         <p class="resume-headline">${esc(L(cv.person.headline, lang))}</p>
         <p class="resume-meta">${esc(L(cv.person.location, lang))} · ${esc(cv.person.profiles.linkedin)} · ${esc(cv.person.profiles.github)} · ${esc(cv.person.profiles.robloxNexus)}</p>
       </header>
-      <section><h2>${lang === 'pt' ? 'Resumo' : 'Summary'}</h2><p>${esc(L(cv.person.summary, lang))}</p></section>
+      <section><h2>${lang === 'pt' ? 'Resumo' : 'Summary'}</h2><p>${esc(summaryText)}</p></section>
+      <section><h2>${lang === 'pt' ? 'Habilidades Técnicas' : 'Technical Skills'}</h2><ul>${cv.skills.map((s) => `<li><strong>${esc(L(s.group, lang))}:</strong> ${esc(s.items)}</li>`).join('')}</ul></section>
       <section><h2>${lang === 'pt' ? 'Experiência' : 'Experience'}</h2>
-        <article class="resume-entry"><h3>${esc(L(exp.role, lang))} — ${esc(exp.organization)} (${esc(exp.platform)})</h3><p class="resume-when">${lang === 'pt' ? 'Atual' : 'Current'}</p><p><strong>${esc(L(exp.title, lang))}</strong> ${esc(L(exp.body, lang))}</p></article>
+        <article class="resume-entry"><h3>${esc(L(exp.role, lang))} — ${esc(exp.organization)} (${esc(exp.platform)})</h3><p class="resume-when">${lang === 'pt' ? 'Atual' : 'Current'}</p><p><strong>${esc(L(exp.title, lang))}</strong> ${esc(detailed ? short(L(exp.body, lang), 300) : short(L(exp.body, lang), 170))}</p></article>
       </section>
-      <section><h2>${lang === 'pt' ? 'Projetos selecionados' : 'Selected projects'}</h2>
-        ${projects.map((p) => `<article class="resume-entry"><h3>${esc(p.name)}${p.org ? ` · ${esc(p.org)}` : ''} — ${esc(L(p.domain, lang))}</h3><p>${esc(L(p.summary, lang))}</p><ul>${(L(p.resumeBullets, lang)).slice(0, sel.highlightCount).map((b) => `<li>${esc(b)}</li>`).join('')}</ul><p class="resume-tech">${esc(p.evidence)}</p></article>`).join('\n        ')}
+      <section><h2>${lang === 'pt' ? 'Projetos Selecionados' : 'Selected Projects'}</h2>
+        ${projects.map((p) => `<article class="resume-entry"><h3>${esc(p.name)}${p.org ? ` · ${esc(p.org)}` : ''} — ${esc(L(p.domain, lang))}</h3><p>${esc(projSummary(p))}</p><ul>${(L(p.resumeBullets, lang)).slice(0, sel.highlightCount).map((b) => `<li>${esc(detailed ? b : short(b, 115))}</li>`).join('')}</ul><p class="resume-tech">${esc(p.evidence)}</p></article>`).join('\n        ')}
       </section>
-      <section><h2>${lang === 'pt' ? 'Pesquisa em segurança (laboratório isolado)' : 'Security research (isolated lab)'}</h2><p>${esc(L(cv.securityResearch.intro, lang))}</p><ul>${cv.securityResearch.areas.map((a) => `<li>${esc(L(a, lang))}</li>`).join('')}</ul></section>
-      <section><h2>${lang === 'pt' ? 'Competências' : 'Skills'}</h2><ul>${cv.skills.map((s) => `<li><strong>${esc(L(s.group, lang))}:</strong> ${esc(s.items)}</li>`).join('')}</ul></section>
+      <section><h2>${lang === 'pt' ? 'Pesquisa em Segurança' : 'Security Research'}</h2><p>${esc(secIntro)}</p><ul>${secAreas.map((a) => `<li>${esc(L(a, lang))}</li>`).join('')}</ul></section>
+      <section><h2>${lang === 'pt' ? 'Certificações' : 'Certifications'}</h2><ul>${cv.certifications.map((c) => `<li>${esc(L(c, lang))}</li>`).join('')}</ul></section>
+      <section><h2>${lang === 'pt' ? 'Idiomas e Interesses' : 'Languages & Interests'}</h2><p>${esc(L(cv.extras.languages, lang))}<br />${esc(L(cv.extras.interests, lang))}</p></section>
       <section><h2>${lang === 'pt' ? 'Observação' : 'Note'}</h2><p>${lang === 'pt' ? 'Repositórios sensíveis são descritos como estudos de caso privados, sem código operacional. Detalhes arquiteturais disponíveis em entrevistas técnicas quando apropriado.' : 'Sensitive repositories are described as private case studies without operational code. Architectural detail available in technical interviews where appropriate.'} ${lang === 'pt' ? 'Atualizado em ' : 'Updated '}2026-09-04 · v${cv.meta.contentVersion}</p></section>
     </main>
     <script>if (new URLSearchParams(location.search).get('print') === '1') addEventListener('load', () => setTimeout(() => print(), 400));</script>
