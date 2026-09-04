@@ -111,12 +111,13 @@ ${head({ lang, title, desc, canonical, prefix })}
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
 ${header(lang, prefix, t)}
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
         ${heroGraphic()}
         <div class="hero-center">
-          <p class="kicker">${esc(L(cv.person.location, lang))} <span>/</span> ${lang === 'pt' ? 'Aberto a oportunidades' : 'Open to opportunities'}</p>
+          <p class="kicker">${esc(L(cv.person.location, lang))} <span>/</span> ${lang === 'pt' ? 'Aberto a oportunidades' : 'Open to opportunities'}<span class="cursor" aria-hidden="true">▊</span></p>
           <h1 id="hero-title">Felipe Lemos</h1>
           <p class="hero-role">${esc(L(cv.person.role, lang))}</p>
           <p class="hero-statement">${esc(L(cv.person.statement, lang))}</p>
@@ -124,6 +125,17 @@ ${header(lang, prefix, t)}
             <a class="primary-link" href="#work">${lang === 'pt' ? 'Explorar projetos' : 'Explore selected work'} ↓</a>
             <a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo em PDF' : 'Résumé as PDF'} ↗</a>
           </div>
+          <aside class="dossier" aria-label="${lang === 'pt' ? 'Ficha do perfil' : 'Profile file info'}">
+            <p class="dossier-title"><span>${lang === 'pt' ? 'FICHA' : 'FILE INFO'}</span></p>
+            <table>
+              <tr><th scope="row">HANDLE</th><td>Felipe Lemos</td></tr>
+              <tr><th scope="row">${lang === 'pt' ? 'FUNÇÃO' : 'ROLE'}</th><td>${esc(L(cv.person.role, lang))}</td></tr>
+              <tr><th scope="row">${lang === 'pt' ? 'ATUAL' : 'CURRENT'}</th><td><a href="${cv.person.profiles.robloxNexus}" target="_blank" rel="noreferrer">NEXUS</a> · Roblox Studio</td></tr>
+              <tr><th scope="row">STACK</th><td>Rust · C/C++ · Python · TypeScript · Luau</td></tr>
+              <tr><th scope="row">${lang === 'pt' ? 'SEGURANÇA' : 'SECURITY'}</th><td>${lang === 'pt' ? 'Laboratório isolado · somente testes autorizados' : 'Isolated lab · authorized testing only'}</td></tr>
+              <tr><th scope="row">${lang === 'pt' ? 'CONTATO' : 'CONTACT'}</th><td><a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a> · <a href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a></td></tr>
+            </table>
+          </aside>
         </div>
         <div class="hero-footer"><span>EST. 2020</span><span>SOFTWARE / SYSTEMS / SECURITY / GAMES</span><span>22°54'S 43°12'W</span></div>
       </section>
@@ -226,6 +238,7 @@ ${head({ lang, title, desc, canonical, prefix })}
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
 ${header(lang, prefix, T[lang])}
     <main id="main" class="showcase">
       <p class="section-index"><a href="${prefix}${en ? '' : 'pt/'}">← Felipe Lemos</a> · ${en ? 'Public technical showcase' : 'Demonstração técnica pública'} · ${en ? 'Sanitized subset — no private code' : 'Subconjunto sanitizado — sem código privado'}</p>

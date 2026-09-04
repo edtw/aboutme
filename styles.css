@@ -147,3 +147,22 @@ section { scroll-margin-top: 84px; }
   @keyframes settle { from { opacity: 0; transform: scale(1.04); } to { opacity: .72; transform: scale(1); } }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 }
+
+/* ── NFO dossier / terminal dressing (refs: ascii-arts folder) ── */
+.cursor { display: inline-block; margin-left: 6px; color: var(--accent); animation: blink 1.15s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.scanlines { position: fixed; inset: 0; z-index: 21; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); }
+.section-index { display: flex; align-items: center; gap: 14px; }
+.section-index::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.dossier { margin: 48px auto 0; max-width: 580px; border: 1px solid var(--line); background: rgba(14,14,15,.82); text-align: left; }
+.dossier-title { display: flex; align-items: center; gap: 12px; margin: 0; padding: 10px 16px; border-bottom: 1px solid var(--line); font: 10px var(--mono); letter-spacing: .18em; color: var(--silver); }
+.dossier-title::before, .dossier-title::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.dossier table { width: 100%; border-collapse: collapse; font: 11px/1.5 var(--mono); }
+.dossier th, .dossier td { padding: 9px 16px; border-bottom: 1px solid #1d1d1f; vertical-align: top; }
+.dossier tr:last-child th, .dossier tr:last-child td { border-bottom: 0; }
+.dossier th { width: 32%; color: var(--dim); font-weight: 400; letter-spacing: .1em; white-space: nowrap; }
+.dossier th::after { content: " …"; }
+.dossier td { color: var(--ivory); }
+.dossier td a { border-bottom: 1px solid var(--silver); }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+@media (max-width: 820px) { .dossier th { width: 38%; } }

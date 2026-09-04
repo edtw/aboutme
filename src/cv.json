@@ -20,8 +20,8 @@
       "pt": "Engenheiro de Software & Desenvolvedor Roblox"
     },
     "statement": {
-      "en": "I engineer reliable digital systems across backend development, security, infrastructure, and interactive experiences.",
-      "pt": "Desenvolvo sistemas digitais confiáveis entre backend, segurança, infraestrutura e experiências interativas."
+      "en": "I build Rust runtimes that run AI locally, distributed mesh and telemetry systems, and combat gameplay on Roblox NEXUS — with security research in an isolated lab behind everything I ship.",
+      "pt": "Construo runtimes Rust com IA local, sistemas distribuídos de mesh e telemetria, e gameplay de combate no NEXUS (Roblox) — com pesquisa em segurança em laboratório isolado por trás de tudo que entrego."
     },
     "summary": {
       "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",

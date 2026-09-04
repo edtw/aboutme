@@ -4,7 +4,7 @@
 
 ### Software Engineer · Systems & Security · Roblox Developer
 
-I design and build reliable digital systems across backend development, infrastructure, security engineering, and interactive technology.
+Rust runtimes with local AI · distributed mesh & telemetry systems · combat gameplay on NEXUS — grounded in isolated-lab security research.
 
 [Portfolio](https://edtw.github.io/aboutme/) · [Português](https://edtw.github.io/aboutme/pt/) · [Micro Runtime showcase](https://edtw.github.io/aboutme/microruntime/) · [Résumé EN](https://edtw.github.io/aboutme/resume/en.html) · [Currículo PT](https://edtw.github.io/aboutme/resume/pt.html) · [LinkedIn](https://www.linkedin.com/in/yuee/) · [GitHub](https://github.com/edtw)
 

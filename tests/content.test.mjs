@@ -45,6 +45,15 @@ test('resume section order is ATS-standard', () => {
   }
 });
 
+test('hero statement names real work and dossier is present', () => {
+  for (const f of ['index.html', 'pt/index.html']) {
+    const html = read(f);
+    assert.ok(html.includes('class="dossier"'), `${f} missing dossier`);
+    assert.ok(html.includes('NEXUS'), `${f} statement missing NEXUS`);
+    assert.ok(html.includes('Rust'), `${f} statement missing Rust`);
+  }
+});
+
 test('resume pages link static PDFs', () => {
   const pairs = [
     ['resume/en.html', 'felipe-lemos-resume-en.pdf'],
