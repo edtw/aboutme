@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Felipe Lemos, software engineer and offensive security researcher based in Rio de Janeiro, Brazil." />
+    <title>Felipe Lemos | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="Felipe Lemos home"><span>F</span>/aboutme</a>
+        <nav aria-label="Main navigation">
+          <a href="#work" data-i18n="navWork">Work</a>
+          <a href="#approach" data-i18n="navApproach">Approach</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
+        </nav>
+        <button class="language-toggle" type="button" aria-label="Change language" data-language="pt">PT <span>/</span> EN</button>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="status-dot"></span><span data-i18n="availability">Available for the right challenge</span></p>
+            <h1 data-i18n="heroTitle">I build useful systems<br /><em>and understand how they break.</em></h1>
+            <p class="hero-lede" data-i18n="heroLede">Software engineer working across product development, security research, automation, and game systems. Based in Rio de Janeiro, Brazil.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#work" data-i18n="seeWork">See selected work <span>↘</span></a>
+              <a class="button button-quiet" href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+            </div>
+          </div>
+          <div class="hero-mark" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="mark-core">F<span>.</span></div>
+            <p>RJ / BR<br />2026</p>
+          </div>
+        </section>
+
+        <section class="signal-strip" aria-label="Profile highlights">
+          <div><strong>01</strong><span data-i18n="signalOne">Systems thinking</span></div>
+          <div><strong>02</strong><span data-i18n="signalTwo">Security-minded engineering</span></div>
+          <div><strong>03</strong><span data-i18n="signalThree">From API to game world</span></div>
+        </section>
+
+        <section class="section intro-section" id="approach">
+          <div class="section-label"><span>01</span><span data-i18n="aboutLabel">Profile</span></div>
+          <div class="intro-grid">
+            <h2 data-i18n="aboutTitle">A generalist by practice,<br /><span>specialist in the details.</span></h2>
+            <div class="intro-text">
+              <p data-i18n="aboutP1">I work comfortably where disciplines meet: backend services that need to stay coherent under load, security tooling that must understand operating systems, and interactive systems that need to feel immediate.</p>
+              <p data-i18n="aboutP2">My projects move between Rust, C++, Python, TypeScript, infrastructure, computer vision, and Roblox Studio. The common thread is curiosity followed by implementation: map the system, find the constraint, make the trade-off explicit.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section work-section" id="work">
+          <div class="section-label"><span>02</span><span data-i18n="workLabel">Selected work</span></div>
+          <div class="work-heading"><h2 data-i18n="workTitle">Built across<br /><span>different worlds.</span></h2><p data-i18n="workIntro">A selection of projects that show how I think about architecture, reliability, and the boundary between software and its environment.</p></div>
+          <div class="project-list">
+            <article class="project-card featured"><div class="project-number">01</div><div class="project-body"><p class="project-type">Rust / systems / infrastructure</p><h3>Micro Runtime</h3><p data-i18n="microDesc">A feature-gated Rust runtime exploration for constrained environments, with no_std support, custom allocation, inference bridges, cryptographic envelopes, telemetry, and automated architecture checks.</p><div class="tags"><span>Rust</span><span>no_std</span><span>GGUF</span><span>CI</span></div></div><a href="https://github.com/edtw/micro_runtime" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Micro Runtime">↗</a></article>
+            <article class="project-card"><div class="project-number">02</div><div class="project-body"><p class="project-type">Full stack / real time product</p><h3>Marambaia PDV</h3><p data-i18n="pdvDesc">A restaurant point-of-sale platform with product and table management, customer QR ordering, cash registers, analytics, backups, access control, and real-time Socket.IO updates.</p><div class="tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Socket.IO</span></div></div><a href="https://github.com/edtw/pdvmar" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Marambaia PDV">↗</a></article>
+            <article class="project-card"><div class="project-number">03</div><div class="project-body"><p class="project-type">Game development / Roblox Studio</p><h3>NEXUS</h3><p data-i18n="nexusDesc">Current Roblox Studio development on a PvP arena experience built around characters, abilities, visual effects, and strategic combat. A practical space for gameplay systems, iteration, and player experience.</p><div class="tags"><span>Roblox Studio</span><span>Luau</span><span>Game systems</span></div></div><a href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer" class="project-link" aria-label="Open NEXUS on Roblox">↗</a></article>
+            <article class="project-card"><div class="project-number">04</div><div class="project-body"><p class="project-type">Rust / release engineering</p><h3>Airshipper</h3><p data-i18n="airshipperDesc">A customized cross-platform launcher and release server with artifact mapping, GitHub release integration, metrics, database-backed metadata, and multi-platform packaging pipelines.</p><div class="tags"><span>Rust</span><span>Tokio</span><span>Axum</span><span>GitLab CI</span></div></div><a href="https://github.com/edtw/airshipper" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Airshipper">↗</a></article>
+            <article class="project-card"><div class="project-number">05</div><div class="project-body"><p class="project-type">AI / distributed services</p><h3>Prisma Platform</h3><p data-i18n="prismaDesc">A multi-service platform direction combining WhatsApp connectivity, AI handlers, provider abstraction, intent detection, analytics, persistence, caching, and Dockerized development.</p><div class="tags"><span>TypeScript</span><span>Python</span><span>PostgreSQL</span><span>Redis</span></div></div><a href="https://github.com/edtw/prismaapp" target="_blank" rel="noreferrer" class="project-link" aria-label="Open Prisma Platform">↗</a></article>
+          </div>
+        </section>
+
+        <section class="section capabilities-section">
+          <div class="section-label"><span>03</span><span data-i18n="capLabel">Capabilities</span></div>
+          <div class="capability-grid">
+            <div><span class="cap-index">A</span><h3 data-i18n="cap1Title">Software engineering</h3><p data-i18n="cap1Desc">Backend APIs, full-stack products, real-time features, data models, and service boundaries.</p></div>
+            <div><span class="cap-index">B</span><h3 data-i18n="cap2Title">Security engineering</h3><p data-i18n="cap2Desc">Security research, binary and protocol analysis, Windows internals, and tooling for authorized testing.</p></div>
+            <div><span class="cap-index">C</span><h3 data-i18n="cap3Title">Systems & infrastructure</h3><p data-i18n="cap3Desc">Rust and C/C++, containers, CI/CD, observability, databases, caching, and platform integration.</p></div>
+            <div><span class="cap-index">D</span><h3 data-i18n="cap4Title">Creative technology</h3><p data-i18n="cap4Desc">Roblox gameplay systems, computer vision prototypes, automation, and experiments that become working software.</p></div>
+          </div>
+        </section>
+
+        <section class="closing-section" id="contact">
+          <p class="eyebrow">/ <span data-i18n="contactLabel">Start a conversation</span></p>
+          <h2 data-i18n="contactTitle">Have a difficult system<br /><em>worth understanding?</em></h2>
+          <a class="contact-email" href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">linkedin.com/in/yuee <span>↗</span></a>
+          <div class="closing-meta"><span>Felipe Lemos</span><span>Rio de Janeiro, BR</span><span>Software Engineer · Security · Roblox</span></div>
+        </section>
+      </main>
+      <footer><span>© 2026 Felipe Lemos</span><span>Built with intent, not templates.</span></footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
