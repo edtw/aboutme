@@ -4,298 +4,382 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
+const dist = path.join(root, 'dist');
 const cv = JSON.parse(fs.readFileSync(path.join(root, 'src/cv.json'), 'utf8'));
 const L = (obj, lang) => obj?.[lang] ?? obj?.en ?? '';
-
-const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const clean = (s) => s.replace(/[ \t]+$/gm, '');
 const SITE = cv.meta.siteUrl;
-const FONTS = 'https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap';
 
-function head({ lang, title, desc, canonical, prefix }) {
+const T = {
+  en: {
+    navWork: 'Work', navProfile: 'Profile', navSecurity: 'Security', navResume: 'Resume', navContact: 'Contact',
+    skip: 'Skip to content', routeHome: 'Portfolio', routeRuntime: 'Micro Runtime', menu: 'Menu'
+  },
+  pt: {
+    navWork: 'Projetos', navProfile: 'Perfil', navSecurity: 'Segurança', navResume: 'Currículo', navContact: 'Contato',
+    skip: 'Pular para o conteúdo', routeHome: 'Portfólio', routeRuntime: 'Micro Runtime', menu: 'Menu'
+  }
+};
+
+function routeConfig(lang, page) {
+  const runtime = page === 'runtime';
+  const prefix = runtime ? (lang === 'pt' ? '../../' : '../') : (lang === 'pt' ? '../' : '');
+  const home = `${prefix}${lang === 'pt' ? 'pt/' : ''}`;
+  const alternate = runtime
+    ? (lang === 'pt' ? `${SITE}/microruntime/` : `${SITE}/pt/microruntime/`)
+    : (lang === 'pt' ? `${SITE}/` : `${SITE}/pt/`);
+  const alternateHref = runtime
+    ? (lang === 'pt' ? '../../microruntime/' : '../pt/microruntime/')
+    : (lang === 'pt' ? '../' : 'pt/');
+  return { prefix, home, alternate, alternateHref };
+}
+
+function head({ lang, title, desc, canonical, route }) {
   const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
-  const ogAlt = lang === 'pt' ? 'pt-BR' : 'en';
+  const alternateLang = lang === 'pt' ? 'en' : 'pt-BR';
+  const defaultUrl = lang === 'en' ? canonical : route.alternate;
   return `  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="${esc(desc)}" />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#090b0a" />
   <link rel="canonical" href="${canonical}" />
-  ${lang === 'en'
-    ? `<link rel="alternate" hreflang="pt-BR" href="${SITE}/pt/" /><link rel="alternate" hreflang="x-default" href="${SITE}/" />`
-    : `<link rel="alternate" hreflang="en" href="${SITE}/" />`}
+  <link rel="alternate" hreflang="${alternateLang}" href="${route.alternate}" />
+  <link rel="alternate" hreflang="x-default" href="${defaultUrl}" />
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(desc)}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="${canonical}" />
   <meta property="og:locale" content="${ogLocale}" />
+  <meta property="og:image" content="${SITE}/assets/social-card.png" />
+  <meta property="og:image:alt" content="YUEE systems engineering portfolio" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <title>${esc(title)}</title>
-  <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="${FONTS}" rel="stylesheet" />
-  <link rel="stylesheet" href="${prefix}styles.css" />
-  <link rel="stylesheet" href="${prefix}assets/css/resume.css" media="print" />
+  <link rel="icon" href="${route.prefix}favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="${route.prefix}styles.css" />
   <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: cv.person.name, url: SITE, sameAs: [cv.person.profiles.github, cv.person.profiles.linkedin], address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' }, knowsAbout: ['Rust', 'Python', 'TypeScript', 'C++', 'Security Engineering', 'Roblox Studio', 'Local AI inference', 'Distributed systems'] })}</script>`;
 }
 
-function header(lang, prefix, t) {
-  const other = lang === 'en' ? { href: `${prefix}pt/`, label: 'PT', aria: 'Switch to Portuguese' } : { href: `${prefix}`, label: 'EN', aria: 'Mudar para inglês' };
-  return `<a class="skip-link" href="#main">Skip to content</a>
+function header(lang, page, route) {
+  const t = T[lang];
+  const other = lang === 'en'
+    ? { label: 'PT', aria: 'Mudar para português', hreflang: 'pt-BR' }
+    : { label: 'EN', aria: 'Switch to English', hreflang: 'en' };
+  const nav = `<a href="${route.home}#work">${t.navWork}</a>
+          <a href="${route.home}#profile">${t.navProfile}</a>
+          <a href="${route.home}#security">${t.navSecurity}</a>
+          <a href="${route.home}#resume">${t.navResume}</a>
+          <a href="${route.home}#contact">${t.navContact}</a>`;
+  return `<a class="skip-link" href="#main">${t.skip}</a>
     <header class="site-header">
-      <a class="monogram" href="${prefix}#top" aria-label="Felipe Lemos home">FL</a>
-      <nav aria-label="${lang === 'pt' ? 'Navegação principal' : 'Main navigation'}">
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#work">[${t.navWork}]</a>
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#security">[${t.navSecurity}]</a>
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#resume">[${t.navResume}]</a>
-        <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}#contact">[${t.navContact}]</a>
+      <a class="brand" href="${route.home}#top" aria-label="Felipe Yuee Lemos home">
+        <span class="brand-mark">YUEE.SYS</span>
+        <span class="route-label">/ ${page === 'runtime' ? t.routeRuntime : t.routeHome}</span>
+      </a>
+      <nav class="desktop-nav" aria-label="${lang === 'pt' ? 'Navegação principal' : 'Main navigation'}">
+          ${nav}
       </nav>
       <div class="header-actions">
-        <a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a class="lang-link" href="${other.href}" hreflang="${lang === 'en' ? 'pt-BR' : 'en'}" aria-label="${other.aria}">${other.label}</a>
+        <a class="network-link" href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="lang-link" href="${route.alternateHref}" hreflang="${other.hreflang}" aria-label="${other.aria}">${other.label}</a>
+        <details class="mobile-nav">
+          <summary>${t.menu}</summary>
+          <nav aria-label="${lang === 'pt' ? 'Navegação móvel' : 'Mobile navigation'}">${nav}</nav>
+        </details>
       </div>
     </header>`;
 }
 
-const T = {
-  en: { navWork: 'Work', navSecurity: 'Security', navResume: 'Résumé', navContact: 'Contact' },
-  pt: { navWork: 'Projetos', navSecurity: 'Segurança', navResume: 'Currículo', navContact: 'Contato' }
-};
+function asciiBackdrop(lang) {
+  return `<pre class="ascii-bg" aria-hidden="true">┌─ YUEE / OPERATIONS ───────────────────────────────────────────────────────┐
+│ INPUT  >  CONSTRAINT  >  BUILD  >  VERIFY  >  SHIP                      │
+│                                                                          │
+│  RUNTIME      [ MEMORY / LOCAL AI / TRUST ]                              │
+│  NETWORK      [ ROUTING / STATE / COMPUTE ]                              │
+│  PRODUCT      [ CONCURRENCY / OPERATIONS ]                               │
+│  GAMEPLAY     [ COMBAT / FEEDBACK / ITERATION ]                          │
+│                                                                          │
+│ STATUS: ${lang === 'pt' ? 'DISPONIVEL PARA TRABALHO' : 'OPEN TO WORK'}                                           │
+└──────────────────────────────────────────────────────────────────────────┘</pre>`;
+}
 
-function heroGraphic() {
-  return `<div class="hero-graphic" aria-hidden="true">
-          <svg viewBox="0 0 1200 450" preserveAspectRatio="none">
-            <defs>
-              <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M 18 0 L 0 0 0 18" fill="none" stroke="currentColor" stroke-width="0.45" /></pattern>
-              <radialGradient id="orb"><stop offset="0" stop-color="#c8fa4e" stop-opacity=".35"/><stop offset="1" stop-color="#c8fa4e" stop-opacity="0"/></radialGradient>
-            </defs>
-            <rect x="100" y="60" width="300" height="250" fill="url(#grid)" />
-            <rect x="800" y="60" width="300" height="250" fill="url(#grid)" />
-            <path d="M0 275 C90 275 90 215 160 215 S245 320 330 270 420 255 500 280 580 180 650 245 740 330 815 240 910 230 970 275 1100 250 1200 250" fill="none" stroke="currentColor" stroke-width="2" />
-            <path d="M0 295 C100 295 100 255 175 255 S250 335 340 290 440 285 520 300 610 225 685 275 750 330 830 275 930 270 1000 295 1120 275 1200 275" fill="none" stroke="currentColor" stroke-opacity=".35" />
-            <circle cx="250" cy="180" r="90" fill="none" stroke="currentColor" /><circle cx="950" cy="180" r="90" fill="none" stroke="currentColor" />
-            <circle cx="250" cy="180" r="46" fill="#0b0b0c" stroke="currentColor" /><circle cx="950" cy="180" r="46" fill="#0b0b0c" stroke="currentColor" />
-            <circle cx="360" cy="82" r="70" fill="url(#orb)" /><circle cx="840" cy="82" r="70" fill="url(#orb)" />
-          </svg>
-        </div>`;
+function runtimeDiagram(lang) {
+  const en = lang === 'en';
+  return `<div class="runtime-diagram" role="img" aria-label="${en ? 'Micro Runtime flow from bounded model output through token dispatch to closed host operations' : 'Fluxo do Micro Runtime, da saída limitada do modelo ao dispatch de tokens e operações fechadas do host'}">
+    <div class="diagram-head"><span>TRACE / 001</span><span>BOUNDARIES: ACTIVE</span></div>
+    <div class="diagram-flow">
+      <div><small>01</small><strong>${en ? 'LOCAL MODEL' : 'MODELO LOCAL'}</strong><span>GGUF / M35</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>02</small><strong>TOKEN ENGINE</strong><span>u32 / budgeted</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>03</small><strong>DISPATCH</strong><span>one-shot / 256</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>04</small><strong>HOST OP</strong><span>closed enum</span></div>
+    </div>
+    <div class="budget-line"><span>MEMORY</span><b></b><strong>HARD LIMIT</strong></div>
+  </div>`;
+}
+
+function projectLink(project, lang, route) {
+  if (!project.link) return `<span class="work-status">${lang === 'pt' ? 'ESTUDO PRIVADO' : 'PRIVATE CASE STUDY'}</span>`;
+  if (project.link.kind === 'showcase') {
+    return `<a class="work-link" href="${route.prefix}${lang === 'pt' ? 'pt/microruntime/' : 'microruntime/'}">${lang === 'pt' ? 'Inspecionar caso' : 'Inspect case study'} <span aria-hidden="true">→</span></a>`;
+  }
+  return `<a class="work-link" href="${project.link.url}" target="_blank" rel="noreferrer">${lang === 'pt' ? 'Abrir projeto' : 'Open live project'} <span aria-hidden="true">↗</span></a>`;
+}
+
+function projectCard(project, lang, index, route) {
+  const major = ['karma', 'nexus'].includes(project.id);
+  return `<article class="work-card ${major ? 'work-card-major' : 'work-card-compact'} work-item reveal" data-track="${project.track}" style="--d:${(index % 3) * 70}ms">
+    <div class="work-top"><span>0${index + 1}</span><span>${project.track}</span><span>${esc(project.codename)}</span></div>
+    <div class="work-copy">
+      <h3>${esc(project.name)}${project.org ? ` <small>/ ${esc(project.org)}</small>` : ''}</h3>
+      <p>${esc(L(project.blurb, lang))}</p>
+    </div>
+    <dl>
+      <div><dt>${lang === 'pt' ? 'CONTRIBUIÇÃO' : 'CONTRIBUTION'}</dt><dd>${esc(L(project.role, lang))}</dd></div>
+      <div><dt>${lang === 'pt' ? 'FOCO' : 'FOCUS'}</dt><dd>${esc(L(project.focus, lang))}</dd></div>
+    </dl>
+    <p class="stack">${esc(project.stack)}</p>
+    ${projectLink(project, lang, route)}
+  </article>`;
 }
 
 function portfolioPage(lang) {
-  const t = T[lang];
-  const prefix = lang === 'pt' ? '../' : '';
-  const canonical = lang === 'pt' ? `${SITE}/pt/` : `${SITE}/`;
-  const title = lang === 'pt' ? 'Felipe Lemos | Engenheiro de Software' : 'Felipe Lemos | Software Engineer';
+  const en = lang === 'en';
+  const route = routeConfig(lang, 'portfolio');
+  const canonical = en ? `${SITE}/` : `${SITE}/pt/`;
+  const title = en ? 'Felipe "Yuee" Lemos | Systems Software Engineer' : 'Felipe "Yuee" Lemos | Engenheiro de Software de Sistemas';
   const desc = L(cv.person.statement, lang);
-  const exp = cv.experience[0];
-  const projects = cv.projects;
-  const sec = (n, label) => `<p class="section-index">${n} / <span>${label}</span></p>`;
-
-  const ordered = [...projects].sort((a, b) => (a.order ?? 9) - (b.order ?? 9));
+  const projects = [...cv.projects].sort((a, b) => (a.order ?? 9) - (b.order ?? 9));
+  const flagship = projects.find((project) => project.id === 'micro-runtime');
+  const remaining = projects
+    .filter((project) => project.id !== 'micro-runtime')
+    .sort((a, b) => Number(!['karma', 'nexus'].includes(a.id)) - Number(!['karma', 'nexus'].includes(b.id)));
   const tracks = ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES'];
-  const trackLabel = (tr) => lang === 'pt'
-    ? ({ ALL: 'TODOS', SYSTEMS: 'SISTEMAS', PRODUCT: 'PRODUTO', SECURITY: 'SEGURANÇA', GAMES: 'JOGOS' }[tr])
-    : ({ ALL: 'ALL', SYSTEMS: 'SYSTEMS', PRODUCT: 'PRODUCT', SECURITY: 'SECURITY', GAMES: 'GAMES' }[tr]);
-  const projectLink = (p) => {
-    if (!p.link) return '';
-    if (p.link.kind === 'showcase') return `<a class="work-link" href="${prefix}microruntime/${lang === 'pt' ? '../pt/microruntime/' : ''}">${lang === 'pt' ? 'Ver demonstração' : 'Open showcase'} →</a>`;
-    return `<a class="work-link" href="${p.link.url}" target="_blank" rel="noreferrer">${lang === 'pt' ? 'Ver ao vivo' : 'See it live'} ↗</a>`;
-  };
-  const projectCards = ordered.map((p, i) => `
-            <article class="work-card" data-track="${p.track}">
-              <div class="work-top"><span>[0${i + 1}]</span><span class="track">${p.track}</span><span class="codename">${esc(p.codename)}</span></div>
-              <h3>${esc(p.name)}${p.org ? ` <small>· ${esc(p.org)}</small>` : ''}</h3>
-              <p class="oneliner">${esc(L(p.blurb, lang))}</p>
-              <p class="stack">${esc(p.stack)}</p>
-              <dl class="roles"><div><dt>${lang === 'pt' ? 'PAPEL' : 'ROLE'}</dt><dd>${esc(L(p.role, lang))}</dd></div><div><dt>FOCO</dt><dd>${esc(L(p.focus, lang))}</dd></div></dl>
-              ${projectLink(p)}
-            </article>`).join('');
-
+  const trackLabels = en
+    ? { ALL: 'ALL WORK', SYSTEMS: 'SYSTEMS', PRODUCT: 'PRODUCT', SECURITY: 'SECURITY', GAMES: 'GAMES' }
+    : { ALL: 'TODOS', SYSTEMS: 'SISTEMAS', PRODUCT: 'PRODUTO', SECURITY: 'SEGURANCA', GAMES: 'JOGOS' };
+  const sec = (n, label) => `<p class="section-index"><span>${n}</span>${label}</p>`;
   const secRes = cv.securityResearch;
 
   return `<!doctype html>
-<html lang="${lang === 'pt' ? 'pt-BR' : 'en'}">
+<html lang="${en ? 'en' : 'pt-BR'}">
   <head>
-${head({ lang, title, desc, canonical, prefix })}
+${head({ lang, title, desc, canonical, route })}
   </head>
-  <body>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
-${header(lang, prefix, t)}
-    <main id="main">
+  <body id="top">
+    <div class="screen-texture" aria-hidden="true"></div>
+${header(lang, 'portfolio', route)}
+    <main id="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="dither" aria-hidden="true"></div>
-        ${heroGraphic()}
+        ${asciiBackdrop(lang)}
+        <div class="hero-rail" aria-hidden="true"><span>OPERATOR / 01</span><span>RJ.BR / UTC-3</span></div>
         <div class="hero-center">
-          <p class="kicker">${esc(L(cv.person.location, lang))} <span>/</span> ${lang === 'pt' ? 'Aberto a oportunidades' : 'Open to opportunities'}<span class="cursor" aria-hidden="true">▊</span></p>
-          <h1 id="hero-title">Felipe Lemos</h1>
-          <p class="hero-role">${esc(L(cv.person.role, lang))}</p>
-          <p class="hero-statement">${esc(L(cv.person.statement, lang))}</p>
+          <p class="kicker"><span class="status-dot"></span>${en ? 'Rio de Janeiro / Open to work' : 'Rio de Janeiro / Aberto a oportunidades'}</p>
+          <p class="identity-mark" aria-hidden="true">YUEE</p>
+          <h1 id="hero-title">Felipe <span>"Yuee"</span> Lemos</h1>
+          <p class="hero-role">${en ? 'Systems Software Engineer / Roblox Developer' : 'Engenheiro de Software de Sistemas / Desenvolvedor Roblox'}</p>
+          <p class="hero-statement">${esc(desc)}</p>
           <div class="hero-links">
-            <a class="primary-link" href="#work">${lang === 'pt' ? 'Ver projetos' : 'See work'} ↓</a>
-            <a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo' : 'Résumé'} ↗</a>
+            <a class="button button-primary" href="#work">${en ? 'Inspect work' : 'Inspecionar projetos'} <span aria-hidden="true">↓</span></a>
+            <a class="button" href="${route.prefix}resume/${en ? 'en.html' : 'pt.html'}">${en ? 'Open resume' : 'Abrir curriculo'} <span aria-hidden="true">↗</span></a>
           </div>
-          <ul class="stat-strip" aria-label="${lang === 'pt' ? 'Números' : 'Numbers'}">
-            <li><strong>07</strong><span>${lang === 'pt' ? 'estudos de caso' : 'case studies'}</span></li>
-            <li><strong>02</strong><span>${lang === 'pt' ? 'idiomas' : 'locales'}</span></li>
-            <li><strong>04</strong><span>${lang === 'pt' ? 'currículos em PDF' : 'PDF résumés'}</span></li>
-            <li><strong>NEXUS</strong><span>${lang === 'pt' ? 'no ar agora' : 'live now'}</span></li>
-          </ul>
         </div>
-        <div class="hero-footer"><span>EST. 2020</span><span>SOFTWARE / SYSTEMS / SECURITY / GAMES</span><span>22°54'S 43°12'W</span></div>
-      </section>
-
-      <section class="profile section" id="profile">
-        <div class="section-inner">
-          <div class="section-heading">
-            ${sec('00', lang === 'pt' ? 'Perfil' : 'Profile')}
-            <h2>${lang === 'pt' ? 'Perto da máquina.<br /><em>Perto das pessoas.</em>' : 'Close to the machine.<br /><em>Close to people.</em>'}</h2>
-          </div>
-          <p class="lead">${lang === 'pt' ? 'Sou engenheiro de software no Rio de Janeiro. Trabalho perto da máquina: Rust, C++, Windows internals. Entrego coisas que gente usa: um PDV, serviços de IA, uma arena no Roblox.' : 'I write software in Rio de Janeiro. I work close to the machine: Rust, C++, Windows internals. I ship things people touch: a POS, AI services, a Roblox arena.'}</p>
-          <div class="trio">
-            <div><h3>Build</h3><p>${lang === 'pt' ? 'Sistemas pequenos que aguentam trabalho real.' : 'Small systems that carry real workloads.'}</p></div>
-            <div><h3>Break</h3><p>${lang === 'pt' ? 'Forçar limites no lab antes que a realidade force.' : 'Abuse it in the lab before reality does.'}</p></div>
-            <div><h3>Harden</h3><p>${lang === 'pt' ? 'Documentar limites. Entregar mais fácil de operar.' : 'Document the limits. Leave it easier to run.'}</p></div>
-          </div>
-          <div class="toolbox">
-            ${cv.skills.map((s) => `<div class="tool-group"><span>${esc(L(s.group, lang))}</span><p>${esc(s.items)}</p></div>`).join('\n            ')}
-          </div>
-          <p class="now-line"><span>${lang === 'pt' ? 'AGORA' : 'NOW'}</span> → <a href="${cv.person.profiles.robloxNexus}" target="_blank" rel="noreferrer">NEXUS</a> · ${lang === 'pt' ? 'gameplay de combate no Roblox Studio' : 'combat gameplay in Roblox Studio'}</p>
-        </div>
+        <div class="hero-footer"><span>RUNTIMES</span><span>NETWORKS</span><span>SECURITY</span><span>GAMEPLAY</span></div>
       </section>
 
       <section class="work section" id="work">
         <div class="section-inner">
-          <div class="section-heading">
-            ${sec('01', lang === 'pt' ? 'Projetos' : 'Selected work')}
-            <h2>${lang === 'pt' ? 'Sete coisas que <em>eu construí.</em>' : 'Seven things <em>I built.</em>'}</h2>
+          <div class="section-heading reveal">
+            ${sec('01', en ? 'Selected work' : 'Projetos selecionados')}
+            <h2>${en ? 'Systems under <span>real constraints.</span>' : 'Sistemas sob <span>restrições reais.</span>'}</h2>
+            <p>${en ? 'Architecture, implementation, and the evidence that connects them.' : 'Arquitetura, implementação e as evidências que conectam as duas.'}</p>
           </div>
-          <div class="filters" role="group" aria-label="${lang === 'pt' ? 'Filtrar projetos' : 'Filter projects'}">
-            ${tracks.map((tr, i) => `<button type="button" data-filter="${tr}" aria-pressed="${i === 0}"${i === 0 ? ' class="active"' : ''}>[${trackLabel(tr)}]</button>`).join('\n            ')}
+
+          <article class="flagship work-item reveal" data-track="${flagship.track}">
+            <div class="flagship-copy">
+              <div class="work-top"><span>00 / FLAGSHIP</span><span>${flagship.track}</span><span>${esc(flagship.codename)}</span></div>
+              <p class="eyebrow">${en ? 'RUST / CONSTRAINED COMPUTE' : 'RUST / COMPUTACAO RESTRITA'}</p>
+              <h3>${esc(flagship.name)}</h3>
+              <p class="flagship-lede">${esc(L(flagship.blurb, lang))}</p>
+              <dl>
+                <div><dt>${en ? 'PROBLEM' : 'PROBLEMA'}</dt><dd>${esc(L(flagship.challenge, lang))}</dd></div>
+                <div><dt>${en ? 'BUILT' : 'CONSTRUIDO'}</dt><dd>${esc(L(flagship.role, lang))}</dd></div>
+                <div><dt>${en ? 'BOUNDARY' : 'LIMITE'}</dt><dd>${esc(L(flagship.focus, lang))}</dd></div>
+              </dl>
+              ${projectLink(flagship, lang, route)}
+            </div>
+            ${runtimeDiagram(lang)}
+          </article>
+
+          <div class="work-toolbar reveal">
+            <div class="filters" role="group" aria-label="${en ? 'Filter projects' : 'Filtrar projetos'}">
+              ${tracks.map((track, index) => `<button type="button" data-filter="${track}" aria-pressed="${index === 0}"${index === 0 ? ' class="active"' : ''}>${trackLabels[track]}</button>`).join('\n              ')}
+            </div>
+            <output class="filter-count" aria-live="polite">${projects.length.toString().padStart(2, '0')} ${en ? 'PROJECTS ONLINE' : 'PROJETOS ONLINE'}</output>
           </div>
-          <div class="work-grid">
-${projectCards}
+          <div class="work-list">
+            ${remaining.map((project) => projectCard(project, lang, projects.indexOf(project), route)).join('\n            ')}
           </div>
-          <p class="fineprint">${lang === 'pt' ? 'Código privado descrito em nível de arquitetura. Nada sensível é publicado.' : 'Private code described at architecture level. Nothing sensitive is published.'}</p>
+          <p class="fineprint">${en ? 'Private systems are described at architecture level. Public links and upstream work are labeled directly.' : 'Sistemas privados sao descritos no nivel de arquitetura. Links publicos e trabalho upstream sao identificados diretamente.'}</p>
+        </div>
+      </section>
+
+      <section class="profile section" id="profile">
+        <div class="section-inner profile-layout">
+          <div class="section-heading reveal">
+            ${sec('02', en ? 'Operator profile' : 'Perfil do operador')}
+            <h2>${en ? 'How I <span>work.</span>' : 'Como eu <span>trabalho.</span>'}</h2>
+          </div>
+          <div class="profile-copy reveal">
+            <p class="lead">${en ? 'I build close to the machine, then carry that discipline into products people use.' : 'Construo perto da máquina e levo essa disciplina para produtos que pessoas usam.'}</p>
+            <ol class="principles">
+              <li><span>01</span><div><h3>${en ? 'Start with the boundary' : 'Começar pelo limite'}</h3><p>${en ? 'Memory, authority, latency, ownership: make the constraint explicit before choosing the abstraction.' : 'Memória, autoridade, latência, ownership: tornar a restrição explícita antes de escolher a abstração.'}</p></div></li>
+              <li><span>02</span><div><h3>${en ? 'Test the failure path' : 'Testar o caminho de falha'}</h3><p>${en ? 'Use isolated labs and integration tests to learn how a system fails before users have to.' : 'Usar laboratórios isolados e testes de integração para entender a falha antes dos usuários.'}</p></div></li>
+              <li><span>03</span><div><h3>${en ? 'Leave operational evidence' : 'Deixar evidência operacional'}</h3><p>${en ? 'Ship diagnostics, architecture checks, and documentation with the implementation.' : 'Entregar diagnósticos, verificações de arquitetura e documentação junto da implementação.'}</p></div></li>
+            </ol>
+          </div>
+          <div class="toolbox reveal">
+            ${cv.skills.map((skill, index) => `<div class="tool-group"><span>0${index + 1} / ${esc(L(skill.group, lang))}</span><p>${esc(skill.items)}</p></div>`).join('\n            ')}
+          </div>
         </div>
       </section>
 
       <section class="security section" id="security">
         <div class="section-inner">
-          <div class="section-heading">
-            ${sec('02', lang === 'pt' ? 'Segurança' : 'Security')}
-            <h2>${lang === 'pt' ? 'Sei atacar.<br /><em>Prefiro defender.</em>' : 'I can attack.<br /><em>I prefer to defend.</em>'}</h2>
+          <div class="section-heading reveal">
+            ${sec('03', en ? 'Security practice' : 'Prática de segurança')}
+            <h2>${en ? 'Research with <span>boundaries.</span>' : 'Pesquisa com <span>limites.</span>'}</h2>
+            <p>${en ? 'Offensive knowledge applied to defensive engineering, in environments where authorization and scope are explicit.' : 'Conhecimento ofensivo aplicado à engenharia defensiva, em ambientes com autorização e escopo explícitos.'}</p>
           </div>
-          <div class="sec-grid">
-            ${secRes.points.map((pt_, i) => `<div><span>0${i + 1}</span><h3>${esc(L(pt_.t, lang))}</h3><p>${esc(L(pt_.d, lang))}</p></div>`).join('\n            ')}
+          <div class="security-console reveal">
+            <div class="console-head"><span>POLICY / LAB-01</span><span class="status-ok">SCOPE VERIFIED</span></div>
+            <div class="sec-grid">
+              ${secRes.points.map((point, index) => `<div><span>0${index + 1}</span><h3>${esc(L(point.t, lang))}</h3><p>${esc(L(point.d, lang))}</p></div>`).join('\n              ')}
+            </div>
+            <p class="rules">${esc(L(secRes.rules, lang))}</p>
           </div>
-          <p class="rules">${esc(L(secRes.rules, lang))}</p>
         </div>
       </section>
 
       <section class="resumes section" id="resume">
-        <div class="section-inner">
-          <div class="section-heading">
-            ${sec('03', lang === 'pt' ? 'Currículo' : 'Résumé')}
-            <h2>${lang === 'pt' ? 'Leve <em>o papel.</em>' : 'Take <em>the paper.</em>'}</h2>
+        <div class="section-inner resume-layout">
+          <div class="section-heading reveal">
+            ${sec('04', en ? 'Resume' : 'Currículo')}
+            <h2>${en ? 'Readable by people.<br><span>Parseable by systems.</span>' : 'Legível por pessoas.<br><span>Interpretável por sistemas.</span>'}</h2>
           </div>
-          <div class="resume-cards">
+          <div class="resume-cards reveal">
             ${[
-              { f: lang === 'pt' ? 'pt.html' : 'en.html', pdf: lang === 'pt' ? 'felipe-lemos-curriculo-pt.pdf' : 'felipe-lemos-resume-en.pdf', t: lang === 'pt' ? 'Uma página' : 'One page' },
-              { f: lang === 'pt' ? 'pt-detailed.html' : 'en-detailed.html', pdf: lang === 'pt' ? 'felipe-lemos-curriculo-pt-detalhado.pdf' : 'felipe-lemos-resume-en-detailed.pdf', t: lang === 'pt' ? 'Detalhado' : 'Detailed' }
-            ].map((r) => `<div><h3>${r.t}</h3><p>${lang === 'pt' ? 'ATS, uma coluna, sem firula.' : 'ATS-safe, one column, no gimmicks.'}</p><a href="${prefix}resume/${r.f}">${lang === 'pt' ? 'Abrir' : 'Open'} ↗</a> <a href="${prefix}downloads/${r.pdf}" download>PDF ↓</a></div>`).join('\n            ')}
+              { f: en ? 'en.html' : 'pt.html', pdf: en ? 'felipe-lemos-resume-en.pdf' : 'felipe-lemos-curriculo-pt.pdf', title: en ? 'One page' : 'Uma página', code: '01' },
+              { f: en ? 'en-detailed.html' : 'pt-detailed.html', pdf: en ? 'felipe-lemos-resume-en-detailed.pdf' : 'felipe-lemos-curriculo-pt-detalhado.pdf', title: en ? 'Detailed' : 'Detalhado', code: '02' }
+            ].map((resume) => `<article><span>${resume.code}</span><h3>${resume.title}</h3><p>${en ? 'Single column, ATS-safe, direct.' : 'Uma coluna, compatível com ATS, direto.'}</p><div><a href="${route.prefix}resume/${resume.f}">${en ? 'Open HTML' : 'Abrir HTML'} ↗</a><a href="${route.prefix}downloads/${resume.pdf}" download>PDF ↓</a></div></article>`).join('\n            ')}
           </div>
         </div>
       </section>
 
       <section class="contact section" id="contact">
-        <div class="contact-ornament" aria-hidden="true">✦</div>
-        ${sec('04', lang === 'pt' ? 'Contato' : 'Contact')}
-        <h2>${lang === 'pt' ? 'Tem um sistema <em>difícil?</em>' : 'Got a hard <em>system?</em>'}</h2>
-        <p>${lang === 'pt' ? 'Software, backend, sistemas, segurança, jogos. Rio de Janeiro, aberto a propostas.' : 'Software, backend, systems, security, games. Rio de Janeiro, open to work.'}</p>
-        <div class="contact-links"><a href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a><a href="${prefix}resume/${lang === 'pt' ? 'pt.html' : 'en.html'}">${lang === 'pt' ? 'Currículo' : 'Résumé'} ↗</a></div>
+        <div class="contact-code" aria-hidden="true">05 / CONNECT</div>
+        <p class="kicker"><span class="status-dot"></span>${en ? 'AVAILABLE FOR THE RIGHT SYSTEM' : 'DISPONIVEL PARA O SISTEMA CERTO'}</p>
+        <h2>${en ? 'Let us inspect the <span>problem.</span>' : 'Vamos inspecionar o <span>problema.</span>'}</h2>
+        <p>${en ? 'Software, backend, systems, security, or gameplay work. Based in Rio de Janeiro.' : 'Software, backend, sistemas, segurança ou gameplay. Rio de Janeiro.'}</p>
+        <div class="contact-links"><a class="button button-primary" href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a></div>
       </section>
     </main>
-    <footer class="statusbar"><span>● ${lang === 'pt' ? 'CONECTADO' : 'CONNECTED'} · Felipe Lemos · ${esc(L(cv.person.location, lang))}</span><span>${lang === 'pt' ? 'Segurança: educação, defesa e testes autorizados.' : 'Security work: education, defense, authorized testing.'}</span><span>© 2026</span></footer>
-    <script src="${prefix}assets/js/site.js"></script>
+    <footer class="statusbar"><span><i></i>${en ? 'NETWORK READY' : 'REDE PRONTA'} / Felipe "Yuee" Lemos</span><span>${en ? 'Education, defense, authorized testing.' : 'Educação, defesa, testes autorizados.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
+    <script src="${route.prefix}assets/js/site.js"></script>
   </body>
 </html>
 `;
 }
 
 function runtimePage(lang) {
-  const prefix = lang === 'pt' ? '../../' : '../';
-  const canonical = lang === 'pt' ? `${SITE}/pt/microruntime/` : `${SITE}/microruntime/`;
-  const title = lang === 'pt' ? 'Micro Runtime: Demonstração pública | Felipe Lemos' : 'Micro Runtime: Public showcase | Felipe Lemos';
-  const desc = lang === 'pt' ? 'Demonstração pública e sanitizada do Micro Runtime: IA local com GGUF, VM TinyML M35 e envelopes MRE1.' : 'Sanitized public showcase of Micro Runtime: local GGUF AI, M35 TinyML VM, and MRE1 envelopes.';
   const en = lang === 'en';
+  const route = routeConfig(lang, 'runtime');
+  const canonical = en ? `${SITE}/microruntime/` : `${SITE}/pt/microruntime/`;
+  const title = en ? 'Micro Runtime | Public systems case study' : 'Micro Runtime | Estudo de caso publico';
+  const desc = en ? 'A sanitized systems case study about bounded local AI, TinyML budgets, canonical envelopes, and explicit trust boundaries.' : 'Estudo de sistemas sanitizado sobre IA local limitada, orçamentos TinyML, envelopes canônicos e limites de confiança explícitos.';
   return `<!doctype html>
 <html lang="${en ? 'en' : 'pt-BR'}">
   <head>
-${head({ lang, title, desc, canonical, prefix })}
-    <link rel="stylesheet" href="${prefix}assets/css/showcase.css" />
+${head({ lang, title, desc, canonical, route })}
+    <link rel="stylesheet" href="${route.prefix}assets/css/showcase.css" />
   </head>
-  <body>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
-${header(lang, prefix, T[lang])}
-    <main id="main" class="showcase">
-      <div class="dither" aria-hidden="true"></div>
-      <p class="section-index"><a href="${prefix}${en ? '' : 'pt/'}">← Felipe Lemos</a> · ${en ? 'Public technical showcase' : 'Demonstração técnica pública'} · ${en ? 'Sanitized subset. No private code.' : 'Subconjunto sanitizado. Sem código privado.'}</p>
-      <h1>Micro Runtime <em>${en ? 'can run AI locally.' : 'executa IA localmente.'}</em></h1>
-      <p class="lede">${en ? 'A modular Rust runtime for constrained environments. This page shows only safe ideas: how numeric model output becomes bounded actions, how tiny models stay within budgets, how envelopes keep artifacts canonical.' : 'Runtime modular em Rust para ambientes restritos. Esta página mostra só ideias seguras: como a saída numérica vira ações limitadas, como modelos minúsculos respeitam orçamentos, como envelopes mantêm artefatos canônicos.'}</p>
-      <div class="showcase-grid">
-        <article><span>01</span><h2>${en ? 'Decision plane, not autopilot' : 'Plano de decisão, não piloto automático'}</h2><p>${en ? 'A minimal TokenEngine trait returns single numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed 256-slot one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never becomes ambient authority.' : 'Um trait mínimo TokenEngine retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo de 256 slots one-shot invoca um handler HostOp fechado. Saída probabilística nunca vira autoridade ambiente.'}</p><pre><code>trait TokenEngine {
-  fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
-  fn reset(&amp;mut self);
-}
-// bridge: model_token -&gt; dispatch_token -&gt; HostOp
-// dispatcher: one-shot, fixed 256 slots, closed enum</code></pre></article>
-        <article><span>02</span><h2>${en ? 'Local GGUF, explicit and boring' : 'GGUF local, explícito e previsível'}</h2><p>${en ? 'Memory-mapped or fully in-memory model loading (no disk writes), quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback, constrained decoding to a digit vocabulary, and zeroized buffers on drop.' : 'Carregamento via mmap ou totalmente em memória (sem escrita em disco), modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso, decodificação restrita a vocabulário de dígitos e buffers zerados no drop.'}</p><pre><code>MICRO_RUNTIME_GGUF=/models/qwen3-0.6b-q4_k_m.gguf
-# missing model =&gt; None (no silent fallback)
-# think budget default 2048, act budget 32 digits</code></pre></article>
-        <article><span>03</span><h2>M35 TinyML VM</h2><p>${en ? 'Canonical 64-byte header, fixed-length opcodes (FC_W8A8, ADD_RQ, LUT8, ARGMAX, END), full tape validation once (spans, aliasing, quantization, order, budgets), int8 only, no heap, no float, no graph. Offline assembler and trainer produce byte-identical images with SHA manifests; only synthetic fixtures ship publicly.' : 'Header canônico de 64 bytes, opcodes de tamanho fixo (FC_W8A8, ADD_RQ, LUT8, ARGMAX, END), validação completa da tape (spans, aliasing, quantização, ordem, orçamentos), apenas int8, sem heap, sem float, sem grafo. Assembler e trainer offline geram imagens byte-idênticas com manifests SHA; publicamente, apenas fixtures sintéticas.'}</p><pre><code>MAGIC M35\\0 · VERSION 1 · HEADER 64B
-MAX_OPS 4096 · MAX_ARENA 16MiB · budgets enforced
-tape: ARGMAX penultimate, END last</code></pre></article>
-        <article><span>04</span><h2>MRE1 ${en ? 'envelopes' : 'envelopes'}</h2><p>${en ? '144-byte header + up to 256 × 80-byte records + 104-byte trailer. Canonical order, sizes, zero-reserved fields, and authority cross-rules. Zero-copy borrowed views; trust (signatures, counters) stays in the bootstrap, never in the parser.' : 'Header de 144 bytes + até 256 registros de 80 bytes + trailer de 104 bytes. Ordem canônica, tamanhos, campos zero-reserved e regras cruzadas de autoridade. Views emprestadas zero-copy; confiança (assinaturas, contadores) fica no bootstrap, nunca no parser.'}</p></article>
-        <article><span>05</span><h2>${en ? 'Memory discipline' : 'Disciplina de memória'}</h2><p>${en ? 'Custom global allocator with 4 KiB pages, sharded heap, and ephemeral scopes; read-only no-follow memory maps; one-shot dispatch that scrubs caller buffers. CI enforces formatting, architecture inventory, tests, and object size gates.' : 'Alocador global customizado com páginas de 4 KiB, heap fragmentado e escopos efêmeros; maps somente leitura sem follow; dispatch one-shot que limpa buffers. O CI impõe formatação, inventário de arquitetura, testes e limites de tamanho.'}</p></article>
-        <article><span>06</span><h2>${en ? 'What is deliberately excluded' : 'O que fica deliberadamente de fora'}</h2><p>${en ? 'No weights, keys, certificates, transports, mixnet, kernel, driver, C2, or evasion content. No private source. This showcase is an original explanation of public concepts, not a release of the private runtime.' : 'Sem pesos, chaves, certificados, transportes, mixnet, kernel, drivers, C2 ou evasão. Sem código privado. Esta demonstração é uma explicação original de conceitos públicos, não um release do runtime privado.'}</p><a class="primary-link" href="${prefix}resume/${en ? 'en-detailed.html' : 'pt-detailed.html'}">${en ? 'See résumé detail →' : 'Ver detalhe no currículo →'}</a></article>
+  <body id="top">
+    <div class="screen-texture" aria-hidden="true"></div>
+${header(lang, 'runtime', route)}
+    <main id="main" class="showcase" tabindex="-1">
+      <div class="showcase-intro">
+        <p class="section-index"><span>CASE / 001</span>${en ? 'Public technical record' : 'Registro tecnico publico'}</p>
+        <p class="kicker"><span class="status-dot"></span>${en ? 'SANITIZED / ARCHITECTURE LEVEL' : 'SANITIZADO / NIVEL DE ARQUITETURA'}</p>
+        <h1>Micro Runtime <span>${en ? 'runs AI within hard limits.' : 'executa IA com limites rigidos.'}</span></h1>
+        <p class="lede">${en ? 'A modular Rust runtime for constrained environments. Numeric model output becomes bounded actions, tiny models stay inside declared budgets, and artifact parsers remain separate from trust decisions.' : 'Runtime modular em Rust para ambientes restritos. Saída numérica de modelos vira ações limitadas, modelos pequenos respeitam orçamentos declarados e parsers de artefatos ficam separados das decisões de confiança.'}</p>
+        ${runtimeDiagram(lang)}
       </div>
-      <section class="demo" aria-label="${en ? 'Interactive TinyML budget demo' : 'Demo interativa de orçamento TinyML'}">
-        <h2>${en ? 'Try the budget logic' : 'Teste a lógica de orçamento'}</h2>
-        <p>${en ? 'A tiny client-side simulation of M35-style budget enforcement. No model, no private code. Just the idea that oversized tapes fail closed.' : 'Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado. Só a ideia de que tapes grandes falham fechadas.'}</p>
-        <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
-        <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
-        <button id="demo-run" type="button">${en ? 'Validate tape' : 'Validar tape'}</button>
-        <p id="demo-out" role="status"></p>
+      <div class="case-register">
+        <article><span>01 / AUTHORITY</span><h2>${en ? 'Decision plane, not autopilot' : 'Plano de decisão, não piloto automático'}</h2><p>${en ? 'A minimal TokenEngine returns numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never receives ambient authority.' : 'Um TokenEngine mínimo retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo one-shot invoca um handler HostOp fechado. Saída probabilística nunca recebe autoridade ambiente.'}</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
+dispatcher: one-shot / 256 slots / closed enum</code></pre></article>
+        <article><span>02 / LOCAL MODEL</span><h2>${en ? 'Explicit model resolution' : 'Resolução explícita de modelo'}</h2><p>${en ? 'Memory-mapped or in-memory model loading, quantized CPU inference, constrained decoding, and no silent fallback when a model is missing.' : 'Carregamento via mmap ou em memória, inferência quantizada em CPU, decodificação restrita e nenhum fallback silencioso quando falta um modelo.'}</p><pre><code>MODEL=/models/local.gguf
+missing model =&gt; None
+act budget =&gt; 32 digits</code></pre></article>
+        <article><span>03 / TINYML</span><h2>M35 VM</h2><p>${en ? 'A canonical header and fixed-length opcodes are fully validated before execution. The VM uses int8 operations, no heap, no floating point, and hard operation and arena budgets.' : 'Um header canônico e opcodes de tamanho fixo são validados integralmente antes da execução. A VM usa operações int8, sem heap, sem ponto flutuante e com limites rígidos para operações e arena.'}</p><pre><code>HEADER 64B / MAX_OPS 4096
+MAX_ARENA 16MiB / END required</code></pre></article>
+        <article><span>04 / FORMAT</span><h2>MRE1 ${en ? 'envelopes' : 'envelopes'}</h2><p>${en ? 'Canonical ordering, bounded records, reserved fields, and zero-copy borrowed views. Signature and counter trust stays in bootstrap code, not in the parser.' : 'Ordem canonica, registros limitados, campos reservados e views zero-copy. Confianca em assinaturas e contadores fica no bootstrap, nao no parser.'}</p></article>
+        <article><span>05 / MEMORY</span><h2>${en ? 'Memory discipline' : 'Disciplina de memória'}</h2><p>${en ? 'A page-based allocator, sharded heap, ephemeral scopes, read-only maps, and caller-buffer scrubbing make resource and lifetime decisions visible.' : 'Alocador baseado em páginas, heap fragmentado, escopos efêmeros, maps somente leitura e limpeza de buffers tornam decisões de recurso e lifetime visíveis.'}</p></article>
+        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>${en ? 'Deliberately excluded' : 'Deliberadamente excluído'}</h2><p>${en ? 'No weights, keys, certificates, private source, transports, kernel code, command infrastructure, or evasion material. This is an original explanation of safe concepts, not a runtime release.' : 'Sem pesos, chaves, certificados, código privado, transportes, kernel, infraestrutura de comando ou material de evasão. Esta é uma explicação original de conceitos seguros, não um release do runtime.'}</p></article>
+      </div>
+      <section class="demo" data-lang="${lang}" aria-labelledby="demo-title">
+        <div><span>INTERACTIVE CHECK / M35</span><h2 id="demo-title">${en ? 'Validate a budget' : 'Validar um orçamento'}</h2><p>${en ? 'Client-side simulation only. Maximum 64 operations and 256 KiB for this demonstration.' : 'Apenas uma simulação no navegador. Máximo de 64 operações e 256 KiB nesta demonstração.'}</p></div>
+        <form class="demo-controls" onsubmit="return false">
+          <label for="demo-ops">ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
+          <label for="demo-arena">arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
+          <button id="demo-run" type="button">${en ? 'Validate tape' : 'Validar tape'}</button>
+        </form>
+        <p id="demo-out" class="demo-output" role="status" aria-live="polite">${en ? 'AWAITING INPUT' : 'AGUARDANDO ENTRADA'}</p>
       </section>
+      <a class="back-link" href="${route.home}#work">← ${en ? 'Return to selected work' : 'Voltar aos projetos'}</a>
     </main>
-    <footer class="statusbar"><span>● ${en ? 'CONNECTED' : 'CONECTADO'} · Felipe Lemos · Micro Runtime ${en ? 'public showcase' : 'demonstração pública'}</span><span>© 2026</span></footer>
-    <script src="${prefix}assets/js/site.js"></script>
-    <script src="${prefix}assets/js/showcase-demo.js"></script>
+    <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Safe concepts only.' : 'Somente conceitos seguros.'}</span><span>2026</span></footer>
+    <script src="${route.prefix}assets/js/site.js"></script>
+    <script src="${route.prefix}assets/js/showcase-demo.js"></script>
   </body>
 </html>
 `;
 }
 
+function completeExcerpt(value, max, fallback) {
+  const text = String(value).trim();
+  if (text.length <= max) return text;
+  const sentences = text.match(/[^.!?]+[.!?]+/g) ?? [];
+  let result = '';
+  for (const sentence of sentences) {
+    if (`${result} ${sentence}`.trim().length > max) break;
+    result = `${result} ${sentence}`.trim();
+  }
+  return result || fallback;
+}
+
 function resumePage(lang, detailed) {
   const prefix = '../';
-  const variant = detailed ? 'detailed' : 'one-page';
   const canonical = `${SITE}/resume/${lang === 'pt' ? 'pt' : 'en'}${detailed ? '-detailed' : ''}.html`;
-  const title = `${cv.person.name} · ${(lang === 'pt' ? 'Currículo' : 'Résumé')}${detailed ? (lang === 'pt' ? ' (Detalhado)' : ' (Detailed)') : ''}`;
-  const sel = detailed ? cv.documents.detailed : cv.documents.onePage;
-  const projects = sel.projectIds.map((id) => cv.projects.find((p) => p.id === id)).filter(Boolean);
-  const exp = cv.experience[0];
+  const title = `${cv.person.name} · ${(lang === 'pt' ? 'Currículo' : 'Resume')}${detailed ? (lang === 'pt' ? ' (Detalhado)' : ' (Detailed)') : ''}`;
+  const selected = detailed ? cv.documents.detailed : cv.documents.onePage;
+  const projects = selected.projectIds.map((id) => cv.projects.find((project) => project.id === id)).filter(Boolean);
+  const experience = cv.experience[0];
   const pdfFile = { en: detailed ? 'felipe-lemos-resume-en-detailed.pdf' : 'felipe-lemos-resume-en.pdf', pt: detailed ? 'felipe-lemos-curriculo-pt-detalhado.pdf' : 'felipe-lemos-curriculo-pt.pdf' }[lang];
-  const short = (s, n) => { const t = String(s); return t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + '…' : t; };
-  const summaryText = detailed ? short(L(cv.person.summary, lang), 450) : short(L(cv.person.summary, lang).split('. ')[0] + '.', 150);
-  const projSummary = (p) => detailed ? short(L(p.summary, lang), 400) : short(L(p.summary, lang), 150);
-  const secAreas = detailed ? cv.securityResearch.areas : cv.securityResearch.areas.slice(0, 2);
-  const secIntro = detailed ? short(L(cv.securityResearch.intro, lang), 260) : short(L(cv.securityResearch.intro, lang), 140);
+  const summaryText = detailed ? completeExcerpt(L(cv.person.summary, lang), 520, L(cv.person.statement, lang)) : L(cv.person.statement, lang);
+  const projectSummary = (project) => detailed ? completeExcerpt(L(project.summary, lang), 420, L(project.blurb, lang)) : L(project.blurb, lang);
+  const securityAreas = detailed ? cv.securityResearch.areas : cv.securityResearch.areas.slice(0, 2);
+  const securityIntro = detailed ? completeExcerpt(L(cv.securityResearch.intro, lang), 320, L(cv.securityResearch.rules, lang)) : L(cv.securityResearch.rules, lang);
+  const en = lang === 'en';
   return `<!doctype html>
-<html lang="${lang === 'pt' ? 'pt-BR' : 'en'}">
+<html lang="${en ? 'en' : 'pt-BR'}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="${esc(title)} — ${esc(L(cv.person.headline, lang))}" />
+    <meta name="description" content="${esc(title)}: ${esc(L(cv.person.headline, lang))}" />
     <meta name="robots" content="noindex,follow" />
     <link rel="canonical" href="${canonical}" />
     <title>${esc(title)}</title>
@@ -305,29 +389,27 @@ function resumePage(lang, detailed) {
   </head>
   <body class="resume ${detailed ? 'detailed' : 'compact'}">
     <div class="resume-actions screen-only">
-      <a href="${prefix}${lang === 'pt' ? 'pt/' : ''}">← ${lang === 'pt' ? 'Portfólio' : 'Portfolio'}</a>
-      <span>${lang === 'pt' ? 'Currículo' : 'Résumé'} · ${lang === 'pt' ? (detailed ? 'Detalhado' : 'Uma página') : (detailed ? 'Detailed' : 'One page')} · ${lang === 'pt' ? 'Português' : 'English'}</span>
-      <span><a href="${lang === 'pt' ? (detailed ? 'pt.html' : 'pt-detailed.html') : (detailed ? 'en.html' : 'en-detailed.html')}">${lang === 'pt' ? (detailed ? 'Versão 1 página' : 'Versão detalhada') : (detailed ? 'One-page version' : 'Detailed version')}</a> · <a href="${detailed ? (lang === 'pt' ? 'en-detailed.html' : 'pt-detailed.html') : (lang === 'pt' ? 'en.html' : 'pt.html')}">${lang === 'pt' ? 'English' : 'Português'}</a> · <a href="../downloads/${pdfFile}" download>${lang === 'pt' ? 'Baixar PDF' : 'Download PDF'}</a></span>
-      <button type="button" onclick="window.print()">${lang === 'pt' ? 'Imprimir / Salvar PDF' : 'Print / Save PDF'}</button>
+      <a href="${prefix}${en ? '' : 'pt/'}">← ${en ? 'Portfolio' : 'Portfolio'}</a>
+      <span>${en ? 'Resume' : 'Currículo'} / ${detailed ? (en ? 'Detailed' : 'Detalhado') : (en ? 'One page' : 'Uma página')} / ${en ? 'English' : 'Português'}</span>
+      <span><a href="${en ? (detailed ? 'en.html' : 'en-detailed.html') : (detailed ? 'pt.html' : 'pt-detailed.html')}">${detailed ? (en ? 'One-page version' : 'Versão de uma página') : (en ? 'Detailed version' : 'Versão detalhada')}</a> / <a href="${detailed ? (en ? 'pt-detailed.html' : 'en-detailed.html') : (en ? 'pt.html' : 'en.html')}">${en ? 'Português' : 'English'}</a> / <a href="../downloads/${pdfFile}" download>${en ? 'Download PDF' : 'Baixar PDF'}</a></span>
+      <button type="button" onclick="window.print()">${en ? 'Print / Save PDF' : 'Imprimir / Salvar PDF'}</button>
     </div>
     <main class="resume-sheet">
       <header>
         <h1>${esc(cv.person.name)}</h1>
         <p class="resume-headline">${esc(L(cv.person.headline, lang))}</p>
-        <p class="resume-meta">${esc(L(cv.person.location, lang))} · ${esc(cv.person.profiles.linkedin)} · ${esc(cv.person.profiles.github)} · ${esc(cv.person.profiles.robloxNexus)}</p>
+        <p class="resume-meta">${esc(L(cv.person.location, lang))} · <a href="${cv.person.profiles.linkedin}">${esc(cv.person.profiles.linkedin)}</a> · <a href="${cv.person.profiles.github}">${esc(cv.person.profiles.github)}</a> · <a href="${cv.person.profiles.robloxNexus}">NEXUS on Roblox</a></p>
       </header>
-      <section><h2>${lang === 'pt' ? 'Resumo' : 'Summary'}</h2><p>${esc(summaryText)}</p></section>
-      <section><h2>${lang === 'pt' ? 'Habilidades Técnicas' : 'Technical Skills'}</h2><ul>${cv.skills.map((s) => `<li><strong>${esc(L(s.group, lang))}:</strong> ${esc(s.items)}</li>`).join('')}</ul></section>
-      <section><h2>${lang === 'pt' ? 'Experiência' : 'Experience'}</h2>
-        <article class="resume-entry"><h3>${esc(L(exp.role, lang))}, ${esc(exp.organization)} (${esc(exp.platform)})</h3><p class="resume-when">${lang === 'pt' ? 'Atual' : 'Current'}</p><p><strong>${esc(L(exp.title, lang))}</strong> ${esc(detailed ? short(L(exp.body, lang), 300) : short(L(exp.body, lang), 170))}</p></article>
+      <section><h2>${en ? 'Summary' : 'Resumo'}</h2><p>${esc(summaryText)}</p></section>
+      <section><h2>${en ? 'Technical Skills' : 'Habilidades Técnicas'}</h2><ul>${cv.skills.map((skill) => `<li><strong>${esc(L(skill.group, lang))}:</strong> ${esc(skill.items)}</li>`).join('')}</ul></section>
+      <section><h2>${en ? 'Experience' : 'Experiência'}</h2><article class="resume-entry"><h3>${esc(L(experience.role, lang))}, ${esc(experience.organization)} (${esc(experience.platform)})</h3><p class="resume-when">${en ? 'Current' : 'Atual'}</p><p><strong>${esc(L(experience.title, lang))}</strong>${detailed ? ` ${esc(completeExcerpt(L(experience.body, lang), 360, ''))}` : ''}</p></article></section>
+      <section><h2>${en ? 'Selected Projects' : 'Projetos Selecionados'}</h2>
+        ${projects.map((project) => `<article class="resume-entry"><h3>${esc(project.name)}${project.org ? ` · ${esc(project.org)}` : ''}: ${esc(L(project.domain, lang))}</h3><p>${esc(projectSummary(project))}</p><ul>${L(project.resumeBullets, lang).slice(0, selected.highlightCount).map((bullet) => `<li>${esc(bullet)}</li>`).join('')}</ul><p class="resume-tech">${esc(project.stack)}</p></article>`).join('\n        ')}
       </section>
-      <section><h2>${lang === 'pt' ? 'Projetos Selecionados' : 'Selected Projects'}</h2>
-        ${projects.map((p) => `<article class="resume-entry"><h3>${esc(p.name)}${p.org ? ` · ${esc(p.org)}` : ''}: ${esc(L(p.domain, lang))}</h3><p>${esc(projSummary(p))}</p><ul>${(L(p.resumeBullets, lang)).slice(0, sel.highlightCount).map((b) => `<li>${esc(detailed ? b : short(b, 115))}</li>`).join('')}</ul><p class="resume-tech">${esc(p.evidence)}</p></article>`).join('\n        ')}
-      </section>
-      <section><h2>${lang === 'pt' ? 'Pesquisa em Segurança' : 'Security Research'}</h2><p>${esc(secIntro)}</p><ul>${secAreas.map((a) => `<li>${esc(L(a, lang))}</li>`).join('')}</ul></section>
-      <section><h2>${lang === 'pt' ? 'Certificações' : 'Certifications'}</h2><ul>${cv.certifications.map((c) => `<li>${esc(L(c, lang))}</li>`).join('')}</ul></section>
-      <section><h2>${lang === 'pt' ? 'Idiomas e Interesses' : 'Languages & Interests'}</h2><p>${esc(L(cv.extras.languages, lang))}<br />${esc(L(cv.extras.interests, lang))}</p></section>
-      <section><h2>${lang === 'pt' ? 'Observação' : 'Note'}</h2><p>${lang === 'pt' ? 'Repositórios sensíveis são descritos como estudos de caso privados, sem código operacional. Detalhes arquiteturais disponíveis em entrevistas técnicas quando apropriado.' : 'Sensitive repositories are described as private case studies without operational code. Architectural detail available in technical interviews where appropriate.'} ${lang === 'pt' ? 'Atualizado em ' : 'Updated '}2026-09-04 · v${cv.meta.contentVersion}</p></section>
+      <section><h2>${en ? 'Security Research' : 'Pesquisa em Segurança'}</h2><p>${esc(securityIntro)}</p><ul>${securityAreas.map((area) => `<li>${esc(L(area, lang))}</li>`).join('')}</ul></section>
+      <section><h2>${en ? 'Certifications' : 'Certificações'}</h2><ul>${cv.certifications.map((certification) => `<li>${esc(L(certification, lang))}</li>`).join('')}</ul></section>
+      <section><h2>${en ? 'Languages & Interests' : 'Idiomas e Interesses'}</h2><p>${esc(L(cv.extras.languages, lang))}<br />${esc(L(cv.extras.interests, lang))}</p></section>
+      <section><h2>${en ? 'Note' : 'Observação'}</h2><p>${en ? 'Sensitive repositories are described as private case studies without operational code. Architecture detail is available in technical interviews when appropriate.' : 'Repositórios sensíveis são descritos como estudos de caso privados, sem código operacional. Detalhes de arquitetura estão disponíveis em entrevistas técnicas quando apropriado.'} ${en ? 'Updated' : 'Atualizado'} ${cv.meta.lastUpdated} · v${cv.meta.contentVersion}</p></section>
     </main>
     <script>if (new URLSearchParams(location.search).get('print') === '1') addEventListener('load', () => setTimeout(() => print(), 400));</script>
   </body>
@@ -335,32 +417,46 @@ function resumePage(lang, detailed) {
 `;
 }
 
-fs.mkdirSync(path.join(root, 'pt'), { recursive: true });
-fs.mkdirSync(path.join(root, 'microruntime'), { recursive: true });
-fs.mkdirSync(path.join(root, 'pt/microruntime'), { recursive: true });
-fs.mkdirSync(path.join(root, 'resume'), { recursive: true });
-fs.mkdirSync(path.join(root, 'assets/css'), { recursive: true });
-fs.mkdirSync(path.join(root, 'assets/js'), { recursive: true });
-fs.mkdirSync(path.join(root, 'downloads'), { recursive: true });
+const generated = [
+  ['index.html', portfolioPage('en')],
+  ['pt/index.html', portfolioPage('pt')],
+  ['microruntime/index.html', runtimePage('en')],
+  ['pt/microruntime/index.html', runtimePage('pt')],
+  ['resume/en.html', resumePage('en', false)],
+  ['resume/en-detailed.html', resumePage('en', true)],
+  ['resume/pt.html', resumePage('pt', false)],
+  ['resume/pt-detailed.html', resumePage('pt', true)]
+];
 
-const clean = (s) => s.replace(/[ \t]+$/gm, '');
-fs.writeFileSync(path.join(root, 'index.html'), clean(portfolioPage('en')));
-fs.writeFileSync(path.join(root, 'pt/index.html'), clean(portfolioPage('pt')));
-fs.writeFileSync(path.join(root, 'microruntime/index.html'), clean(runtimePage('en')));
-fs.writeFileSync(path.join(root, 'pt/microruntime/index.html'), clean(runtimePage('pt')));
-fs.writeFileSync(path.join(root, 'resume/en.html'), clean(resumePage('en', false)));
-fs.writeFileSync(path.join(root, 'resume/en-detailed.html'), clean(resumePage('en', true)));
-fs.writeFileSync(path.join(root, 'resume/pt.html'), clean(resumePage('pt', false)));
-fs.writeFileSync(path.join(root, 'resume/pt-detailed.html'), clean(resumePage('pt', true)));
+for (const [relative, content] of generated) {
+  const output = path.join(root, relative);
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  fs.writeFileSync(output, clean(content));
+}
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>${SITE}/</loc><xhtml:link rel="alternate" hreflang="pt-BR" href="${SITE}/pt/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/></url>
   <url><loc>${SITE}/pt/</loc><xhtml:link rel="alternate" hreflang="en" href="${SITE}/"/></url>
-  <url><loc>${SITE}/microruntime/</loc></url>
-  <url><loc>${SITE}/pt/microruntime/</loc></url>
+  <url><loc>${SITE}/microruntime/</loc><xhtml:link rel="alternate" hreflang="pt-BR" href="${SITE}/pt/microruntime/"/></url>
+  <url><loc>${SITE}/pt/microruntime/</loc><xhtml:link rel="alternate" hreflang="en" href="${SITE}/microruntime/"/></url>
 </urlset>
 `;
 fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(root, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /resume/\nDisallow: /downloads/\nSitemap: ${SITE}/sitemap.xml\n`);
-console.log('build ok: index, pt, microruntime x2, resume x4, sitemap, robots');
+
+fs.rmSync(dist, { recursive: true, force: true });
+fs.mkdirSync(dist, { recursive: true });
+for (const relative of ['index.html', 'styles.css', 'favicon.svg', 'robots.txt', 'sitemap.xml']) {
+  fs.copyFileSync(path.join(root, relative), path.join(dist, relative));
+}
+for (const directory of ['pt', 'microruntime', 'resume', 'assets']) {
+  fs.cpSync(path.join(root, directory), path.join(dist, directory), { recursive: true });
+}
+const distDownloads = path.join(dist, 'downloads');
+fs.mkdirSync(distDownloads, { recursive: true });
+for (const file of fs.readdirSync(path.join(root, 'downloads')).filter((file) => file.endsWith('.pdf'))) {
+  fs.copyFileSync(path.join(root, 'downloads', file), path.join(distDownloads, file));
+}
+
+console.log(`build ok: ${generated.length} pages and allowlisted dist/ artifact`);

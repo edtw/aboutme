@@ -4,10 +4,10 @@
   "private": true,
   "description": "Felipe's professional portfolio",
   "scripts": {
-    "start": "python3 -m http.server 4173",
+    "start": "npm run build && python3 -m http.server 4173 --directory dist",
     "build": "node scripts/build.mjs",
     "validate": "node scripts/validate.mjs",
-    "check": "node --check scripts/build.mjs && node --check scripts/validate.mjs && node --check scripts/generate-pdfs.mjs && node --check assets/js/site.js",
+    "check": "node --check scripts/build.mjs && node --check scripts/validate.mjs && node --check scripts/generate-pdfs.mjs && node --check assets/js/site.js && node --check assets/js/showcase-demo.js",
     "test": "node --test \"tests/*.mjs\"",
     "pdf": "node scripts/generate-pdfs.mjs"
   },

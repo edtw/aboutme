@@ -5,90 +5,134 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const read = (f) => fs.readFileSync(path.join(root, f), 'utf8');
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const publicPages = ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html'];
+const resumePages = ['resume/en.html', 'resume/en-detailed.html', 'resume/pt.html', 'resume/pt-detailed.html'];
 
-test('build outputs exist', () => {
-  for (const f of ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html', 'resume/en.html', 'resume/en-detailed.html', 'resume/pt.html', 'resume/pt-detailed.html', 'sitemap.xml', 'robots.txt']) {
-    assert.ok(fs.existsSync(path.join(root, f)), f);
+test('build outputs and allowlisted deployment artifact exist', () => {
+  for (const file of [...publicPages, ...resumePages, 'sitemap.xml', 'robots.txt']) {
+    assert.ok(fs.existsSync(path.join(root, file)), file);
+    assert.ok(fs.existsSync(path.join(root, 'dist', file)), `dist/${file}`);
+  }
+  assert.deepEqual(
+    fs.readdirSync(path.join(root, 'dist')).sort(),
+    ['assets', 'downloads', 'favicon.svg', 'index.html', 'microruntime', 'pt', 'resume', 'robots.txt', 'sitemap.xml', 'styles.css'].sort()
+  );
+  for (const privateName of ['poc', 'src', 'scripts', 'tests', 'node_modules', 'downloads/ascii arts']) {
+    assert.ok(!fs.existsSync(path.join(root, 'dist', privateName)), `${privateName} must not be deployed`);
   }
 });
 
-test('no private repo links on public pages', () => {
-  const html = ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html'].map(read).join('\n');
-  for (const r of ['karma', 'micro_runtime', 'esth', 'minecraft', 'pdvmar', 'prismaapp', 'airshipper']) {
-    assert.ok(!html.includes(`github.com/edtw/${r}`), r);
+test('no private repository links on public pages', () => {
+  const html = publicPages.map(read).join('\n');
+  for (const repository of ['karma', 'micro_runtime', 'esth', 'minecraft', 'pdvmar', 'prismaapp', 'airshipper']) {
+    assert.ok(!html.includes(`github.com/edtw/${repository}`), repository);
   }
 });
 
-test('locale metadata', () => {
-  assert.ok(read('index.html').includes('<html lang="en">'));
-  assert.ok(read('pt/index.html').includes('<html lang="pt-BR">'));
-  assert.ok(read('index.html').includes('hreflang="pt-BR"'));
+test('locale metadata and page switches are reciprocal', () => {
+  assert.match(read('index.html'), /<html lang="en">/);
+  assert.match(read('pt/index.html'), /<html lang="pt-BR">/);
+  assert.match(read('index.html'), /class="lang-link" href="pt\//);
+  assert.match(read('pt/index.html'), /class="lang-link" href="\.\.\//);
+  assert.match(read('microruntime/index.html'), /class="lang-link" href="\.\.\/pt\/microruntime\//);
+  assert.match(read('pt/microruntime/index.html'), /class="lang-link" href="\.\.\/\.\.\/microruntime\//);
+  assert.ok(read('microruntime/index.html').includes(`${rootUrl()}/pt/microruntime/`));
+  assert.ok(read('pt/microruntime/index.html').includes(`${rootUrl()}/microruntime/`));
   assert.ok(read('resume/en.html').includes('noindex,follow'));
 });
 
-test('resume variants differ sanely', () => {
-  const one = read('resume/en.html').length;
-  const det = read('resume/en-detailed.html').length;
-  assert.ok(det > one, 'detailed should be longer');
-});
-
-test('resume section order is ATS-standard', () => {
-  for (const f of ['resume/en.html', 'resume/pt.html', 'resume/en-detailed.html', 'resume/pt-detailed.html']) {
-    const html = read(f);
-    const order = ['Summary', 'Technical Skills', 'Experience', 'Selected Projects', 'Resumo', 'Habilidades Técnicas', 'Experiência', 'Projetos Selecionados']
-      .filter((h) => html.includes(`<h2>${h}</h2>`));
-    const idx = order.map((h) => html.indexOf(`<h2>${h}</h2>`));
-    assert.deepEqual([...idx].sort((a, b) => a - b), idx, `${f} headings out of order`);
-    assert.ok(html.includes('Technical Skills') || html.includes('Habilidades Técnicas'), `${f} missing skills heading`);
-    assert.ok(html.includes('Certifications') || html.includes('Certificações'), `${f} missing certifications`);
+test('resume variants differ and use standard section order', () => {
+  assert.ok(read('resume/en-detailed.html').length > read('resume/en.html').length);
+  const headings = {
+    en: ['Summary', 'Technical Skills', 'Experience', 'Selected Projects', 'Security Research', 'Certifications'],
+    pt: ['Resumo', 'Habilidades Técnicas', 'Experiência', 'Projetos Selecionados', 'Pesquisa em Segurança', 'Certificações']
+  };
+  for (const file of resumePages) {
+    const html = read(file);
+    const order = headings[file.includes('/pt') ? 'pt' : 'en'].map((heading) => html.indexOf(`<h2>${heading}</h2>`));
+    assert.ok(order.every((index) => index >= 0), `${file} missing heading`);
+    assert.deepEqual(order, [...order].sort((a, b) => a - b), `${file} headings out of order`);
+    assert.ok(!html.includes('…'), `${file} contains mechanically truncated copy`);
+    assert.match(html, /class="resume-meta"[\s\S]*<a href=/, `${file} profile URLs must be links`);
   }
 });
 
-test('hero is short, human, visual', () => {
-  for (const f of ['index.html', 'pt/index.html']) {
-    const html = read(f);
-    assert.ok(!html.includes('class="dossier"'), `${f} still has dossier`);
-    assert.ok(html.includes('class="stat-strip"'), `${f} missing stat strip`);
-    const m = html.match(/<p class="hero-statement">([\s\S]*?)<\/p>/);
-    assert.ok(m && m[1].length < 220, `${f} hero statement too long`);
+test('hero has a focused identity and direct actions', () => {
+  for (const file of ['index.html', 'pt/index.html']) {
+    const html = read(file);
+    assert.ok(html.includes('class="identity-mark"'), `${file} missing identity mark`);
+    assert.ok(html.includes('class="ascii-bg"'), `${file} missing systems backdrop`);
+    assert.ok(!html.includes('class="stat-strip"'), `${file} still has implementation stats`);
+    const statement = html.match(/<p class="hero-statement">([\s\S]*?)<\/p>/);
+    assert.ok(statement && statement[1].length < 220, `${file} hero statement too long`);
+    assert.ok(html.includes('href="#work"'), `${file} missing primary work action`);
   }
-  assert.ok(read('index.html').includes('On purpose'));
-  assert.ok(read('pt/index.html').includes('De propósito'));
 });
 
-test('work board has filters, cards, approach', () => {
-  for (const f of ['index.html', 'pt/index.html']) {
-    const html = read(f);
-    for (const tr of ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES']) {
-      assert.ok(html.includes(`data-filter="${tr}"`), `${f} missing filter ${tr}`);
+test('social preview uses a crawler-compatible image', () => {
+  assert.ok(fs.existsSync(path.join(root, 'assets/social-card.png')));
+  assert.ok(fs.statSync(path.join(root, 'assets/social-card.png')).size > 10000);
+  for (const file of publicPages) {
+    const html = read(file);
+    assert.ok(html.includes('/assets/social-card.png'));
+    assert.ok(html.includes('og:image:width'));
+    assert.ok(html.includes('og:image:height'));
+  }
+});
+
+test('work is proof-first, filterable, and hierarchically varied', () => {
+  for (const file of ['index.html', 'pt/index.html']) {
+    const html = read(file);
+    assert.ok(html.indexOf('id="work"') < html.indexOf('id="profile"'), `${file} work must precede profile`);
+    assert.ok(html.includes('class="flagship work-item reveal"'), `${file} missing flagship`);
+    assert.ok(html.includes('class="runtime-diagram"'), `${file} missing project-derived diagram`);
+    assert.equal((html.match(/class="[^"]*work-item reveal"/g) ?? []).length, 7, `${file} expected seven projects`);
+    assert.ok(html.includes('work-card-major') && html.includes('work-card-compact'), `${file} missing card hierarchy`);
+    for (const track of ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES']) {
+      assert.ok(html.includes(`data-filter="${track}"`), `${file} missing ${track} filter`);
     }
-    const cards = html.match(/class="work-card"/g) || [];
-    assert.equal(cards.length, 7, `${f} expected 7 cards`);
-    assert.ok(html.includes('LOCAL MIND'), `${f} missing codenames`);
-    assert.ok(html.includes('Build') || html.includes('Build'), `${f} missing approach trio`);
+    assert.ok(html.includes('class="filter-count"'), `${file} missing announced result count`);
   }
 });
 
-test('ascii-arts dressing present (dither, statusbar)', () => {
-  for (const f of ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html']) {
-    const html = read(f);
-    assert.ok(html.includes('class="dither"'), `${f} missing dither`);
-    assert.ok(html.includes('class="statusbar"'), `${f} missing statusbar`);
+test('navigation and interactions remain available on mobile', () => {
+  for (const file of publicPages) {
+    const html = read(file);
+    assert.ok(html.includes('class="mobile-nav"'), `${file} missing mobile menu`);
+    assert.ok(html.includes('class="lang-link"'), `${file} missing persistent locale switch`);
+    assert.ok(html.includes('id="top"'), `${file} missing top target`);
+    assert.ok(html.includes('tabindex="-1"'), `${file} main must accept skip-link focus`);
   }
+  assert.ok(read('pt/index.html').includes('Pular para o conteúdo'));
+  const css = read('styles.css');
+  assert.match(css, /min-height: 44px/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /scroll-behavior: auto/);
 });
 
-test('no em-dashes, blackletter, or version trivia on portfolio pages', () => {
-  for (const f of ['index.html', 'pt/index.html', 'microruntime/index.html', 'pt/microruntime/index.html']) {
-    const html = read(f);
-    assert.ok(!html.includes('—'), `${f} contains em-dash`);
-    assert.ok(!html.includes('Unifraktur'), `${f} still loads blackletter`);
-    assert.ok(!html.includes('Rust 2021') && !html.includes('Rust 2024') && !html.includes('C++17'), `${f} has version trivia`);
-  }
-  assert.ok(read('styles.css').includes('Anton'), 'display font missing');
+test('showcase is localized and exposes budgets before interaction', () => {
+  const pt = read('pt/microruntime/index.html');
+  assert.ok(pt.includes('Máximo de 64 operações e 256 KiB'));
+  assert.ok(pt.includes('data-lang="pt"'));
+  const js = read('assets/js/showcase-demo.js');
+  assert.ok(js.includes('ACEITO'));
+  assert.ok(js.includes('REJEITADO'));
+  assert.ok(js.includes('Maximum 64 ops / 256 KiB'));
 });
 
-test('resume pages link static PDFs', () => {
+test('public pages avoid stale design and version trivia', () => {
+  for (const file of publicPages) {
+    const html = read(file);
+    assert.ok(!html.includes('—'), `${file} contains an em dash`);
+    assert.ok(!html.includes('Unifraktur'), `${file} loads blackletter`);
+    assert.ok(!html.includes('Rust 2021') && !html.includes('Rust 2024') && !html.includes('C++17'), `${file} has version trivia`);
+    assert.ok(!html.includes('fonts.googleapis.com'), `${file} has an external font dependency`);
+  }
+  assert.ok(read('styles.css').includes('--display: "Arial Narrow"'));
+});
+
+test('resume pages link current static PDFs', () => {
   const pairs = [
     ['resume/en.html', 'felipe-lemos-resume-en.pdf'],
     ['resume/en-detailed.html', 'felipe-lemos-resume-en-detailed.pdf'],
@@ -100,3 +144,33 @@ test('resume pages link static PDFs', () => {
     assert.ok(fs.existsSync(path.join(root, 'downloads', pdf)), `${pdf} not generated`);
   }
 });
+
+test('static PDFs contain the current name and expected page counts', async () => {
+  const { getDocument } = await import('pdfjs-dist/legacy/build/pdf.mjs');
+  const expected = [
+    ['felipe-lemos-resume-en.pdf', 1],
+    ['felipe-lemos-resume-en-detailed.pdf', 2],
+    ['felipe-lemos-curriculo-pt.pdf', 1],
+    ['felipe-lemos-curriculo-pt-detalhado.pdf', 2]
+  ];
+  for (const [file, pages] of expected) {
+    const task = getDocument({ data: new Uint8Array(fs.readFileSync(path.join(root, 'downloads', file))) });
+    const pdf = await task.promise;
+    let text = '';
+    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+      const page = await pdf.getPage(pageNumber);
+      const content = await page.getTextContent();
+      text += content.items.map((item) => item.str).join(' ');
+    }
+    assert.equal(pdf.numPages, pages, `${file} page count`);
+    assert.ok(text.includes('Felipe "Yuee" Lemos'), `${file} has a stale name`);
+    assert.ok(!text.includes('…'), `${file} contains clipped copy`);
+    assert.ok(!text.includes('—'), `${file} contains an em dash`);
+    assert.ok(!text.includes('Rust 2021') && !text.includes('Rust 2024') && !text.includes('C++17'), `${file} contains version trivia`);
+    await task.destroy();
+  }
+});
+
+function rootUrl() {
+  return 'https://edtw.github.io/aboutme';
+}

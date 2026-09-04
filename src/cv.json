@@ -6,7 +6,7 @@
     "siteUrl": "https://edtw.github.io/aboutme"
   },
   "person": {
-    "name": "Felipe Lemos",
+    "name": "Felipe \"Yuee\" Lemos",
     "location": {
       "en": "Rio de Janeiro, Brazil",
       "pt": "Rio de Janeiro, Brasil"
@@ -24,8 +24,8 @@
       "pt": "Sou o Felipe. Construo software de sistemas: runtimes, redes, combate em jogos. Estudo como eles quebram. Em laboratório. De propósito."
     },
     "summary": {
-      "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them — and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
-      "pt": "Sou engenheiro de software no Rio de Janeiro e aprendo sistemas construindo — e quebrando em laboratório isolado. Atuo em serviços backend, runtimes Rust com IA local, infraestrutura de releases, pesquisa em sistemas distribuídos e gameplay no Roblox, atualmente em sistemas de combate no NEXUS. Rendo melhor onde há ownership real: times pequenos, restrições duras e código que precisa conquistar confiança. Em preparação para o OSCP, busco vagas em engenharia de software, backend, sistemas e segurança de aplicações."
+      "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
+      "pt": "Sou engenheiro de software no Rio de Janeiro e aprendo sistemas construindo e quebrando em laboratório isolado. Atuo em serviços backend, runtimes Rust com IA local, infraestrutura de releases, pesquisa em sistemas distribuídos e gameplay no Roblox, atualmente em sistemas de combate no NEXUS. Rendo melhor onde há ownership real: times pequenos, restrições duras e código que precisa conquistar confiança. Em preparação para o OSCP, busco vagas em engenharia de software, backend, sistemas e segurança de aplicações."
     },
     "profiles": {
       "github": "https://github.com/edtw",
@@ -71,7 +71,7 @@
         "en": "Unify consensus, networking, and distributed ML into one coherent Rust workspace without losing operability.",
         "pt": "Unificar consenso, rede e ML distribuído em um único workspace Rust sem perder operabilidade."
       },
-      "evidence": "Rust 2024 workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker",
+      "evidence": "Rust workspace · Tokio · Axum · SQLx/PostgreSQL · Candle · DHT/mesh · PoA chain · Docker",
       "order": 2,
       "track": "SYSTEMS",
       "codename": "MESH LEDGER",
@@ -111,14 +111,14 @@
         "pt": "RUST · ENGENHARIA DE SISTEMAS · RUNTIME LOCAL DE IA"
       },
       "summary": {
-        "en": "Modular Rust 2021 runtime for constrained environments. Feature-gated architecture with optional no_std, custom allocator (4 KiB pages, sharded heap, ephemeral scopes), fixed 256-slot one-shot SecureDispatcher, read-only memory-mapped IO, closed HostOp ISA with session workers, and automated architecture validation in CI. Local AI execution model: TokenEngine trait decoupling numeric decisions from actions; local GGUF via Candle with memory-mapped and in-memory model loading, quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback; M35 TinyML VM with canonical 64-byte header, fixed-length opcodes, full tape validation, budgets, offline assembler/trainer and synthetic fixtures; MRE1 zero-copy product-envelope parser with canonical ordering and policy rules.",
-        "pt": "Runtime modular em Rust 2021 para ambientes restritos. Arquitetura por features com no_std opcional, alocador customizado (páginas de 4 KiB, heap fragmentado, escopos efêmeros), SecureDispatcher fixo de 256 slots one-shot, IO com memory-map somente leitura, ISA fechada HostOp com session workers e validação automatizada da arquitetura no CI. Execução local de IA: trait TokenEngine separando decisões numéricas de ações; GGUF local via Candle com mmap e carregamento em memória, modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso; VM TinyML M35 com header canônico de 64 bytes, opcodes de tamanho fixo, validação completa da tape, orçamentos, assembler/trainer offline e fixtures sintéticas; parser zero-copy de envelopes MRE1 com ordenação canônica e regras de política."
+        "en": "Modular Rust runtime for constrained environments. Feature-gated architecture with optional no_std, custom allocator (4 KiB pages, sharded heap, ephemeral scopes), fixed 256-slot one-shot SecureDispatcher, read-only memory-mapped IO, closed HostOp ISA with session workers, and automated architecture validation in CI. Local AI execution model: TokenEngine trait decoupling numeric decisions from actions; local GGUF via Candle with memory-mapped and in-memory model loading, quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback; M35 TinyML VM with canonical 64-byte header, fixed-length opcodes, full tape validation, budgets, offline assembler/trainer and synthetic fixtures; MRE1 zero-copy product-envelope parser with canonical ordering and policy rules.",
+        "pt": "Runtime modular em Rust para ambientes restritos. Arquitetura por features com no_std opcional, alocador customizado (páginas de 4 KiB, heap fragmentado, escopos efêmeros), SecureDispatcher fixo de 256 slots one-shot, IO com memory-map somente leitura, ISA fechada HostOp com session workers e validação automatizada da arquitetura no CI. Execução local de IA: trait TokenEngine separando decisões numéricas de ações; GGUF local via Candle com mmap e carregamento em memória, modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso; VM TinyML M35 com header canônico de 64 bytes, opcodes de tamanho fixo, validação completa da tape, orçamentos, assembler/trainer offline e fixtures sintéticas; parser zero-copy de envelopes MRE1 com ordenação canônica e regras de política."
       },
       "challenge": {
         "en": "Unify low-level memory control, local inference, transport, and trust boundaries without turning the runtime into a monolith.",
         "pt": "Unificar controle de memória em baixo nível, inferência local, transporte e limites de confiança sem criar um monolito."
       },
-      "evidence": "Rust 2021 · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
+      "evidence": "Rust · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
       "order": 1,
       "track": "SYSTEMS",
       "codename": "LOCAL MIND",
@@ -165,7 +165,7 @@
         "en": "Keep licensing, configuration delivery, execution, and diagnostics isolated, versioned, and fail-closed across platforms.",
         "pt": "Manter licenciamento, entrega de configuração, execução e diagnóstico isolados, versionados e fail-closed entre plataformas."
       },
-      "evidence": "C++17 · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery",
+      "evidence": "C++ · CMake · FastAPI · Pydantic · AES-GCM · versioned JSON schemas · pytest integration tests · manual lab battery",
       "order": 3,
       "track": "SECURITY",
       "codename": "GATED AGENT",
@@ -355,17 +355,17 @@
   ],
   "securityResearch": {
     "title": {
-      "en": "Offensive Security Research — Isolated Lab Only",
-      "pt": "Pesquisa em Segurança Ofensiva — Somente Laboratório Isolado"
+      "en": "Offensive Security Research, Isolated Lab Only",
+      "pt": "Pesquisa em Segurança Ofensiva, Somente Laboratório Isolado"
     },
     "intro": {
-      "en": "Hands-on security research conducted for education, defense, and authorized testing only. Work emphasizes understanding operating-system behavior, binary and protocol analysis, and defensive detection — not operational tooling. Sensitive implementations stay private; public discussion is limited to concepts, boundaries, and defensive outcomes.",
-      "pt": "Pesquisa prática em segurança conduzida somente para educação, defesa e testes autorizados. O foco é compreender comportamento de sistemas operacionais, análise binária e de protocolos e detecção defensiva — não ferramentação operacional. Implementações sensíveis permanecem privadas; a discussão pública se limita a conceitos, limites e resultados defensivos."
+      "en": "Hands-on security research conducted for education, defense, and authorized testing only. Work emphasizes understanding operating-system behavior, binary and protocol analysis, and defensive detection, not operational tooling. Sensitive implementations stay private; public discussion is limited to concepts, boundaries, and defensive outcomes.",
+      "pt": "Pesquisa prática em segurança conduzida somente para educação, defesa e testes autorizados. O foco é compreender comportamento de sistemas operacionais, análise binária e de protocolos e detecção defensiva, não ferramentação operacional. Implementações sensíveis permanecem privadas; a discussão pública se limita a conceitos, limites e resultados defensivos."
     },
     "areas": [
       {
-        "en": "Windows internals and binary analysis in isolated VMs — studying telemetry to learn what defenders should log",
-        "pt": "Windows internals e análise binária em VMs isoladas — estudando telemetria para saber o que defensores devem registrar"
+        "en": "Windows internals and binary analysis in isolated VMs, studying telemetry to learn what defenders should log",
+        "pt": "Windows internals e análise binária em VMs isoladas, estudando telemetria para saber o que defensores devem registrar"
       },
       {
         "en": "Protocol and app-behavior review, including hypothesis-driven API assessments under explicit authorization",
@@ -405,12 +405,12 @@
   },
   "certifications": [
     {
-      "en": "OSCP (Offensive Security Certified Professional) — in progress, self-study with lab practice",
-      "pt": "OSCP (Offensive Security Certified Professional) — em andamento, estudo com prática em laboratório"
+      "en": "OSCP (Offensive Security Certified Professional), in progress through self-study and lab practice",
+      "pt": "OSCP (Offensive Security Certified Professional), em andamento com estudo e prática em laboratório"
     },
     {
-      "en": "TryHackMe — active learner, ongoing rooms across red-team and blue-team tracks",
-      "pt": "TryHackMe — aprendizado ativo, rooms contínuos nas trilhas red-team e blue-team"
+      "en": "TryHackMe, active learner across red-team and blue-team tracks",
+      "pt": "TryHackMe, aprendizado ativo nas trilhas red-team e blue-team"
     }
   ],
   "extras": {

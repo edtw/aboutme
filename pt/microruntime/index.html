@@ -3,74 +3,99 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Demonstração pública e sanitizada do Micro Runtime: IA local com GGUF, VM TinyML M35 e envelopes MRE1." />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="description" content="Estudo de sistemas sanitizado sobre IA local limitada, orçamentos TinyML, envelopes canônicos e limites de confiança explícitos." />
+  <meta name="theme-color" content="#090b0a" />
   <link rel="canonical" href="https://edtw.github.io/aboutme/pt/microruntime/" />
-  <link rel="alternate" hreflang="en" href="https://edtw.github.io/aboutme/" />
-  <meta property="og:title" content="Micro Runtime: Demonstração pública | Felipe Lemos" />
-  <meta property="og:description" content="Demonstração pública e sanitizada do Micro Runtime: IA local com GGUF, VM TinyML M35 e envelopes MRE1." />
+  <link rel="alternate" hreflang="en" href="https://edtw.github.io/aboutme/microruntime/" />
+  <link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/microruntime/" />
+  <meta property="og:title" content="Micro Runtime | Estudo de caso publico" />
+  <meta property="og:description" content="Estudo de sistemas sanitizado sobre IA local limitada, orçamentos TinyML, envelopes canônicos e limites de confiança explícitos." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edtw.github.io/aboutme/pt/microruntime/" />
   <meta property="og:locale" content="pt_BR" />
-  <title>Micro Runtime: Demonstração pública | Felipe Lemos</title>
+  <meta property="og:image" content="https://edtw.github.io/aboutme/assets/social-card.png" />
+  <meta property="og:image:alt" content="YUEE systems engineering portfolio" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Micro Runtime | Estudo de caso publico</title>
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
-  <link rel="stylesheet" href="../../assets/css/resume.css" media="print" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe \"Yuee\" Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
     <link rel="stylesheet" href="../../assets/css/showcase.css" />
   </head>
-  <body>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
-<a class="skip-link" href="#main">Skip to content</a>
+  <body id="top">
+    <div class="screen-texture" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
     <header class="site-header">
-      <a class="monogram" href="../../#top" aria-label="Felipe Lemos home">FL</a>
-      <nav aria-label="Navegação principal">
-        <a href="../../pt/#work">[Projetos]</a>
-        <a href="../../pt/#security">[Segurança]</a>
-        <a href="../../pt/#resume">[Currículo]</a>
-        <a href="../../pt/#contact">[Contato]</a>
+      <a class="brand" href="../../pt/#top" aria-label="Felipe Yuee Lemos home">
+        <span class="brand-mark">YUEE.SYS</span>
+        <span class="route-label">/ Micro Runtime</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+          <a href="../../pt/#work">Projetos</a>
+          <a href="../../pt/#profile">Perfil</a>
+          <a href="../../pt/#security">Segurança</a>
+          <a href="../../pt/#resume">Currículo</a>
+          <a href="../../pt/#contact">Contato</a>
       </nav>
       <div class="header-actions">
-        <a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a class="lang-link" href="../../" hreflang="en" aria-label="Mudar para inglês">EN</a>
+        <a class="network-link" href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="lang-link" href="../../microruntime/" hreflang="en" aria-label="Switch to English">EN</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Navegação móvel"><a href="../../pt/#work">Projetos</a>
+          <a href="../../pt/#profile">Perfil</a>
+          <a href="../../pt/#security">Segurança</a>
+          <a href="../../pt/#resume">Currículo</a>
+          <a href="../../pt/#contact">Contato</a></nav>
+        </details>
       </div>
     </header>
-    <main id="main" class="showcase">
-      <div class="dither" aria-hidden="true"></div>
-      <p class="section-index"><a href="../../pt/">← Felipe Lemos</a> · Demonstração técnica pública · Subconjunto sanitizado. Sem código privado.</p>
-      <h1>Micro Runtime <em>executa IA localmente.</em></h1>
-      <p class="lede">Runtime modular em Rust para ambientes restritos. Esta página mostra só ideias seguras: como a saída numérica vira ações limitadas, como modelos minúsculos respeitam orçamentos, como envelopes mantêm artefatos canônicos.</p>
-      <div class="showcase-grid">
-        <article><span>01</span><h2>Plano de decisão, não piloto automático</h2><p>Um trait mínimo TokenEngine retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo de 256 slots one-shot invoca um handler HostOp fechado. Saída probabilística nunca vira autoridade ambiente.</p><pre><code>trait TokenEngine {
-  fn infer_next_token(&amp;self, input: &amp;[u32]) -&gt; u32;
-  fn reset(&amp;mut self);
-}
-// bridge: model_token -&gt; dispatch_token -&gt; HostOp
-// dispatcher: one-shot, fixed 256 slots, closed enum</code></pre></article>
-        <article><span>02</span><h2>GGUF local, explícito e previsível</h2><p>Carregamento via mmap ou totalmente em memória (sem escrita em disco), modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso, decodificação restrita a vocabulário de dígitos e buffers zerados no drop.</p><pre><code>MICRO_RUNTIME_GGUF=/models/qwen3-0.6b-q4_k_m.gguf
-# missing model =&gt; None (no silent fallback)
-# think budget default 2048, act budget 32 digits</code></pre></article>
-        <article><span>03</span><h2>M35 TinyML VM</h2><p>Header canônico de 64 bytes, opcodes de tamanho fixo (FC_W8A8, ADD_RQ, LUT8, ARGMAX, END), validação completa da tape (spans, aliasing, quantização, ordem, orçamentos), apenas int8, sem heap, sem float, sem grafo. Assembler e trainer offline geram imagens byte-idênticas com manifests SHA; publicamente, apenas fixtures sintéticas.</p><pre><code>MAGIC M35\0 · VERSION 1 · HEADER 64B
-MAX_OPS 4096 · MAX_ARENA 16MiB · budgets enforced
-tape: ARGMAX penultimate, END last</code></pre></article>
-        <article><span>04</span><h2>MRE1 envelopes</h2><p>Header de 144 bytes + até 256 registros de 80 bytes + trailer de 104 bytes. Ordem canônica, tamanhos, campos zero-reserved e regras cruzadas de autoridade. Views emprestadas zero-copy; confiança (assinaturas, contadores) fica no bootstrap, nunca no parser.</p></article>
-        <article><span>05</span><h2>Disciplina de memória</h2><p>Alocador global customizado com páginas de 4 KiB, heap fragmentado e escopos efêmeros; maps somente leitura sem follow; dispatch one-shot que limpa buffers. O CI impõe formatação, inventário de arquitetura, testes e limites de tamanho.</p></article>
-        <article><span>06</span><h2>O que fica deliberadamente de fora</h2><p>Sem pesos, chaves, certificados, transportes, mixnet, kernel, drivers, C2 ou evasão. Sem código privado. Esta demonstração é uma explicação original de conceitos públicos, não um release do runtime privado.</p><a class="primary-link" href="../../resume/pt-detailed.html">Ver detalhe no currículo →</a></article>
+    <main id="main" class="showcase" tabindex="-1">
+      <div class="showcase-intro">
+        <p class="section-index"><span>CASE / 001</span>Registro tecnico publico</p>
+        <p class="kicker"><span class="status-dot"></span>SANITIZADO / NIVEL DE ARQUITETURA</p>
+        <h1>Micro Runtime <span>executa IA com limites rigidos.</span></h1>
+        <p class="lede">Runtime modular em Rust para ambientes restritos. Saída numérica de modelos vira ações limitadas, modelos pequenos respeitam orçamentos declarados e parsers de artefatos ficam separados das decisões de confiança.</p>
+        <div class="runtime-diagram" role="img" aria-label="Fluxo do Micro Runtime, da saída limitada do modelo ao dispatch de tokens e operações fechadas do host">
+    <div class="diagram-head"><span>TRACE / 001</span><span>BOUNDARIES: ACTIVE</span></div>
+    <div class="diagram-flow">
+      <div><small>01</small><strong>MODELO LOCAL</strong><span>GGUF / M35</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>02</small><strong>TOKEN ENGINE</strong><span>u32 / budgeted</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>03</small><strong>DISPATCH</strong><span>one-shot / 256</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>04</small><strong>HOST OP</strong><span>closed enum</span></div>
+    </div>
+    <div class="budget-line"><span>MEMORY</span><b></b><strong>HARD LIMIT</strong></div>
+  </div>
       </div>
-      <section class="demo" aria-label="Demo interativa de orçamento TinyML">
-        <h2>Teste a lógica de orçamento</h2>
-        <p>Uma simulação mínima em JS da imposição de orçamentos estilo M35. Sem modelo, sem código privado. Só a ideia de que tapes grandes falham fechadas.</p>
-        <label>ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
-        <label>arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
-        <button id="demo-run" type="button">Validar tape</button>
-        <p id="demo-out" role="status"></p>
+      <div class="case-register">
+        <article><span>01 / AUTHORITY</span><h2>Plano de decisão, não piloto automático</h2><p>Um TokenEngine mínimo retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo one-shot invoca um handler HostOp fechado. Saída probabilística nunca recebe autoridade ambiente.</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
+dispatcher: one-shot / 256 slots / closed enum</code></pre></article>
+        <article><span>02 / LOCAL MODEL</span><h2>Resolução explícita de modelo</h2><p>Carregamento via mmap ou em memória, inferência quantizada em CPU, decodificação restrita e nenhum fallback silencioso quando falta um modelo.</p><pre><code>MODEL=/models/local.gguf
+missing model =&gt; None
+act budget =&gt; 32 digits</code></pre></article>
+        <article><span>03 / TINYML</span><h2>M35 VM</h2><p>Um header canônico e opcodes de tamanho fixo são validados integralmente antes da execução. A VM usa operações int8, sem heap, sem ponto flutuante e com limites rígidos para operações e arena.</p><pre><code>HEADER 64B / MAX_OPS 4096
+MAX_ARENA 16MiB / END required</code></pre></article>
+        <article><span>04 / FORMAT</span><h2>MRE1 envelopes</h2><p>Ordem canonica, registros limitados, campos reservados e views zero-copy. Confianca em assinaturas e contadores fica no bootstrap, nao no parser.</p></article>
+        <article><span>05 / MEMORY</span><h2>Disciplina de memória</h2><p>Alocador baseado em páginas, heap fragmentado, escopos efêmeros, maps somente leitura e limpeza de buffers tornam decisões de recurso e lifetime visíveis.</p></article>
+        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>Deliberadamente excluído</h2><p>Sem pesos, chaves, certificados, código privado, transportes, kernel, infraestrutura de comando ou material de evasão. Esta é uma explicação original de conceitos seguros, não um release do runtime.</p></article>
+      </div>
+      <section class="demo" data-lang="pt" aria-labelledby="demo-title">
+        <div><span>INTERACTIVE CHECK / M35</span><h2 id="demo-title">Validar um orçamento</h2><p>Apenas uma simulação no navegador. Máximo de 64 operações e 256 KiB nesta demonstração.</p></div>
+        <form class="demo-controls" onsubmit="return false">
+          <label for="demo-ops">ops <input id="demo-ops" type="number" value="64" min="1" max="5000" /></label>
+          <label for="demo-arena">arena_kb <input id="demo-arena" type="number" value="256" min="1" max="16384" /></label>
+          <button id="demo-run" type="button">Validar tape</button>
+        </form>
+        <p id="demo-out" class="demo-output" role="status" aria-live="polite">AGUARDANDO ENTRADA</p>
       </section>
+      <a class="back-link" href="../../pt/#work">← Voltar aos projetos</a>
     </main>
-    <footer class="statusbar"><span>● CONECTADO · Felipe Lemos · Micro Runtime demonstração pública</span><span>© 2026</span></footer>
+    <footer class="statusbar"><span><i></i>CASO ONLINE / Micro Runtime</span><span>Somente conceitos seguros.</span><span>2026</span></footer>
     <script src="../../assets/js/site.js"></script>
     <script src="../../assets/js/showcase-demo.js"></script>
   </body>

@@ -4,213 +4,275 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="I'm Felipe. I build systems software: runtimes, networks, game combat. I study how they break. In a lab. On purpose." />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#090b0a" />
   <link rel="canonical" href="https://edtw.github.io/aboutme/" />
-  <link rel="alternate" hreflang="pt-BR" href="https://edtw.github.io/aboutme/pt/" /><link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/" />
-  <meta property="og:title" content="Felipe Lemos | Software Engineer" />
+  <link rel="alternate" hreflang="pt-BR" href="https://edtw.github.io/aboutme/pt/" />
+  <link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/" />
+  <meta property="og:title" content="Felipe &quot;Yuee&quot; Lemos | Systems Software Engineer" />
   <meta property="og:description" content="I'm Felipe. I build systems software: runtimes, networks, game combat. I study how they break. In a lab. On purpose." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edtw.github.io/aboutme/" />
   <meta property="og:locale" content="en_US" />
-  <title>Felipe Lemos | Software Engineer</title>
+  <meta property="og:image" content="https://edtw.github.io/aboutme/assets/social-card.png" />
+  <meta property="og:image:alt" content="YUEE systems engineering portfolio" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Felipe &quot;Yuee&quot; Lemos | Systems Software Engineer</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="assets/css/resume.css" media="print" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe \"Yuee\" Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Rust","Python","TypeScript","C++","Security Engineering","Roblox Studio","Local AI inference","Distributed systems"]}</script>
   </head>
-  <body>
-    <div class="grain" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
+  <body id="top">
+    <div class="screen-texture" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="monogram" href="#top" aria-label="Felipe Lemos home">FL</a>
-      <nav aria-label="Main navigation">
-        <a href="#work">[Work]</a>
-        <a href="#security">[Security]</a>
-        <a href="#resume">[Résumé]</a>
-        <a href="#contact">[Contact]</a>
+      <a class="brand" href="#top" aria-label="Felipe Yuee Lemos home">
+        <span class="brand-mark">YUEE.SYS</span>
+        <span class="route-label">/ Portfolio</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="#work">Work</a>
+          <a href="#profile">Profile</a>
+          <a href="#security">Security</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
       </nav>
       <div class="header-actions">
-        <a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a class="lang-link" href="pt/" hreflang="pt-BR" aria-label="Switch to Portuguese">PT</a>
+        <a class="network-link" href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="lang-link" href="pt/" hreflang="pt-BR" aria-label="Mudar para português">PT</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation"><a href="#work">Work</a>
+          <a href="#profile">Profile</a>
+          <a href="#security">Security</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a></nav>
+        </details>
       </div>
     </header>
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="dither" aria-hidden="true"></div>
-        <div class="hero-graphic" aria-hidden="true">
-          <svg viewBox="0 0 1200 450" preserveAspectRatio="none">
-            <defs>
-              <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M 18 0 L 0 0 0 18" fill="none" stroke="currentColor" stroke-width="0.45" /></pattern>
-              <radialGradient id="orb"><stop offset="0" stop-color="#c8fa4e" stop-opacity=".35"/><stop offset="1" stop-color="#c8fa4e" stop-opacity="0"/></radialGradient>
-            </defs>
-            <rect x="100" y="60" width="300" height="250" fill="url(#grid)" />
-            <rect x="800" y="60" width="300" height="250" fill="url(#grid)" />
-            <path d="M0 275 C90 275 90 215 160 215 S245 320 330 270 420 255 500 280 580 180 650 245 740 330 815 240 910 230 970 275 1100 250 1200 250" fill="none" stroke="currentColor" stroke-width="2" />
-            <path d="M0 295 C100 295 100 255 175 255 S250 335 340 290 440 285 520 300 610 225 685 275 750 330 830 275 930 270 1000 295 1120 275 1200 275" fill="none" stroke="currentColor" stroke-opacity=".35" />
-            <circle cx="250" cy="180" r="90" fill="none" stroke="currentColor" /><circle cx="950" cy="180" r="90" fill="none" stroke="currentColor" />
-            <circle cx="250" cy="180" r="46" fill="#0b0b0c" stroke="currentColor" /><circle cx="950" cy="180" r="46" fill="#0b0b0c" stroke="currentColor" />
-            <circle cx="360" cy="82" r="70" fill="url(#orb)" /><circle cx="840" cy="82" r="70" fill="url(#orb)" />
-          </svg>
-        </div>
+        <pre class="ascii-bg" aria-hidden="true">┌─ YUEE / OPERATIONS ───────────────────────────────────────────────────────┐
+│ INPUT  >  CONSTRAINT  >  BUILD  >  VERIFY  >  SHIP                      │
+│                                                                          │
+│  RUNTIME      [ MEMORY / LOCAL AI / TRUST ]                              │
+│  NETWORK      [ ROUTING / STATE / COMPUTE ]                              │
+│  PRODUCT      [ CONCURRENCY / OPERATIONS ]                               │
+│  GAMEPLAY     [ COMBAT / FEEDBACK / ITERATION ]                          │
+│                                                                          │
+│ STATUS: OPEN TO WORK                                           │
+└──────────────────────────────────────────────────────────────────────────┘</pre>
+        <div class="hero-rail" aria-hidden="true"><span>OPERATOR / 01</span><span>RJ.BR / UTC-3</span></div>
         <div class="hero-center">
-          <p class="kicker">Rio de Janeiro, Brazil <span>/</span> Open to opportunities<span class="cursor" aria-hidden="true">▊</span></p>
-          <h1 id="hero-title">Felipe Lemos</h1>
-          <p class="hero-role">Software Engineer &amp; Roblox Developer</p>
+          <p class="kicker"><span class="status-dot"></span>Rio de Janeiro / Open to work</p>
+          <p class="identity-mark" aria-hidden="true">YUEE</p>
+          <h1 id="hero-title">Felipe <span>"Yuee"</span> Lemos</h1>
+          <p class="hero-role">Systems Software Engineer / Roblox Developer</p>
           <p class="hero-statement">I'm Felipe. I build systems software: runtimes, networks, game combat. I study how they break. In a lab. On purpose.</p>
           <div class="hero-links">
-            <a class="primary-link" href="#work">See work ↓</a>
-            <a href="resume/en.html">Résumé ↗</a>
+            <a class="button button-primary" href="#work">Inspect work <span aria-hidden="true">↓</span></a>
+            <a class="button" href="resume/en.html">Open resume <span aria-hidden="true">↗</span></a>
           </div>
-          <ul class="stat-strip" aria-label="Numbers">
-            <li><strong>07</strong><span>case studies</span></li>
-            <li><strong>02</strong><span>locales</span></li>
-            <li><strong>04</strong><span>PDF résumés</span></li>
-            <li><strong>NEXUS</strong><span>live now</span></li>
-          </ul>
         </div>
-        <div class="hero-footer"><span>EST. 2020</span><span>SOFTWARE / SYSTEMS / SECURITY / GAMES</span><span>22°54'S 43°12'W</span></div>
-      </section>
-
-      <section class="profile section" id="profile">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-index">00 / <span>Profile</span></p>
-            <h2>Close to the machine.<br /><em>Close to people.</em></h2>
-          </div>
-          <p class="lead">I write software in Rio de Janeiro. I work close to the machine: Rust, C++, Windows internals. I ship things people touch: a POS, AI services, a Roblox arena.</p>
-          <div class="trio">
-            <div><h3>Build</h3><p>Small systems that carry real workloads.</p></div>
-            <div><h3>Break</h3><p>Abuse it in the lab before reality does.</p></div>
-            <div><h3>Harden</h3><p>Document the limits. Leave it easier to run.</p></div>
-          </div>
-          <div class="toolbox">
-            <div class="tool-group"><span>Backend &amp; product engineering</span><p>TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO</p></div>
-            <div class="tool-group"><span>Systems &amp; infrastructure</span><p>Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus</p></div>
-            <div class="tool-group"><span>Security engineering</span><p>Reverse engineering · AppSec · network analysis · cryptography · authorized testing</p></div>
-            <div class="tool-group"><span>AI &amp; interactive technology</span><p>Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau</p></div>
-          </div>
-          <p class="now-line"><span>NOW</span> → <a href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">NEXUS</a> · combat gameplay in Roblox Studio</p>
-        </div>
+        <div class="hero-footer"><span>RUNTIMES</span><span>NETWORKS</span><span>SECURITY</span><span>GAMEPLAY</span></div>
       </section>
 
       <section class="work section" id="work">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-index">01 / <span>Selected work</span></p>
-            <h2>Seven things <em>I built.</em></h2>
+          <div class="section-heading reveal">
+            <p class="section-index"><span>01</span>Selected work</p>
+            <h2>Systems under <span>real constraints.</span></h2>
+            <p>Architecture, implementation, and the evidence that connects them.</p>
           </div>
-          <div class="filters" role="group" aria-label="Filter projects">
-            <button type="button" data-filter="ALL" aria-pressed="true" class="active">[ALL]</button>
-            <button type="button" data-filter="SYSTEMS" aria-pressed="false">[SYSTEMS]</button>
-            <button type="button" data-filter="PRODUCT" aria-pressed="false">[PRODUCT]</button>
-            <button type="button" data-filter="SECURITY" aria-pressed="false">[SECURITY]</button>
-            <button type="button" data-filter="GAMES" aria-pressed="false">[GAMES]</button>
-          </div>
-          <div class="work-grid">
 
-            <article class="work-card" data-track="SYSTEMS">
-              <div class="work-top"><span>[01]</span><span class="track">SYSTEMS</span><span class="codename">LOCAL MIND</span></div>
+          <article class="flagship work-item reveal" data-track="SYSTEMS">
+            <div class="flagship-copy">
+              <div class="work-top"><span>00 / FLAGSHIP</span><span>SYSTEMS</span><span>LOCAL MIND</span></div>
+              <p class="eyebrow">RUST / CONSTRAINED COMPUTE</p>
               <h3>Micro Runtime</h3>
-              <p class="oneliner">A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.</p>
-              <p class="stack">Rust · no_std · Candle · GGUF · TinyML · Wasm</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Architecture, allocator, local-AI execution</dd></div><div><dt>FOCO</dt><dd>Memory budgets, TinyML, no silent fallbacks</dd></div></dl>
-              <a class="work-link" href="microruntime/">Open showcase →</a>
-            </article>
-            <article class="work-card" data-track="SYSTEMS">
-              <div class="work-top"><span>[02]</span><span class="track">SYSTEMS</span><span class="codename">MESH LEDGER</span></div>
-              <h3>Karma Network <small>· Spirix</small></h3>
-              <p class="oneliner">A Rust mesh network with its own chain and distributed compute. I work on the networking and agent crates.</p>
-              <p class="stack">Rust · Tokio · Axum · SQLx · Candle · DHT</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Networking + agent crates in a 700-commit monorepo</dd></div><div><dt>FOCO</dt><dd>DHT overlay, DAG sync, federated primitives</dd></div></dl>
+              <p class="flagship-lede">A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.</p>
+              <dl>
+                <div><dt>PROBLEM</dt><dd>Unify low-level memory control, local inference, transport, and trust boundaries without turning the runtime into a monolith.</dd></div>
+                <div><dt>BUILT</dt><dd>Architecture, allocator, local-AI execution</dd></div>
+                <div><dt>BOUNDARY</dt><dd>Memory budgets, TinyML, no silent fallbacks</dd></div>
+              </dl>
+              <a class="work-link" href="microruntime/">Inspect case study <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="runtime-diagram" role="img" aria-label="Micro Runtime flow from bounded model output through token dispatch to closed host operations">
+    <div class="diagram-head"><span>TRACE / 001</span><span>BOUNDARIES: ACTIVE</span></div>
+    <div class="diagram-flow">
+      <div><small>01</small><strong>LOCAL MODEL</strong><span>GGUF / M35</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>02</small><strong>TOKEN ENGINE</strong><span>u32 / budgeted</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>03</small><strong>DISPATCH</strong><span>one-shot / 256</span></div>
+      <i aria-hidden="true">&gt;</i>
+      <div><small>04</small><strong>HOST OP</strong><span>closed enum</span></div>
+    </div>
+    <div class="budget-line"><span>MEMORY</span><b></b><strong>HARD LIMIT</strong></div>
+  </div>
+          </article>
 
-            </article>
-            <article class="work-card" data-track="SECURITY">
-              <div class="work-top"><span>[03]</span><span class="track">SECURITY</span><span class="codename">GATED AGENT</span></div>
-              <h3>ESTH: Enterprise Scripting &amp; Telemetry Host</h3>
-              <p class="oneliner">A licensed telemetry agent for an authorized game client. Encrypted config, fail-closed by design.</p>
-              <p class="stack">C++ · CMake · FastAPI · AES-GCM · pytest</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Agent, backend sync, integration tests</dd></div><div><dt>FOCO</dt><dd>Local IPC, encrypted delivery, fail-closed</dd></div></dl>
-
-            </article>
-            <article class="work-card" data-track="GAMES">
-              <div class="work-top"><span>[04]</span><span class="track">GAMES</span><span class="codename">ARENA BUILD</span></div>
-              <h3>NEXUS</h3>
-              <p class="oneliner">Combat gameplay on a live Roblox arena. Characters, abilities, iteration with real players.</p>
-              <p class="stack">Roblox Studio · Luau · live ops</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Gameplay developer, live iteration</dd></div><div><dt>FOCO</dt><dd>Combat systems, abilities, player feel</dd></div></dl>
-              <a class="work-link" href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">See it live ↗</a>
-            </article>
-            <article class="work-card" data-track="PRODUCT">
-              <div class="work-top"><span>[05]</span><span class="track">PRODUCT</span><span class="codename">TABLE SYNC</span></div>
-              <h3>Marambaia PDV</h3>
-              <p class="oneliner">A restaurant POS with real-time orders. I fixed the race conditions, not just found them.</p>
-              <p class="stack">React · Node.js · MongoDB · Socket.IO</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Full-stack build + concurrency fixes</dd></div><div><dt>FOCO</dt><dd>Real-time orders, QR flows, cash consistency</dd></div></dl>
-
-            </article>
-            <article class="work-card" data-track="SYSTEMS">
-              <div class="work-top"><span>[06]</span><span class="track">SYSTEMS</span><span class="codename">RELEASE RAIL</span></div>
-              <h3>Airshipper</h3>
-              <p class="oneliner">Release infrastructure: a Rust launcher serving versioned builds to three OSes. (Upstream: Veloren.)</p>
-              <p class="stack">Rust · Iced · Tokio · SQLx · CI</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Fork customization, release channels</dd></div><div><dt>FOCO</dt><dd>Artifact mapping, multi-OS packaging</dd></div></dl>
-
-            </article>
-            <article class="work-card" data-track="PRODUCT">
-              <div class="work-top"><span>[07]</span><span class="track">PRODUCT</span><span class="codename">FALLBACK BUS</span></div>
-              <h3>Prisma Platform</h3>
-              <p class="oneliner">WhatsApp + AI behind one API. Swappable providers, managed sessions, all containerized.</p>
-              <p class="stack">Next.js · FastAPI · PostgreSQL · Redis · Docker</p>
-              <dl class="roles"><div><dt>ROLE</dt><dd>Service boundaries, provider fallback</dd></div><div><dt>FOCO</dt><dd>Messaging, intent detection, containers</dd></div></dl>
-
-            </article>
+          <div class="work-toolbar reveal">
+            <div class="filters" role="group" aria-label="Filter projects">
+              <button type="button" data-filter="ALL" aria-pressed="true" class="active">ALL WORK</button>
+              <button type="button" data-filter="SYSTEMS" aria-pressed="false">SYSTEMS</button>
+              <button type="button" data-filter="PRODUCT" aria-pressed="false">PRODUCT</button>
+              <button type="button" data-filter="SECURITY" aria-pressed="false">SECURITY</button>
+              <button type="button" data-filter="GAMES" aria-pressed="false">GAMES</button>
+            </div>
+            <output class="filter-count" aria-live="polite">07 PROJECTS ONLINE</output>
           </div>
-          <p class="fineprint">Private code described at architecture level. Nothing sensitive is published.</p>
+          <div class="work-list">
+            <article class="work-card work-card-major work-item reveal" data-track="SYSTEMS" style="--d:70ms">
+    <div class="work-top"><span>02</span><span>SYSTEMS</span><span>MESH LEDGER</span></div>
+    <div class="work-copy">
+      <h3>Karma Network <small>/ Spirix</small></h3>
+      <p>A Rust mesh network with its own chain and distributed compute. I work on the networking and agent crates.</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Networking + agent crates in a 700-commit monorepo</dd></div>
+      <div><dt>FOCUS</dt><dd>DHT overlay, DAG sync, federated primitives</dd></div>
+    </dl>
+    <p class="stack">Rust · Tokio · Axum · SQLx · Candle · DHT</p>
+    <span class="work-status">PRIVATE CASE STUDY</span>
+  </article>
+            <article class="work-card work-card-major work-item reveal" data-track="GAMES" style="--d:0ms">
+    <div class="work-top"><span>04</span><span>GAMES</span><span>ARENA BUILD</span></div>
+    <div class="work-copy">
+      <h3>NEXUS</h3>
+      <p>Combat gameplay on a live Roblox arena. Characters, abilities, iteration with real players.</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Gameplay developer, live iteration</dd></div>
+      <div><dt>FOCUS</dt><dd>Combat systems, abilities, player feel</dd></div>
+    </dl>
+    <p class="stack">Roblox Studio · Luau · live ops</p>
+    <a class="work-link" href="https://www.roblox.com/pt/games/84720327590325/NEXUS" target="_blank" rel="noreferrer">Open live project <span aria-hidden="true">↗</span></a>
+  </article>
+            <article class="work-card work-card-compact work-item reveal" data-track="SECURITY" style="--d:140ms">
+    <div class="work-top"><span>03</span><span>SECURITY</span><span>GATED AGENT</span></div>
+    <div class="work-copy">
+      <h3>ESTH: Enterprise Scripting &amp; Telemetry Host</h3>
+      <p>A licensed telemetry agent for an authorized game client. Encrypted config, fail-closed by design.</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Agent, backend sync, integration tests</dd></div>
+      <div><dt>FOCUS</dt><dd>Local IPC, encrypted delivery, fail-closed</dd></div>
+    </dl>
+    <p class="stack">C++ · CMake · FastAPI · AES-GCM · pytest</p>
+    <span class="work-status">PRIVATE CASE STUDY</span>
+  </article>
+            <article class="work-card work-card-compact work-item reveal" data-track="PRODUCT" style="--d:70ms">
+    <div class="work-top"><span>05</span><span>PRODUCT</span><span>TABLE SYNC</span></div>
+    <div class="work-copy">
+      <h3>Marambaia PDV</h3>
+      <p>A restaurant POS with real-time orders. I fixed the race conditions, not just found them.</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Full-stack build + concurrency fixes</dd></div>
+      <div><dt>FOCUS</dt><dd>Real-time orders, QR flows, cash consistency</dd></div>
+    </dl>
+    <p class="stack">React · Node.js · MongoDB · Socket.IO</p>
+    <span class="work-status">PRIVATE CASE STUDY</span>
+  </article>
+            <article class="work-card work-card-compact work-item reveal" data-track="SYSTEMS" style="--d:140ms">
+    <div class="work-top"><span>06</span><span>SYSTEMS</span><span>RELEASE RAIL</span></div>
+    <div class="work-copy">
+      <h3>Airshipper</h3>
+      <p>Release infrastructure: a Rust launcher serving versioned builds to three OSes. (Upstream: Veloren.)</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Fork customization, release channels</dd></div>
+      <div><dt>FOCUS</dt><dd>Artifact mapping, multi-OS packaging</dd></div>
+    </dl>
+    <p class="stack">Rust · Iced · Tokio · SQLx · CI</p>
+    <span class="work-status">PRIVATE CASE STUDY</span>
+  </article>
+            <article class="work-card work-card-compact work-item reveal" data-track="PRODUCT" style="--d:0ms">
+    <div class="work-top"><span>07</span><span>PRODUCT</span><span>FALLBACK BUS</span></div>
+    <div class="work-copy">
+      <h3>Prisma Platform</h3>
+      <p>WhatsApp + AI behind one API. Swappable providers, managed sessions, all containerized.</p>
+    </div>
+    <dl>
+      <div><dt>CONTRIBUTION</dt><dd>Service boundaries, provider fallback</dd></div>
+      <div><dt>FOCUS</dt><dd>Messaging, intent detection, containers</dd></div>
+    </dl>
+    <p class="stack">Next.js · FastAPI · PostgreSQL · Redis · Docker</p>
+    <span class="work-status">PRIVATE CASE STUDY</span>
+  </article>
+          </div>
+          <p class="fineprint">Private systems are described at architecture level. Public links and upstream work are labeled directly.</p>
+        </div>
+      </section>
+
+      <section class="profile section" id="profile">
+        <div class="section-inner profile-layout">
+          <div class="section-heading reveal">
+            <p class="section-index"><span>02</span>Operator profile</p>
+            <h2>How I <span>work.</span></h2>
+          </div>
+          <div class="profile-copy reveal">
+            <p class="lead">I build close to the machine, then carry that discipline into products people use.</p>
+            <ol class="principles">
+              <li><span>01</span><div><h3>Start with the boundary</h3><p>Memory, authority, latency, ownership: make the constraint explicit before choosing the abstraction.</p></div></li>
+              <li><span>02</span><div><h3>Test the failure path</h3><p>Use isolated labs and integration tests to learn how a system fails before users have to.</p></div></li>
+              <li><span>03</span><div><h3>Leave operational evidence</h3><p>Ship diagnostics, architecture checks, and documentation with the implementation.</p></div></li>
+            </ol>
+          </div>
+          <div class="toolbox reveal">
+            <div class="tool-group"><span>01 / Backend &amp; product engineering</span><p>TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO</p></div>
+            <div class="tool-group"><span>02 / Systems &amp; infrastructure</span><p>Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus</p></div>
+            <div class="tool-group"><span>03 / Security engineering</span><p>Reverse engineering · AppSec · network analysis · cryptography · authorized testing</p></div>
+            <div class="tool-group"><span>04 / AI &amp; interactive technology</span><p>Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau</p></div>
+          </div>
         </div>
       </section>
 
       <section class="security section" id="security">
         <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-index">02 / <span>Security</span></p>
-            <h2>I can attack.<br /><em>I prefer to defend.</em></h2>
+          <div class="section-heading reveal">
+            <p class="section-index"><span>03</span>Security practice</p>
+            <h2>Research with <span>boundaries.</span></h2>
+            <p>Offensive knowledge applied to defensive engineering, in environments where authorization and scope are explicit.</p>
           </div>
-          <div class="sec-grid">
-            <div><span>01</span><h3>Windows internals</h3><p>Studied in isolated VMs to learn what defenders should log.</p></div>
-            <div><span>02</span><h3>Protocol &amp; API review</h3><p>Hypothesis-driven, authorized, written down.</p></div>
-            <div><span>03</span><h3>Malware fundamentals</h3><p>Loader telemetry, persistence signs, control-plane patterns.</p></div>
-            <div><span>04</span><h3>Detection habit</h3><p>Reproduce it safely, then write the alert.</p></div>
+          <div class="security-console reveal">
+            <div class="console-head"><span>POLICY / LAB-01</span><span class="status-ok">SCOPE VERIFIED</span></div>
+            <div class="sec-grid">
+              <div><span>01</span><h3>Windows internals</h3><p>Studied in isolated VMs to learn what defenders should log.</p></div>
+              <div><span>02</span><h3>Protocol &amp; API review</h3><p>Hypothesis-driven, authorized, written down.</p></div>
+              <div><span>03</span><h3>Malware fundamentals</h3><p>Loader telemetry, persistence signs, control-plane patterns.</p></div>
+              <div><span>04</span><h3>Detection habit</h3><p>Reproduce it safely, then write the alert.</p></div>
+            </div>
+            <p class="rules">Rules: isolated VMs only · authorized targets only · sensitive work stays private.</p>
           </div>
-          <p class="rules">Rules: isolated VMs only · authorized targets only · sensitive work stays private.</p>
         </div>
       </section>
 
       <section class="resumes section" id="resume">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="section-index">03 / <span>Résumé</span></p>
-            <h2>Take <em>the paper.</em></h2>
+        <div class="section-inner resume-layout">
+          <div class="section-heading reveal">
+            <p class="section-index"><span>04</span>Resume</p>
+            <h2>Readable by people.<br><span>Parseable by systems.</span></h2>
           </div>
-          <div class="resume-cards">
-            <div><h3>One page</h3><p>ATS-safe, one column, no gimmicks.</p><a href="resume/en.html">Open ↗</a> <a href="downloads/felipe-lemos-resume-en.pdf" download>PDF ↓</a></div>
-            <div><h3>Detailed</h3><p>ATS-safe, one column, no gimmicks.</p><a href="resume/en-detailed.html">Open ↗</a> <a href="downloads/felipe-lemos-resume-en-detailed.pdf" download>PDF ↓</a></div>
+          <div class="resume-cards reveal">
+            <article><span>01</span><h3>One page</h3><p>Single column, ATS-safe, direct.</p><div><a href="resume/en.html">Open HTML ↗</a><a href="downloads/felipe-lemos-resume-en.pdf" download>PDF ↓</a></div></article>
+            <article><span>02</span><h3>Detailed</h3><p>Single column, ATS-safe, direct.</p><div><a href="resume/en-detailed.html">Open HTML ↗</a><a href="downloads/felipe-lemos-resume-en-detailed.pdf" download>PDF ↓</a></div></article>
           </div>
         </div>
       </section>
 
       <section class="contact section" id="contact">
-        <div class="contact-ornament" aria-hidden="true">✦</div>
-        <p class="section-index">04 / <span>Contact</span></p>
-        <h2>Got a hard <em>system?</em></h2>
-        <p>Software, backend, systems, security, games. Rio de Janeiro, open to work.</p>
-        <div class="contact-links"><a href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/edtw" target="_blank" rel="noreferrer">GitHub ↗</a><a href="resume/en.html">Résumé ↗</a></div>
+        <div class="contact-code" aria-hidden="true">05 / CONNECT</div>
+        <p class="kicker"><span class="status-dot"></span>AVAILABLE FOR THE RIGHT SYSTEM</p>
+        <h2>Let us inspect the <span>problem.</span></h2>
+        <p>Software, backend, systems, security, or gameplay work. Based in Rio de Janeiro.</p>
+        <div class="contact-links"><a class="button button-primary" href="https://www.linkedin.com/in/yuee/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="https://github.com/edtw" target="_blank" rel="noreferrer">GitHub ↗</a></div>
       </section>
     </main>
-    <footer class="statusbar"><span>● CONNECTED · Felipe Lemos · Rio de Janeiro, Brazil</span><span>Security work: education, defense, authorized testing.</span><span>© 2026</span></footer>
+    <footer class="statusbar"><span><i></i>NETWORK READY / Felipe "Yuee" Lemos</span><span>Education, defense, authorized testing.</span><span>2026 / v2.0.0</span></footer>
     <script src="assets/js/site.js"></script>
   </body>
 </html>
