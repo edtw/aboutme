@@ -93,16 +93,25 @@ function header(lang, page, route) {
 }
 
 function asciiBackdrop(lang) {
-  return `<pre class="ascii-bg" aria-hidden="true">┌─ YUEE / OPERATIONS ───────────────────────────────────────────────────────┐
-│ INPUT  >  CONSTRAINT  >  BUILD  >  VERIFY  >  SHIP                      │
-│                                                                          │
-│  RUNTIME      [ MEMORY / LOCAL AI / TRUST ]                              │
-│  NETWORK      [ ROUTING / STATE / COMPUTE ]                              │
-│  PRODUCT      [ CONCURRENCY / OPERATIONS ]                               │
-│  GAMEPLAY     [ COMBAT / FEEDBACK / ITERATION ]                          │
-│                                                                          │
-│ STATUS: ${lang === 'pt' ? 'DISPONIVEL PARA TRABALHO' : 'OPEN TO WORK'}                                           │
-└──────────────────────────────────────────────────────────────────────────┘</pre>`;
+  return `<div class="ascii-console" aria-hidden="true">
+    <div class="ascii-console-head"><span>TTY / YUEE-01</span><span>LIVE SIGNAL</span></div>
+    <pre class="ascii-bg"> __   __  _   _  _____  _____
+ \\ \\ / / | | | || ____|| ____|
+  \\ V /  | | | ||  _|  |  _|
+   | |   | |_| || |___ | |___
+   |_|    \\___/ |_____||_____|
+
+  +--------------------------------+
+  | RUNTIME   MEMORY / LOCAL AI    |
+  | NETWORK   ROUTING / STATE      |
+  | SECURITY  LAB / DEFENSE        |
+  | GAMEPLAY  COMBAT / ITERATION   |
+  +--------------------------------+
+
+  STATUS &gt; ${lang === 'pt' ? 'DISPONIVEL' : 'OPEN TO WORK'}
+  TRACE  &gt; ACTIVE</pre>
+    <div class="ascii-console-foot"><span>RX 011001</span><b></b><span>LAT 00.7</span></div>
+  </div>`;
 }
 
 function runtimeDiagram(lang) {
@@ -179,7 +188,7 @@ ${header(lang, 'portfolio', route)}
         <div class="hero-rail" aria-hidden="true"><span>OPERATOR / 01</span><span>RJ.BR / UTC-3</span></div>
         <div class="hero-center">
           <p class="kicker"><span class="status-dot"></span>${en ? 'Rio de Janeiro / Open to work' : 'Rio de Janeiro / Aberto a oportunidades'}</p>
-          <p class="identity-mark" aria-hidden="true">YUEE</p>
+          <p class="identity-mark" data-text="YUEE" aria-hidden="true">YUEE</p>
           <h1 id="hero-title">Felipe <span>"Yuee"</span> Lemos</h1>
           <p class="hero-role">${en ? 'Systems Software Engineer / Roblox Developer' : 'Engenheiro de Software de Sistemas / Desenvolvedor Roblox'}</p>
           <p class="hero-statement">${esc(desc)}</p>

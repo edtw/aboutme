@@ -62,12 +62,21 @@ test('hero has a focused identity and direct actions', () => {
   for (const file of ['index.html', 'pt/index.html']) {
     const html = read(file);
     assert.ok(html.includes('class="identity-mark"'), `${file} missing identity mark`);
+    assert.ok(html.includes('class="ascii-console"'), `${file} missing ASCII console`);
     assert.ok(html.includes('class="ascii-bg"'), `${file} missing systems backdrop`);
     assert.ok(!html.includes('class="stat-strip"'), `${file} still has implementation stats`);
     const statement = html.match(/<p class="hero-statement">([\s\S]*?)<\/p>/);
     assert.ok(statement && statement[1].length < 220, `${file} hero statement too long`);
     assert.ok(html.includes('href="#work"'), `${file} missing primary work action`);
   }
+});
+
+test('motion system animates identity, ASCII, and technical flow', () => {
+  const css = read('styles.css');
+  for (const animation of ['identity-enter', 'ascii-decode', 'console-scan', 'signal-glitch', 'node-signal', 'signal-scan']) {
+    assert.ok(css.includes(`@keyframes ${animation}`), `missing ${animation} animation`);
+  }
+  assert.ok(css.includes('prefers-reduced-motion'), 'missing reduced motion fallback');
 });
 
 test('social preview uses a crawler-compatible image', () => {
