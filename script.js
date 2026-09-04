@@ -1,11 +1,72 @@
 const translations = {
-  en: {
-    navWork: 'Work', navApproach: 'Approach', navContact: 'Contact', availability: 'Available for the right challenge', heroTitle: 'I build useful systems<br /><em>and understand how they break.</em>', heroLede: 'Software engineer working across product development, security research, automation, and game systems. Based in Rio de Janeiro, Brazil.', seeWork: 'See selected work <span>↘</span>', signalOne: 'Systems thinking', signalTwo: 'Security-minded engineering', signalThree: 'From API to game world', aboutLabel: 'Profile', aboutTitle: 'A generalist by practice,<br /><span>specialist in the details.</span>', aboutP1: 'I work comfortably where disciplines meet: backend services that need to stay coherent under load, security tooling that must understand operating systems, and interactive systems that need to feel immediate.', aboutP2: 'My projects move between Rust, C++, Python, TypeScript, infrastructure, computer vision, and Roblox Studio. The common thread is curiosity followed by implementation: map the system, find the constraint, make the trade-off explicit.', workLabel: 'Selected work', workTitle: 'Built across<br /><span>different worlds.</span>', workIntro: 'A selection of projects that show how I think about architecture, reliability, and the boundary between software and its environment.', microDesc: 'A feature-gated Rust runtime exploration for constrained environments, with no_std support, custom allocation, inference bridges, cryptographic envelopes, telemetry, and automated architecture checks.', pdvDesc: 'A restaurant point-of-sale platform with product and table management, customer QR ordering, cash registers, analytics, backups, access control, and real-time Socket.IO updates.', nexusDesc: 'Current Roblox Studio development on a PvP arena experience built around characters, abilities, visual effects, and strategic combat. A practical space for gameplay systems, iteration, and player experience.', airshipperDesc: 'A customized cross-platform launcher and release server with artifact mapping, GitHub release integration, metrics, database-backed metadata, and multi-platform packaging pipelines.', prismaDesc: 'A multi-service platform direction combining WhatsApp connectivity, AI handlers, provider abstraction, intent detection, analytics, persistence, caching, and Dockerized development.', capLabel: 'Capabilities', cap1Title: 'Software engineering', cap1Desc: 'Backend APIs, full-stack products, real-time features, data models, and service boundaries.', cap2Title: 'Security engineering', cap2Desc: 'Security research, binary and protocol analysis, Windows internals, and tooling for authorized testing.', cap3Title: 'Systems & infrastructure', cap3Desc: 'Rust and C/C++, containers, CI/CD, observability, databases, caching, and platform integration.', cap4Title: 'Creative technology', cap4Desc: 'Roblox gameplay systems, computer vision prototypes, automation, and experiments that become working software.', contactLabel: 'Start a conversation', contactTitle: 'Have a difficult system<br /><em>worth understanding?</em>'
-  },
   pt: {
-    navWork: 'Projetos', navApproach: 'Perfil', navContact: 'Contato', availability: 'Disponivel para o desafio certo', heroTitle: 'Eu construo sistemas uteis<br /><em>e entendo como eles quebram.</em>', heroLede: 'Engenheiro de software atuando entre desenvolvimento de produtos, pesquisa em seguranca, automacao e sistemas de jogos. Baseado no Rio de Janeiro, Brasil.', seeWork: 'Ver projetos <span>↘</span>', signalOne: 'Visao de sistemas', signalTwo: 'Engenharia com mentalidade de seguranca', signalThree: 'Da API ao mundo do jogo', aboutLabel: 'Perfil', aboutTitle: 'Generalista na pratica,<br /><span>especialista nos detalhes.</span>', aboutP1: 'Trabalho confortavelmente na intersecao entre disciplinas: servicos backend que precisam permanecer consistentes sob carga, ferramentas de seguranca que entendem sistemas operacionais e sistemas interativos que precisam responder imediatamente.', aboutP2: 'Meus projetos passam por Rust, C++, Python, TypeScript, infraestrutura, visao computacional e Roblox Studio. O fio condutor e a curiosidade seguida de implementacao: mapear o sistema, encontrar a restricao e tornar as decisoes tecnicas explicitas.', workLabel: 'Projetos selecionados', workTitle: 'Construido em<br /><span>mundos diferentes.</span>', workIntro: 'Uma selecao de projetos que mostra como penso sobre arquitetura, confiabilidade e a fronteira entre o software e o ambiente onde ele roda.', microDesc: 'Exploracao de um runtime Rust modular para ambientes restritos, com suporte a no_std, alocacao customizada, pontes de inferencia, envelopes criptograficos, telemetria e verificacoes automatizadas de arquitetura.', pdvDesc: 'Plataforma de ponto de venda para restaurantes com gestao de produtos e mesas, pedidos por QR Code, caixa, analytics, backups, controle de acesso e atualizacoes em tempo real via Socket.IO.', nexusDesc: 'Desenvolvimento atual em Roblox Studio de uma experiencia PvP de arena com personagens, habilidades, efeitos visuais e combate estrategico. Um espaco pratico para sistemas de gameplay, iteracao e experiencia do jogador.', airshipperDesc: 'Launcher multiplataforma e servidor de releases customizado com mapeamento de artefatos, integracao com releases do GitHub, metricas, metadados em banco e pipelines de empacotamento.', prismaDesc: 'Plataforma orientada a microsservicos combinando conectividade WhatsApp, handlers de IA, abstracao de provedores, deteccao de intencao, analytics, persistencia, cache e desenvolvimento com Docker.', capLabel: 'Competencias', cap1Title: 'Engenharia de software', cap1Desc: 'APIs backend, produtos full-stack, funcionalidades em tempo real, modelos de dados e limites entre servicos.', cap2Title: 'Engenharia de seguranca', cap2Desc: 'Pesquisa em seguranca, analise binaria e de protocolos, Windows internals e ferramentas para testes autorizados.', cap3Title: 'Sistemas e infraestrutura', cap3Desc: 'Rust e C/C++, containers, CI/CD, observabilidade, bancos de dados, cache e integracao de plataformas.', cap4Title: 'Tecnologia criativa', cap4Desc: 'Sistemas de gameplay em Roblox, prototipos de visao computacional, automacao e experimentos transformados em software.', contactLabel: 'Vamos conversar', contactTitle: 'Tem um sistema dificil<br /><em>que vale a pena entender?</em>'
+    navProfile: "Perfil",
+    navWork: "Projetos",
+    navExpertise: "Competencias",
+    heroRole: "Engenheiro de Software & Desenvolvedor Roblox",
+    heroStatement: "Desenvolvo sistemas digitais confiáveis entre backend, segurança, infraestrutura e experiências interativas.",
+    exploreWork: "Explorar projetos selecionados",
+    profileLabel: "Perfil profissional",
+    profileTitle: "Amplitude generalista.<br><em>Profundidade técnica.</em>",
+    profileLead: "Sou engenheiro de software com visão orientada a sistemas e capacidade de transitar entre produto, infraestrutura, segurança e desenvolvimento de jogos.",
+    profileP1: "Meu trabalho inclui plataformas web em tempo real, runtimes em Rust, infraestrutura de releases multiplataforma, arquiteturas de serviços de IA, pesquisa em segurança, visão computacional e desenvolvimento de gameplay no Roblox. Em cada domínio, aplico a mesma disciplina: compreender a arquitetura, isolar as restrições e tomar decisões que continuem claras conforme o sistema cresce.",
+    profileP2: "Tenho melhor desempenho em funções que valorizam amplitude técnica, autonomia e investigação cuidadosa. Consigo trabalhar desde contratos de API e modelos de dados até o comportamento do sistema operacional, e desde um protótipo inicial até testes, deploy, observabilidade e iteração.",
+    careerLabel: "Momento atual",
+    careerTitle: "Construindo sistemas<br><em>que as pessoas sentem.</em>",
+    current: "Atual",
+    roleLabel: "Desenvolvedor · NEXUS",
+    nexusTitle: "Desenvolvimento de gameplay para uma experiência PvP de arena em evolução.",
+    nexusBody: "Contribuo para o NEXUS no Roblox Studio, uma experiência de combate centrada em personagens distintos, habilidades, efeitos visuais e interação estratégica entre jogadores. O trabalho une lógica de gameplay, iteração rápida, colaboração técnica e atenção a como os sistemas se comportam durante o jogo.",
+    viewExperience: "Ver experiência",
+    workLabel: "Trabalhos de engenharia selecionados",
+    workTitle: "Evidências acima<br><em>de adjetivos.</em>",
+    workIntro: "Estudos de caso representativos selecionados entre meus repositórios públicos e privados. Bases de código confidenciais são descritas no nível de arquitetura, sem expor detalhes sensíveis de implementação.",
+    privateCase: "Estudo de caso privado",
+    challenge: "Desafio",
+    evidence: "Evidências de engenharia",
+    focus: "Foco tecnico",
+    architecture: "Arquitetura",
+    principle: "Princípio de design",
+    microBody: "Exploração de um runtime modular em Rust para ambientes restritos. A arquitetura combina isolamento por features, suporte opcional a <code>no_std</code>, alocação customizada, caminhos de dados sem cópia, carregamento de modelos em memória, envelopes criptográficos, telemetria e validação automatizada da arquitetura.",
+    microChallenge: "Unificar controle de memória em baixo nível, inferência, transporte e limites de confiança sem transformar o runtime em um monolito.",
+    pdvBody: "Plataforma de operações para restaurantes com diferentes interfaces cobrindo produtos, mesas, pedidos, caixas, pedidos via QR Code, analytics, backups, controle de acesso e sincronização em tempo real.",
+    airshipperBody: "Launcher desktop customizado e serviço de releases com mapeamento de artefatos por plataforma, integração com releases do GitHub, métricas, metadados em banco, instaladores e pipelines multiplataforma.",
+    prismaBody: "Plataforma orientada a serviços para conectividade com WhatsApp e fluxos assistidos por IA. A arquitetura separa aplicação web, mensageria, processamento de IA, abstração de provedores, detecção de intenção, analytics, persistência, cache e operação em containers.",
+    prismaPrinciple: "Manter provedores externos substituíveis e responsabilidades operacionais explícitas.",
+    expertiseLabel: "Disciplinas de engenharia",
+    expertiseTitle: "Amplitude com<br><em>um centro claro.</em>",
+    discipline1: "Backend e engenharia de produto",
+    discipline1Body: "APIs, sistemas full-stack, limites entre serviços, modelagem de dados, autenticação e comunicação em tempo real.",
+    discipline2: "Sistemas e infraestrutura",
+    discipline2Body: "Software consciente de memória, integração de plataformas, containers, pipelines, observabilidade, persistência e cache.",
+    discipline3: "Engenharia de segurança",
+    discipline3Body: "Pesquisa autorizada em binários, protocolos, Windows internals, comportamento de aplicações e validação defensiva.",
+    discipline4: "Tecnologia interativa",
+    discipline4Body: "Sistemas de gameplay, iteração rápida, visão computacional, automação e software orientado pelo retorno direto do usuário.",
+    contactLabel: "Contato",
+    contactTitle: "Vamos construir algo<br><em>que vale compreender.</em>",
+    contactBody: "Aberto a oportunidades em engenharia de software, backend, sistemas, segurança de aplicações, DevSecOps, automação e tecnologia para jogos.",
+    footerNote: "Trabalhos de segurança são conduzidos para educação, defesa e testes autorizados."
   }
 };
-const button = document.querySelector('.language-toggle');
-let language = 'en';
-button.addEventListener('click', () => { language = language === 'en' ? 'pt' : 'en'; button.dataset.language = language === 'en' ? 'pt' : 'en'; document.documentElement.lang = language; document.querySelectorAll('[data-i18n]').forEach((node) => { const value = translations[language][node.dataset.i18n]; if (value) node.innerHTML = value; }); });
+
+const toggle = document.querySelector("#language-toggle");
+const original = {};
+
+document.querySelectorAll("[data-copy]").forEach((element) => {
+  original[element.dataset.copy] = element.innerHTML;
+});
+
+let language = "en";
+
+toggle.addEventListener("click", () => {
+  language = language === "en" ? "pt" : "en";
+  document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
+  toggle.textContent = language === "en" ? "PT" : "EN";
+  toggle.setAttribute("aria-label", language === "en" ? "Switch to Portuguese" : "Mudar para inglês");
+
+  document.querySelectorAll("[data-copy]").forEach((element) => {
+    const key = element.dataset.copy;
+    element.innerHTML = language === "pt" ? translations.pt[key] : original[key];
+  });
+});

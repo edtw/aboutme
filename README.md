@@ -1,104 +1,119 @@
-# Felipe Lemos / aboutme
+<div align="center">
 
-> Software engineer working across product development, security research, systems, automation, and Roblox Studio.
+# Felipe Lemos
 
-**Rio de Janeiro, Brazil** · [LinkedIn](https://www.linkedin.com/in/yuee/) · [GitHub](https://github.com/edtw)
+### Software Engineer · Systems & Security · Roblox Developer
 
-## About
+I design and build reliable digital systems across backend development, infrastructure, security engineering, and interactive technology.
 
-I build software at the intersection of application development and systems engineering. My work spans backend services, real-time products, Rust and C/C++, security research, computer vision, infrastructure, and game development.
+[Portfolio](https://edtw.github.io/aboutme/) · [LinkedIn](https://www.linkedin.com/in/yuee/) · [GitHub](https://github.com/edtw)
 
-I am currently developing in Roblox Studio on [NEXUS](https://www.roblox.com/pt/games/84720327590325/NEXUS), a PvP arena experience built around characters, abilities, visual effects, and strategic combat.
+Rio de Janeiro, Brazil · Open to opportunities
 
-My engineering approach is practical and security-minded: understand the system, identify its constraints, make trade-offs explicit, and build software that can be inspected and improved.
+</div>
 
-## Selected Work
+---
 
-### Micro Runtime
+## Professional Profile
 
-Rust runtime exploration for constrained environments. The repository includes feature-gated modules, `no_std` support, custom allocation, inference bridges, cryptographic envelopes, telemetry, and automated architecture validation.
+I am a software engineer with a systems-oriented mindset and the ability to move between product, infrastructure, security, and game development.
 
-- Repository: [edtw/micro_runtime](https://github.com/edtw/micro_runtime)
-- Focus: Rust, systems programming, memory constraints, inference, cryptography, CI
+My work includes real-time web platforms, Rust runtimes, cross-platform release infrastructure, AI service architectures, security research, computer vision, and Roblox gameplay development. I approach each domain through the same discipline: understand the architecture, isolate the constraints, and make decisions that remain understandable as the system grows.
 
-### Marambaia PDV
+I am most effective in roles that value technical range, ownership, and careful investigation. I can work from an API contract or data model down to operating-system behavior, and from an early prototype through testing, deployment, observability, and iteration.
 
-Full-stack restaurant point-of-sale platform with product and table management, customer QR ordering, cash registers, analytics, backups, access control, and real-time updates.
+## Current Work
 
-- Repository: [edtw/pdvmar](https://github.com/edtw/pdvmar)
-- Focus: React, Node.js, Express, MongoDB, Mongoose, Socket.IO, JWT
+### Roblox Studio Developer · NEXUS
 
-### NEXUS
+I currently contribute to [NEXUS](https://www.roblox.com/pt/games/84720327590325/NEXUS), an evolving PvP arena experience on Roblox centered on distinctive characters, abilities, visual effects, and strategic player interaction.
 
-Current Roblox Studio development on a PvP arena game. The experience combines character abilities, combat interactions, visual effects, and player-focused iteration.
+The work combines gameplay logic, rapid iteration, technical collaboration, and attention to how systems feel during play.
 
-- Experience: [NEXUS on Roblox](https://www.roblox.com/pt/games/84720327590325/NEXUS)
-- Focus: Roblox Studio, Luau, gameplay systems, iteration, player experience
+## Selected Engineering Work
 
-### Airshipper
+### Micro Runtime · Rust Systems Engineering
 
-Customized cross-platform launcher and release server with artifact mapping, GitHub release integration, metrics, database-backed metadata, and multi-platform packaging pipelines.
+A modular Rust runtime exploration for constrained environments. The architecture combines feature isolation, optional `no_std` support, custom memory allocation, zero-copy data paths, in-memory model loading, cryptographic envelopes, telemetry, and automated architecture validation.
 
-- Repository: [edtw/airshipper](https://github.com/edtw/airshipper)
-- Focus: Rust, Iced, Tokio, Axum, SQLx, metrics, release engineering
+**Engineering focus:** Rust 2021, systems programming, Candle, GGUF, Wasm, Axum, cryptography, CI architecture gates.
 
-### Prisma Platform
+**Visibility:** Private case study. Architectural details are available during technical interviews where appropriate.
 
-Multi-service platform direction combining WhatsApp connectivity, AI handlers, provider abstraction, intent detection, analytics, persistence, caching, and Dockerized development.
+### Marambaia PDV · Full-Stack Product Engineering
 
-- Repository: [edtw/prismaapp](https://github.com/edtw/prismaapp)
-- Focus: TypeScript, Python, Next.js, Express, FastAPI, PostgreSQL, Redis, Docker
+A multi-surface restaurant operations platform covering products, tables, orders, cash registers, customer QR ordering, analytics, backups, access control, and real-time synchronization. The project includes work on race conditions and order-total consistency.
 
-## Technical Focus
+**Engineering focus:** React, Node.js, Express, MongoDB, Mongoose, Socket.IO, JWT, operational consistency.
 
-**Languages:** Rust, C, C++, Python, TypeScript, JavaScript, C#, Luau, PowerShell
+**Visibility:** Private case study.
 
-**Engineering:** APIs, full-stack applications, distributed services, real-time systems, data modeling, testing, CI/CD, Docker, observability
+### Airshipper · Cross-Platform Release Engineering
 
-**Security:** Security research, binary analysis, protocol analysis, Windows internals, network tooling, and authorized testing
+A customized desktop launcher and release service with platform artifact mapping, GitHub release integration, metrics, database-backed metadata, installers, and multi-platform build pipelines.
 
-**Data and AI:** PostgreSQL, MongoDB, Redis, OpenCV, PyTorch, model-serving experiments, workflow automation
+**Engineering focus:** Rust, Iced, Tokio, Axum, SQLx, Prometheus, GitLab CI, release automation.
 
-**Creative technology:** Roblox Studio, gameplay systems, computer vision prototypes, desktop automation
+**Visibility:** Private case study based on an upstream open-source project; customization is described without claiming authorship of the original project.
 
-## English Profile
+### Prisma Platform · AI and Messaging Architecture
 
-### LinkedIn Headline
+A service-oriented platform for WhatsApp connectivity and AI-assisted workflows. The architecture separates the web application, messaging service, AI handling, provider abstraction, intent detection, analytics, persistence, caching, and containerized operations.
 
-Software Engineer | Backend & Systems | Cybersecurity Research | Rust, Python, TypeScript, C/C++ | Roblox Studio
+**Engineering focus:** Next.js, TypeScript, Express, FastAPI, PostgreSQL, Redis, Docker, service boundaries.
 
-### LinkedIn About
+**Visibility:** Private case study.
 
-Software engineer based in Rio de Janeiro, Brazil, with a generalist profile grounded in systems thinking. I build backend services, full-stack products, real-time features, security tooling, infrastructure experiments, and gameplay systems in Roblox Studio.
+## Engineering Disciplines
 
-My projects include Rust runtime and release-engineering work, a full-stack restaurant POS, AI and WhatsApp service architectures, computer-vision prototypes, and security research involving binary, protocol, and operating-system analysis. I enjoy working close to the constraints: understanding how a system is assembled, where it can fail, and how to make it more reliable and easier to evolve.
+| Discipline | Focus |
+| --- | --- |
+| Backend and product | APIs, full-stack systems, data modeling, authentication, real-time communication |
+| Systems and infrastructure | Memory-aware software, platform integration, containers, CI/CD, observability |
+| Security engineering | Binary and protocol analysis, Windows internals, AppSec, defensive validation |
+| Interactive technology | Roblox gameplay systems, computer vision, automation, user-centered iteration |
 
-I am open to software engineering, backend, systems, application security, DevSecOps, automation, and game-technology opportunities.
+## Technology
 
-## Perfil em Portugues do Brasil
+**Primary languages:** Rust, C, C++, Python, TypeScript, JavaScript, Luau
 
-### Titulo para o LinkedIn
+**Application engineering:** React, Next.js, Node.js, Express, FastAPI, REST, GraphQL, Socket.IO
 
-Engenheiro de Software | Backend e Sistemas | Pesquisa em Ciberseguranca | Rust, Python, TypeScript, C/C++ | Roblox Studio
+**Data and operations:** PostgreSQL, MongoDB, Redis, SQLx, Docker, GitHub Actions, GitLab CI, Prometheus
 
-### Sobre
+**Security and systems:** Windows internals, network protocols, binary analysis, cryptography, authorized security testing
 
-Sou engenheiro de software baseado no Rio de Janeiro, Brasil, com perfil generalista e forte visao de sistemas. Desenvolvo servicos backend, produtos full-stack, funcionalidades em tempo real, ferramentas de seguranca, experimentos de infraestrutura e sistemas de gameplay no Roblox Studio.
+**AI and computer vision:** PyTorch, Candle, OpenCV, model-loading and workflow-automation experiments
 
-Meus projetos incluem runtime e engenharia de releases em Rust, um sistema full-stack de ponto de venda para restaurantes, arquiteturas de servicos para IA e WhatsApp, prototipos de visao computacional e pesquisa em seguranca envolvendo analise binaria, protocolos e sistemas operacionais. Gosto de trabalhar proximo das restricoes: entender como um sistema e construido, onde ele pode falhar e como torna-lo mais confiavel e evolutivo.
+---
 
-Tenho interesse em oportunidades de engenharia de software, backend, sistemas, seguranca de aplicacoes, DevSecOps, automacao e tecnologia para jogos.
+## Perfil Profissional · Português do Brasil
 
-## Responsible Disclosure
+Sou engenheiro de software com visão orientada a sistemas e capacidade de transitar entre produto, infraestrutura, segurança e desenvolvimento de jogos.
 
-Security-related work should be presented in the context of education, defensive research, and authorized testing. This portfolio intentionally describes capabilities at a professional level and does not publish operational details for misuse.
+Minha experiência prática inclui plataformas web em tempo real, runtimes em Rust, infraestrutura de releases multiplataforma, arquiteturas de serviços de IA, pesquisa em segurança, visão computacional e desenvolvimento de gameplay no Roblox. Em cada domínio, aplico a mesma disciplina: compreender a arquitetura, isolar as restrições e tomar decisões que continuem claras conforme o sistema cresce.
 
-## Run Locally
+Atualmente contribuo para o desenvolvimento do [NEXUS](https://www.roblox.com/pt/games/84720327590325/NEXUS) no Roblox Studio, uma experiência PvP de arena centrada em personagens, habilidades, efeitos visuais e interação estratégica entre jogadores.
 
-This is a dependency-free static site.
+Tenho melhor desempenho em funções que valorizam amplitude técnica, autonomia e investigação cuidadosa. Consigo atuar desde contratos de API e modelos de dados até o comportamento do sistema operacional, e desde um protótipo inicial até testes, deploy, observabilidade e iteração.
+
+Tenho interesse em oportunidades nas áreas de engenharia de software, backend, sistemas, segurança de aplicações, DevSecOps, automação e tecnologia para jogos.
+
+## Professional Positioning
+
+**LinkedIn headline:** Software Engineer | Backend & Systems | Security Engineering | Rust, Python, TypeScript, C/C++ | Roblox Developer
+
+**Título para LinkedIn:** Engenheiro de Software | Backend e Sistemas | Engenharia de Segurança | Rust, Python, TypeScript, C/C++ | Desenvolvedor Roblox
+
+## Responsible Practice
+
+Security-related work is conducted for education, defense, and authorized testing. Sensitive repositories are intentionally represented as high-level case studies rather than published operational implementations.
+
+## Portfolio Development
+
+The portfolio is a dependency-free static site with an English and Brazilian Portuguese interface.
 
 ```bash
-python3 -m http.server 4173
+npm run check
+npm start
 ```
-
-Open `http://localhost:4173` in a browser. Use the `PT / EN` control in the header to switch languages.
