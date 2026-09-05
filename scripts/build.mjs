@@ -92,26 +92,104 @@ function header(lang, page, route) {
     </header>`;
 }
 
+function seededRandom(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+}
+
+function sparkline(points, label) {
+  return `<svg class="spark" viewBox="0 0 120 28" aria-hidden="true"><polyline points="${points}" fill="none" stroke="currentColor" stroke-width="1.2" /><circle cx="120" cy="${points.split(' ').pop().split(',')[1]}" r="2" fill="currentColor" stroke="none" /><title>${label}</title></svg>`;
+}
+
+function treeDots() {
+  const rand = seededRandom(20260904);
+  const dots = [];
+  let i = 0;
+  const push = (x, y, r, o, accent) => {
+    const cls = accent ? 'tree-dot accent' : (i % 6 === 0 ? 'tree-dot tw' : 'tree-dot');
+    dots.push(`<circle class="${cls}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" opacity="${o.toFixed(2)}" style="animation-delay:${(rand() * 4).toFixed(2)}s"/>`);
+    i += 1;
+  };
+  for (let k = 0; k < 620; k += 1) {
+    const a = rand() * Math.PI * 2;
+    const r = Math.sqrt(rand());
+    const x = 240 + Math.cos(a) * r * 138 * (0.75 + 0.25 * rand());
+    const y = 146 + Math.sin(a) * r * 94 * (0.7 + 0.3 * rand());
+    if (y > 232 && Math.abs(x - 240) < 24) continue;
+    push(x, y, 0.6 + rand() * 0.9, 0.25 + rand() * 0.65, rand() > 0.986);
+  }
+  for (let k = 0; k < 90; k += 1) {
+    const t = rand();
+    const y = 196 + t * 102;
+    const w = 6 + t * 10;
+    push(240 + (rand() - 0.5) * 2 * w + Math.sin(t * 3) * 3, y, 0.7 + rand() * 0.8, 0.5 + rand() * 0.4, false);
+  }
+  for (let k = 0; k < 160; k += 1) {
+    const x = 240 + (rand() - 0.5) * 360 * (0.4 + rand() * 0.6);
+    push(x, 296 + rand() * 22 - Math.abs(x - 240) * 0.02 * rand(), 0.5 + rand() * 0.9, 0.2 + rand() * 0.5, rand() > 0.988);
+  }
+  return dots.join('');
+}
+
 function asciiBackdrop(lang) {
-  return `<div class="ascii-console" aria-hidden="true">
-    <div class="ascii-console-head"><span>TTY / YUEE-01</span><span>LIVE SIGNAL</span></div>
-    <pre class="ascii-bg"> __   __  _   _  _____  _____
- \\ \\ / / | | | || ____|| ____|
-  \\ V /  | | | ||  _|  |  _|
-   | |   | |_| || |___ | |___
-   |_|    \\___/ |_____||_____|
-
-  +--------------------------------+
-  | RUNTIME   MEMORY / LOCAL AI    |
-  | NETWORK   ROUTING / STATE      |
-  | SECURITY  LAB / DEFENSE        |
-  | GAMEPLAY  COMBAT / ITERATION   |
-  +--------------------------------+
-
-  STATUS &gt; ${lang === 'pt' ? 'DISPONIVEL' : 'OPEN TO WORK'}
-  TRACE  &gt; ACTIVE</pre>
+  const en = lang === 'en';
+  const cells = [
+    { label: en ? 'RUNTIME' : 'RUNTIME', value: 'NOMINAL', spark: '0,22 18,20 36,21 54,16 72,17 90,11 108,13 120,8' },
+    { label: en ? 'MEMORY BUDGET' : 'MEMÓRIA', value: '72% CAP', spark: '0,10 20,12 40,11 60,15 80,16 100,20 120,21' },
+    { label: en ? 'NETWORK' : 'REDE', value: 'MESH OK', spark: '0,18 25,17 50,15 75,14 100,10 120,9' },
+    { label: en ? 'BUILD TREND' : 'BUILDS', value: '+12 WK', spark: '0,24 20,22 40,23 60,18 80,16 100,12 120,9' },
+    { label: en ? 'DISPATCH' : 'DISPATCH', value: '256 SLOTS', spark: '0,14 30,14 60,13 90,13 120,12' },
+    { label: en ? 'STACK' : 'STACK', value: 'RS · PY · TS', spark: '0,20 24,18 48,18 72,14 96,14 120,10' }
+  ];
+  return `<div class="ascii-console tree-console" role="img" aria-label="${en ? 'Dot-matrix system tree with runtime telemetry' : 'Árvore de sistema em matriz de pontos com telemetria de runtime'}">
+    <div class="ascii-console-head"><span>${en ? 'YOUR SYSTEM • CONNECTED' : 'SEU SISTEMA • CONECTADO'}</span><span>${en ? 'TODAY' : 'HOJE'}</span></div>
+    <div class="ascii-bg tree-body"><svg class="tree-svg" viewBox="0 0 480 330" aria-hidden="true">${treeDots()}</svg>
+      <div class="telemetry-grid">${cells.map((c) => `<div class="tele-cell"><span>${c.label}</span>${sparkline(c.spark, c.label)}<b>${c.value}</b></div>`).join('')}</div>
+    </div>
     <div class="ascii-console-foot"><span>RX 011001</span><b></b><span>LAT 00.7</span></div>
   </div>`;
+}
+
+function waveField() {
+  const rand = seededRandom(77031);
+  const parts = [];
+  for (let k = 0; k < 60; k += 1) {
+    parts.push(`<circle class="wave-star" cx="${(rand() * 1200).toFixed(1)}" cy="${(rand() * 120).toFixed(1)}" r="${(0.5 + rand() * 0.7).toFixed(2)}" opacity="${(0.2 + rand() * 0.5).toFixed(2)}" style="animation-delay:${(rand() * 5).toFixed(2)}s"/>`);
+  }
+  let bands = '';
+  for (let layer = 0; layer < 4; layer += 1) {
+    let d = '';
+    for (let x = 0; x <= 1200; x += 9) {
+      const y = 212 + layer * 24 + Math.sin(x / 130 + layer * 1.1) * 22 + Math.sin(x / 47 + layer) * 8 + (rand() - 0.5) * 10;
+      const edge = 1 - Math.abs(x - 600) / 900;
+      d += `<circle class="wave-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(0.6 + rand() * 1.1 + (layer === 0 ? 0.4 : 0)).toFixed(2)}" opacity="${(0.18 + edge * 0.5).toFixed(2)}"/>`;
+    }
+    bands += `<g class="wave-swell" style="animation-delay:${(layer * 0.9).toFixed(1)}s">${d}</g>`;
+  }
+  const figure = (cx, baseY, dir) => {
+    let f = '';
+    const dot = (x, y, r, o) => { f += `<circle class="wave-dot figure-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" opacity="${o.toFixed(2)}"/>`; };
+    for (let k = 0; k < 42; k += 1) {
+      const a = rand() * Math.PI * 2, r = Math.sqrt(rand()) * 9;
+      dot(cx + Math.cos(a) * r, baseY - 92 + Math.sin(a) * r, 0.8 + rand() * 0.7, 0.55 + rand() * 0.4);
+    }
+    const seg = (x1, y1, x2, y2, n, w) => {
+      for (let k = 0; k < n; k += 1) {
+        const t = rand();
+        dot(x1 + (x2 - x1) * t + (rand() - 0.5) * w, y1 + (y2 - y1) * t + (rand() - 0.5) * w, 0.7 + rand() * 0.7, 0.45 + rand() * 0.45);
+      }
+    };
+    seg(cx, baseY - 80, cx, baseY - 30, 46, 9);
+    seg(cx, baseY - 66, cx + dir * 46, baseY - 60, 30, 6);
+    seg(cx, baseY - 64, cx - dir * 12, baseY - 34, 22, 7);
+    seg(cx, baseY - 30, cx - 10, baseY, 26, 7);
+    seg(cx, baseY - 30, cx + 11, baseY, 26, 7);
+    return f;
+  };
+  return `<div class="wave-field" aria-hidden="true"><svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice">${parts.join('')}${bands}<g>${figure(505, 196, 1)}${figure(608, 188, -1)}</g></svg></div>`;
 }
 
 function runtimeDiagram(lang) {
@@ -290,6 +368,7 @@ ${header(lang, 'portfolio', route)}
       </section>
 
       <section class="contact section" id="contact">
+        ${waveField()}
         <div class="contact-code" aria-hidden="true">05 / CONNECT</div>
         <p class="kicker"><span class="status-dot"></span>${en ? 'AVAILABLE FOR THE RIGHT SYSTEM' : 'DISPONIVEL PARA O SISTEMA CERTO'}</p>
         <h2>${en ? 'Let us inspect the <span>problem.</span>' : 'Vamos inspecionar o <span>problema.</span>'}</h2>
