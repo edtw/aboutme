@@ -145,7 +145,7 @@ function asciiBackdrop(lang) {
     { label: en ? 'STACK' : 'STACK', value: 'RS · PY · TS', spark: '0,20 24,18 48,18 72,14 96,14 120,10' }
   ];
   return `<div class="ascii-console tree-console" role="img" aria-label="${en ? 'Dot-matrix system tree with runtime telemetry' : 'Árvore de sistema em matriz de pontos com telemetria de runtime'}">
-    <div class="ascii-console-head"><span>${en ? 'YOUR SYSTEM • CONNECTED' : 'SEU SISTEMA • CONECTADO'}</span><span>${en ? 'TODAY' : 'HOJE'}</span></div>
+    <div class="ascii-console-head"><span>YUEE.SYS • ${en ? 'CONNECTED' : 'CONECTADO'}</span><span>${en ? 'TODAY' : 'HOJE'}</span></div>
     <div class="ascii-bg tree-body"><svg class="tree-svg" viewBox="0 0 480 330" aria-hidden="true">${treeDots()}</svg>
       <div class="telemetry-grid">${cells.map((c) => `<div class="tele-cell"><span>${c.label}</span>${sparkline(c.spark, c.label)}<b>${c.value}</b></div>`).join('')}</div>
     </div>

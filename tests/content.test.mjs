@@ -76,7 +76,7 @@ test('hero has a focused identity and direct actions', () => {
 
 test('motion system animates identity, ASCII, and technical flow', () => {
   const css = read('styles.css');
-  for (const animation of ['identity-enter', 'ascii-decode', 'console-scan', 'signal-glitch', 'node-signal', 'signal-scan', 'canopy-twinkle', 'wave-drift']) {
+  for (const animation of ['identity-enter', 'ascii-decode', 'signal-glitch', 'node-signal', 'canopy-twinkle', 'wave-drift']) {
     assert.ok(css.includes(`@keyframes ${animation}`), `missing ${animation} animation`);
   }
   assert.ok(css.includes('prefers-reduced-motion'), 'missing reduced motion fallback');
