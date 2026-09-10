@@ -214,4 +214,40 @@
       }
     });
   }
+
+  // Showcase theme: green shifts to red when the operator case study opens.
+  const showcasePage = document.body.classList.contains('showcase-page');
+  if (showcasePage) {
+    const modeLabel = document.getElementById('mode-label');
+    const arm = () => {
+      document.documentElement.classList.add('theme-red');
+      if (modeLabel) modeLabel.textContent = lang === 'pt' ? 'MODO / RED' : 'MODE / RED';
+    };
+    if (reduced) {
+      arm();
+    } else {
+      const wipe = document.createElement('div');
+      wipe.className = 'theme-wipe';
+      document.body.append(wipe);
+      setTimeout(() => {
+        document.documentElement.classList.add('theme-anim');
+        wipe.classList.add('run');
+        arm();
+        setTimeout(() => document.documentElement.classList.remove('theme-anim'), 1600);
+        setTimeout(() => wipe.remove(), 1400);
+      }, 420);
+    }
+  } else {
+    // Portfolio: arm the red transition before opening the case study.
+    document.querySelectorAll('a[href*="microruntime"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (reduced || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
+        event.preventDefault();
+        const overlay = document.createElement('div');
+        overlay.className = 'arm-overlay';
+        document.body.append(overlay);
+        setTimeout(() => { location.href = link.href; }, 620);
+      });
+    });
+  }
 })();

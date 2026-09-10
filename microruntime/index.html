@@ -3,14 +3,14 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A readable case study: a Rust runtime that runs local AI under hard limits, a hardened fleet agent, and the red-team and blue-team work around it." />
+  <meta name="description" content="A red team operator platform: endpoint agent, command-and-control plane, and local AI with per-action authorization. Architecture-level case study, private code off-page." />
   <meta name="theme-color" content="#04060a" />
   <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="https://edtw.github.io/aboutme/microruntime/" />
   <link rel="alternate" hreflang="pt-BR" href="https://edtw.github.io/aboutme/pt/microruntime/" />
   <link rel="alternate" hreflang="x-default" href="https://edtw.github.io/aboutme/microruntime/" />
-  <meta property="og:title" content="Micro Runtime | Systems &amp; security case study" />
-  <meta property="og:description" content="A readable case study: a Rust runtime that runs local AI under hard limits, a hardened fleet agent, and the red-team and blue-team work around it." />
+  <meta property="og:title" content="Micro Runtime | Red team operator platform" />
+  <meta property="og:description" content="A red team operator platform: endpoint agent, command-and-control plane, and local AI with per-action authorization. Architecture-level case study, private code off-page." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://edtw.github.io/aboutme/microruntime/" />
   <meta property="og:locale" content="en_US" />
@@ -19,13 +19,13 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>Micro Runtime | Systems &amp; security case study</title>
+  <title>Micro Runtime | Red team operator platform</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../styles.css" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe \"Yuee\" Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Red Team","Blue Team","Cybersecurity Research","Detection Engineering","Rust","Python","TypeScript","C++","Local AI inference","Distributed systems","Roblox Studio"]}</script>
     <link rel="stylesheet" href="../assets/css/showcase.css" />
   </head>
-  <body id="top">
+  <body id="top" class="showcase-page">
     <div class="screen-texture" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
@@ -57,12 +57,13 @@
     </header>
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
-        <p class="section-index"><span>CASE / 001</span>Public technical record</p>
-        <p class="kicker"><span class="status-dot"></span>ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE</p>
-        <h1>Micro Runtime <span>runs local AI under hard limits.</span></h1>
-        <p class="lede">A Rust runtime for small machines and edge fleets. It runs tiny models locally, turns model output into bounded actions that must be authorized, and ships as a hardened agent for industrial operations. This page explains what it is and what I built, without private code.</p>
+        <p class="section-index"><span>CASE / 001</span>Red team platform / public record</p>
+        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">MODE / STANDBY</b><span>AUTHORIZED OPERATIONS ONLY</span></p>
+        <p class="kicker">ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE</p>
+        <h1>Micro Runtime <span>a red team operator platform.</span></h1>
+        <p class="lede">A Rust runtime, endpoint agent, and command-and-control plane I designed and built for authorized red-team operations. Local AI supports decisions at the edge, and every model-proposed action is typed, authorized, and audited. This page is the architecture story; private code stays private.</p>
         <div class="runtime-diagram" role="img" aria-label="Micro Runtime flow from bounded model output through token dispatch to closed host operations">
-    <div class="diagram-head"><span>TRACE / 001</span><span>BOUNDARIES: ACTIVE</span></div>
+    <div class="diagram-head"><span>TRACE / RED-001</span><span>BOUNDARIES: ENFORCED</span></div>
     <div class="diagram-flow">
       <div><small>01</small><strong>LOCAL MODEL</strong><span>GGUF / M35</span></div>
       <i aria-hidden="true">&gt;</i>
@@ -76,16 +77,27 @@
   </div>
       </div>
       <div class="case-register">
-        <article><span>01 / WHAT IT IS</span><h2>A runtime, not a chatbot</h2><p>A Rust runtime for constrained machines and industrial edge fleets. It exists so local AI can decide and act without a cloud connection, and without trusting the model with the machine.</p></article>
-        <article><span>02 / WHAT IT DOES</span><h2>Local AI under hard limits</h2><p>Runs quantized GGUF models on CPU and a tiny INT8 model VM with no heap and fixed budgets. If a model is missing, it fails closed instead of falling back silently.</p><pre><code>MODEL=/models/local.gguf
-missing model =&gt; None
-act budget =&gt; 32 digits</code></pre></article>
-        <article><span>03 / THE BOUNDARY</span><h2>Every action needs a ticket</h2><p>A capability broker authorizes each model-proposed action before it reaches the host. Numeric output never gets ambient authority: it becomes a bounded HostOp in a closed ISA, inside an isolated worker with no shell.</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
+        <article><span>01 / WHAT IT IS</span><h2>An operator platform</h2><p>An endpoint agent plus a command-and-control plane for authorized red-team work, with an operator HMI and one binary for Linux, macOS, and Windows. I designed the architecture, the tasking model, and the security boundaries.</p></article>
+        <article><span>02 / CONTROL PLANE</span><h2>Tasking with identity</h2><p>Operators issue typed tasks over mutual TLS, agents are pinned to site certificates, and every instruction, result, and decision lands in the audit trail. Nothing depends on a shell or an implicit channel.</p><pre><code>operator -&gt; control plane -&gt; agent
+identity: certificate + pinned PKI</code></pre></article>
+        <article><span>03 / LOCAL AI</span><h2>A model that cannot act alone</h2><p>Quantized GGUF on CPU and a tiny INT8 model VM give the agent local decision support with no cloud. A capability broker authorizes each proposed action, so probabilistic output never receives ambient authority.</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
 one-shot / 256 slots / closed enum</code></pre></article>
-        <article><span>04 / THE FLEET</span><h2>A hardened agent</h2><p>The same binary runs on Linux, macOS, and Windows. Mutual TLS, site PKI, signed extensions, telemetry, and an operator HMI on the plant host. Memory-safe workers, sealed model weights, and CI gates that fail a dirty build.</p></article>
-        <article><span>05 / SKILLS SHOWN</span><h2>What this proves</h2><p>Low-level Rust, memory and allocator design, local inference, PKI and secure transport, Windows/Linux/macOS internals, and the discipline to keep the architecture honest with measurable gates.</p></article>
-        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>Architecture level</h2><p>Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews, and the red-team and blue-team work is summarized on the portfolio.</p></article>
+        <article><span>04 / BOUNDARIES</span><h2>Strict everywhere else</h2><p>A closed task ISA, isolated workers with no shell, hard memory and operation budgets, sealed weights, and zeroization on sensitive buffers. Powerful under authorization, fail-closed everywhere else.</p></article>
+        <article><span>05 / RED TO BLUE</span><h2>Emulation to detection</h2><p>I run the platform for adversary emulation in isolated labs, then turn what it produces into telemetry, detections, and hardening. Offense and defense share the same evidence, and only authorized scopes.</p></article>
+        <article><span>06 / SKILLS SHOWN</span><h2>What this proves</h2><p>Low-level Rust, memory and allocator design, PKI and secure transport, protocol design, cross-platform internals, local inference, and the discipline to gate every build with architecture checks.</p></article>
+        <article class="excluded"><span>07 / PUBLIC BOUNDARY</span><h2>Architecture level</h2><p>Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews.</p></article>
       </div>
+      <section class="showcase-meters reveal" aria-labelledby="meters-title">
+        <span>CAPABILITY / SELF-ASSESSED</span>
+        <h2 id="meters-title">Where I am strong</h2>
+        <div class="meter-grid">
+          <div class="meter"><div class="meter-head"><span>Backend &amp; product</span><b>90%</b></div><div class="meter-bar" role="img" aria-label="Backend &amp; product 90%"><i style="--v:90%"></i></div></div>
+          <div class="meter"><div class="meter-head"><span>Systems &amp; infrastructure</span><b>93%</b></div><div class="meter-bar" role="img" aria-label="Systems &amp; infrastructure 93%"><i style="--v:93%"></i></div></div>
+          <div class="meter"><div class="meter-head"><span>Red team</span><b>82%</b></div><div class="meter-bar" role="img" aria-label="Red team 82%"><i style="--v:82%"></i></div></div>
+          <div class="meter"><div class="meter-head"><span>Blue team</span><b>78%</b></div><div class="meter-bar" role="img" aria-label="Blue team 78%"><i style="--v:78%"></i></div></div>
+          <div class="meter"><div class="meter-head"><span>AI &amp; local inference</span><b>87%</b></div><div class="meter-bar" role="img" aria-label="AI &amp; local inference 87%"><i style="--v:87%"></i></div></div>
+        </div>
+      </section>
       <section class="demo" data-lang="en" aria-labelledby="demo-title">
         <div><span>INTERACTIVE CHECK / M35</span><h2 id="demo-title">Validate a budget</h2><p>Client-side simulation only. Maximum 64 operations and 256 KiB for this demonstration.</p></div>
         <form class="demo-controls" onsubmit="return false">
@@ -97,7 +109,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
       </section>
       <a class="back-link" href="../#work">← Return to selected work</a>
     </main>
-    <footer class="statusbar"><span><i></i>CASE ONLINE / Micro Runtime</span><span>Architecture-level public record.</span><span>2026 / v2.1.0</span></footer>
+    <footer class="statusbar"><span><i></i>CASE ONLINE / Micro Runtime</span><span>Authorized operations only. Architecture-level public record.</span><span>2026 / v2.1.0</span></footer>
     <div class="palette" id="palette" hidden>
       <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Command palette">
         <div class="palette-input"><span class="prompt" aria-hidden="true">root@yuee:~$</span><input id="palette-input" type="search" autocomplete="off" placeholder="jump to section..." aria-label="Search sections" /></div>

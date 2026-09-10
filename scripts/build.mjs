@@ -209,7 +209,7 @@ function palette(lang) {
 function runtimeDiagram(lang) {
   const en = lang === 'en';
   return `<div class="runtime-diagram" role="img" aria-label="${en ? 'Micro Runtime flow from bounded model output through token dispatch to closed host operations' : 'Fluxo do Micro Runtime, da saída limitada do modelo ao dispatch de tokens e operações fechadas do host'}">
-    <div class="diagram-head"><span>TRACE / 001</span><span>BOUNDARIES: ACTIVE</span></div>
+    <div class="diagram-head"><span>TRACE / RED-001</span><span>BOUNDARIES: ENFORCED</span></div>
     <div class="diagram-flow">
       <div><small>01</small><strong>${en ? 'LOCAL MODEL' : 'MODELO LOCAL'}</strong><span>GGUF / M35</span></div>
       <i aria-hidden="true">&gt;</i>
@@ -262,7 +262,7 @@ function portfolioPage(lang) {
   const tracks = ['ALL', 'SYSTEMS', 'PRODUCT', 'SECURITY', 'GAMES'];
   const trackLabels = en
     ? { ALL: 'ALL WORK', SYSTEMS: 'SYSTEMS', PRODUCT: 'PRODUCT', SECURITY: 'SECURITY', GAMES: 'GAMES' }
-    : { ALL: 'TODOS', SYSTEMS: 'SISTEMAS', PRODUCT: 'PRODUTO', SECURITY: 'SEGURANCA', GAMES: 'JOGOS' };
+    : { ALL: 'TODOS', SYSTEMS: 'SISTEMAS', PRODUCT: 'PRODUTO', SECURITY: 'SEGURANÇA', GAMES: 'JOGOS' };
   const sec = (n, label) => `<p class="section-index"><span>${n}</span>${label}</p>`;
   const secRes = cv.securityResearch;
 
@@ -305,7 +305,7 @@ ${header(lang, 'portfolio', route)}
           <article class="flagship work-item reveal" data-track="${flagship.track}">
             <div class="flagship-copy">
               <div class="work-top"><span>00 / FLAGSHIP</span><span>${flagship.track}</span><span>${esc(flagship.codename)}</span></div>
-              <p class="eyebrow">${en ? 'RUST / LOCAL AI / SECURITY' : 'RUST / IA LOCAL / SEGURANCA'}</p>
+              <p class="eyebrow">${en ? 'RUST / LOCAL AI / SECURITY' : 'RUST / IA LOCAL / SEGURANÇA'}</p>
               <h3>${esc(flagship.name)}</h3>
               <p class="flagship-lede">${esc(L(flagship.blurb, lang))}</p>
               <dl>
@@ -348,7 +348,7 @@ ${header(lang, 'portfolio', route)}
           <div class="toolbox reveal">
             ${cv.skills.map((skill, index) => {
               const meter = Number(skill.meter ?? 0);
-              return `<div class="tool-group"><span>0${index + 1} / ${esc(L(skill.group, lang))}</span><p>${esc(skill.items)}</p><div class="meter"><div class="meter-head"><span>${en ? 'SELF-ASSESSED' : 'AUTOAVALIACAO'}</span><b>${meter}%</b></div><div class="meter-bar" role="img" aria-label="${esc(L(skill.group, lang))} ${meter}%"><i style="--v:${meter}%"></i></div></div></div>`;
+              return `<div class="tool-group"><span>0${index + 1} / ${esc(L(skill.group, lang))}</span><p>${esc(skill.items)}</p><div class="meter"><div class="meter-head"><span>${en ? 'SELF-ASSESSED' : 'AUTOAVALIAÇÃO'}</span><b>${meter}%</b></div><div class="meter-bar" role="img" aria-label="${esc(L(skill.group, lang))} ${meter}%"><i style="--v:${meter}%"></i></div></div></div>`;
             }).join('\n            ')}
           </div>
         </div>
@@ -389,7 +389,7 @@ ${header(lang, 'portfolio', route)}
       <section class="contact section" id="contact">
         ${waveField()}
         <div class="contact-code" aria-hidden="true">05 / CONNECT</div>
-        <p class="kicker"><span class="status-dot"></span>${en ? 'AVAILABLE FOR THE RIGHT SYSTEM' : 'DISPONIVEL PARA O SISTEMA CERTO'}</p>
+        <p class="kicker"><span class="status-dot"></span>${en ? 'AVAILABLE FOR THE RIGHT SYSTEM' : 'DISPONÍVEL PARA O SISTEMA CERTO'}</p>
         <h2>${en ? 'Let us inspect the <span>problem.</span>' : 'Vamos inspecionar o <span>problema.</span>'}</h2>
         <p>${en ? 'Software, backend, systems, security, or gameplay work. Based in Rio de Janeiro.' : 'Software, backend, sistemas, segurança ou gameplay. Rio de Janeiro.'}</p>
         <div class="contact-links"><a class="button button-primary" href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a></div>
@@ -407,36 +407,47 @@ function runtimePage(lang) {
   const en = lang === 'en';
   const route = routeConfig(lang, 'runtime');
   const canonical = en ? `${SITE}/microruntime/` : `${SITE}/pt/microruntime/`;
-  const title = en ? 'Micro Runtime | Systems & security case study' : 'Micro Runtime | Estudo de caso de sistemas e segurança';
-  const desc = en ? 'A readable case study: a Rust runtime that runs local AI under hard limits, a hardened fleet agent, and the red-team and blue-team work around it.' : 'Estudo de caso direto: um runtime Rust que executa IA local sob limites rígidos, um agente de frota endurecido e a pesquisa red team e blue team em volta.';
+  const title = en ? 'Micro Runtime | Red team operator platform' : 'Micro Runtime | Plataforma de operador red team';
+  const desc = en ? 'A red team operator platform: endpoint agent, command-and-control plane, and local AI with per-action authorization. Architecture-level case study, private code off-page.' : 'Plataforma de operador red team: agente de endpoint, plano de command-and-control e IA local com autorização por ação. Estudo de caso em nível de arquitetura, código privado fora da página.';
   return `<!doctype html>
 <html lang="${en ? 'en' : 'pt-BR'}">
   <head>
 ${head({ lang, title, desc, canonical, route })}
     <link rel="stylesheet" href="${route.prefix}assets/css/showcase.css" />
   </head>
-  <body id="top">
+  <body id="top" class="showcase-page">
     <div class="screen-texture" aria-hidden="true"></div>
 ${header(lang, 'runtime', route)}
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
-        <p class="section-index"><span>CASE / 001</span>${en ? 'Public technical record' : 'Registro tecnico publico'}</p>
-        <p class="kicker"><span class="status-dot"></span>${en ? 'ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE' : 'NÍVEL DE ARQUITETURA / CÓDIGO PRIVADO FORA DA PÁGINA'}</p>
-        <h1>Micro Runtime <span>${en ? 'runs local AI under hard limits.' : 'executa IA local sob limites rígidos.'}</span></h1>
-        <p class="lede">${en ? 'A Rust runtime for small machines and edge fleets. It runs tiny models locally, turns model output into bounded actions that must be authorized, and ships as a hardened agent for industrial operations. This page explains what it is and what I built, without private code.' : 'Um runtime Rust para máquinas pequenas e frotas de borda. Executa modelos minúsculos localmente, transforma a saída do modelo em ações limitadas que precisam de autorização e entrega um agente endurecido para operações industriais. Esta página explica o que é e o que eu construí, sem código privado.'}</p>
+        <p class="section-index"><span>CASE / 001</span>${en ? 'Red team platform / public record' : 'Plataforma red team / registro público'}</p>
+        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">${en ? 'MODE / STANDBY' : 'MODO / STANDBY'}</b><span>${en ? 'AUTHORIZED OPERATIONS ONLY' : 'SOMENTE OPERAÇÕES AUTORIZADAS'}</span></p>
+        <p class="kicker">${en ? 'ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE' : 'NÍVEL DE ARQUITETURA / CÓDIGO PRIVADO FORA DA PÁGINA'}</p>
+        <h1>Micro Runtime <span>${en ? 'a red team operator platform.' : 'uma plataforma de operador red team.'}</span></h1>
+        <p class="lede">${en ? 'A Rust runtime, endpoint agent, and command-and-control plane I designed and built for authorized red-team operations. Local AI supports decisions at the edge, and every model-proposed action is typed, authorized, and audited. This page is the architecture story; private code stays private.' : 'Runtime Rust, agente de endpoint e plano de command-and-control que projetei e construí para operações red team autorizadas. IA local apoia decisões na borda, e cada ação proposta pelo modelo é tipada, autorizada e auditada. Esta página é a história de arquitetura; código privado permanece privado.'}</p>
         ${runtimeDiagram(lang)}
       </div>
       <div class="case-register">
-        <article><span>01 / WHAT IT IS</span><h2>${en ? 'A runtime, not a chatbot' : 'Um runtime, não um chatbot'}</h2><p>${en ? 'A Rust runtime for constrained machines and industrial edge fleets. It exists so local AI can decide and act without a cloud connection, and without trusting the model with the machine.' : 'Um runtime Rust para máquinas restritas e frotas industriais de borda. Existe para IA local decidir e agir sem nuvem, e sem confiar a máquina ao modelo.'}</p></article>
-        <article><span>02 / WHAT IT DOES</span><h2>${en ? 'Local AI under hard limits' : 'IA local sob limites rígidos'}</h2><p>${en ? 'Runs quantized GGUF models on CPU and a tiny INT8 model VM with no heap and fixed budgets. If a model is missing, it fails closed instead of falling back silently.' : 'Executa modelos GGUF quantizados em CPU e uma VM minúscula de modelo INT8 sem heap e com orçamentos fixos. Se falta um modelo, falha fechado em vez de cair em fallback silencioso.'}</p><pre><code>MODEL=/models/local.gguf
-missing model =&gt; None
-act budget =&gt; 32 digits</code></pre></article>
-        <article><span>03 / THE BOUNDARY</span><h2>${en ? 'Every action needs a ticket' : 'Toda ação precisa de ticket'}</h2><p>${en ? 'A capability broker authorizes each model-proposed action before it reaches the host. Numeric output never gets ambient authority: it becomes a bounded HostOp in a closed ISA, inside an isolated worker with no shell.' : 'Um capability broker autoriza cada ação proposta pelo modelo antes de chegar ao host. Saída numérica nunca ganha autoridade ambiente: vira um HostOp limitado numa ISA fechada, dentro de um worker isolado e sem shell.'}</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
+        <article><span>01 / WHAT IT IS</span><h2>${en ? 'An operator platform' : 'Uma plataforma de operador'}</h2><p>${en ? 'An endpoint agent plus a command-and-control plane for authorized red-team work, with an operator HMI and one binary for Linux, macOS, and Windows. I designed the architecture, the tasking model, and the security boundaries.' : 'Um agente de endpoint mais um plano de command-and-control para trabalho red team autorizado, com HMI de operador e um binário para Linux, macOS e Windows. Projetei a arquitetura, o modelo de tasking e os limites de segurança.'}</p></article>
+        <article><span>02 / CONTROL PLANE</span><h2>${en ? 'Tasking with identity' : 'Tasking com identidade'}</h2><p>${en ? 'Operators issue typed tasks over mutual TLS, agents are pinned to site certificates, and every instruction, result, and decision lands in the audit trail. Nothing depends on a shell or an implicit channel.' : 'Operadores emitem tarefas tipadas via mTLS, agentes são fixados a certificados de site, e cada instrução, resultado e decisão entra na trilha de auditoria. Nada depende de shell ou canal implícito.'}</p><pre><code>operator -&gt; control plane -&gt; agent
+identity: certificate + pinned PKI</code></pre></article>
+        <article><span>03 / LOCAL AI</span><h2>${en ? 'A model that cannot act alone' : 'Um modelo que não age sozinho'}</h2><p>${en ? 'Quantized GGUF on CPU and a tiny INT8 model VM give the agent local decision support with no cloud. A capability broker authorizes each proposed action, so probabilistic output never receives ambient authority.' : 'GGUF quantizado em CPU e uma VM minúscula de modelo INT8 dão ao agente suporte de decisão local sem nuvem. Um capability broker autoriza cada ação proposta, então saída probabilística nunca recebe autoridade ambiente.'}</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
 one-shot / 256 slots / closed enum</code></pre></article>
-        <article><span>04 / THE FLEET</span><h2>${en ? 'A hardened agent' : 'Um agente endurecido'}</h2><p>${en ? 'The same binary runs on Linux, macOS, and Windows. Mutual TLS, site PKI, signed extensions, telemetry, and an operator HMI on the plant host. Memory-safe workers, sealed model weights, and CI gates that fail a dirty build.' : 'O mesmo binário roda em Linux, macOS e Windows. mTLS, PKI de planta, extensões assinadas, telemetria e HMI do operador no host da planta. Workers memory-safe, pesos selados e gates de CI que reprovam um build sujo.'}</p></article>
-        <article><span>05 / SKILLS SHOWN</span><h2>${en ? 'What this proves' : 'O que isso prova'}</h2><p>${en ? 'Low-level Rust, memory and allocator design, local inference, PKI and secure transport, Windows/Linux/macOS internals, and the discipline to keep the architecture honest with measurable gates.' : 'Rust de baixo nível, desenho de memória e alocador, inferência local, PKI e transporte seguro, internals de Windows/Linux/macOS e a disciplina de manter a arquitetura honesta com gates mensuráveis.'}</p></article>
-        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>${en ? 'Architecture level' : 'Nível de arquitetura'}</h2><p>${en ? 'Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews, and the red-team and blue-team work is summarized on the portfolio.' : 'Implementação privada, pesos, chaves, transportes reais e pesquisa privilegiada ficam fora desta página. Posso detalhar a arquitetura em entrevistas, e o trabalho red team e blue team está resumido no portfólio.'}</p></article>
+        <article><span>04 / BOUNDARIES</span><h2>${en ? 'Strict everywhere else' : 'Rígido em todo o resto'}</h2><p>${en ? 'A closed task ISA, isolated workers with no shell, hard memory and operation budgets, sealed weights, and zeroization on sensitive buffers. Powerful under authorization, fail-closed everywhere else.' : 'ISA de tarefas fechada, workers isolados sem shell, orçamentos rígidos de memória e operação, pesos selados e zeroização em buffers sensíveis. Poderoso sob autorização, fail-closed em todo o resto.'}</p></article>
+        <article><span>05 / RED TO BLUE</span><h2>${en ? 'Emulation to detection' : 'Da emulação à detecção'}</h2><p>${en ? 'I run the platform for adversary emulation in isolated labs, then turn what it produces into telemetry, detections, and hardening. Offense and defense share the same evidence, and only authorized scopes.' : 'Uso a plataforma para emulação de adversário em laboratórios isolados e transformo o que ela produz em telemetria, detecções e hardening. Ofensa e defesa compartilham a mesma evidência, e apenas escopos autorizados.'}</p></article>
+        <article><span>06 / SKILLS SHOWN</span><h2>${en ? 'What this proves' : 'O que isso prova'}</h2><p>${en ? 'Low-level Rust, memory and allocator design, PKI and secure transport, protocol design, cross-platform internals, local inference, and the discipline to gate every build with architecture checks.' : 'Rust de baixo nível, desenho de memória e alocador, PKI e transporte seguro, desenho de protocolo, internals multiplataforma, inferência local e a disciplina de validar cada build com checks de arquitetura.'}</p></article>
+        <article class="excluded"><span>07 / PUBLIC BOUNDARY</span><h2>${en ? 'Architecture level' : 'Nível de arquitetura'}</h2><p>${en ? 'Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews.' : 'Implementação privada, pesos, chaves, transportes reais e pesquisa privilegiada ficam fora desta página. Posso detalhar a arquitetura em entrevistas.'}</p></article>
       </div>
+      <section class="showcase-meters reveal" aria-labelledby="meters-title">
+        <span>${en ? 'CAPABILITY / SELF-ASSESSED' : 'CAPACIDADE / AUTOAVALIAÇÃO'}</span>
+        <h2 id="meters-title">${en ? 'Where I am strong' : 'Onde eu sou forte'}</h2>
+        <div class="meter-grid">
+          ${cv.skills.map((skill) => {
+            const meter = Number(skill.meter ?? 0);
+            return `<div class="meter"><div class="meter-head"><span>${esc(L(skill.group, lang))}</span><b>${meter}%</b></div><div class="meter-bar" role="img" aria-label="${esc(L(skill.group, lang))} ${meter}%"><i style="--v:${meter}%"></i></div></div>`;
+          }).join('\n          ')}
+        </div>
+      </section>
       <section class="demo" data-lang="${lang}" aria-labelledby="demo-title">
         <div><span>INTERACTIVE CHECK / M35</span><h2 id="demo-title">${en ? 'Validate a budget' : 'Validar um orçamento'}</h2><p>${en ? 'Client-side simulation only. Maximum 64 operations and 256 KiB for this demonstration.' : 'Apenas uma simulação no navegador. Máximo de 64 operações e 256 KiB nesta demonstração.'}</p></div>
         <form class="demo-controls" onsubmit="return false">
@@ -448,7 +459,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
       </section>
       <a class="back-link" href="${route.home}#work">← ${en ? 'Return to selected work' : 'Voltar aos projetos'}</a>
     </main>
-    <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Architecture-level public record.' : 'Registro público no nível de arquitetura.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
+    <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Authorized operations only. Architecture-level public record.' : 'Somente operações autorizadas. Registro público em nível de arquitetura.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
     ${palette(lang)}
     <script src="${route.prefix}assets/js/site.js"></script>
     <script src="${route.prefix}assets/js/showcase-demo.js"></script>

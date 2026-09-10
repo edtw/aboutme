@@ -107,46 +107,46 @@
       "name": "Micro Runtime",
       "visibility": "private-case-study",
       "domain": {
-        "en": "RUST · SECURITY ENGINEERING · LOCAL AI · OT FLEET RUNTIME",
-        "pt": "RUST · ENGENHARIA DE SEGURANÇA · IA LOCAL · RUNTIME DE FROTA OT"
+        "en": "RUST · RED TEAM PLATFORM · LOCAL AI · C2",
+        "pt": "RUST · PLATAFORMA RED TEAM · IA LOCAL · C2"
       },
       "summary": {
-        "en": "A Rust runtime for small machines and industrial edge fleets. It runs local AI inside hard limits: a tiny INT8 model VM, GGUF inference on CPU, and a capability broker where every model decision is authorized before it reaches the host. Ships with a hardened fleet agent (mutual TLS, site PKI, signed extensions), an operator HMI, memory-safe workers, sealed weights, and CI gates that keep the architecture honest. Also my red-team and blue-team research platform.",
-        "pt": "Runtime Rust para máquinas pequenas e frotas industriais de borda. Executa IA local dentro de limites rígidos: uma VM de modelo INT8 minúscula, inferência GGUF em CPU e um capability broker que autoriza cada decisão do modelo antes de chegar ao host. Inclui agente de frota endurecido (mTLS, PKI de planta, extensões assinadas), HMI do operador, workers memory-safe, pesos selados e gates de CI que mantêm a arquitetura honesta. Também é minha plataforma de pesquisa red team e blue team."
+        "en": "A red team operator platform I designed and built in Rust. An endpoint agent and command-and-control plane for authorized operations: mutual-TLS tasking, site PKI, an operator HMI, telemetry, and a closed HostOp ISA executed in isolated workers. Local AI supports decisions at the edge (GGUF on CPU and a tiny INT8 model VM) behind a capability broker that authorizes every model-proposed action, so probabilistic output never gets ambient authority. Memory-safe, sealed weights, signed extensions, and CI gates that keep the architecture honest. Also the platform behind my red-team and blue-team research.",
+        "pt": "Plataforma de operador red team que projetei e construí em Rust. Agente de endpoint e plano de command-and-control para operações autorizadas: tasking mTLS, PKI de site, HMI do operador, telemetria e ISA HostOp fechada executada em workers isolados. IA local apoia decisões na borda (GGUF em CPU e uma VM minúscula de modelo INT8) atrás de um capability broker que autoriza cada ação proposta pelo modelo, então saída probabilística nunca ganha autoridade ambiente. Memory-safe, pesos selados, extensões assinadas e gates de CI que mantêm a arquitetura honesta. Também é a plataforma por trás da minha pesquisa red team e blue team."
       },
       "challenge": {
-      "en": "Make local AI useful on constrained hardware without giving probabilistic output ambient authority.",
-      "pt": "Tornar IA local útil em hardware restrito sem dar autoridade ambiente à saída probabilística."
+      "en": "Build an operator platform that is powerful under authorization and strict everywhere else.",
+      "pt": "Construir uma plataforma de operador poderosa sob autorização e rígida em todo o resto."
       },
-      "evidence": "Rust · no_std · Candle · GGUF · M35 TinyML · mTLS/PKI · Windows internals · Linux/macOS · CI architecture gates",
+      "evidence": "Rust · no_std · Candle · GGUF · M35 TinyML · mTLS/PKI · C2 control plane · Windows internals · Linux/macOS · CI architecture gates",
       "order": 1,
       "track": "SECURITY",
-      "codename": "TRUSTED EDGE",
+      "codename": "RED EDGE",
       "blurb": {
-        "en": "A Rust runtime for constrained machines: local AI, a typed capability ISA, and a hardened fleet agent. Built red, verified blue.",
-        "pt": "Runtime Rust para máquinas restritas: IA local, ISA de capacidades tipada e agente de frota endurecido. Construído em red, verificado em blue."
+        "en": "A red team operator platform: endpoint agent, command-and-control plane, and local AI with per-action authorization.",
+        "pt": "Plataforma de operador red team: agente de endpoint, plano de command-and-control e IA local com autorização por ação."
       },
-      "stack": "Rust · no_std · Candle · GGUF · TinyML · mTLS · PKI · Windows internals",
+      "stack": "Rust · no_std · Candle · GGUF · TinyML · mTLS · PKI · C2 · Windows internals",
       "role": {
-        "en": "Architecture, local-AI execution, hardened agent runtime, CI gates",
-        "pt": "Arquitetura, execução de IA local, runtime endurecido do agente, gates de CI"
+        "en": "Architecture, agent and control plane, local AI, CI gates",
+        "pt": "Arquitetura, agente e plano de controle, IA local, gates de CI"
       },
       "focus": {
-        "en": "Capability boundaries, memory budgets, adversarial research",
-        "pt": "Limites de capacidade, orçamentos de memória, pesquisa adversarial"
+        "en": "Adversary emulation, capability boundaries, detection handoff",
+        "pt": "Emulação de adversário, limites de capacidade, handoff de detecção"
       },
       "link": { "kind": "showcase" },
       "resumeBullets": {
         "en": [
           "Built a feature-gated Rust runtime where capabilities compile in or out by build profile without forking the codebase",
           "Added local AI execution: memory-mapped GGUF, a no-heap INT8 TinyML VM with hard budgets, and a capability broker that authorizes each model-proposed action",
-          "Engineered a hardened fleet agent with mutual TLS, site PKI, signed extensions, and a closed HostOp ISA in isolated session workers",
+          "Engineered the endpoint agent and command-and-control plane: mutual TLS, site PKI, signed extensions, and a closed HostOp ISA in isolated workers",
           "Run red-team and blue-team research around the platform: endpoint internals, telemetry, detection surfaces, and CI architecture gates that fail dirty builds"
         ],
         "pt": [
           "Construção de runtime Rust por features, com capacidades compiladas por perfil de build sem forking do código",
           "Execução de IA local: GGUF via mmap, VM TinyML INT8 sem heap com orçamentos rígidos e capability broker que autoriza cada ação proposta pelo modelo",
-          "Agente de frota endurecido com mTLS, PKI de planta, extensões assinadas e ISA HostOp fechada em session workers isolados",
+          "Agente de endpoint e plano de command-and-control: mTLS, PKI de site, extensões assinadas e ISA HostOp fechada em workers isolados",
           "Pesquisa red team e blue team na plataforma: internals de endpoint, telemetria, superfícies de detecção e gates de arquitetura no CI que reprovam builds sujos"
         ]
       }

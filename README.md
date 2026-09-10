@@ -21,7 +21,7 @@ A unified bilingual professional identity:
 - **Editorial portfolio** (EN + PT-BR static pages) with a cyber-operator console visual system
 - **Evidence-based case studies**: Karma Network, Micro Runtime, ESTH, Marambaia PDV, Prisma Platform, Airshipper, NEXUS
 - **Security & Red Team section** framed for authorized lab work and defensive outcomes
-- **Public Micro Runtime showcase**: readable case study of the runtime running local AI, the capability broker, and the hardened fleet agent. Architecture level, no private code.
+- **Public Micro Runtime showcase**: architecture-level case study of the operator platform: endpoint agent, command-and-control plane, local AI with per-action authorization, and the red-to-blue workflow. No private code.
 - **Résumé creator**: ATS-friendly one-page + detailed résumés in EN + PT-BR, with print CSS and optional PDF generation
 
 ## Professional profile
@@ -31,7 +31,7 @@ Software engineer and security researcher with a systems-oriented mindset across
 ## Selected work (private case studies, architecture-level only)
 
 - **Karma Network · Spirix:** Rust mesh/blockchain/compute framework with PoA chain, DHT overlay, DAG sync, federated learning, Candle inference, and a reference agent.
-- **Micro Runtime:** Rust runtime for constrained hosts and industrial edge fleets: local AI (GGUF, M35 TinyML), a capability broker, hardened fleet agent with site PKI, and CI architecture gates.
+- **Micro Runtime:** Red team operator platform in Rust: endpoint agent + command-and-control plane for authorized operations, local AI (GGUF, M35 TinyML) behind a capability broker, site PKI, and CI architecture gates.
 - **ESTH:** Licensed scripting/telemetry system with a C++ agent, FastAPI cloud, ownership-gated sync, AES-GCM delivery, versioned contracts, and lab-only scope.
 - **Marambaia PDV:** Real-time restaurant operations with QR flows and consistency fixes.
 - **Prisma Platform:** WhatsApp/AI service platform with provider abstraction.
