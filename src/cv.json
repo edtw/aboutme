@@ -1,7 +1,7 @@
 {
   "meta": {
     "schemaVersion": 1,
-    "contentVersion": "2.2.0",
+    "contentVersion": "2.2.1",
     "lastUpdated": "2026-09-10",
     "siteUrl": "https://edtw.github.io/aboutme"
   },
@@ -115,8 +115,8 @@
         "pt": "Plataforma de operador red team que projetei e construí em Rust. Agente de endpoint e plano de command-and-control para operações autorizadas: tasking mTLS, PKI de site, HMI do operador, telemetria e ISA HostOp fechada executada em workers isolados. IA local apoia decisões na borda (GGUF em CPU e uma VM minúscula de modelo INT8) atrás de um capability broker que autoriza cada ação proposta pelo modelo, então saída probabilística nunca ganha autoridade ambiente. Memory-safe, pesos selados, extensões assinadas e gates de CI que mantêm a arquitetura honesta. Também é a plataforma por trás da minha pesquisa red team e blue team."
       },
       "challenge": {
-      "en": "Build an operator platform that is powerful under authorization and strict everywhere else.",
-      "pt": "Construir uma plataforma de operador poderosa sob autorização e rígida em todo o resto."
+        "en": "Build an operator platform that is powerful under authorization and strict everywhere else.",
+        "pt": "Construir uma plataforma de operador poderosa sob autorização e rígida em todo o resto."
       },
       "evidence": "Rust · no_std · Candle · GGUF · M35 TinyML · mTLS/PKI · C2 control plane · Windows internals · Linux/macOS · CI architecture gates",
       "order": 1,
@@ -135,7 +135,9 @@
         "en": "Adversary emulation, capability boundaries, detection handoff",
         "pt": "Emulação de adversário, limites de capacidade, handoff de detecção"
       },
-      "link": { "kind": "showcase" },
+      "link": {
+        "kind": "showcase"
+      },
       "resumeBullets": {
         "en": [
           "Built a feature-gated Rust runtime where capabilities compile in or out by build profile without forking the codebase",
@@ -233,8 +235,14 @@
       },
       "link": null,
       "resumeBullets": {
-        "en": ["Built real-time ordering, QR customer flows, and cash/table management for a restaurant POS", "Hunted down race conditions and order-total bugs across concurrent admin and customer surfaces"],
-        "pt": ["Pedidos em tempo real, fluxos QR e gestão de caixa/mesas para um PDV de restaurante", "Caça a race conditions e bugs de total em superfícies concorrentes de admin e cliente"]
+        "en": [
+          "Built real-time ordering, QR customer flows, and cash/table management for a restaurant POS",
+          "Hunted down race conditions and order-total bugs across concurrent admin and customer surfaces"
+        ],
+        "pt": [
+          "Pedidos em tempo real, fluxos QR e gestão de caixa/mesas para um PDV de restaurante",
+          "Caça a race conditions e bugs de total em superfícies concorrentes de admin e cliente"
+        ]
       }
     },
     {
@@ -272,8 +280,14 @@
       },
       "link": null,
       "resumeBullets": {
-        "en": ["Customized the open-source Veloren launcher for GitHub-hosted release channels", "Mapped platform artifacts, metrics, and metadata with automated multi-OS packaging"],
-        "pt": ["Customização do launcher open-source do Veloren para releases hospedados no GitHub", "Artefatos por plataforma, métricas e metadados com empacotamento multi-OS"]
+        "en": [
+          "Customized the open-source Veloren launcher for GitHub-hosted release channels",
+          "Mapped platform artifacts, metrics, and metadata with automated multi-OS packaging"
+        ],
+        "pt": [
+          "Customização do launcher open-source do Veloren para releases hospedados no GitHub",
+          "Artefatos por plataforma, métricas e metadados com empacotamento multi-OS"
+        ]
       }
     },
     {
@@ -311,8 +325,14 @@
       },
       "link": null,
       "resumeBullets": {
-        "en": ["Designed a multi-service WhatsApp/AI platform with provider fallback and session management", "Drew hard lines between web, messaging, AI, persistence, and cache behind Docker Compose"],
-        "pt": ["Plataforma multisseriço de WhatsApp/IA com fallback de provedores e gestão de sessão", "Fronteiras claras entre web, mensageria, IA, persistência e cache com Docker Compose"]
+        "en": [
+          "Designed a multi-service WhatsApp/AI platform with provider fallback and session management",
+          "Drew hard lines between web, messaging, AI, persistence, and cache behind Docker Compose"
+        ],
+        "pt": [
+          "Plataforma multisseriço de WhatsApp/IA com fallback de provedores e gestão de sessão",
+          "Fronteiras claras entre web, mensageria, IA, persistência e cache com Docker Compose"
+        ]
       }
     },
     {
@@ -333,8 +353,12 @@
       },
       "evidence": "Roblox Studio · Luau · live ops",
       "resumeBullets": {
-        "en": ["Develop combat gameplay on a live Roblox PvP arena"],
-        "pt": ["Gameplay de combate em arena PvP Roblox ao vivo"]
+        "en": [
+          "Develop combat gameplay on a live Roblox PvP arena"
+        ],
+        "pt": [
+          "Gameplay de combate em arena PvP Roblox ao vivo"
+        ]
       },
       "order": 4,
       "track": "GAMES",
@@ -352,7 +376,10 @@
         "en": "Combat systems, abilities, player feel",
         "pt": "Sistemas de combate, habilidades, feel do jogador"
       },
-      "link": { "kind": "url", "url": "https://www.roblox.com/pt/games/84720327590325/NEXUS" }
+      "link": {
+        "kind": "url",
+        "url": "https://www.roblox.com/pt/games/84720327590325/NEXUS"
+      }
     }
   ],
   "securityResearch": {
@@ -384,20 +411,44 @@
     ],
     "points": [
       {
-        "t": { "en": "Red team", "pt": "Red team" },
-        "d": { "en": "Adversary emulation and OS internals, isolated lab only.", "pt": "Emulação de adversário e internals de SO, só laboratório isolado." }
+        "t": {
+          "en": "Red team",
+          "pt": "Red team"
+        },
+        "d": {
+          "en": "Adversary emulation and OS internals, isolated lab only.",
+          "pt": "Emulação de adversário e internals de SO, só laboratório isolado."
+        }
       },
       {
-        "t": { "en": "Blue team", "pt": "Blue team" },
-        "d": { "en": "Reproduce the behavior, then write the detection.", "pt": "Reproduzir o comportamento, depois escrever a detecção." }
+        "t": {
+          "en": "Blue team",
+          "pt": "Blue team"
+        },
+        "d": {
+          "en": "Reproduce the behavior, then write the detection.",
+          "pt": "Reproduzir o comportamento, depois escrever a detecção."
+        }
       },
       {
-        "t": { "en": "Research", "pt": "Pesquisa" },
-        "d": { "en": "Binary and protocol analysis, cryptography, AI boundaries.", "pt": "Análise binária e de protocolos, criptografia, limites de IA." }
+        "t": {
+          "en": "Research",
+          "pt": "Pesquisa"
+        },
+        "d": {
+          "en": "Binary and protocol analysis, cryptography, AI boundaries.",
+          "pt": "Análise binária e de protocolos, criptografia, limites de IA."
+        }
       },
       {
-        "t": { "en": "Discipline", "pt": "Disciplina" },
-        "d": { "en": "Authorization first, evidence over claims.", "pt": "Autorização primeiro, evidência acima de afirmações." }
+        "t": {
+          "en": "Discipline",
+          "pt": "Disciplina"
+        },
+        "d": {
+          "en": "Authorization first, evidence over claims.",
+          "pt": "Autorização primeiro, evidência acima de afirmações."
+        }
       }
     ],
     "rules": {
@@ -427,7 +478,10 @@
   },
   "skills": [
     {
-      "group": { "en": "Backend & product", "pt": "Backend e produto" },
+      "group": {
+        "en": "Backend & product",
+        "pt": "Backend e produto"
+      },
       "meter": 90,
       "items": "TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO",
       "body": {
@@ -436,7 +490,10 @@
       }
     },
     {
-      "group": { "en": "Systems & infrastructure", "pt": "Sistemas e infraestrutura" },
+      "group": {
+        "en": "Systems & infrastructure",
+        "pt": "Sistemas e infraestrutura"
+      },
       "meter": 93,
       "items": "Rust · C/C++ · Windows internals · Linux/macOS · Docker · CI/CD · PostgreSQL · Redis",
       "body": {
@@ -445,7 +502,10 @@
       }
     },
     {
-      "group": { "en": "Red team", "pt": "Red team" },
+      "group": {
+        "en": "Red team",
+        "pt": "Red team"
+      },
       "meter": 82,
       "items": "Adversary emulation · Windows internals · binary & protocol analysis · attack-surface review",
       "body": {
@@ -454,7 +514,10 @@
       }
     },
     {
-      "group": { "en": "Blue team", "pt": "Blue team" },
+      "group": {
+        "en": "Blue team",
+        "pt": "Blue team"
+      },
       "meter": 78,
       "items": "Detection engineering · telemetry & logging · threat modeling · hardening validation",
       "body": {
@@ -463,7 +526,10 @@
       }
     },
     {
-      "group": { "en": "AI & local inference", "pt": "IA e inferência local" },
+      "group": {
+        "en": "AI & local inference",
+        "pt": "IA e inferência local"
+      },
       "meter": 87,
       "items": "Candle · GGUF · TinyML · capability boundaries · PyTorch · OpenCV · Luau",
       "body": {
@@ -474,11 +540,22 @@
   ],
   "documents": {
     "onePage": {
-      "projectIds": ["micro-runtime", "karma", "marambaia-pdv"],
+      "projectIds": [
+        "micro-runtime",
+        "karma",
+        "marambaia-pdv"
+      ],
       "highlightCount": 2
     },
     "detailed": {
-      "projectIds": ["karma", "micro-runtime", "esth", "marambaia-pdv", "prisma-platform", "airshipper"],
+      "projectIds": [
+        "karma",
+        "micro-runtime",
+        "esth",
+        "marambaia-pdv",
+        "prisma-platform",
+        "airshipper"
+      ],
       "highlightCount": 3
     }
   }

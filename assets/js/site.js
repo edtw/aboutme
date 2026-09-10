@@ -2,6 +2,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
   const transitionWipe = document.querySelector('.transition-wipe');
+  addEventListener('pageshow', () => document.body.classList.remove('leaving'));
 
   // Content remains visible if motion is reduced or observation is unavailable.
   if (!reduced && 'IntersectionObserver' in window) {
@@ -235,4 +236,10 @@
       });
     });
   }
+
+  // Restored from the back/forward cache (or reload mid-transition): the
+  // .leaving class would keep the red transition wipe frozen over the page.
+  addEventListener('pageshow', () => {
+    document.body.classList.remove('leaving');
+  });
 })();

@@ -263,8 +263,8 @@ section { scroll-margin-top: calc(var(--header) + 12px); }
 html.theme-red { --signal: #ff3b3b; --signal-rgb: 255, 59, 59; --signal-soft: rgba(255, 59, 59, .12); --accent-2: #ff8a3d; --accent-2-rgb: 255, 138, 61; --on-signal: #160303; }
 .theme-red body::before { background: radial-gradient(820px 560px at 8% -8%, rgba(var(--signal-rgb), .1), transparent 62%), radial-gradient(760px 620px at 102% 4%, rgba(var(--accent-2-rgb), .06), transparent 58%), radial-gradient(900px 700px at 50% 118%, rgba(var(--signal-rgb), .05), transparent 60%); }
 .theme-anim, .theme-anim *, .theme-anim *::before, .theme-anim *::after { transition: color .9s ease, background-color .9s ease, border-color .9s ease, box-shadow .9s ease, text-shadow .9s ease, outline-color .9s ease !important; }
-.transition-wipe { position: fixed; inset: 0; z-index: 130; pointer-events: none; transform: translateY(101%); background: linear-gradient(180deg, var(--signal) 0 2px, rgba(255, 59, 59, .96) 14%, #b3121f 100%); box-shadow: 0 -22px 70px rgba(255, 59, 59, .45); }
-body.leaving .transition-wipe { animation: leave-sweep .8s cubic-bezier(.7, 0, .25, 1) forwards; }
+.transition-wipe { position: fixed; inset: 0; z-index: 130; pointer-events: none; transform: translateY(101%); visibility: hidden; background: linear-gradient(180deg, var(--signal) 0 2px, rgba(255, 59, 59, .96) 14%, #b3121f 100%); }
+body.leaving .transition-wipe { visibility: visible; box-shadow: 0 -22px 70px rgba(255, 59, 59, .45); animation: leave-sweep .8s cubic-bezier(.7, 0, .25, 1) forwards; }
 html.theme-red ::selection { background: #ff3b3b; color: #160303; }
 html.theme-red ::-webkit-scrollbar { width: 12px; }
 html.theme-red ::-webkit-scrollbar-track { background: #0a0506; }
