@@ -1,6 +1,7 @@
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
+  const transitionWipe = document.querySelector('.transition-wipe');
 
   // Content remains visible if motion is reduced or observation is unavailable.
   if (!reduced && 'IntersectionObserver' in window) {
@@ -164,7 +165,14 @@
         const path = document.createElement('small');
         path.textContent = entry.href.startsWith('http') ? 'external' : entry.href;
         button.append(name, path);
-        button.addEventListener('click', () => { location.href = entry.href; });
+        button.addEventListener('click', () => {
+          if (transitionWipe && !reduced && entry.href.includes('microruntime')) {
+            document.body.classList.add('leaving');
+            setTimeout(() => { location.href = entry.href; }, 780);
+          } else {
+            location.href = entry.href;
+          }
+        });
         li.append(button);
         list.append(li);
       });
@@ -215,38 +223,15 @@
     });
   }
 
-  // Showcase theme: green shifts to red when the operator case study opens.
-  const showcasePage = document.body.classList.contains('showcase-page');
-  if (showcasePage) {
-    const modeLabel = document.getElementById('mode-label');
-    const arm = () => {
-      document.documentElement.classList.add('theme-red');
-      if (modeLabel) modeLabel.textContent = lang === 'pt' ? 'MODO / RED' : 'MODE / RED';
-    };
-    if (reduced) {
-      arm();
-    } else {
-      const wipe = document.createElement('div');
-      wipe.className = 'theme-wipe';
-      document.body.append(wipe);
-      setTimeout(() => {
-        document.documentElement.classList.add('theme-anim');
-        wipe.classList.add('run');
-        arm();
-        setTimeout(() => document.documentElement.classList.remove('theme-anim'), 1600);
-        setTimeout(() => wipe.remove(), 1400);
-      }, 420);
-    }
-  } else {
-    // Portfolio: arm the red transition before opening the case study.
+  // Page transition: leaving the portfolio for the operator case study.
+  if (!document.body.classList.contains('showcase-page')) {
     document.querySelectorAll('a[href*="microruntime"]').forEach((link) => {
       link.addEventListener('click', (event) => {
         if (reduced || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
+        if (!transitionWipe) return;
         event.preventDefault();
-        const overlay = document.createElement('div');
-        overlay.className = 'arm-overlay';
-        document.body.append(overlay);
-        setTimeout(() => { location.href = link.href; }, 620);
+        document.body.classList.add('leaving');
+        setTimeout(() => { location.href = link.href; }, 780);
       });
     });
   }

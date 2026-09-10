@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="theme-red">
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,13 +20,14 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Micro Runtime | Red team operator platform</title>
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="icon" href="../favicon.svg?v=2.2.0" type="image/svg+xml" />
+  <link rel="stylesheet" href="../styles.css?v=2.2.0" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe \"Yuee\" Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Red Team","Blue Team","Cybersecurity Research","Detection Engineering","Rust","Python","TypeScript","C++","Local AI inference","Distributed systems","Roblox Studio"]}</script>
-    <link rel="stylesheet" href="../assets/css/showcase.css" />
+    <link rel="stylesheet" href="../assets/css/showcase.css?v=2.2.0" />
   </head>
   <body id="top" class="showcase-page">
     <div class="screen-texture" aria-hidden="true"></div>
+    <div class="intro-wipe" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href="../#top" aria-label="Felipe Yuee Lemos home">
@@ -55,12 +56,13 @@
         </details>
       </div>
     </header>
+    <div class="ticker" aria-hidden="true"><div><span>AUTHORIZED OPERATIONS ONLY</span><b>/</b><span>SCOPE / ISOLATED LAB</span><b>/</b><span>AGENT + CONTROL PLANE</span><b>/</b><span>LOCAL AI / BROKERED</span><b>/</b><span>AUDIT TRAIL ON</span><b>/</b><span>AUTHORIZED OPERATIONS ONLY</span><b>/</b><span>SCOPE / ISOLATED LAB</span><b>/</b><span>AGENT + CONTROL PLANE</span><b>/</b><span>LOCAL AI / BROKERED</span><b>/</b><span>AUDIT TRAIL ON</span><b>/</b></div></div>
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
         <p class="section-index"><span>CASE / 001</span>Red team platform / public record</p>
-        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">MODE / STANDBY</b><span>AUTHORIZED OPERATIONS ONLY</span></p>
+        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">MODE / RED</b><span>AUTHORIZED OPERATIONS ONLY</span></p>
         <p class="kicker">ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE</p>
-        <h1>Micro Runtime <span>a red team operator platform.</span></h1>
+        <h1>Micro Runtime <span data-text="a red team operator platform.">a red team operator platform.</span></h1>
         <p class="lede">A Rust runtime, endpoint agent, and command-and-control plane I designed and built for authorized red-team operations. Local AI supports decisions at the edge, and every model-proposed action is typed, authorized, and audited. This page is the architecture story; private code stays private.</p>
         <div class="runtime-diagram" role="img" aria-label="Micro Runtime flow from bounded model output through token dispatch to closed host operations">
     <div class="diagram-head"><span>TRACE / RED-001</span><span>BOUNDARIES: ENFORCED</span></div>
@@ -87,6 +89,34 @@ one-shot / 256 slots / closed enum</code></pre></article>
         <article><span>06 / SKILLS SHOWN</span><h2>What this proves</h2><p>Low-level Rust, memory and allocator design, PKI and secure transport, protocol design, cross-platform internals, local inference, and the discipline to gate every build with architecture checks.</p></article>
         <article class="excluded"><span>07 / PUBLIC BOUNDARY</span><h2>Architecture level</h2><p>Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews.</p></article>
       </div>
+      <section class="ops-board reveal" aria-label="Operator console preview">
+        <div class="ops-head"><span>OPS / LIVE</span><span class="ops-live"><i></i>CONTROL PLANE</span><span>CELL 001</span></div>
+        <div class="ops-grid">
+          <div class="ops-col">
+            <h3>Agents</h3>
+            <ul class="agent-list">
+              <li><i></i><span>agent-01</span><b>linux</b><em>mTLS</em></li>
+              <li><i></i><span>agent-02</span><b>darwin</b><em>mTLS</em></li>
+              <li><i class="warn"></i><span>agent-03</span><b>windows</b><em>queued</em></li>
+            </ul>
+          </div>
+          <div class="ops-col">
+            <h3>Task queue</h3>
+            <ul class="task-list">
+              <li><span>policy.sync</span><i style="--w:86%"></i><b>86%</b></li>
+              <li><span>telemetry.collect</span><i style="--w:64%"></i><b>64%</b></li>
+              <li><span>audit.export</span><i style="--w:42%"></i><b>42%</b></li>
+              <li><span>assess.plan</span><i style="--w:23%"></i><b>23%</b></li>
+            </ul>
+          </div>
+          <div class="ops-col ops-signal">
+            <h3>Signal</h3>
+            <div class="radar" aria-hidden="true"><span></span><span></span><span></span><i class="sweep"></i><b class="blip b1"></b><b class="blip b2"></b><b class="blip b3"></b></div>
+            <svg class="wave" viewBox="0 0 220 40" aria-hidden="true"><polyline points="0,20 18,20 24,9 30,31 36,13 42,25 50,17 58,20 78,20 84,7 90,33 96,15 104,25 112,17 122,20 146,20 152,11 158,29 164,15 172,23 188,20 220,20"/></svg>
+          </div>
+        </div>
+        <div class="ops-foot"><span>TYPED TASKING / PINNED IDENTITY / AUDIT TRAIL</span><span>AUTHORIZED ONLY</span></div>
+      </section>
       <section class="showcase-meters reveal" aria-labelledby="meters-title">
         <span>CAPABILITY / SELF-ASSESSED</span>
         <h2 id="meters-title">Where I am strong</h2>
@@ -109,7 +139,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
       </section>
       <a class="back-link" href="../#work">← Return to selected work</a>
     </main>
-    <footer class="statusbar"><span><i></i>CASE ONLINE / Micro Runtime</span><span>Authorized operations only. Architecture-level public record.</span><span>2026 / v2.1.0</span></footer>
+    <footer class="statusbar"><span><i></i>CASE ONLINE / Micro Runtime</span><span>Authorized operations only. Architecture-level public record.</span><span>2026 / v2.2.0</span></footer>
     <div class="palette" id="palette" hidden>
       <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Command palette">
         <div class="palette-input"><span class="prompt" aria-hidden="true">root@yuee:~$</span><input id="palette-input" type="search" autocomplete="off" placeholder="jump to section..." aria-label="Search sections" /></div>
@@ -117,7 +147,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
         <div class="palette-hint"><span>↑↓ navigate</span><span>↵ open</span><span>esc close</span></div>
       </div>
     </div>
-    <script src="../assets/js/site.js"></script>
-    <script src="../assets/js/showcase-demo.js"></script>
+    <script src="../assets/js/site.js?v=2.2.0"></script>
+    <script src="../assets/js/showcase-demo.js?v=2.2.0"></script>
   </body>
 </html>

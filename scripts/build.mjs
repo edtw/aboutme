@@ -10,6 +10,7 @@ const L = (obj, lang) => obj?.[lang] ?? obj?.en ?? '';
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const clean = (s) => s.replace(/[ \t]+$/gm, '');
 const SITE = cv.meta.siteUrl;
+const V = cv.meta.contentVersion;
 
 const T = {
   en: {
@@ -58,8 +59,8 @@ function head({ lang, title, desc, canonical, route }) {
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>${esc(title)}</title>
-  <link rel="icon" href="${route.prefix}favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="${route.prefix}styles.css" />
+  <link rel="icon" href="${route.prefix}favicon.svg?v=${V}" type="image/svg+xml" />
+  <link rel="stylesheet" href="${route.prefix}styles.css?v=${V}" />
   <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: cv.person.name, url: SITE, sameAs: [cv.person.profiles.github, cv.person.profiles.linkedin], address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' }, knowsAbout: ['Red Team', 'Blue Team', 'Cybersecurity Research', 'Detection Engineering', 'Rust', 'Python', 'TypeScript', 'C++', 'Local AI inference', 'Distributed systems', 'Roblox Studio'] })}</script>`;
 }
 
@@ -273,6 +274,7 @@ ${head({ lang, title, desc, canonical, route })}
   </head>
   <body id="top">
     <div class="screen-texture" aria-hidden="true"></div>
+    <div class="transition-wipe" aria-hidden="true"></div>
 ${header(lang, 'portfolio', route)}
     <main id="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
@@ -397,7 +399,7 @@ ${header(lang, 'portfolio', route)}
     </main>
     <footer class="statusbar"><span><i></i>${en ? 'SYSTEM READY' : 'SISTEMA PRONTO'} / Felipe "Yuee" Lemos</span><span>${en ? 'Red team. Blue team. Authorized research.' : 'Red team. Blue team. Pesquisa autorizada.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
     ${palette(lang)}
-    <script src="${route.prefix}assets/js/site.js"></script>
+    <script src="${route.prefix}assets/js/site.js?v=${V}"></script>
   </body>
 </html>
 `;
@@ -410,20 +412,22 @@ function runtimePage(lang) {
   const title = en ? 'Micro Runtime | Red team operator platform' : 'Micro Runtime | Plataforma de operador red team';
   const desc = en ? 'A red team operator platform: endpoint agent, command-and-control plane, and local AI with per-action authorization. Architecture-level case study, private code off-page.' : 'Plataforma de operador red team: agente de endpoint, plano de command-and-control e IA local com autorização por ação. Estudo de caso em nível de arquitetura, código privado fora da página.';
   return `<!doctype html>
-<html lang="${en ? 'en' : 'pt-BR'}">
+<html lang="${en ? 'en' : 'pt-BR'}" class="theme-red">
   <head>
 ${head({ lang, title, desc, canonical, route })}
-    <link rel="stylesheet" href="${route.prefix}assets/css/showcase.css" />
+    <link rel="stylesheet" href="${route.prefix}assets/css/showcase.css?v=${V}" />
   </head>
   <body id="top" class="showcase-page">
     <div class="screen-texture" aria-hidden="true"></div>
+    <div class="intro-wipe" aria-hidden="true"></div>
 ${header(lang, 'runtime', route)}
+    <div class="ticker" aria-hidden="true"><div>${Array.from({ length: 2 }, () => (en ? '<span>AUTHORIZED OPERATIONS ONLY</span><b>/</b><span>SCOPE / ISOLATED LAB</span><b>/</b><span>AGENT + CONTROL PLANE</span><b>/</b><span>LOCAL AI / BROKERED</span><b>/</b><span>AUDIT TRAIL ON</span><b>/</b>' : '<span>SOMENTE OPERAÇÕES AUTORIZADAS</span><b>/</b><span>ESCOPO / LABORATÓRIO ISOLADO</span><b>/</b><span>AGENTE + PLANO DE CONTROLE</span><b>/</b><span>IA LOCAL / BROKER</span><b>/</b><span>TRILHA DE AUDITORIA ATIVA</span><b>/</b>')).join('')}</div></div>
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
         <p class="section-index"><span>CASE / 001</span>${en ? 'Red team platform / public record' : 'Plataforma red team / registro público'}</p>
-        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">${en ? 'MODE / STANDBY' : 'MODO / STANDBY'}</b><span>${en ? 'AUTHORIZED OPERATIONS ONLY' : 'SOMENTE OPERAÇÕES AUTORIZADAS'}</span></p>
+        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">${en ? 'MODE / RED' : 'MODO / RED'}</b><span>${en ? 'AUTHORIZED OPERATIONS ONLY' : 'SOMENTE OPERAÇÕES AUTORIZADAS'}</span></p>
         <p class="kicker">${en ? 'ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE' : 'NÍVEL DE ARQUITETURA / CÓDIGO PRIVADO FORA DA PÁGINA'}</p>
-        <h1>Micro Runtime <span>${en ? 'a red team operator platform.' : 'uma plataforma de operador red team.'}</span></h1>
+        <h1>Micro Runtime <span data-text="${en ? 'a red team operator platform.' : 'uma plataforma de operador red team.'}">${en ? 'a red team operator platform.' : 'uma plataforma de operador red team.'}</span></h1>
         <p class="lede">${en ? 'A Rust runtime, endpoint agent, and command-and-control plane I designed and built for authorized red-team operations. Local AI supports decisions at the edge, and every model-proposed action is typed, authorized, and audited. This page is the architecture story; private code stays private.' : 'Runtime Rust, agente de endpoint e plano de command-and-control que projetei e construí para operações red team autorizadas. IA local apoia decisões na borda, e cada ação proposta pelo modelo é tipada, autorizada e auditada. Esta página é a história de arquitetura; código privado permanece privado.'}</p>
         ${runtimeDiagram(lang)}
       </div>
@@ -438,6 +442,34 @@ one-shot / 256 slots / closed enum</code></pre></article>
         <article><span>06 / SKILLS SHOWN</span><h2>${en ? 'What this proves' : 'O que isso prova'}</h2><p>${en ? 'Low-level Rust, memory and allocator design, PKI and secure transport, protocol design, cross-platform internals, local inference, and the discipline to gate every build with architecture checks.' : 'Rust de baixo nível, desenho de memória e alocador, PKI e transporte seguro, desenho de protocolo, internals multiplataforma, inferência local e a disciplina de validar cada build com checks de arquitetura.'}</p></article>
         <article class="excluded"><span>07 / PUBLIC BOUNDARY</span><h2>${en ? 'Architecture level' : 'Nível de arquitetura'}</h2><p>${en ? 'Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews.' : 'Implementação privada, pesos, chaves, transportes reais e pesquisa privilegiada ficam fora desta página. Posso detalhar a arquitetura em entrevistas.'}</p></article>
       </div>
+      <section class="ops-board reveal" aria-label="${en ? 'Operator console preview' : 'Prévia da consola do operador'}">
+        <div class="ops-head"><span>OPS / LIVE</span><span class="ops-live"><i></i>${en ? 'CONTROL PLANE' : 'PLANO DE CONTROLE'}</span><span>CELL 001</span></div>
+        <div class="ops-grid">
+          <div class="ops-col">
+            <h3>${en ? 'Agents' : 'Agentes'}</h3>
+            <ul class="agent-list">
+              <li><i></i><span>agent-01</span><b>linux</b><em>mTLS</em></li>
+              <li><i></i><span>agent-02</span><b>darwin</b><em>mTLS</em></li>
+              <li><i class="warn"></i><span>agent-03</span><b>windows</b><em>queued</em></li>
+            </ul>
+          </div>
+          <div class="ops-col">
+            <h3>${en ? 'Task queue' : 'Fila de tarefas'}</h3>
+            <ul class="task-list">
+              <li><span>policy.sync</span><i style="--w:86%"></i><b>86%</b></li>
+              <li><span>telemetry.collect</span><i style="--w:64%"></i><b>64%</b></li>
+              <li><span>audit.export</span><i style="--w:42%"></i><b>42%</b></li>
+              <li><span>assess.plan</span><i style="--w:23%"></i><b>23%</b></li>
+            </ul>
+          </div>
+          <div class="ops-col ops-signal">
+            <h3>${en ? 'Signal' : 'Sinal'}</h3>
+            <div class="radar" aria-hidden="true"><span></span><span></span><span></span><i class="sweep"></i><b class="blip b1"></b><b class="blip b2"></b><b class="blip b3"></b></div>
+            <svg class="wave" viewBox="0 0 220 40" aria-hidden="true"><polyline points="0,20 18,20 24,9 30,31 36,13 42,25 50,17 58,20 78,20 84,7 90,33 96,15 104,25 112,17 122,20 146,20 152,11 158,29 164,15 172,23 188,20 220,20"/></svg>
+          </div>
+        </div>
+        <div class="ops-foot"><span>${en ? 'TYPED TASKING / PINNED IDENTITY / AUDIT TRAIL' : 'TASKING TIPADO / IDENTIDADE FIXADA / TRILHA DE AUDITORIA'}</span><span>${en ? 'AUTHORIZED ONLY' : 'SOMENTE AUTORIZADO'}</span></div>
+      </section>
       <section class="showcase-meters reveal" aria-labelledby="meters-title">
         <span>${en ? 'CAPABILITY / SELF-ASSESSED' : 'CAPACIDADE / AUTOAVALIAÇÃO'}</span>
         <h2 id="meters-title">${en ? 'Where I am strong' : 'Onde eu sou forte'}</h2>
@@ -461,8 +493,8 @@ one-shot / 256 slots / closed enum</code></pre></article>
     </main>
     <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Authorized operations only. Architecture-level public record.' : 'Somente operações autorizadas. Registro público em nível de arquitetura.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
     ${palette(lang)}
-    <script src="${route.prefix}assets/js/site.js"></script>
-    <script src="${route.prefix}assets/js/showcase-demo.js"></script>
+    <script src="${route.prefix}assets/js/site.js?v=${V}"></script>
+    <script src="${route.prefix}assets/js/showcase-demo.js?v=${V}"></script>
   </body>
 </html>
 `;

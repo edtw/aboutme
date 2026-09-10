@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="theme-red">
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,13 +20,14 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Micro Runtime | Plataforma de operador red team</title>
-  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="icon" href="../../favicon.svg?v=2.2.0" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../styles.css?v=2.2.0" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Felipe \"Yuee\" Lemos","url":"https://edtw.github.io/aboutme","sameAs":["https://github.com/edtw","https://www.linkedin.com/in/yuee/"],"address":{"@type":"PostalAddress","addressLocality":"Rio de Janeiro","addressCountry":"BR"},"knowsAbout":["Red Team","Blue Team","Cybersecurity Research","Detection Engineering","Rust","Python","TypeScript","C++","Local AI inference","Distributed systems","Roblox Studio"]}</script>
-    <link rel="stylesheet" href="../../assets/css/showcase.css" />
+    <link rel="stylesheet" href="../../assets/css/showcase.css?v=2.2.0" />
   </head>
   <body id="top" class="showcase-page">
     <div class="screen-texture" aria-hidden="true"></div>
+    <div class="intro-wipe" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
     <header class="site-header">
       <a class="brand" href="../../pt/#top" aria-label="Felipe Yuee Lemos home">
@@ -55,12 +56,13 @@
         </details>
       </div>
     </header>
+    <div class="ticker" aria-hidden="true"><div><span>SOMENTE OPERAÇÕES AUTORIZADAS</span><b>/</b><span>ESCOPO / LABORATÓRIO ISOLADO</span><b>/</b><span>AGENTE + PLANO DE CONTROLE</span><b>/</b><span>IA LOCAL / BROKER</span><b>/</b><span>TRILHA DE AUDITORIA ATIVA</span><b>/</b><span>SOMENTE OPERAÇÕES AUTORIZADAS</span><b>/</b><span>ESCOPO / LABORATÓRIO ISOLADO</span><b>/</b><span>AGENTE + PLANO DE CONTROLE</span><b>/</b><span>IA LOCAL / BROKER</span><b>/</b><span>TRILHA DE AUDITORIA ATIVA</span><b>/</b></div></div>
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
         <p class="section-index"><span>CASE / 001</span>Plataforma red team / registro público</p>
-        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">MODO / STANDBY</b><span>SOMENTE OPERAÇÕES AUTORIZADAS</span></p>
+        <p class="mode-strip"><span class="status-dot"></span><b id="mode-label">MODO / RED</b><span>SOMENTE OPERAÇÕES AUTORIZADAS</span></p>
         <p class="kicker">NÍVEL DE ARQUITETURA / CÓDIGO PRIVADO FORA DA PÁGINA</p>
-        <h1>Micro Runtime <span>uma plataforma de operador red team.</span></h1>
+        <h1>Micro Runtime <span data-text="uma plataforma de operador red team.">uma plataforma de operador red team.</span></h1>
         <p class="lede">Runtime Rust, agente de endpoint e plano de command-and-control que projetei e construí para operações red team autorizadas. IA local apoia decisões na borda, e cada ação proposta pelo modelo é tipada, autorizada e auditada. Esta página é a história de arquitetura; código privado permanece privado.</p>
         <div class="runtime-diagram" role="img" aria-label="Fluxo do Micro Runtime, da saída limitada do modelo ao dispatch de tokens e operações fechadas do host">
     <div class="diagram-head"><span>TRACE / RED-001</span><span>BOUNDARIES: ENFORCED</span></div>
@@ -87,6 +89,34 @@ one-shot / 256 slots / closed enum</code></pre></article>
         <article><span>06 / SKILLS SHOWN</span><h2>O que isso prova</h2><p>Rust de baixo nível, desenho de memória e alocador, PKI e transporte seguro, desenho de protocolo, internals multiplataforma, inferência local e a disciplina de validar cada build com checks de arquitetura.</p></article>
         <article class="excluded"><span>07 / PUBLIC BOUNDARY</span><h2>Nível de arquitetura</h2><p>Implementação privada, pesos, chaves, transportes reais e pesquisa privilegiada ficam fora desta página. Posso detalhar a arquitetura em entrevistas.</p></article>
       </div>
+      <section class="ops-board reveal" aria-label="Prévia da consola do operador">
+        <div class="ops-head"><span>OPS / LIVE</span><span class="ops-live"><i></i>PLANO DE CONTROLE</span><span>CELL 001</span></div>
+        <div class="ops-grid">
+          <div class="ops-col">
+            <h3>Agentes</h3>
+            <ul class="agent-list">
+              <li><i></i><span>agent-01</span><b>linux</b><em>mTLS</em></li>
+              <li><i></i><span>agent-02</span><b>darwin</b><em>mTLS</em></li>
+              <li><i class="warn"></i><span>agent-03</span><b>windows</b><em>queued</em></li>
+            </ul>
+          </div>
+          <div class="ops-col">
+            <h3>Fila de tarefas</h3>
+            <ul class="task-list">
+              <li><span>policy.sync</span><i style="--w:86%"></i><b>86%</b></li>
+              <li><span>telemetry.collect</span><i style="--w:64%"></i><b>64%</b></li>
+              <li><span>audit.export</span><i style="--w:42%"></i><b>42%</b></li>
+              <li><span>assess.plan</span><i style="--w:23%"></i><b>23%</b></li>
+            </ul>
+          </div>
+          <div class="ops-col ops-signal">
+            <h3>Sinal</h3>
+            <div class="radar" aria-hidden="true"><span></span><span></span><span></span><i class="sweep"></i><b class="blip b1"></b><b class="blip b2"></b><b class="blip b3"></b></div>
+            <svg class="wave" viewBox="0 0 220 40" aria-hidden="true"><polyline points="0,20 18,20 24,9 30,31 36,13 42,25 50,17 58,20 78,20 84,7 90,33 96,15 104,25 112,17 122,20 146,20 152,11 158,29 164,15 172,23 188,20 220,20"/></svg>
+          </div>
+        </div>
+        <div class="ops-foot"><span>TASKING TIPADO / IDENTIDADE FIXADA / TRILHA DE AUDITORIA</span><span>SOMENTE AUTORIZADO</span></div>
+      </section>
       <section class="showcase-meters reveal" aria-labelledby="meters-title">
         <span>CAPACIDADE / AUTOAVALIAÇÃO</span>
         <h2 id="meters-title">Onde eu sou forte</h2>
@@ -109,7 +139,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
       </section>
       <a class="back-link" href="../../pt/#work">← Voltar aos projetos</a>
     </main>
-    <footer class="statusbar"><span><i></i>CASO ONLINE / Micro Runtime</span><span>Somente operações autorizadas. Registro público em nível de arquitetura.</span><span>2026 / v2.1.0</span></footer>
+    <footer class="statusbar"><span><i></i>CASO ONLINE / Micro Runtime</span><span>Somente operações autorizadas. Registro público em nível de arquitetura.</span><span>2026 / v2.2.0</span></footer>
     <div class="palette" id="palette" hidden>
       <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Paleta de comandos">
         <div class="palette-input"><span class="prompt" aria-hidden="true">root@yuee:~$</span><input id="palette-input" type="search" autocomplete="off" placeholder="ir para a seção..." aria-label="Buscar seções" /></div>
@@ -117,7 +147,7 @@ one-shot / 256 slots / closed enum</code></pre></article>
         <div class="palette-hint"><span>↑↓ navegar</span><span>↵ abrir</span><span>esc fechar</span></div>
       </div>
     </div>
-    <script src="../../assets/js/site.js"></script>
-    <script src="../../assets/js/showcase-demo.js"></script>
+    <script src="../../assets/js/site.js?v=2.2.0"></script>
+    <script src="../../assets/js/showcase-demo.js?v=2.2.0"></script>
   </body>
 </html>
