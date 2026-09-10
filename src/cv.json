@@ -1,8 +1,8 @@
 {
   "meta": {
     "schemaVersion": 1,
-    "contentVersion": "2.0.0",
-    "lastUpdated": "2026-09-04",
+    "contentVersion": "2.1.0",
+    "lastUpdated": "2026-09-10",
     "siteUrl": "https://edtw.github.io/aboutme"
   },
   "person": {
@@ -12,20 +12,20 @@
       "pt": "Rio de Janeiro, Brasil"
     },
     "headline": {
-      "en": "Software Engineer | Backend & Systems | Security Engineering | Rust, Python, TypeScript, C/C++ | Roblox Developer",
-      "pt": "Engenheiro de Software | Backend e Sistemas | Engenharia de Segurança | Rust, Python, TypeScript, C/C++ | Desenvolvedor Roblox"
+      "en": "Security Engineer | Red Team & Blue Team | Cybersecurity Researcher | AI & Rust Systems",
+      "pt": "Engenheiro de Segurança | Red Team e Blue Team | Pesquisador em Cibersegurança | IA e Sistemas Rust"
     },
     "role": {
-      "en": "Software Engineer & Roblox Developer",
-      "pt": "Engenheiro de Software & Desenvolvedor Roblox"
+      "en": "Security Engineer / Red Team & Blue Team / AI Systems",
+      "pt": "Engenheiro de Segurança / Red Team e Blue Team / Sistemas de IA"
     },
     "statement": {
-      "en": "I'm Felipe. I build systems software: runtimes, networks, game combat. I study how they break. In a lab. On purpose.",
-      "pt": "Sou o Felipe. Construo software de sistemas: runtimes, redes, combate em jogos. Estudo como eles quebram. Em laboratório. De propósito."
+      "en": "I build systems and break them on purpose: Rust runtimes with local AI, red team and blue team security work. Isolated lab, explicit scope.",
+      "pt": "Construo sistemas e os quebro de propósito: runtimes Rust com IA local, trabalho de red team e blue team. Laboratório isolado, escopo explícito."
     },
     "summary": {
-      "en": "I'm a software engineer in Rio de Janeiro who learns systems by building them and breaking them in an isolated lab. I work across backend services, Rust runtimes with local AI, release infrastructure, distributed-systems research, and Roblox gameplay, currently developing combat systems on NEXUS. I do my best work where ownership is real: small teams, hard constraints, and code that has to earn trust. Preparing for OSCP and open to software engineering, backend, systems, and application-security roles.",
-      "pt": "Sou engenheiro de software no Rio de Janeiro e aprendo sistemas construindo e quebrando em laboratório isolado. Atuo em serviços backend, runtimes Rust com IA local, infraestrutura de releases, pesquisa em sistemas distribuídos e gameplay no Roblox, atualmente em sistemas de combate no NEXUS. Rendo melhor onde há ownership real: times pequenos, restrições duras e código que precisa conquistar confiança. Em preparação para o OSCP, busco vagas em engenharia de software, backend, sistemas e segurança de aplicações."
+      "en": "Security engineer in Rio de Janeiro. I build Rust runtimes with local AI and break systems on purpose in an isolated lab. Background in backend, infrastructure, distributed systems, and live Roblox gameplay. OSCP in progress. Open to red team, blue team, research, and AI engineering roles.",
+      "pt": "Engenheiro de segurança no Rio de Janeiro. Construo runtimes Rust com IA local e quebro sistemas de propósito em laboratório isolado. Base em backend, infraestrutura, sistemas distribuídos e gameplay ao vivo no Roblox. OSCP em andamento. Aberto a vagas de red team, blue team, pesquisa e engenharia de IA."
     },
     "profiles": {
       "github": "https://github.com/edtw",
@@ -107,45 +107,47 @@
       "name": "Micro Runtime",
       "visibility": "private-case-study",
       "domain": {
-        "en": "RUST · SYSTEMS ENGINEERING · LOCAL AI RUNTIME",
-        "pt": "RUST · ENGENHARIA DE SISTEMAS · RUNTIME LOCAL DE IA"
+        "en": "RUST · SECURITY ENGINEERING · LOCAL AI · OT FLEET RUNTIME",
+        "pt": "RUST · ENGENHARIA DE SEGURANÇA · IA LOCAL · RUNTIME DE FROTA OT"
       },
       "summary": {
-        "en": "Modular Rust runtime for constrained environments. Feature-gated architecture with optional no_std, custom allocator (4 KiB pages, sharded heap, ephemeral scopes), fixed 256-slot one-shot SecureDispatcher, read-only memory-mapped IO, closed HostOp ISA with session workers, and automated architecture validation in CI. Local AI execution model: TokenEngine trait decoupling numeric decisions from actions; local GGUF via Candle with memory-mapped and in-memory model loading, quantized Qwen/Llama/Gemma/Phi on CPU, explicit model resolution with no silent fallback; M35 TinyML VM with canonical 64-byte header, fixed-length opcodes, full tape validation, budgets, offline assembler/trainer and synthetic fixtures; MRE1 zero-copy product-envelope parser with canonical ordering and policy rules.",
-        "pt": "Runtime modular em Rust para ambientes restritos. Arquitetura por features com no_std opcional, alocador customizado (páginas de 4 KiB, heap fragmentado, escopos efêmeros), SecureDispatcher fixo de 256 slots one-shot, IO com memory-map somente leitura, ISA fechada HostOp com session workers e validação automatizada da arquitetura no CI. Execução local de IA: trait TokenEngine separando decisões numéricas de ações; GGUF local via Candle com mmap e carregamento em memória, modelos quantizados Qwen/Llama/Gemma/Phi em CPU, resolução explícita sem fallback silencioso; VM TinyML M35 com header canônico de 64 bytes, opcodes de tamanho fixo, validação completa da tape, orçamentos, assembler/trainer offline e fixtures sintéticas; parser zero-copy de envelopes MRE1 com ordenação canônica e regras de política."
+        "en": "A Rust runtime for small machines and industrial edge fleets. It runs local AI inside hard limits: a tiny INT8 model VM, GGUF inference on CPU, and a capability broker where every model decision is authorized before it reaches the host. Ships with a hardened fleet agent (mutual TLS, site PKI, signed extensions), an operator HMI, memory-safe workers, sealed weights, and CI gates that keep the architecture honest. Also my red-team and blue-team research platform.",
+        "pt": "Runtime Rust para máquinas pequenas e frotas industriais de borda. Executa IA local dentro de limites rígidos: uma VM de modelo INT8 minúscula, inferência GGUF em CPU e um capability broker que autoriza cada decisão do modelo antes de chegar ao host. Inclui agente de frota endurecido (mTLS, PKI de planta, extensões assinadas), HMI do operador, workers memory-safe, pesos selados e gates de CI que mantêm a arquitetura honesta. Também é minha plataforma de pesquisa red team e blue team."
       },
       "challenge": {
-        "en": "Unify low-level memory control, local inference, transport, and trust boundaries without turning the runtime into a monolith.",
-        "pt": "Unificar controle de memória em baixo nível, inferência local, transporte e limites de confiança sem criar um monolito."
+      "en": "Make local AI useful on constrained hardware without giving probabilistic output ambient authority.",
+      "pt": "Tornar IA local útil em hardware restrito sem dar autoridade ambiente à saída probabilística."
       },
-      "evidence": "Rust · no_std · Candle · GGUF · M35 VM · MRE1 · Wasm · Axum · cryptography · CI architecture gates",
+      "evidence": "Rust · no_std · Candle · GGUF · M35 TinyML · mTLS/PKI · Windows internals · Linux/macOS · CI architecture gates",
       "order": 1,
-      "track": "SYSTEMS",
-      "codename": "LOCAL MIND",
+      "track": "SECURITY",
+      "codename": "TRUSTED EDGE",
       "blurb": {
-        "en": "A Rust runtime for small machines. Custom allocator, one-shot dispatch, AI that runs locally with no cloud.",
-        "pt": "Runtime Rust para máquinas pequenas. Alocador próprio, dispatch one-shot e IA local sem nuvem."
+        "en": "A Rust runtime for constrained machines: local AI, a typed capability ISA, and a hardened fleet agent. Built red, verified blue.",
+        "pt": "Runtime Rust para máquinas restritas: IA local, ISA de capacidades tipada e agente de frota endurecido. Construído em red, verificado em blue."
       },
-      "stack": "Rust · no_std · Candle · GGUF · TinyML · Wasm",
+      "stack": "Rust · no_std · Candle · GGUF · TinyML · mTLS · PKI · Windows internals",
       "role": {
-        "en": "Architecture, allocator, local-AI execution",
-        "pt": "Arquitetura, alocador, execução de IA local"
+        "en": "Architecture, local-AI execution, hardened agent runtime, CI gates",
+        "pt": "Arquitetura, execução de IA local, runtime endurecido do agente, gates de CI"
       },
       "focus": {
-        "en": "Memory budgets, TinyML, no silent fallbacks",
-        "pt": "Orçamentos de memória, TinyML, sem fallback silencioso"
+        "en": "Capability boundaries, memory budgets, adversarial research",
+        "pt": "Limites de capacidade, orçamentos de memória, pesquisa adversarial"
       },
       "link": { "kind": "showcase" },
       "resumeBullets": {
         "en": [
-          "Built a feature-gated Rust runtime where capabilities compile in or out without forking the codebase",
-          "Added local AI paths: memory-mapped GGUF loading and a no-heap TinyML VM with hard budgets",
-          "Keep the architecture honest with CI inventories and size gates that fail dirty builds"
+          "Built a feature-gated Rust runtime where capabilities compile in or out by build profile without forking the codebase",
+          "Added local AI execution: memory-mapped GGUF, a no-heap INT8 TinyML VM with hard budgets, and a capability broker that authorizes each model-proposed action",
+          "Engineered a hardened fleet agent with mutual TLS, site PKI, signed extensions, and a closed HostOp ISA in isolated session workers",
+          "Run red-team and blue-team research around the platform: endpoint internals, telemetry, detection surfaces, and CI architecture gates that fail dirty builds"
         ],
         "pt": [
-          "Construção de runtime Rust por features, sem forking do código para ligar/desligar capacidades",
-          "Criação de IA local: GGUF via mmap e VM TinyML sem heap, com orçamentos rígidos",
-          "Arquitetura auditável com inventários de CI e limites que reprovam builds fora do contrato"
+          "Construção de runtime Rust por features, com capacidades compiladas por perfil de build sem forking do código",
+          "Execução de IA local: GGUF via mmap, VM TinyML INT8 sem heap com orçamentos rígidos e capability broker que autoriza cada ação proposta pelo modelo",
+          "Agente de frota endurecido com mTLS, PKI de planta, extensões assinadas e ISA HostOp fechada em session workers isolados",
+          "Pesquisa red team e blue team na plataforma: internals de endpoint, telemetria, superfícies de detecção e gates de arquitetura no CI que reprovam builds sujos"
         ]
       }
     },
@@ -355,52 +357,52 @@
   ],
   "securityResearch": {
     "title": {
-      "en": "Offensive Security Research, Isolated Lab Only",
-      "pt": "Pesquisa em Segurança Ofensiva, Somente Laboratório Isolado"
+      "en": "Red Team, Blue Team & Security Research",
+      "pt": "Red Team, Blue Team e Pesquisa em Segurança"
     },
     "intro": {
-      "en": "Hands-on security research conducted for education, defense, and authorized testing only. Work emphasizes understanding operating-system behavior, binary and protocol analysis, and defensive detection, not operational tooling. Sensitive implementations stay private; public discussion is limited to concepts, boundaries, and defensive outcomes.",
-      "pt": "Pesquisa prática em segurança conduzida somente para educação, defesa e testes autorizados. O foco é compreender comportamento de sistemas operacionais, análise binária e de protocolos e detecção defensiva, não ferramentação operacional. Implementações sensíveis permanecem privadas; a discussão pública se limita a conceitos, limites e resultados defensivos."
+      "en": "Offense and defense, always in an isolated lab or authorized scope. I emulate adversaries to learn how systems break, then turn that into detections and hardening. Sensitive work stays private; this page stays at architecture level.",
+      "pt": "Ofensa e defesa, sempre em laboratório isolado ou escopo autorizado. Emulo adversários para entender como sistemas quebram e transformo isso em detecções e hardening. Trabalho sensível fica privado; esta página fica no nível de arquitetura."
     },
     "areas": [
       {
-        "en": "Windows internals and binary analysis in isolated VMs, studying telemetry to learn what defenders should log",
-        "pt": "Windows internals e análise binária em VMs isoladas, estudando telemetria para saber o que defensores devem registrar"
+        "en": "Red team: adversary emulation, Windows internals, binary and protocol analysis in isolated labs",
+        "pt": "Red team: emulação de adversário, Windows internals, análise binária e de protocolos em laboratório isolado"
       },
       {
-        "en": "Protocol and app-behavior review, including hypothesis-driven API assessments under explicit authorization",
-        "pt": "Revisão de protocolos e comportamento de apps, com avaliações de API orientadas por hipóteses e autorização explícita"
+        "en": "Blue team: detection engineering, telemetry and logging, threat modeling, hardening validation",
+        "pt": "Blue team: detection engineering, telemetria e logging, threat modeling, validação de hardening"
       },
       {
-        "en": "Malware-analysis fundamentals: loader telemetry, encrypted-IPC patterns, persistence indicators, control-plane detections",
-        "pt": "Fundamentos de análise de malware: telemetria de loaders, padrões de IPC criptografado, persistência e detecções"
+        "en": "Research: cryptography, runtime integrity, supply chain, and security boundaries for local AI",
+        "pt": "Pesquisa: criptografia, integridade de runtime, supply chain e limites de segurança para IA local"
       },
       {
-        "en": "Detection-engineering habit: reproduce suspicious behavior safely, then write the alert I wish existed",
-        "pt": "Hábito de detection engineering: reproduzir comportamento suspeito com segurança e escrever o alerta ideal"
+        "en": "Practice: authorization first, reproducible evidence, and defensive outcomes written down",
+        "pt": "Prática: autorização primeiro, evidência reproduzível e resultados defensivos documentados"
       }
     ],
     "points": [
       {
-        "t": { "en": "Windows internals", "pt": "Windows internals" },
-        "d": { "en": "Studied in isolated VMs to learn what defenders should log.", "pt": "Estudado em VMs isoladas para saber o que defensores devem registrar." }
+        "t": { "en": "Red team", "pt": "Red team" },
+        "d": { "en": "Adversary emulation and OS internals, isolated lab only.", "pt": "Emulação de adversário e internals de SO, só laboratório isolado." }
       },
       {
-        "t": { "en": "Protocol & API review", "pt": "Revisão de protocolos e APIs" },
-        "d": { "en": "Hypothesis-driven, authorized, written down.", "pt": "Com hipótese, autorização e documentação." }
+        "t": { "en": "Blue team", "pt": "Blue team" },
+        "d": { "en": "Reproduce the behavior, then write the detection.", "pt": "Reproduzir o comportamento, depois escrever a detecção." }
       },
       {
-        "t": { "en": "Malware fundamentals", "pt": "Fundamentos de malware" },
-        "d": { "en": "Loader telemetry, persistence signs, control-plane patterns.", "pt": "Telemetria de loaders, persistência, padrões de control-plane." }
+        "t": { "en": "Research", "pt": "Pesquisa" },
+        "d": { "en": "Binary and protocol analysis, cryptography, AI boundaries.", "pt": "Análise binária e de protocolos, criptografia, limites de IA." }
       },
       {
-        "t": { "en": "Detection habit", "pt": "Hábito de detecção" },
-        "d": { "en": "Reproduce it safely, then write the alert.", "pt": "Reproduzir com segurança, depois escrever o alerta." }
+        "t": { "en": "Discipline", "pt": "Disciplina" },
+        "d": { "en": "Authorization first, evidence over claims.", "pt": "Autorização primeiro, evidência acima de afirmações." }
       }
     ],
     "rules": {
-      "en": "Rules: isolated VMs only · authorized targets only · sensitive work stays private.",
-      "pt": "Regras: só VMs isoladas · só alvos autorizados · sensível fica privado."
+      "en": "Rules: isolated lab or authorized scope · evidence over claims · sensitive work stays private.",
+      "pt": "Regras: laboratório isolado ou escopo autorizado · evidência acima de afirmações · sensível fica privado."
     }
   },
   "certifications": [
@@ -419,41 +421,54 @@
       "pt": "Português (nativo) · Inglês (proficiência profissional)"
     },
     "interests": {
-      "en": "Game development (Roblox Studio) · CTF challenges · home-lab security research · open-source Rust",
-      "pt": "Desenvolvimento de jogos (Roblox Studio) · desafios CTF · pesquisa em home-lab · Rust open-source"
+      "en": "Red-team and blue-team home lab · CTFs · local AI and open-source Rust · game development (Roblox Studio)",
+      "pt": "Home lab red team e blue team · CTFs · IA local e Rust open-source · desenvolvimento de jogos (Roblox Studio)"
     }
   },
   "skills": [
     {
-      "group": { "en": "Backend & product engineering", "pt": "Backend e engenharia de produto" },
+      "group": { "en": "Backend & product", "pt": "Backend e produto" },
+      "meter": 90,
       "items": "TypeScript · Python · Node.js · FastAPI · React · Next.js · REST · GraphQL · Socket.IO",
       "body": {
-        "en": "APIs, full-stack systems, service boundaries, data modeling, authentication, and real-time communication.",
-        "pt": "APIs, sistemas full-stack, limites entre serviços, modelagem de dados, autenticação e comunicação em tempo real."
+        "en": "APIs, full-stack apps, service boundaries, authentication, and real-time features.",
+        "pt": "APIs, apps full-stack, limites entre serviços, autenticação e recursos em tempo real."
       }
     },
     {
       "group": { "en": "Systems & infrastructure", "pt": "Sistemas e infraestrutura" },
-      "items": "Rust · C/C++ · Docker · CI/CD · PostgreSQL · Redis · SQLx · Prometheus",
+      "meter": 93,
+      "items": "Rust · C/C++ · Windows internals · Linux/macOS · Docker · CI/CD · PostgreSQL · Redis",
       "body": {
-        "en": "Memory-aware software, platform integration, containers, build pipelines, observability, persistence, and caching.",
-        "pt": "Software consciente de memória, integração de plataformas, containers, pipelines, observabilidade, persistência e cache."
+        "en": "Low-level software, platform integration, containers, build pipelines, and observability.",
+        "pt": "Software de baixo nível, integração de plataformas, containers, pipelines de build e observabilidade."
       }
     },
     {
-      "group": { "en": "Security engineering", "pt": "Engenharia de segurança" },
-      "items": "Reverse engineering · AppSec · network analysis · cryptography · authorized testing",
+      "group": { "en": "Red team", "pt": "Red team" },
+      "meter": 82,
+      "items": "Adversary emulation · Windows internals · binary & protocol analysis · attack-surface review",
       "body": {
-        "en": "Authorized research across binaries, protocols, Windows internals, application behavior, and defensive validation.",
-        "pt": "Pesquisa autorizada em binários, protocolos, Windows internals, comportamento de aplicações e validação defensiva."
+        "en": "Authorized lab work: understand the mechanism, reproduce it, document it.",
+        "pt": "Trabalho autorizado em laboratório: entender o mecanismo, reproduzir, documentar."
       }
     },
     {
-      "group": { "en": "AI & interactive technology", "pt": "IA e tecnologia interativa" },
-      "items": "Candle · GGUF · TinyML · PyTorch · OpenCV · Roblox Studio · Luau",
+      "group": { "en": "Blue team", "pt": "Blue team" },
+      "meter": 78,
+      "items": "Detection engineering · telemetry & logging · threat modeling · hardening validation",
       "body": {
-        "en": "Local model execution, TinyML budgets, computer vision, gameplay systems, and software shaped around direct user feedback.",
-        "pt": "Execução local de modelos, orçamentos TinyML, visão computacional, sistemas de gameplay e software orientado pelo retorno do usuário."
+        "en": "Turn offensive findings into detections, hardening, and reproducible evidence.",
+        "pt": "Transformar achados ofensivos em detecções, hardening e evidência reproduzível."
+      }
+    },
+    {
+      "group": { "en": "AI & local inference", "pt": "IA e inferência local" },
+      "meter": 87,
+      "items": "Candle · GGUF · TinyML · capability boundaries · PyTorch · OpenCV · Luau",
+      "body": {
+        "en": "Local models with hard budgets, sealed artifacts, and explicit capability boundaries.",
+        "pt": "Modelos locais com orçamentos rígidos, artefatos selados e limites explícitos de capacidade."
       }
     }
   ],

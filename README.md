@@ -2,9 +2,9 @@
 
 # Felipe "Yuee" Lemos
 
-### Software Engineer · Systems & Security · Roblox Developer
+### Security Engineer · Red Team & Blue Team · AI & Rust Systems
 
-Rust runtimes with local AI. Distributed mesh and telemetry. Combat gameplay on NEXUS. Security research in an isolated lab.
+Red team and blue team security engineering. Rust runtimes with local AI. Distributed mesh and telemetry. Combat gameplay on NEXUS.
 
 [Portfolio](https://edtw.github.io/aboutme/) · [Português](https://edtw.github.io/aboutme/pt/) · [Micro Runtime showcase](https://edtw.github.io/aboutme/microruntime/) · [Résumé EN](https://edtw.github.io/aboutme/resume/en.html) · [Currículo PT](https://edtw.github.io/aboutme/resume/pt.html) · [LinkedIn](https://www.linkedin.com/in/yuee/) · [GitHub](https://github.com/edtw)
 
@@ -18,20 +18,20 @@ Rio de Janeiro, Brazil · Open to opportunities
 
 A unified bilingual professional identity:
 
-- **Editorial portfolio** (EN + PT-BR static pages) with gothic-noir visual system
+- **Editorial portfolio** (EN + PT-BR static pages) with a cyber-operator console visual system
 - **Evidence-based case studies**: Karma Network, Micro Runtime, ESTH, Marambaia PDV, Prisma Platform, Airshipper, NEXUS
 - **Security & Red Team section** framed for authorized lab work and defensive outcomes
-- **Public Micro Runtime showcase**: sanitized demonstration that the runtime can run AI locally (TokenEngine, GGUF, M35 TinyML, MRE1). Concepts only, no private code.
+- **Public Micro Runtime showcase**: readable case study of the runtime running local AI, the capability broker, and the hardened fleet agent. Architecture level, no private code.
 - **Résumé creator**: ATS-friendly one-page + detailed résumés in EN + PT-BR, with print CSS and optional PDF generation
 
 ## Professional profile
 
-Software engineer with a systems-oriented mindset across product, infrastructure, security, and game development: real-time web platforms, Rust runtimes with local AI execution, cross-platform release infrastructure, distributed mesh/blockchain/compute research, licensed telemetry systems, AI service architectures, isolated-lab security research, computer vision, and Roblox gameplay on NEXUS.
+Software engineer and security researcher with a systems-oriented mindset across red team, blue team, product, infrastructure, and game development: real-time web platforms, Rust runtimes with local AI execution, cross-platform release infrastructure, distributed mesh/blockchain/compute research, licensed telemetry systems, isolated-lab security research, computer vision, and Roblox gameplay on NEXUS.
 
 ## Selected work (private case studies, architecture-level only)
 
 - **Karma Network · Spirix:** Rust mesh/blockchain/compute framework with PoA chain, DHT overlay, DAG sync, federated learning, Candle inference, and a reference agent.
-- **Micro Runtime:** Rust runtime for constrained hosts with no_std, a custom allocator, one-shot dispatch, local GGUF, M35 TinyML, MRE1 envelopes, and CI architecture gates.
+- **Micro Runtime:** Rust runtime for constrained hosts and industrial edge fleets: local AI (GGUF, M35 TinyML), a capability broker, hardened fleet agent with site PKI, and CI architecture gates.
 - **ESTH:** Licensed scripting/telemetry system with a C++ agent, FastAPI cloud, ownership-gated sync, AES-GCM delivery, versioned contracts, and lab-only scope.
 - **Marambaia PDV:** Real-time restaurant operations with QR flows and consistency fixes.
 - **Prisma Platform:** WhatsApp/AI service platform with provider abstraction.

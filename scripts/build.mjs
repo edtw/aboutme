@@ -42,7 +42,8 @@ function head({ lang, title, desc, canonical, route }) {
   return `  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="${esc(desc)}" />
-  <meta name="theme-color" content="#090b0a" />
+  <meta name="theme-color" content="#04060a" />
+  <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="${canonical}" />
   <link rel="alternate" hreflang="${alternateLang}" href="${route.alternate}" />
   <link rel="alternate" hreflang="x-default" href="${defaultUrl}" />
@@ -59,7 +60,7 @@ function head({ lang, title, desc, canonical, route }) {
   <title>${esc(title)}</title>
   <link rel="icon" href="${route.prefix}favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="${route.prefix}styles.css" />
-  <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: cv.person.name, url: SITE, sameAs: [cv.person.profiles.github, cv.person.profiles.linkedin], address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' }, knowsAbout: ['Rust', 'Python', 'TypeScript', 'C++', 'Security Engineering', 'Roblox Studio', 'Local AI inference', 'Distributed systems'] })}</script>`;
+  <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: cv.person.name, url: SITE, sameAs: [cv.person.profiles.github, cv.person.profiles.linkedin], address: { '@type': 'PostalAddress', addressLocality: 'Rio de Janeiro', addressCountry: 'BR' }, knowsAbout: ['Red Team', 'Blue Team', 'Cybersecurity Research', 'Detection Engineering', 'Rust', 'Python', 'TypeScript', 'C++', 'Local AI inference', 'Distributed systems', 'Roblox Studio'] })}</script>`;
 }
 
 function header(lang, page, route) {
@@ -82,6 +83,8 @@ function header(lang, page, route) {
           ${nav}
       </nav>
       <div class="header-actions">
+        <span class="hud-clock" id="hud-clock" aria-hidden="true">--:--:--</span>
+        <button class="palette-trigger" type="button" data-palette-open aria-label="${lang === 'pt' ? 'Abrir paleta de comandos' : 'Open command palette'}">CMD <kbd>&#8984;K</kbd></button>
         <a class="network-link" href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
         <a class="lang-link" href="${route.alternateHref}" hreflang="${other.hreflang}" aria-label="${other.aria}">${other.label}</a>
         <details class="mobile-nav">
@@ -138,9 +141,9 @@ function asciiBackdrop(lang) {
   const en = lang === 'en';
   const cells = [
     { label: en ? 'RUNTIME' : 'RUNTIME', value: 'NOMINAL', spark: '0,22 18,20 36,21 54,16 72,17 90,11 108,13 120,8' },
-    { label: en ? 'MEMORY BUDGET' : 'MEMÓRIA', value: '72% CAP', spark: '0,10 20,12 40,11 60,15 80,16 100,20 120,21' },
-    { label: en ? 'NETWORK' : 'REDE', value: 'MESH OK', spark: '0,18 25,17 50,15 75,14 100,10 120,9' },
-    { label: en ? 'BUILD TREND' : 'BUILDS', value: '+12 WK', spark: '0,24 20,22 40,23 60,18 80,16 100,12 120,9' },
+    { label: en ? 'LOCAL AI' : 'IA LOCAL', value: 'M35 / GGUF', spark: '0,10 20,12 40,11 60,15 80,16 100,20 120,21' },
+    { label: en ? 'FLEET' : 'FROTA', value: 'mTLS OK', spark: '0,18 25,17 50,15 75,14 100,10 120,9' },
+    { label: en ? 'HARDENING' : 'HARDENING', value: 'W^X ON', spark: '0,24 20,22 40,23 60,18 80,16 100,12 120,9' },
     { label: en ? 'DISPATCH' : 'DISPATCH', value: '256 SLOTS', spark: '0,14 30,14 60,13 90,13 120,12' },
     { label: en ? 'STACK' : 'STACK', value: 'RS · PY · TS', spark: '0,20 24,18 48,18 72,14 96,14 120,10' }
   ];
@@ -192,6 +195,17 @@ function waveField() {
   return `<div class="wave-field" aria-hidden="true"><svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice">${parts.join('')}${bands}<g>${figure(505, 196, 1)}${figure(608, 188, -1)}</g></svg></div>`;
 }
 
+function palette(lang) {
+  const en = lang === 'en';
+  return `<div class="palette" id="palette" hidden>
+      <div class="palette-panel" role="dialog" aria-modal="true" aria-label="${en ? 'Command palette' : 'Paleta de comandos'}">
+        <div class="palette-input"><span class="prompt" aria-hidden="true">root@yuee:~$</span><input id="palette-input" type="search" autocomplete="off" placeholder="${en ? 'jump to section...' : 'ir para a seção...'}" aria-label="${en ? 'Search sections' : 'Buscar seções'}" /></div>
+        <ul class="palette-list" id="palette-list" role="listbox" aria-label="${en ? 'Sections' : 'Seções'}"></ul>
+        <div class="palette-hint"><span>↑↓ ${en ? 'navigate' : 'navegar'}</span><span>↵ ${en ? 'open' : 'abrir'}</span><span>esc ${en ? 'close' : 'fechar'}</span></div>
+      </div>
+    </div>`;
+}
+
 function runtimeDiagram(lang) {
   const en = lang === 'en';
   return `<div class="runtime-diagram" role="img" aria-label="${en ? 'Micro Runtime flow from bounded model output through token dispatch to closed host operations' : 'Fluxo do Micro Runtime, da saída limitada do modelo ao dispatch de tokens e operações fechadas do host'}">
@@ -201,7 +215,7 @@ function runtimeDiagram(lang) {
       <i aria-hidden="true">&gt;</i>
       <div><small>02</small><strong>TOKEN ENGINE</strong><span>u32 / budgeted</span></div>
       <i aria-hidden="true">&gt;</i>
-      <div><small>03</small><strong>DISPATCH</strong><span>one-shot / 256</span></div>
+      <div><small>03</small><strong>BROKER</strong><span>one-shot / 256</span></div>
       <i aria-hidden="true">&gt;</i>
       <div><small>04</small><strong>HOST OP</strong><span>closed enum</span></div>
     </div>
@@ -262,20 +276,22 @@ ${head({ lang, title, desc, canonical, route })}
 ${header(lang, 'portfolio', route)}
     <main id="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
+        <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
         ${asciiBackdrop(lang)}
         <div class="hero-rail" aria-hidden="true"><span>OPERATOR / 01</span><span>RJ.BR / UTC-3</span></div>
         <div class="hero-center">
           <p class="kicker"><span class="status-dot"></span>${en ? 'Rio de Janeiro / Open to work' : 'Rio de Janeiro / Aberto a oportunidades'}</p>
+          <p class="boot-strip" aria-hidden="true"><b>&gt;</b><span id="boot-text"></span><span class="caret"></span></p>
           <p class="identity-mark" data-text="YUEE" aria-hidden="true">YUEE</p>
           <h1 id="hero-title">Felipe <span>"Yuee"</span> Lemos</h1>
-          <p class="hero-role">${en ? 'Systems Software Engineer / Roblox Developer' : 'Engenheiro de Software de Sistemas / Desenvolvedor Roblox'}</p>
+          <p class="hero-role">${esc(L(cv.person.role, lang))}</p>
           <p class="hero-statement">${esc(desc)}</p>
           <div class="hero-links">
             <a class="button button-primary" href="#work">${en ? 'Inspect work' : 'Inspecionar projetos'} <span aria-hidden="true">↓</span></a>
             <a class="button" href="${route.prefix}resume/${en ? 'en.html' : 'pt.html'}">${en ? 'Open resume' : 'Abrir curriculo'} <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="hero-footer"><span>RUNTIMES</span><span>NETWORKS</span><span>SECURITY</span><span>GAMEPLAY</span></div>
+        <div class="hero-footer"><span>RED TEAM</span><span>BLUE TEAM</span><span>RESEARCH</span><span>AI</span></div>
       </section>
 
       <section class="work section" id="work">
@@ -289,7 +305,7 @@ ${header(lang, 'portfolio', route)}
           <article class="flagship work-item reveal" data-track="${flagship.track}">
             <div class="flagship-copy">
               <div class="work-top"><span>00 / FLAGSHIP</span><span>${flagship.track}</span><span>${esc(flagship.codename)}</span></div>
-              <p class="eyebrow">${en ? 'RUST / CONSTRAINED COMPUTE' : 'RUST / COMPUTACAO RESTRITA'}</p>
+              <p class="eyebrow">${en ? 'RUST / LOCAL AI / SECURITY' : 'RUST / IA LOCAL / SEGURANCA'}</p>
               <h3>${esc(flagship.name)}</h3>
               <p class="flagship-lede">${esc(L(flagship.blurb, lang))}</p>
               <dl>
@@ -330,7 +346,10 @@ ${header(lang, 'portfolio', route)}
             </ol>
           </div>
           <div class="toolbox reveal">
-            ${cv.skills.map((skill, index) => `<div class="tool-group"><span>0${index + 1} / ${esc(L(skill.group, lang))}</span><p>${esc(skill.items)}</p></div>`).join('\n            ')}
+            ${cv.skills.map((skill, index) => {
+              const meter = Number(skill.meter ?? 0);
+              return `<div class="tool-group"><span>0${index + 1} / ${esc(L(skill.group, lang))}</span><p>${esc(skill.items)}</p><div class="meter"><div class="meter-head"><span>${en ? 'SELF-ASSESSED' : 'AUTOAVALIACAO'}</span><b>${meter}%</b></div><div class="meter-bar" role="img" aria-label="${esc(L(skill.group, lang))} ${meter}%"><i style="--v:${meter}%"></i></div></div></div>`;
+            }).join('\n            ')}
           </div>
         </div>
       </section>
@@ -339,8 +358,8 @@ ${header(lang, 'portfolio', route)}
         <div class="section-inner">
           <div class="section-heading reveal">
             ${sec('03', en ? 'Security practice' : 'Prática de segurança')}
-            <h2>${en ? 'Research with <span>boundaries.</span>' : 'Pesquisa com <span>limites.</span>'}</h2>
-            <p>${en ? 'Offensive knowledge applied to defensive engineering, in environments where authorization and scope are explicit.' : 'Conhecimento ofensivo aplicado à engenharia defensiva, em ambientes com autorização e escopo explícitos.'}</p>
+            <h2>${en ? 'Red team. <span>Blue team.</span>' : 'Red team. <span>Blue team.</span>'}</h2>
+            <p>${en ? 'Offense and defense under explicit authorization: adversary emulation, detection engineering, and research that ships defensive outcomes.' : 'Ofensa e defesa sob autorização explícita: emulação de adversário, detection engineering e pesquisa que entrega resultados defensivos.'}</p>
           </div>
           <div class="security-console reveal">
             <div class="console-head"><span>POLICY / LAB-01</span><span class="status-ok">SCOPE VERIFIED</span></div>
@@ -376,7 +395,8 @@ ${header(lang, 'portfolio', route)}
         <div class="contact-links"><a class="button button-primary" href="${cv.person.profiles.linkedin}" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="button" href="${cv.person.profiles.github}" target="_blank" rel="noreferrer">GitHub ↗</a></div>
       </section>
     </main>
-    <footer class="statusbar"><span><i></i>${en ? 'NETWORK READY' : 'REDE PRONTA'} / Felipe "Yuee" Lemos</span><span>${en ? 'Education, defense, authorized testing.' : 'Educação, defesa, testes autorizados.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
+    <footer class="statusbar"><span><i></i>${en ? 'SYSTEM READY' : 'SISTEMA PRONTO'} / Felipe "Yuee" Lemos</span><span>${en ? 'Red team. Blue team. Authorized research.' : 'Red team. Blue team. Pesquisa autorizada.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
+    ${palette(lang)}
     <script src="${route.prefix}assets/js/site.js"></script>
   </body>
 </html>
@@ -387,8 +407,8 @@ function runtimePage(lang) {
   const en = lang === 'en';
   const route = routeConfig(lang, 'runtime');
   const canonical = en ? `${SITE}/microruntime/` : `${SITE}/pt/microruntime/`;
-  const title = en ? 'Micro Runtime | Public systems case study' : 'Micro Runtime | Estudo de caso publico';
-  const desc = en ? 'A sanitized systems case study about bounded local AI, TinyML budgets, canonical envelopes, and explicit trust boundaries.' : 'Estudo de sistemas sanitizado sobre IA local limitada, orçamentos TinyML, envelopes canônicos e limites de confiança explícitos.';
+  const title = en ? 'Micro Runtime | Systems & security case study' : 'Micro Runtime | Estudo de caso de sistemas e segurança';
+  const desc = en ? 'A readable case study: a Rust runtime that runs local AI under hard limits, a hardened fleet agent, and the red-team and blue-team work around it.' : 'Estudo de caso direto: um runtime Rust que executa IA local sob limites rígidos, um agente de frota endurecido e a pesquisa red team e blue team em volta.';
   return `<!doctype html>
 <html lang="${en ? 'en' : 'pt-BR'}">
   <head>
@@ -401,22 +421,21 @@ ${header(lang, 'runtime', route)}
     <main id="main" class="showcase" tabindex="-1">
       <div class="showcase-intro">
         <p class="section-index"><span>CASE / 001</span>${en ? 'Public technical record' : 'Registro tecnico publico'}</p>
-        <p class="kicker"><span class="status-dot"></span>${en ? 'SANITIZED / ARCHITECTURE LEVEL' : 'SANITIZADO / NIVEL DE ARQUITETURA'}</p>
-        <h1>Micro Runtime <span>${en ? 'runs AI within hard limits.' : 'executa IA com limites rigidos.'}</span></h1>
-        <p class="lede">${en ? 'A modular Rust runtime for constrained environments. Numeric model output becomes bounded actions, tiny models stay inside declared budgets, and artifact parsers remain separate from trust decisions.' : 'Runtime modular em Rust para ambientes restritos. Saída numérica de modelos vira ações limitadas, modelos pequenos respeitam orçamentos declarados e parsers de artefatos ficam separados das decisões de confiança.'}</p>
+        <p class="kicker"><span class="status-dot"></span>${en ? 'ARCHITECTURE LEVEL / PRIVATE CODE OFF-PAGE' : 'NÍVEL DE ARQUITETURA / CÓDIGO PRIVADO FORA DA PÁGINA'}</p>
+        <h1>Micro Runtime <span>${en ? 'runs local AI under hard limits.' : 'executa IA local sob limites rígidos.'}</span></h1>
+        <p class="lede">${en ? 'A Rust runtime for small machines and edge fleets. It runs tiny models locally, turns model output into bounded actions that must be authorized, and ships as a hardened agent for industrial operations. This page explains what it is and what I built, without private code.' : 'Um runtime Rust para máquinas pequenas e frotas de borda. Executa modelos minúsculos localmente, transforma a saída do modelo em ações limitadas que precisam de autorização e entrega um agente endurecido para operações industriais. Esta página explica o que é e o que eu construí, sem código privado.'}</p>
         ${runtimeDiagram(lang)}
       </div>
       <div class="case-register">
-        <article><span>01 / AUTHORITY</span><h2>${en ? 'Decision plane, not autopilot' : 'Plano de decisão, não piloto automático'}</h2><p>${en ? 'A minimal TokenEngine returns numeric tokens. A bridge maps model tokens to dispatch tokens, then a fixed one-shot dispatcher invokes a closed HostOp handler. Probabilistic output never receives ambient authority.' : 'Um TokenEngine mínimo retorna tokens numéricos. Uma ponte mapeia tokens do modelo para tokens de dispatch, e um dispatcher fixo one-shot invoca um handler HostOp fechado. Saída probabilística nunca recebe autoridade ambiente.'}</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
-dispatcher: one-shot / 256 slots / closed enum</code></pre></article>
-        <article><span>02 / LOCAL MODEL</span><h2>${en ? 'Explicit model resolution' : 'Resolução explícita de modelo'}</h2><p>${en ? 'Memory-mapped or in-memory model loading, quantized CPU inference, constrained decoding, and no silent fallback when a model is missing.' : 'Carregamento via mmap ou em memória, inferência quantizada em CPU, decodificação restrita e nenhum fallback silencioso quando falta um modelo.'}</p><pre><code>MODEL=/models/local.gguf
+        <article><span>01 / WHAT IT IS</span><h2>${en ? 'A runtime, not a chatbot' : 'Um runtime, não um chatbot'}</h2><p>${en ? 'A Rust runtime for constrained machines and industrial edge fleets. It exists so local AI can decide and act without a cloud connection, and without trusting the model with the machine.' : 'Um runtime Rust para máquinas restritas e frotas industriais de borda. Existe para IA local decidir e agir sem nuvem, e sem confiar a máquina ao modelo.'}</p></article>
+        <article><span>02 / WHAT IT DOES</span><h2>${en ? 'Local AI under hard limits' : 'IA local sob limites rígidos'}</h2><p>${en ? 'Runs quantized GGUF models on CPU and a tiny INT8 model VM with no heap and fixed budgets. If a model is missing, it fails closed instead of falling back silently.' : 'Executa modelos GGUF quantizados em CPU e uma VM minúscula de modelo INT8 sem heap e com orçamentos fixos. Se falta um modelo, falha fechado em vez de cair em fallback silencioso.'}</p><pre><code>MODEL=/models/local.gguf
 missing model =&gt; None
 act budget =&gt; 32 digits</code></pre></article>
-        <article><span>03 / TINYML</span><h2>M35 VM</h2><p>${en ? 'A canonical header and fixed-length opcodes are fully validated before execution. The VM uses int8 operations, no heap, no floating point, and hard operation and arena budgets.' : 'Um header canônico e opcodes de tamanho fixo são validados integralmente antes da execução. A VM usa operações int8, sem heap, sem ponto flutuante e com limites rígidos para operações e arena.'}</p><pre><code>HEADER 64B / MAX_OPS 4096
-MAX_ARENA 16MiB / END required</code></pre></article>
-        <article><span>04 / FORMAT</span><h2>MRE1 ${en ? 'envelopes' : 'envelopes'}</h2><p>${en ? 'Canonical ordering, bounded records, reserved fields, and zero-copy borrowed views. Signature and counter trust stays in bootstrap code, not in the parser.' : 'Ordem canonica, registros limitados, campos reservados e views zero-copy. Confianca em assinaturas e contadores fica no bootstrap, nao no parser.'}</p></article>
-        <article><span>05 / MEMORY</span><h2>${en ? 'Memory discipline' : 'Disciplina de memória'}</h2><p>${en ? 'A page-based allocator, sharded heap, ephemeral scopes, read-only maps, and caller-buffer scrubbing make resource and lifetime decisions visible.' : 'Alocador baseado em páginas, heap fragmentado, escopos efêmeros, maps somente leitura e limpeza de buffers tornam decisões de recurso e lifetime visíveis.'}</p></article>
-        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>${en ? 'Deliberately excluded' : 'Deliberadamente excluído'}</h2><p>${en ? 'No weights, keys, certificates, private source, transports, kernel code, command infrastructure, or evasion material. This is an original explanation of safe concepts, not a runtime release.' : 'Sem pesos, chaves, certificados, código privado, transportes, kernel, infraestrutura de comando ou material de evasão. Esta é uma explicação original de conceitos seguros, não um release do runtime.'}</p></article>
+        <article><span>03 / THE BOUNDARY</span><h2>${en ? 'Every action needs a ticket' : 'Toda ação precisa de ticket'}</h2><p>${en ? 'A capability broker authorizes each model-proposed action before it reaches the host. Numeric output never gets ambient authority: it becomes a bounded HostOp in a closed ISA, inside an isolated worker with no shell.' : 'Um capability broker autoriza cada ação proposta pelo modelo antes de chegar ao host. Saída numérica nunca ganha autoridade ambiente: vira um HostOp limitado numa ISA fechada, dentro de um worker isolado e sem shell.'}</p><pre><code>model_token -&gt; dispatch_token -&gt; HostOp
+one-shot / 256 slots / closed enum</code></pre></article>
+        <article><span>04 / THE FLEET</span><h2>${en ? 'A hardened agent' : 'Um agente endurecido'}</h2><p>${en ? 'The same binary runs on Linux, macOS, and Windows. Mutual TLS, site PKI, signed extensions, telemetry, and an operator HMI on the plant host. Memory-safe workers, sealed model weights, and CI gates that fail a dirty build.' : 'O mesmo binário roda em Linux, macOS e Windows. mTLS, PKI de planta, extensões assinadas, telemetria e HMI do operador no host da planta. Workers memory-safe, pesos selados e gates de CI que reprovam um build sujo.'}</p></article>
+        <article><span>05 / SKILLS SHOWN</span><h2>${en ? 'What this proves' : 'O que isso prova'}</h2><p>${en ? 'Low-level Rust, memory and allocator design, local inference, PKI and secure transport, Windows/Linux/macOS internals, and the discipline to keep the architecture honest with measurable gates.' : 'Rust de baixo nível, desenho de memória e alocador, inferência local, PKI e transporte seguro, internals de Windows/Linux/macOS e a disciplina de manter a arquitetura honesta com gates mensuráveis.'}</p></article>
+        <article class="excluded"><span>06 / PUBLIC BOUNDARY</span><h2>${en ? 'Architecture level' : 'Nível de arquitetura'}</h2><p>${en ? 'Private implementation, weights, keys, live transports, and privileged research stay off this page. I can walk through the architecture in interviews, and the red-team and blue-team work is summarized on the portfolio.' : 'Implementação privada, pesos, chaves, transportes reais e pesquisa privilegiada ficam fora desta página. Posso detalhar a arquitetura em entrevistas, e o trabalho red team e blue team está resumido no portfólio.'}</p></article>
       </div>
       <section class="demo" data-lang="${lang}" aria-labelledby="demo-title">
         <div><span>INTERACTIVE CHECK / M35</span><h2 id="demo-title">${en ? 'Validate a budget' : 'Validar um orçamento'}</h2><p>${en ? 'Client-side simulation only. Maximum 64 operations and 256 KiB for this demonstration.' : 'Apenas uma simulação no navegador. Máximo de 64 operações e 256 KiB nesta demonstração.'}</p></div>
@@ -429,7 +448,8 @@ MAX_ARENA 16MiB / END required</code></pre></article>
       </section>
       <a class="back-link" href="${route.home}#work">← ${en ? 'Return to selected work' : 'Voltar aos projetos'}</a>
     </main>
-    <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Safe concepts only.' : 'Somente conceitos seguros.'}</span><span>2026</span></footer>
+    <footer class="statusbar"><span><i></i>${en ? 'CASE ONLINE' : 'CASO ONLINE'} / Micro Runtime</span><span>${en ? 'Architecture-level public record.' : 'Registro público no nível de arquitetura.'}</span><span>2026 / v${esc(cv.meta.contentVersion)}</span></footer>
+    ${palette(lang)}
     <script src="${route.prefix}assets/js/site.js"></script>
     <script src="${route.prefix}assets/js/showcase-demo.js"></script>
   </body>
